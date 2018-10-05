@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" author="true" classpath="C:\Users\sukuri\.p2\pool\plugins\org.hamcrest.core_1.3.0.v20180420-1519.jar;C:\Users\sukuri\.p2\pool\plugins\org.junit_4.12.0.v201504281640\junit.jar" destdir="C:\Suruthi\adv 6441\project material\Soen-6441-Online-risk\Documents\Javadoc" doctitle="Java Map Utility API" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="Java" source="1.8" sourcepath="C:\Suruthi\adv 6441\project material\Soen-6441-Online-risk\OnlineRiskGame\src" splitindex="true" use="true" version="true"/>
+    </target>
+</project>

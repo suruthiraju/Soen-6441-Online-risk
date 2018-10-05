@@ -3,7 +3,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import Java.Map;
+import ExecutionFiles.Map;
 
 @RunWith(Suite.class)
 @SuiteClasses({ Map.class })
