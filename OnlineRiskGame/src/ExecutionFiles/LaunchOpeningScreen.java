@@ -3,17 +3,12 @@ package ExecutionFiles;
  * This is the <b>JavaDoc</b> for Map Java file.
  */
 /**
- * This is Map Java file for creating User-driven map.
- * It's implemented in Core Java.
+ * This is Opening Screen Java file for Opening the application.
  * 
- * The initial task performed by the tasks are:
- * - Asking for User input
- * - Creating a map file
- * - Validation of Correctness
  * 
  * @author - Suruthi Raju
  * @since 1.0.0
- * @see Map.java
+ * @see LaunchOpeningScreen.java
  * @version
  * 1.0.0 - Initial - Suruthi
  * 
@@ -28,7 +23,7 @@ import org.junit.BeforeClass;
 
 import org.junit.Ignore;
 
-public class Map {
+public class LaunchOpeningScreen {
 	@Ignore
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

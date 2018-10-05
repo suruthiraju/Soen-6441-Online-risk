@@ -3,10 +3,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import ExecutionFiles.Map;
+import ExecutionFiles.LaunchOpeningScreen;
 
 @RunWith(Suite.class)
-@SuiteClasses({ Map.class })
+@SuiteClasses({ LaunchOpeningScreen.class })
 public class TestRunner {
 	
 }
