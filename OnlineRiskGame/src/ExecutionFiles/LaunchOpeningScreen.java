@@ -19,15 +19,17 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-
-
 import org.junit.Ignore;
+
 
 public class LaunchOpeningScreen {
 	@Ignore
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Map");
+		
+	
+		
 	}
 
 /**
@@ -59,7 +61,5 @@ public class LaunchOpeningScreen {
 	public void after() {
 		  System.out.println("in after TestJunit1 test case");
 	}
-
-	
 
 }
