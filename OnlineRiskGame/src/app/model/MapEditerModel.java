@@ -1,4 +1,4 @@
-package Model;
+package app.model;
 
 public class MapEditerModel {
 

@@ -1,4 +1,4 @@
-package View;
+package app.view;
 
 //This is the View
 //Its only job is to display what the user sees
@@ -9,9 +9,13 @@ import java.awt.event.ActionListener;
 import java.awt.Font;
 import javax.swing.*;
 
-public class welcomeScreenView extends JFrame{
+public class WelcomeScreenView extends JFrame{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5402570613272324763L;
 	private String welcomeText = "<html>WELCOME TO ONLINE \"RISK\" GAME</html>";
 	private JLabel welcomeLabel = new JLabel(welcomeText);
 	private String questionText = "<html>PLEASE SELECT AN OPTION</html>";
@@ -19,13 +23,13 @@ public class welcomeScreenView extends JFrame{
 	
 	private JButton createMapButton = new JButton("Create Map");
 	private JButton editMapButton = new JButton("Edit Map");
-	private JButton defaultMapButton = new JButton("Default Map");
+	private JButton defaultMapButton = new JButton("Play");
 	private JButton exitButton = new JButton("Exit");
 	
 	//private String welcomeMessageText = "";
 	//private JLabel welcomeMessageLabel = new JLabel(welcomeMessageText);
 
-	welcomeScreenView(){
+	public WelcomeScreenView(){
       // Sets up the view and adds the components
       JPanel welcomePanel = new JPanel();
       this.setName("RISK GAME");
@@ -80,24 +84,24 @@ public class welcomeScreenView extends JFrame{
 	
 	// If any button is clicked execute a method
   // in the Controller named <.........>ActionPerformed
-	void createMapListener(ActionListener listenForCreateMapButton){
+	public void createMapListener(ActionListener listenForCreateMapButton){
 		createMapButton.addActionListener(listenForCreateMapButton);
 	}
 	
-	void editMapListener(ActionListener listenForEditMapButton){
+	public void editMapListener(ActionListener listenForEditMapButton){
 		editMapButton.addActionListener(listenForEditMapButton);
 	}
 	
-	void defaultMapListener(ActionListener listenForDefaultMapButton){
+	public void defaultMapListener(ActionListener listenForDefaultMapButton){
 		defaultMapButton.addActionListener(listenForDefaultMapButton);
 	}
 	    
-	void exitListener(ActionListener listenForExitButton){
+	public void exitListener(ActionListener listenForExitButton){
 		exitButton.addActionListener(listenForExitButton);
 	}
 
 	// Open a popup that contains the error message passed
-	void displayErrorMessage(String errorMessage){
+	public void displayErrorMessage(String errorMessage){
 	    JOptionPane.showMessageDialog(this, errorMessage);
 	}
 

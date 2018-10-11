@@ -1,19 +1,20 @@
-package Controller;
+package app.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import WelcomeWindowPackage.welcomeScreenModel;
-import WelcomeWindowPackage.welcomeScreenView;
+import app.model.WelcomeScreenModel;
+import app.view.WelcomeScreenView;
 
 //The Controller coordinates interactions
 //between the View and Model
 
-public class welcomeScreenController {
+public class WelcomeScreenController {
 
-    private welcomeScreenView theView;
-    private welcomeScreenModel theModel;
-    public welcomeScreenController(welcomeScreenView theView, welcomeScreenModel theModel) {
+    
+    private WelcomeScreenView theView;
+    private WelcomeScreenModel theModel;
+    public WelcomeScreenController(WelcomeScreenView theView, WelcomeScreenModel theModel) {
     	this.theView = theView;
         this.theModel = theModel;
         
