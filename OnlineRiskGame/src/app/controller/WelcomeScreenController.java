@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import app.model.WelcomeScreenModel;
 import app.view.WelcomeScreenView;
+import app.view.NewGameView;
 
 //The Controller coordinates interactions
 //between the View and Model
@@ -63,7 +64,9 @@ public class WelcomeScreenController {
         public void actionPerformed(ActionEvent e) {
             // create a new map
             try{
-                theView.displayErrorMessage("You pressed \"Default Map\" button");
+            	NewGameView theView = new NewGameView();
+            	theView.setVisible(true);
+                //theView.displayErrorMessage("You pressed \"Default Map\" button");
                 //theView.setCalcSolution(theModel.getCalculationValue());
             }
             catch(NumberFormatException ex){
