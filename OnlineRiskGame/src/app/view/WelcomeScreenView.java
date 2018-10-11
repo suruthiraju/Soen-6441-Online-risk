@@ -23,7 +23,7 @@ public class WelcomeScreenView extends JFrame{
 	
 	private JButton createMapButton = new JButton("Create Map");
 	private JButton editMapButton = new JButton("Edit Map");
-	private JButton defaultMapButton = new JButton("Play");
+	private JButton playMapButton = new JButton("Play");
 	private JButton exitButton = new JButton("Exit");
 	
 	//private String welcomeMessageText = "";
@@ -66,9 +66,9 @@ public class WelcomeScreenView extends JFrame{
       welcomePanel.add(editMapButton);
       editMapButton.setBounds(100, 300, 200, 40);
       
-      defaultMapButton.setFont(smallFont);
-      welcomePanel.add(defaultMapButton);
-      defaultMapButton.setBounds(100, 400, 200, 40);
+      playMapButton.setFont(smallFont);
+      welcomePanel.add(playMapButton);
+      playMapButton.setBounds(100, 400, 200, 40);
       
       exitButton.setFont(smallFont);
       welcomePanel.add(exitButton);
@@ -92,8 +92,8 @@ public class WelcomeScreenView extends JFrame{
 		editMapButton.addActionListener(listenForEditMapButton);
 	}
 	
-	public void defaultMapListener(ActionListener listenForDefaultMapButton){
-		defaultMapButton.addActionListener(listenForDefaultMapButton);
+	public void playMapListener(ActionListener listenForplayMapButton){
+		playMapButton.addActionListener(listenForplayMapButton);
 	}
 	    
 	public void exitListener(ActionListener listenForExitButton){

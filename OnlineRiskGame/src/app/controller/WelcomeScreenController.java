@@ -24,7 +24,7 @@ public class WelcomeScreenController {
     
     	this.theView.createMapListener(new createMapButtonListener());
     	this.theView.editMapListener(new editMapButtonListener());
-    	this.theView.defaultMapListener(new defaultMapButtonListener());
+    	this.theView.playMapListener(new playMapButtonListener());
     	this.theView.exitListener(new exitButtonListener());
     	
     	
@@ -59,7 +59,7 @@ public class WelcomeScreenController {
         }
     }
 
-    class defaultMapButtonListener implements ActionListener{
+    class playMapButtonListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             // create a new map
             try{
