@@ -97,11 +97,11 @@ public class CreateMapView extends JFrame{
 
     }
 
-    public void addContinentListner(ActionListener listenAddContinent)
+   /* public void addContinentListner(ActionListener listenAddContinent)
     {
         addContinent.addActionListener(listenAddContinent);
 
-    }
+    }*/
 
     public void removeContinentListner(ActionListener listenRemoveContinent)
     {
