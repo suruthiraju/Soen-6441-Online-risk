@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
 /**
- * The Interface IView.
+ * The Interface InterfaceView.
  *
  * @author Jatan Gohel
  */

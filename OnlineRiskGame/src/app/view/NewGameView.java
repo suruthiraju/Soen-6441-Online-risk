@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
 /**
- * The Class NewGameSelectorView 
+ * The Class NewGameView 
  *
  * @author Jatan Gohel
  */
@@ -101,7 +101,7 @@ public class NewGameView extends JFrame implements InterfaceView {
 	}
 
 	/* (non-Javadoc)
-	 * @see ca.concordia.app.view.IView#setMouseListener(java.awt.event.MouseListener)
+	 * @see app.view.InterfaceView#setMouseListener(java.awt.event.MouseListener)
 	 */
 	
 	public void setMouseListener(MouseListener mouseListener) {
