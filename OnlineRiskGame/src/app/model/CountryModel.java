@@ -1,6 +1,7 @@
 package app.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CountryModel {
 
@@ -8,11 +9,11 @@ public class CountryModel {
 	private int xPosition;
 	private int yPosition;
 	private String continentName;
-	private ArrayList linkedCountries;
+	private List linkedCountries;
 	private int noOfArmies;
 	private PlayerModel ruler;
 	
-	public CountryModel(String countryName, int xPosition, int yPosition, String continentName, ArrayList linkedCountries) {
+	public CountryModel(String countryName, int xPosition, int yPosition, String continentName, List linkedCountries) {
 		this.countryName = countryName;
 		this.xPosition = xPosition;
 		this.yPosition = yPosition;
@@ -94,7 +95,7 @@ public void setContinentName(String continentName) {
  * 
  * @return the list of array.
  */
-public ArrayList linkedCountries() {
+public List linkedCountries() {
 	return linkedCountries;
 }
 
@@ -102,7 +103,7 @@ public ArrayList linkedCountries() {
  * Sets the list of array.
  * @param ArrayList
  */
-public void setLinkedCountries(ArrayList linkedCountries) {
+public void setLinkedCountries(List linkedCountries) {
 	this.linkedCountries = linkedCountries;
 }
 
