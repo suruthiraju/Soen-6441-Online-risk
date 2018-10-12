@@ -1,6 +1,8 @@
 package app.model;
- public class ContinentsModel {
- 	private String continentName;
+
+public class ContinentsModel {
+
+	private String continentName;
 	private int valueControl;
 	public ContinentsModel(String continentName, int valueControl ) {
 		this.continentName = continentName;
