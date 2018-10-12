@@ -19,14 +19,14 @@ public class CreateMapView extends JFrame{
     private DefaultListModel modelContinent = new DefaultListModel<>();
     private JList currentContinentList;
     private JButton removeContinent = new JButton("Pull from the list");
-    private JButton finalizeContinent = new JButton("Finalize the list");
+    private JButton finalizeContinents = new JButton("Finalize the list");
 
     private JTextField enterCountry = new JTextField(20);
     private JButton addCountry = new JButton("Push to the list");
     private DefaultListModel modelCountry = new DefaultListModel<>();
     private JList currentCountryList= new JList(modelCountry);
     private JButton removeCountry = new JButton("Pull from the list");
-    private JButton finalizeCountry = new JButton("Finalize the list");
+    private JButton finalizeCountries = new JButton("Finalize the list");
 
     CreateMapView()
     {
@@ -43,8 +43,8 @@ public class CreateMapView extends JFrame{
         currentContinentList.setLocation(300, 20);
         mapPanel.add(removeContinent);
         removeContinent.setLocation(300, 80);
-        mapPanel.add(finalizeContinent);
-        finalizeContinent.setLocation(350, 80);
+        mapPanel.add(finalizeContinents);
+        finalizeContinents.setLocation(350, 80);
         JScrollPane jScrollContinent = new JScrollPane(currentContinentList);
         currentContinentList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
@@ -56,12 +56,17 @@ public class CreateMapView extends JFrame{
         currentCountryList.setLocation(300, 100);
         mapPanel.add(removeCountry);
         removeContinent.setLocation(300, 160);
-        mapPanel.add(finalizeCountry);
-        finalizeContinent.setLocation(350, 160);
+        mapPanel.add(finalizeCountries);
+        finalizeContinents.setLocation(350, 160);
         JScrollPane jScrollCountry = new JScrollPane(currentCountryList);
         currentCountryList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-
-
+        
+        enterContinent.setEditable(false);
+        addCountry.setEnabled(false);
+        currentCountryList.setEnabled(false);
+        removeCountry.setEnabled(false);
+        finalizeCountries.setEnabled(false);
+      
         this.add(mapPanel);
 
     }
@@ -100,8 +105,19 @@ public class CreateMapView extends JFrame{
    public void addContinentListner(ActionListener listenAddContinent)
     {
         addContinent.addActionListener(listenAddContinent);
-
+        
     }
+   public int selectContinentListner()
+   {
+	   int tempIndex = currentContinentList.getSelectedIndex();
+	   return tempIndex;
+   }
+   
+   public int selectCountryListner()
+   {
+	   int tempIndex = currentCountryList.getSelectedIndex();
+	   return tempIndex;
+   }
 
     public void removeContinentListner(ActionListener listenRemoveContinent)
     {
@@ -118,14 +134,14 @@ public class CreateMapView extends JFrame{
         removeContinent.addActionListener(listenRemoveCountry);
 
     }
-    public void finalizeContinentListner(ActionListener listenFinalizeContinent)
+    public void finalizeContinentsListner(ActionListener listenfinalizeContinents)
     {
-        finalizeContinent.addActionListener(listenFinalizeContinent);
+        finalizeContinents.addActionListener(listenfinalizeContinents);
 
     }
-    public void finalizeCountryListner(ActionListener listenFinalizeCountry)
+    public void finalizeCountriesListner(ActionListener listenfinalizeCountries)
     {
-        finalizeCountry.addActionListener(listenFinalizeCountry);
+        finalizeCountries.addActionListener(listenfinalizeCountries);
 
     }
 }
