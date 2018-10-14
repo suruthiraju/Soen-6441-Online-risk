@@ -8,6 +8,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import app.helper.View;
+
 import javax.swing.JComboBox;
 
 /**
@@ -17,7 +20,7 @@ import javax.swing.JComboBox;
  */
 
 
-public class NewGameView extends JFrame implements InterfaceView {
+public class NewGameView extends JFrame implements View {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -78,33 +81,22 @@ public class NewGameView extends JFrame implements InterfaceView {
 		choose_map = new JFileChooser();
 		
 		initialize();
+		
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		setBounds(100, 100, 881, 536);
+		setBounds(100, 100, 500, 500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
+	}	
 
-	
-	/**
-	 * calls the setActionlistener
-	 * @param actionListener
-	 */
-	
+	@Override
 	public void setActionListener(ActionListener actionListener) {
 		browse_map.addActionListener(actionListener);
 		next_button.addActionListener(actionListener);
 		cancel_button.addActionListener(actionListener);
-	}
-
-	/* (non-Javadoc)
-	 * @see app.view.InterfaceView#setMouseListener(java.awt.event.MouseListener)
-	 */
-	
-	public void setMouseListener(MouseListener mouseListener) {
 		
 	}
 }
