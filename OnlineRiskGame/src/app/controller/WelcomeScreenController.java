@@ -11,7 +11,11 @@ import app.view.NewGameView;
 //between the View and Model
 
 public class WelcomeScreenController implements ActionListener {
-
+	
+	 public static void main(String[] args) {
+	    	WelcomeScreenController wsc = new WelcomeScreenController();
+	    	
+	    }
     
     private WelcomeScreenView theView;
     private WelcomeScreenModel theModel;
@@ -29,77 +33,13 @@ public class WelcomeScreenController implements ActionListener {
         		// is clicked to execute the actionPerformed method
         		// in the CalculateListener inner class
     
-    	this.theView.createMapListener(new createMapButtonListener());
-    	this.theView.editMapListener(new editMapButtonListener());
-    	this.theView.playMapListener(new playMapButtonListener());
-    	this.theView.exitListener(new exitButtonListener());
+    	
     	
     	
     }
 
-    class createMapButtonListener implements ActionListener{
-        public void actionPerformed(ActionEvent e) {
-            // create a new map
-            try{
-                //theView.setCalcSolution(theModel.getCalculationValue());
-                theView.displayErrorMessage("You pressed \"Create Map\" button");
-        		//System.out.println("Hey! I am here...!");
-            }
-            catch(NumberFormatException ex){
-                //System.out.println(ex);
-                //theView.displayErrorMessage("You Need to Enter 2 Integers");
-            }
-        }
-    }
-
-    class editMapButtonListener implements ActionListener{
-        public void actionPerformed(ActionEvent e) {
-            // create a new map
-            try{
-                theView.displayErrorMessage("You pressed \"Edit Map\" button");
-                //theView.setCalcSolution(theModel.getCalculationValue());
-            }
-            catch(NumberFormatException ex){
-                //System.out.println(ex);
-                //theView.displayErrorMessage("You Need to Enter 2 Integers");
-            }
-        }
-    }
-
-    class playMapButtonListener implements ActionListener{
-        public void actionPerformed(ActionEvent e) {
-            // create a new map
-            try{
-            	NewGameView theView = new NewGameView();
-            	theView.setVisible(true);
-                //theView.displayErrorMessage("You pressed \"Default Map\" button");
-                //theView.setCalcSolution(theModel.getCalculationValue());
-            }
-            catch(NumberFormatException ex){
-                //System.out.println(ex);
-                //theView.displayErrorMessage("You Need to Enter 2 Integers");
-            }
-        }
-    }
-
-    class exitButtonListener implements ActionListener{
-        public void actionPerformed(ActionEvent e) {
-            // create a new map
-            try{
-                theView.displayErrorMessage("You pressed \"Exit\" button");
-                //theView.setCalcSolution(theModel.getCalculationValue());
-            }
-            catch(NumberFormatException ex){
-                //System.out.println(ex);
-                //theView.displayErrorMessage("You Need to Enter 2 Integers");
-            }
-        }
-    }
     
-    public static void main(String[] args) {
-    	WelcomeScreenController wsc = new WelcomeScreenController();
-    	
-    }
+   
 
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
@@ -127,18 +67,19 @@ public class WelcomeScreenController implements ActionListener {
 	}
 
 	private void exitGame() {
-		// TODO Auto-generated method stub
+		 this.theView.dispose();
 		
 	}
 
 	private void showPlayGameWindow() {
-		// TODO Auto-generated method stub
+		new PlayGameController();
+		 this.theView.dispose();
 		
 	}
 
 	private void showEditGameWindow() {
-		// TODO Auto-generated method stub
-		
+		new EditMapController();
+		 this.theView.dispose();
 	}
 
 	private void showCreateMapWindow() {

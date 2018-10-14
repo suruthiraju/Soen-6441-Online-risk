@@ -19,7 +19,7 @@ public class CreateMapView extends JFrame implements View {
     private JTextField enterContinent = new JTextField(20);
     private JButton addContinent = new JButton("Push to the list");
     private DefaultListModel modelContinent = new DefaultListModel<>();
-    private JList currentContinentList;
+    private JList currentContinentList =  new JList(modelContinent);
     private JButton removeContinent = new JButton("Pull from the list");
     private JButton finalizeContinents = new JButton("Finalize the list");
 
@@ -30,7 +30,7 @@ public class CreateMapView extends JFrame implements View {
     private JButton removeCountry = new JButton("Pull from the list");
     private JButton finalizeCountries = new JButton("Finalize the list");
 
-    CreateMapView()
+    public CreateMapView()
     {
         //initialization of the panel and all the components
         JPanel mapPanel= new JPanel();
