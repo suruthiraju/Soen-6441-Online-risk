@@ -10,13 +10,17 @@ public class CountryModel {
 	private int yPosition;
 	private String continentName;
 	private List linkedCountries;
+	private String ruler;
+	private int armies;
 	
-	public CountryModel(String countryName, int xPosition, int yPosition, String continentName, List linkedCountries) {
+	public CountryModel(String countryName, int xPosition, int yPosition, String continentName, List linkedCountries, String ruler, int armies) {
 		this.countryName = countryName;
 		this.xPosition = xPosition;
 		this.yPosition = yPosition;
 		this.continentName = continentName;
 		this.linkedCountries = linkedCountries;		
+		this.ruler = ruler;
+		this.armies = armies;	
 	}
 	
 	/**
@@ -103,6 +107,38 @@ public List linkedCountries() {
  */
 public void setLinkedCountries(List linkedCountries) {
 	this.linkedCountries = linkedCountries;
+}
+
+/**
+ * 
+ * @return the ruler.
+ */
+public String getRuler() {
+	return ruler;
+}
+
+/**
+ * Sets the Ruler.
+ * @param ruler
+ */
+public void setRuler(String ruler) {
+	this.ruler = ruler;
+}
+
+/**
+ * 
+ * @return the army Value.
+ */
+public int getArmies() {
+	return armies;
+}
+
+/**
+ * Sets the army Value.
+ * @param armies
+ */
+public void setArmies(int armies) {
+	this.armies = armies;
 }
 
 

@@ -88,7 +88,7 @@ public class ReadFile {
     	  	  	  List<String> tempLinks = Arrays.asList(sc7.split("\\s*,\\s*"));
     	  	  	  System.out.println("link: " + sc7);
     	  	  	  
-    	  	  	  CountryModel tempMyCountry=new CountryModel(sc3,result,result1,sc6,tempLinks);
+    	  	  	  CountryModel tempMyCountry=new CountryModel(sc3,result,result1,sc6,tempLinks,"",0 );
     	  	  	  listOfCountrys.add(tempMyCountry);
     	  	  }
     	  	}
