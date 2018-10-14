@@ -1,13 +1,11 @@
 package app.view;
 
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 import app.helper.View;
 
@@ -26,25 +24,25 @@ public class NewGameView extends JFrame implements View {
 	private static final long serialVersionUID = 1L;
 	
 	/** The browse map. */
-	public JButton browse_map;
+	public JButton browseMapButton;
 	
 	/** The next button. */
-	public JButton next_button;
+	public JButton nextButton;
 	
 	/** The cancel button. */
-	public JButton cancel_button;
+	public JButton cancelButton;
 	
 	
 	/** The choose map. */
-	public JComboBox<Integer> num_players;
+	public JComboBox<Integer> numOfPlayers;
 
-	public JFileChooser choose_map;
+	public JFileChooser chooseMap;
 	
 	/** The label map file. */
-	public JLabel label_players, label_map_file;
+	public JLabel labelPlayers, labelMapFile;
 	
 	/** The final players. */
-	public int final_players;
+	public int finalPlayers;
 	
 	/**
 	 * Create the application.
@@ -52,33 +50,33 @@ public class NewGameView extends JFrame implements View {
 	public NewGameView() {
 		getContentPane().setLayout(null);
 		
-		label_players = new JLabel("Number of Players?");
-		label_players.setBounds(53, 47, 311, 27);
-		getContentPane().add(label_players);
+		labelPlayers = new JLabel("Number of Players?");
+		labelPlayers.setBounds(53, 47, 311, 27);
+		getContentPane().add(labelPlayers);
 		
 		Integer[] items = {2,3,4,5};
-		num_players = new JComboBox<>(items);
-		num_players.setBounds(202, 49, 116, 22);
-		getContentPane().add(num_players);
+		numOfPlayers = new JComboBox<>(items);
+		numOfPlayers.setBounds(202, 49, 116, 22);
+		getContentPane().add(numOfPlayers);
 		
-		label_map_file = new JLabel("Please Select Map File");
-		label_map_file.setBounds(53, 133, 157, 27);
-		getContentPane().add(label_map_file);
+		labelMapFile = new JLabel("Please Select Map File");
+		labelMapFile.setBounds(53, 133, 157, 27);
+		getContentPane().add(labelMapFile);
 		
-		browse_map = new JButton("Browse");
-		browse_map.setBounds(202, 134, 116, 27);
-		getContentPane().add(browse_map);
+		browseMapButton = new JButton("Browse");
+		browseMapButton.setBounds(202, 134, 116, 27);
+		getContentPane().add(browseMapButton);
 		
-		next_button = new JButton("Next");
-		next_button.setBounds(202, 237, 116, 25);
-		getContentPane().add(next_button);
+		nextButton = new JButton("Next");
+		nextButton.setBounds(202, 237, 116, 25);
+		getContentPane().add(nextButton);
 		
-		cancel_button = new JButton("Cancel");
-		cancel_button.setBounds(53, 237, 97, 25);
-		getContentPane().add(cancel_button);
+		cancelButton = new JButton("Cancel");
+		cancelButton.setBounds(53, 237, 97, 25);
+		getContentPane().add(cancelButton);
 		
 		
-		choose_map = new JFileChooser();
+		chooseMap = new JFileChooser();
 		
 		initialize();
 		
@@ -94,9 +92,9 @@ public class NewGameView extends JFrame implements View {
 
 	@Override
 	public void setActionListener(ActionListener actionListener) {
-		browse_map.addActionListener(actionListener);
-		next_button.addActionListener(actionListener);
-		cancel_button.addActionListener(actionListener);
+		browseMapButton.addActionListener(actionListener);
+		nextButton.addActionListener(actionListener);
+		cancelButton.addActionListener(actionListener);
 		
 	}
 }

@@ -79,7 +79,7 @@ public void setYPosition(int yPosition) {
  * 
  * @return the Continent Name.
  */
-public String continentName() {
+public String getcontinentName() {
 	return continentName;
 }
 
@@ -97,7 +97,7 @@ public void setContinentName(String continentName) {
  * 
  * @return the list of array.
  */
-public List linkedCountries() {
+public List getlinkedCountries() {
 	return linkedCountries;
 }
 

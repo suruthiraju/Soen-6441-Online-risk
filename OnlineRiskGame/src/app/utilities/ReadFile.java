@@ -71,14 +71,14 @@ public class ReadFile {
     	  	  	  System.out.println("Country Name: " + sc3 );
     	  	  	  
     	  	  	  int positionEqual1 = sc2.indexOf(',', (positionEqual+1));
-    	  	  	  String sc4 = sc2.substring((positionEqual+1), positionEqual1);
-    	  	  	  System.out.println("xposition: " + sc4);    	  	  	  
-    	  	  	  int result = Integer.parseInt(sc4);
+    	  	  	  String sc4 = sc2.substring((positionEqual+1), positionEqual1); 
+    	  	  	  System.out.println("xposition: " + sc4.trim()); 
+    	  	  	  int result = Integer.parseInt(sc4.trim());
     	  	  	  
     	  	  	  int positionEqual2 = sc2.indexOf(',', (positionEqual1+1));
     	  	  	  String sc5 = sc2.substring((positionEqual1+1), positionEqual2);
-    	  	  	  System.out.println("yPosition" + sc5);    	  	  	  
-    	  	  	  int result1 = Integer.parseInt(sc5);
+    	  	  	  System.out.println("yPosition" + sc5.trim());  
+    	  	  	  int result1 = Integer.parseInt(sc5.trim());
     	  	  	  
     	  	  	  int positionEqual3 = sc2.indexOf(',', (positionEqual2+1));
     	  	  	  String sc6 = sc2.substring((positionEqual2+1), positionEqual3);
