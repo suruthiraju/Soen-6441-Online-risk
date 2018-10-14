@@ -74,40 +74,10 @@ public class WelcomeScreenView  extends JFrame implements View{
       
       exitButton.setFont(smallFont);
       welcomePanel.add(exitButton);
-      exitButton.setBounds(100, 500, 200, 40);
+      exitButton.setBounds(100, 500, 200, 40);  
       
-      
-      
-      //this.add(welcomePanel);
-      // End of setting up the components --------
   }
 	
-	
-	
-	// If any button is clicked execute a method
-  // in the Controller named <.........>ActionPerformed
-	public void createMapListener(ActionListener listenForCreateMapButton){
-		createMapButton.addActionListener(listenForCreateMapButton);
-	}
-	
-	public void editMapListener(ActionListener listenForEditMapButton){
-		editMapButton.addActionListener(listenForEditMapButton);
-	}
-	
-	public void playMapListener(ActionListener listenForplayMapButton){
-		playMapButton.addActionListener(listenForplayMapButton);
-	}
-	    
-	public void exitListener(ActionListener listenForExitButton){
-		exitButton.addActionListener(listenForExitButton);
-	}
-
-	// Open a popup that contains the error message passed
-	public void displayErrorMessage(String errorMessage){
-	    JOptionPane.showMessageDialog(this, errorMessage);
-	}
-
-
 
 	@Override
 	public void setActionListener(ActionListener actionListener) {
@@ -121,44 +91,7 @@ public class WelcomeScreenView  extends JFrame implements View{
 		
 	}
 
-	/*
-	public static void setWelcomeMessageLabel(String newMesage) {
-		
-		JLabel welcomeMessageLabel = new JLabel(newMesage);
-		JPanel aPanel = new JPanel();
-	    aPanel.add(welcomeMessageLabel);
-	    welcomeMessageLabel.setBounds(100, 600, 600, 200);
-	    
-	}
-	*/
-  
+	  
 }
 	
 
-
-
-/*      
-
-public int getFirstNumber(){
-    return Integer.parseInt(firstNumber.getText());
-}
-public int getSecondNumber(){
-    return Integer.parseInt(secondNumber.getText());
-}
-public int getCalcSolution(){
-    return Integer.parseInt(calcSolution.getText());
-}
-public void setCalcSolution(int solution){
-    calcSolution.setText(Integer.toString(solution));
-}
-// If the calculateButton is clicked execute a method
-// in the Controller named actionPerformed
-void addCalculateListener(ActionListener listenForCalcButton){
-    calculateButton.addActionListener(listenForCalcButton);
-}
-// Open a popup that contains the error message passed
-void displayErrorMessage(String errorMessage){
-    JOptionPane.showMessageDialog(this, errorMessage);
-}
-
-*/

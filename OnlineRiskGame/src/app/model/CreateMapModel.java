@@ -1,6 +1,8 @@
 package app.model;
 
-public class CreateMapModel {
+import java.util.Observable;
+
+public class CreateMapModel{
 
 	String[] continents;
 	String[] countries;

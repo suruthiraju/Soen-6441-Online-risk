@@ -1,6 +1,7 @@
 package app.view;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -149,6 +150,6 @@ public class CreateMapView extends JFrame implements View {
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		
-		
 	}
+	
 }
