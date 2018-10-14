@@ -1,22 +1,19 @@
 package app.view;
 
-//This is the View
-//Its only job is to display what the user sees
-//It performs no function, but instead passes
-//information entered by the user to whomever needs
-//it.
 import java.awt.event.ActionListener;
 import java.awt.Font;
 import javax.swing.*;
 
 import app.helper.View;
 
+/**
+ * This is the Welcome Screen of the game.
+ * It displays Welcome Message and 
+ * the options for user to start the game with default map or 
+ * to create/edit any map before starting the game
+ */
 public class WelcomeScreenView  extends JFrame implements View{
-
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5402570613272324763L;
 	private String welcomeText = "<html>WELCOME TO ONLINE \"RISK\" GAME</html>";
 	private JLabel welcomeLabel = new JLabel(welcomeText);
@@ -28,64 +25,50 @@ public class WelcomeScreenView  extends JFrame implements View{
 	public JButton playMapButton = new JButton("Play");
 	public JButton exitButton = new JButton("Exit");
 	
-	//private String welcomeMessageText = "";
-	//private JLabel welcomeMessageLabel = new JLabel(welcomeMessageText);
-
 	public WelcomeScreenView(){
-      // Sets up the view and adds the components
-      JPanel welcomePanel = new JPanel();
-      this.setName("RISK GAME");
-      this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      this.setLocation(300, 200);
-      this.setSize(800, 700);
-      this.setResizable(false);
-      this.setVisible(false);
-      //this.setLayout(null);
+		// Sets up the view and adds the components
+		JPanel welcomePanel = new JPanel();
+		this.setName("RISK GAME");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocation(300, 200);
+		this.setSize(800, 700);
+		this.setResizable(false);
+		this.setVisible(false);
+		
+		welcomePanel.setLayout(null);
+		this.add(welcomePanel);
       
-      //welcomePanel.setSize(200, 500);
-      welcomePanel.setLayout(null);
-      
-      //welcomePanel.setLocation(400, 300);
-      this.add(welcomePanel);
-      
-      Font largeFont = new Font("Serif", Font.BOLD, 30);
-      Font mediumFont = new Font("Serif", Font.BOLD, 18);
-      Font smallFont = new Font("Serif", Font.BOLD, 14);
+		Font largeFont = new Font("Serif", Font.BOLD, 30);
+		Font mediumFont = new Font("Serif", Font.BOLD, 18);
+		Font smallFont = new Font("Serif", Font.BOLD, 14);
 
-      welcomeLabel.setFont(largeFont);
-      welcomePanel.add(welcomeLabel);
-      welcomeLabel.setBounds(100, 0, 600, 200);
+		welcomeLabel.setFont(largeFont);
+		welcomePanel.add(welcomeLabel);
+		welcomeLabel.setBounds(100, 0, 600, 200);
               
-      questionLabel.setFont(mediumFont);
-      welcomePanel.add(questionLabel);
-      questionLabel.setBounds(100, 50, 500, 200);
+		questionLabel.setFont(mediumFont);
+		welcomePanel.add(questionLabel);
+		questionLabel.setBounds(100, 50, 500, 200);
       
-      createMapButton.setFont(smallFont);
-      welcomePanel.add(createMapButton);
-      createMapButton.setBounds(100, 200, 200, 40);
+		createMapButton.setFont(smallFont);
+		welcomePanel.add(createMapButton);
+		createMapButton.setBounds(100, 200, 200, 40);
       
-      editMapButton.setFont(smallFont);
-      welcomePanel.add(editMapButton);
-      editMapButton.setBounds(100, 300, 200, 40);
+		editMapButton.setFont(smallFont);
+		welcomePanel.add(editMapButton);
+		editMapButton.setBounds(100, 300, 200, 40);
       
-      playMapButton.setFont(smallFont);
-      welcomePanel.add(playMapButton);
-      playMapButton.setBounds(100, 400, 200, 40);
+		playMapButton.setFont(smallFont);
+		welcomePanel.add(playMapButton);
+		playMapButton.setBounds(100, 400, 200, 40);
       
-      exitButton.setFont(smallFont);
-      welcomePanel.add(exitButton);
-      exitButton.setBounds(100, 500, 200, 40);
-      
-      
-      
-      //this.add(welcomePanel);
-      // End of setting up the components --------
-  }
-	
-	
+		exitButton.setFont(smallFont);
+		welcomePanel.add(exitButton);
+		exitButton.setBounds(100, 500, 200, 40);
+	}
 	
 	// If any button is clicked execute a method
-  // in the Controller named <.........>ActionPerformed
+	// in the Controller named <.........>ActionPerformed
 	public void createMapListener(ActionListener listenForCreateMapButton){
 		createMapButton.addActionListener(listenForCreateMapButton);
 	}
@@ -107,8 +90,6 @@ public class WelcomeScreenView  extends JFrame implements View{
 	    JOptionPane.showMessageDialog(this, errorMessage);
 	}
 
-
-
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		createMapButton.addActionListener(actionListener);
@@ -118,47 +99,6 @@ public class WelcomeScreenView  extends JFrame implements View{
 		playMapButton.addActionListener(actionListener);
 		
 		exitButton.addActionListener(actionListener);
-		
 	}
-
-	/*
-	public static void setWelcomeMessageLabel(String newMesage) {
-		
-		JLabel welcomeMessageLabel = new JLabel(newMesage);
-		JPanel aPanel = new JPanel();
-	    aPanel.add(welcomeMessageLabel);
-	    welcomeMessageLabel.setBounds(100, 600, 600, 200);
-	    
-	}
-	*/
-  
+ 
 }
-	
-
-
-
-/*      
-
-public int getFirstNumber(){
-    return Integer.parseInt(firstNumber.getText());
-}
-public int getSecondNumber(){
-    return Integer.parseInt(secondNumber.getText());
-}
-public int getCalcSolution(){
-    return Integer.parseInt(calcSolution.getText());
-}
-public void setCalcSolution(int solution){
-    calcSolution.setText(Integer.toString(solution));
-}
-// If the calculateButton is clicked execute a method
-// in the Controller named actionPerformed
-void addCalculateListener(ActionListener listenForCalcButton){
-    calculateButton.addActionListener(listenForCalcButton);
-}
-// Open a popup that contains the error message passed
-void displayErrorMessage(String errorMessage){
-    JOptionPane.showMessageDialog(this, errorMessage);
-}
-
-*/
