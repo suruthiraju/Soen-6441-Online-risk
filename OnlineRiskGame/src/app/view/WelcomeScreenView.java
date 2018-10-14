@@ -9,7 +9,9 @@ import java.awt.event.ActionListener;
 import java.awt.Font;
 import javax.swing.*;
 
-public class WelcomeScreenView extends JFrame{
+import app.helper.View;
+
+public class WelcomeScreenView  extends JFrame implements View{
 
 	
 	/**
@@ -21,10 +23,10 @@ public class WelcomeScreenView extends JFrame{
 	private String questionText = "<html>PLEASE SELECT AN OPTION</html>";
 	private JLabel questionLabel = new JLabel(questionText);
 	
-	private JButton createMapButton = new JButton("Create Map");
-	private JButton editMapButton = new JButton("Edit Map");
-	private JButton playMapButton = new JButton("Play");
-	private JButton exitButton = new JButton("Exit");
+	public JButton createMapButton = new JButton("Create Map");
+	public JButton editMapButton = new JButton("Edit Map");
+	public JButton playMapButton = new JButton("Play");
+	public JButton exitButton = new JButton("Exit");
 	
 	//private String welcomeMessageText = "";
 	//private JLabel welcomeMessageLabel = new JLabel(welcomeMessageText);
@@ -103,6 +105,20 @@ public class WelcomeScreenView extends JFrame{
 	// Open a popup that contains the error message passed
 	public void displayErrorMessage(String errorMessage){
 	    JOptionPane.showMessageDialog(this, errorMessage);
+	}
+
+
+
+	@Override
+	public void setActionListener(ActionListener actionListener) {
+		createMapButton.addActionListener(actionListener);
+		
+		editMapButton.addActionListener(actionListener);
+		
+		playMapButton.addActionListener(actionListener);
+		
+		exitButton.addActionListener(actionListener);
+		
 	}
 
 	/*

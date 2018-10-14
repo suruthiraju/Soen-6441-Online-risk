@@ -11,7 +11,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
-public class CreateMapView extends JFrame{
+import app.helper.View;
+
+public class CreateMapView extends JFrame implements View {
 
     //creating all the components of the current view
     private JTextField enterContinent = new JTextField(20);
@@ -144,4 +146,9 @@ public class CreateMapView extends JFrame{
         finalizeCountries.addActionListener(listenfinalizeCountries);
 
     }
+	@Override
+	public void setActionListener(ActionListener actionListener) {
+		
+		
+	}
 }
