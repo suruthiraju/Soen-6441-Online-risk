@@ -31,17 +31,13 @@ public class writeMap {
 		  }
 	}
 	
-	public static void main(String[] args) throws Exception{
+	public static void writeMapToFile(File path, ArrayList<ContinentsModel> listOfContinents, ArrayList<CountryModel> listOfCountrys) throws Exception{
 		
-		ReadFile rf = new ReadFile() ; 
-		ArrayList<ContinentsModel> listOfContinents = rf.getMapContinentDetails();
-		ArrayList<CountryModel> listOfCountrys = rf.getMapCountryDetails();
 	   	      
 		try{
             // Create new file
             String content = null;
-            String path= System.getProperty("user.dir") + "\\mapfiles\\new.map" ;
-            File file = new File(path);
+            File file = path;
 
             // If file doesn't exists, then create it
             if (!file.exists()) {

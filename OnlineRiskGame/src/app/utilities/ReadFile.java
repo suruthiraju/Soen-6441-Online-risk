@@ -9,10 +9,10 @@ import app.model.*;
 
 public class ReadFile {
 	
-	public ArrayList<ContinentsModel> getMapContinentDetails() throws Exception  {
+	public ArrayList<ContinentsModel> getMapContinentDetails(File mapFile) throws Exception  {
 	  
 	    // pass the path to the file as a parameter 
-	    File file = new File("C:\\Users\\sukuri\\Downloads\\Montreal\\Montreal.map"); 
+	    File file = mapFile; 
 	    Scanner sc = new Scanner(file); 
 
 	    ArrayList<ContinentsModel> listOfContinents = new ArrayList<ContinentsModel>();
@@ -46,10 +46,10 @@ public class ReadFile {
 	}
 	
 	
-	public ArrayList<CountryModel> getMapCountryDetails() throws Exception{
+	public ArrayList<CountryModel> getMapCountryDetails(File mapFile) throws Exception{
 		  
 	    // pass the path to the file as a parameter 
-	    File file = new File("C:\\Users\\sukuri\\Downloads\\Montreal\\Montreal.map"); 
+	    File file = mapFile;
 	    Scanner sc = new Scanner(file); 
 
 	    ArrayList<CountryModel> listOfCountrys = new ArrayList<CountryModel>();
