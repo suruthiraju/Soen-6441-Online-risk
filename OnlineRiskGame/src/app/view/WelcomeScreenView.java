@@ -6,6 +6,7 @@ package app.view;
 //information entered by the user to whomever needs
 //it.
 import java.awt.event.ActionListener;
+import java.util.Observable;
 import java.awt.Font;
 import javax.swing.*;
 
@@ -88,6 +89,13 @@ public class WelcomeScreenView  extends JFrame implements View{
 		playMapButton.addActionListener(actionListener);
 		
 		exitButton.addActionListener(actionListener);
+		
+	}
+
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
 		
 	}
 

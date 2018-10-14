@@ -1,19 +1,20 @@
 package app.model;
 
 import java.util.List;
+import java.util.Observable;
 
 import app.utilities.ReadFile;
 
-public class GameMapModel {
+public class GameMapModel extends Observable{
 
 	private List<ContinentsModel> continentList;
-	private List<CountryModel> Countries;
+	private List<CountryModel> countryList;
 	private ReadFile readfile;
 
 	public GameMapModel() {
 		readfile = new ReadFile();
 		this.continentList = readfile.getMapContinentDetails();
-		this.Countries = readfile.getMapCountryDetails();
+		this.countryList = readfile.getMapCountryDetails();
 	}
 
 	/**
@@ -38,7 +39,7 @@ public class GameMapModel {
 	 * @return the list of Countries.
 	 */
 	public List<CountryModel> getCountries() {
-		return Countries;
+		return countryList;
 	}
 
 	/**
@@ -47,6 +48,21 @@ public class GameMapModel {
 	 * @param valueControl
 	 */
 	public void setCountries(List<CountryModel> Countries) {
-		this.Countries = Countries;
+		this.countryList = Countries;
+	}
+	
+	
+	/**
+	 * Method used to notify state change whenever any change is reflected by
+	 * CreateContinentController via CreateContinentView
+	 */
+	public void callObservers() {
+		setChanged();
+		notifyObservers(this);
+	}
+
+	public void removeContinent(ContinentsModel newContinentModel) {
+		this.continentList.remove(newContinentModel);
+		callObservers();
 	}
 }

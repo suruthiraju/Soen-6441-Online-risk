@@ -151,5 +151,10 @@ public class CreateMapView extends JFrame implements View {
 	public void setActionListener(ActionListener actionListener) {
 		
 	}
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
