@@ -10,8 +10,6 @@ public class CountryModel {
 	private int yPosition;
 	private String continentName;
 	private List linkedCountries;
-	private int noOfArmies;
-	private PlayerModel ruler;
 	
 	public CountryModel(String countryName, int xPosition, int yPosition, String continentName, List linkedCountries) {
 		this.countryName = countryName;
