@@ -14,6 +14,13 @@ import javax.swing.ListSelectionModel;
 
 import app.helper.View;
 
+/**
+ * 
+ * @author DELL
+ *
+ */
+
+
 public class CreateMapView extends JFrame implements View {
 
     //creating all the components of the current view

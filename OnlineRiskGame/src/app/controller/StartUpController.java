@@ -111,7 +111,16 @@ public class StartUpController implements ActionListener {
 		    System.out.println(listOfCountrys.get(i).getArmies());
 		}
 	}
+
+
+	/**
+	 * 
+	 * @author DELL
+	 *
+	 */
 	
+	
+
 	public void assignPlayerModel() {
 		for(int i=0; i<noOfPlayers; i++) {	
 			PlayerModel tempMyPlayers = new PlayerModel();

@@ -7,6 +7,13 @@ import javax.swing.JFrame;
 
 import app.helper.View;
 
+/**
+ * 
+ * @author DELL
+ *
+ */
+
+
 public class StartUpView extends JFrame implements View {
 
 		

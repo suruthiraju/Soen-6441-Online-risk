@@ -9,6 +9,13 @@ import app.view.WelcomeScreenView;
 //The Controller coordinates interactions
 //between the View and Model
 
+/**
+ * 
+ * @author DELL
+ *
+ */
+
+
 public class WelcomeScreenController implements ActionListener {
 
 	public static void main(String[] args) {

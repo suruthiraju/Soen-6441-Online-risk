@@ -8,6 +8,13 @@ import java.util.List;
 import java.util.Scanner;
 import app.model.*;
 
+/**
+ * 
+ * @author DELL
+ *
+ */
+
+
 public class ReadFile {
 	
 	public ArrayList<ContinentsModel> getMapContinentDetails(File mapFile) throws Exception  {

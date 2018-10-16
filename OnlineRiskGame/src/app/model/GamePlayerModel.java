@@ -2,6 +2,13 @@ package app.model;
 
 import java.util.List;
 
+/**
+ * 
+ * @author DELL
+ *
+ */
+
+
 public class GamePlayerModel {
 
 	private GameMapModel gameMap;

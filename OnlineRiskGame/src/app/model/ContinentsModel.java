@@ -2,6 +2,13 @@ package app.model;
 
 public class ContinentsModel {
 
+	/**
+	 * 
+	 * @author DELL
+	 *
+	 */
+	
+
 	private String continentName;
 	private int valueControl;
 	public ContinentsModel(String continentName, int valueControl ) {
