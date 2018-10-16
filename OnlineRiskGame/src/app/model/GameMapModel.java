@@ -1,5 +1,6 @@
 package app.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
@@ -64,5 +65,19 @@ public class GameMapModel extends Observable{
 	public void removeContinent(ContinentsModel newContinentModel) {
 		this.continentList.remove(newContinentModel);
 		callObservers();
+	}
+
+	public GameMapModel updateCountries(GameMapModel mapModel) {
+		List<CountryModel> newCountryList = new ArrayList<CountryModel>();
+		for(int i=0;i<mapModel.continentList.size();i++) {
+			for(int j=0;j<mapModel.countryList.size();j++) {
+				if(mapModel.countryList.get(j).continentName().equals(mapModel.continentList.get(i).getContinentName())) {
+					newCountryList.add(mapModel.countryList.get(j));
+				}
+			}
+		}
+		mapModel.countryList = null;
+		mapModel.countryList = newCountryList;
+		return mapModel;
 	}
 }

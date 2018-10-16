@@ -84,7 +84,7 @@ public class WelcomeScreenController implements ActionListener {
 
 	private void showCreateMapWindow() {
 		
-		new CreateMapController();
+		new CreateContinentController();
 		 this.theView.dispose();
 	}
 }
