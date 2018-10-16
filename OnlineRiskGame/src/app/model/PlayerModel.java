@@ -14,6 +14,10 @@ public class PlayerModel {
 		this.color = color;
 	}
 	
+	public PlayerModel() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * 
 	 * @return the value Control.

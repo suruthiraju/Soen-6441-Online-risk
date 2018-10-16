@@ -1,4 +1,4 @@
-package app.model;
+package app.model ;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +10,10 @@ public class CountryModel {
 	private int yPosition;
 	private String continentName;
 	private List linkedCountries;
-	private String ruler;
+	private PlayerModel ruler;
 	private int armies;
 	
-	public CountryModel(String countryName, int xPosition, int yPosition, String continentName, List linkedCountries, String ruler, int armies) {
+	public CountryModel(String countryName, int xPosition, int yPosition, String continentName, List linkedCountries, PlayerModel ruler, int armies) {
 		this.countryName = countryName;
 		this.xPosition = xPosition;
 		this.yPosition = yPosition;
@@ -111,17 +111,17 @@ public void setLinkedCountries(List linkedCountries) {
 
 /**
  * 
- * @return the ruler.
+ * @return the Player.
  */
-public String getRuler() {
+public PlayerModel getRuler() {
 	return ruler;
 }
 
 /**
- * Sets the Ruler.
- * @param ruler
+ * Sets the Player.
+ * @param PlayerModel
  */
-public void setRuler(String ruler) {
+public void setRuler(PlayerModel ruler) {
 	this.ruler = ruler;
 }
 
