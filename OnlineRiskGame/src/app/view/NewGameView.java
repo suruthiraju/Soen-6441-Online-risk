@@ -1,6 +1,7 @@
 package app.view;
 
 import java.awt.event.ActionListener;
+import java.util.Observable;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -95,6 +96,12 @@ public class NewGameView extends JFrame implements View {
 		browseMapButton.addActionListener(actionListener);
 		nextButton.addActionListener(actionListener);
 		cancelButton.addActionListener(actionListener);
+		
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
 		
 	}
 }
