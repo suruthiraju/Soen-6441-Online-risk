@@ -1,8 +1,6 @@
 package app.view;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.GradientPaint;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Observable;
@@ -54,8 +52,6 @@ public class CreateContinentView extends JFrame implements View {
 		mainPanel = new JPanel();
 		mainPanel.setLayout(null);
 		
-		Font myFont = new Font("Sans", Font.ITALIC, 12);
-		
 		textArea =  new JTextArea("Default text",5,5);
 
 		welcomeLabel = new JLabel("Please name the Continents you want in the map and their control values");
@@ -74,7 +70,6 @@ public class CreateContinentView extends JFrame implements View {
 		controlValue.setBounds(200, 200, 200, 40);
 		
 		controlValueInfoText = new JLabel("(0 to 10)");
-		controlValueInfoText.setFont(myFont);
 		controlValueInfoText.setBounds(411, 200, 100, 40);
 
 		addButton = new JButton("Add");

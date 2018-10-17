@@ -50,6 +50,7 @@ public class CreateCountryView extends JFrame implements View {
 	JTextArea textArea;
 
 	public CreateCountryView(List<ContinentsModel> listOfContinents) {
+		this.setTitle("Create Country");
 
 		welcomeLabel = new JLabel("Please add the Countries in the Continents you created:");
 
@@ -111,7 +112,7 @@ public class CreateCountryView extends JFrame implements View {
 		textArea.setWrapStyleWord(true);
 		textArea.setEditable(false);
 		mainPanel.add(textArea);
-		textArea.setBorder(new TitledBorder(new LineBorder(Color.black, 5), "Continents added list:"));
+		textArea.setBorder(new TitledBorder(new LineBorder(Color.black, 5), "Countries added list:"));
 		textArea.setBounds(520, 0, 260, 650);
 
 		Color main = new Color(230, 230, 255);
@@ -126,7 +127,7 @@ public class CreateCountryView extends JFrame implements View {
 		if (continentListArray.length > 0) {
 			continentListCombobox.setRenderer(continentViewRenderer);
 		}
-		continentListCombobox.setBounds(200, 200, 100, 20);
+		continentListCombobox.setBounds(200, 200, 100, 40);
 		mainPanel.add(continentListCombobox);
 
 		this.add(mainPanel);
