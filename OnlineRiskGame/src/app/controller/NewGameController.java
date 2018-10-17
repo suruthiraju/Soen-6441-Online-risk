@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
-import app.view.*;
-import app.model.*;
-import app.utilities.ReadFile;
+import app.model.ContinentsModel;
+import app.model.CountryModel;
+import app.model.GameMapModel;
+import app.model.PlayerModel;
+import app.view.NewGameView;
 
 /**
  * The Class NewGameController 
@@ -22,8 +24,9 @@ import app.utilities.ReadFile;
 public class NewGameController implements ActionListener {
 
 	private NewGameView theView;
-	private ArrayList<ContinentsModel> listOfContinents;  
-	private ArrayList<CountryModel> listOfCountries;
+	private ArrayList<PlayerModel> listOfPlayers = new ArrayList<PlayerModel>();
+	private GameMapModel gmM = new GameMapModel();
+	private int noOfPlayers;
     
     public NewGameController() {
     	this.theView = new NewGameView();
@@ -33,40 +36,46 @@ public class NewGameController implements ActionListener {
     }
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getSource().equals(theView.browseMapButton)) {		
-			int value = theView.chooseMap.showOpenDialog(theView);
-			
-			if(value == JFileChooser.APPROVE_OPTION){
-				
-				//System.out.println(mapFile);
-				//ReadFile rf;
-				//rf.readFile(mapFile);
+	public void actionPerformed(ActionEvent actionEvent) {
+		if (actionEvent.getSource().equals(theView.browseMapButton)) {		
+			int value = theView.chooseMap.showOpenDialog(theView);			
+			if(value == JFileChooser.APPROVE_OPTION){				
 				try {
 					File mapFile = theView.chooseMap.getSelectedFile();
-					ReadFile rf = new ReadFile();
-					rf.setFile(mapFile);
-					listOfContinents = rf.getMapContinentDetails();
-					listOfCountries = rf.getMapCountryDetails();
-					JOptionPane.showMessageDialog(theView, "Map Loaded Successfully! Click Next to Play!","Map Loaded",JOptionPane.INFORMATION_MESSAGE);
+					gmM = new GameMapModel(mapFile);
+					JOptionPane.showMessageDialog(theView, "File Loaded Successfully! Click Next to Play!","Map Loaded",JOptionPane.INFORMATION_MESSAGE);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
-				//MapService.getInstance().loadMap(mapFile);				
+				}				
 			}
-		}else if(arg0.getSource().equals(theView.nextButton)) {
-			int noOfPlayers = (int) theView.numOfPlayers.getSelectedItem();
-			new StartUpController(noOfPlayers, listOfContinents, listOfCountries);
-			 this.theView.dispose();			
-		}else if(arg0.getSource().equals(theView.cancelButton)) {
+		}else if(actionEvent.getSource().equals(theView.nextButton)) {
+			noOfPlayers = (int) theView.numOfPlayers.getSelectedItem();
+			playerValidation();			
+						
+		}else if(actionEvent.getSource().equals(theView.cancelButton)) {
 			new WelcomeScreenController();
 			 this.theView.dispose();
 		}
 		
 	}
     
-    
+	public void playerValidation() {
+		if ( gmM.getCountries().size() > noOfPlayers) {
+			System.out.println("no of players");
+			String PlayerName = "";
+			for (int i=0; i<noOfPlayers; i++) {
+				PlayerName = "Player"+ (i+1);
+				PlayerModel pm = new PlayerModel(PlayerName, 0, "");
+				listOfPlayers.add(pm);				
+			}
+			new StartUpController(listOfPlayers, gmM);
+			this.theView.dispose();
+		} else {
+			JOptionPane.showMessageDialog(theView,
+					"Number of cuntry in the Map is less than Number of Players. Select map or player Again!",
+					"Map Loaded", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}   
 	
     
 }
