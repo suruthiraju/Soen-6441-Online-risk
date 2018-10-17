@@ -9,7 +9,7 @@ public class CountryModel {
 	private int xPosition;
 	private int yPosition;
 	private String continentName;
-	private List linkedCountries;
+	private List<CountryModel> linkedCountries;
 	private PlayerModel ruler;
 	private int armies;
 	

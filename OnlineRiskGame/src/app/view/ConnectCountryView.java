@@ -19,6 +19,13 @@ import javax.swing.ListSelectionModel;
 import app.helper.View;
 import app.model.CountryModel;
 
+/**
+ * 
+ * @author DELL
+ *
+ */
+
+
 public class ConnectCountryView extends JFrame implements View {
 
 	public JPanel welcomePanel;

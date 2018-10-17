@@ -10,12 +10,24 @@ import app.model.GameMapModel;
 import app.view.ConnectCountryView;
 import app.view.CreateContinentView;
 
+/**
+ * 
+ * @author DELL
+ *
+ */
+
 public class ConnectCountryController implements ActionListener{
 
 	private GameMapModel gameMapModel;
 	private ConnectCountryView connectCountryView;
 	private List<CountryModel> CountryList;
 	private CountryModel newCountryModel;
+
+	/**
+	 * 
+	 * @author DELL
+	 *
+	 */
 	
 	public ConnectCountryController(GameMapModel mapModel) {
 		
