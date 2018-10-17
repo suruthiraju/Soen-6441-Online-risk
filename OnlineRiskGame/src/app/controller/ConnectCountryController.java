@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Observable;
 
 import app.model.CountryModel;
 import app.model.GameMapModel;
@@ -23,10 +24,13 @@ public class ConnectCountryController implements ActionListener {
 
 		this.gameMapModel = mapModel;
 		this.countryList = this.gameMapModel.getCountries();
-		this.countryListlinks = new ArrayList<CountryModel>();
 		this.connectCountryView = new ConnectCountryView(this.countryList);
+		mapModel.addObserver(this.connectCountryView);
+		gameMapModel.callObservers();
+		this.countryListlinks = new ArrayList<CountryModel>();
 		this.connectCountryView.setActionListener(this);
 		this.connectCountryView.setVisible(true);
+		
 
 	}
 
