@@ -102,7 +102,7 @@ public class CreateCountryView extends JFrame implements View {
 		} else {
 			textAreaText.setLength(0);
 			for (int i = 0; i < listOfCountryModel.size(); i++) {
-				textAreaText.append("Continent name : " + listOfCountryModel.get(i).getCountryName()
+				textAreaText.append("Country name : " + listOfCountryModel.get(i).getCountryName()
 						+ " ,Continent name : " + listOfCountryModel.get(i).getcontinentName() + "\n");
 			}
 		}
