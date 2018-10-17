@@ -3,16 +3,19 @@ package app.view;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.List;
 import java.util.Observable;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileSystemView;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import app.helper.View;
@@ -147,5 +150,6 @@ public class EditContinentView extends JFrame implements View {
 		welcomePanel.add(saveButton);
 		saveButton.setBounds(200, 250, 100, 20);
 	}
-
+	
+	
 }

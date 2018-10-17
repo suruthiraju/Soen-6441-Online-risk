@@ -5,53 +5,83 @@ package app.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileSystemView;
 
 import app.model.ContinentsModel;
 import app.model.GameMapModel;
+import app.utilities.ReadFile;
 import app.view.EditContinentView;
 
 /**
  * @author Jatan Gohel
  *
  */
-public class EditContinentController implements ActionListener {
+public class EditContinentController extends Observable implements ActionListener {
 
-	private EditContinentView createContinentView;
+	private EditContinentView editContinentView;
 	private GameMapModel mapModel;
 	private List<ContinentsModel> continentList;
-
+	private ReadFile tempRead = new ReadFile();
+	private File file;
 	private ContinentsModel newContinentModel;
 	private List<ContinentsModel> newContinentList;
 
 	public EditContinentController() {
+		
+		file=this.selectFile();
+	    tempRead.setFile(file);
+	    continentList=tempRead.getMapContinentDetails();
 		this.mapModel = new GameMapModel();
+		mapModel.setContinents(continentList);
+		setChanged();
+		notifyObservers();
 		this.newContinentList = new ArrayList<ContinentsModel>();
 		continentList = this.mapModel.getContinents();
-		this.createContinentView = new EditContinentView(continentList);
-		this.createContinentView.setActionListener(this);
-		this.createContinentView.setVisible(true);
-		this.mapModel.addObserver(this.createContinentView);
+		this.editContinentView = new EditContinentView(continentList);
+		this.editContinentView.setActionListener(this);
+		this.editContinentView.setVisible(true);
+		this.mapModel.addObserver(this.editContinentView);
 	}
+	
+	public File selectFile()
+	{
+		JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+		File file;
+		int returnValue = jfc.showOpenDialog(this.editContinentView);
+
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			File selectedFile = jfc.getSelectedFile();
+			System.out.println(selectedFile.getAbsolutePath());
+			 file= new File(selectedFile.getAbsolutePath());
+			 return file;
+		}
+		else
+			return null;
+
+}
 
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		if (actionEvent.getSource().equals(this.createContinentView.addButton)) {
-			if (this.createContinentView.controlValue.getText() != null
-					&& !this.createContinentView.controlValue.getText().isEmpty()) {
-				if (0 < Integer.parseInt(this.createContinentView.controlValue.getText())
-						&& Integer.parseInt(this.createContinentView.controlValue.getText()) < 10) {
+		if (actionEvent.getSource().equals(this.editContinentView.addButton)) {
+			if (this.editContinentView.controlValue.getText() != null
+					&& !this.editContinentView.controlValue.getText().isEmpty()) {
+				if (0 < Integer.parseInt(this.editContinentView.controlValue.getText())
+						&& Integer.parseInt(this.editContinentView.controlValue.getText()) < 10) {
 
-					this.newContinentModel = (ContinentsModel) this.createContinentView.continentListCombobox
+					this.newContinentModel = (ContinentsModel) this.editContinentView.continentListCombobox
 							.getSelectedItem();
 
 					this.mapModel.removeContinent(this.newContinentModel);
 
 					this.newContinentModel
-							.setValueControl(Integer.parseInt(this.createContinentView.controlValue.getText()));
+							.setValueControl(Integer.parseInt(this.editContinentView.controlValue.getText()));
 					this.newContinentList.add(this.newContinentModel);
 
 					System.out.println(this.newContinentList);
@@ -66,16 +96,16 @@ public class EditContinentController implements ActionListener {
 						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
 				return;
 			}
-		} else if (actionEvent.getSource().equals(this.createContinentView.saveButton)) {
-			if (this.createContinentView.controlValue.getText() != null
-					&& !this.createContinentView.controlValue.getText().isEmpty()) {
-				if (0 < Integer.parseInt(this.createContinentView.controlValue.getText())
-						&& Integer.parseInt(this.createContinentView.controlValue.getText()) < 10) {
+		} else if (actionEvent.getSource().equals(this.editContinentView.saveButton)) {
+			if (this.editContinentView.controlValue.getText() != null
+					&& !this.editContinentView.controlValue.getText().isEmpty()) {
+				if (0 < Integer.parseInt(this.editContinentView.controlValue.getText())
+						&& Integer.parseInt(this.editContinentView.controlValue.getText()) < 10) {
 					if (!this.newContinentList.isEmpty()) {
 						this.mapModel.setContinents(newContinentList);
 						this.mapModel = this.mapModel.updateCountries(this.mapModel);
 						new ConnectCountryController(this.mapModel);
-						this.createContinentView.dispose();
+						this.editContinentView.dispose();
 						// open connectCountries Controller and pass the map model
 					}else {
 						JOptionPane.showOptionDialog(null, "Please add atleast one continent first.", "Invalid",
@@ -96,3 +126,5 @@ public class EditContinentController implements ActionListener {
 	}
 
 }
+
+	
