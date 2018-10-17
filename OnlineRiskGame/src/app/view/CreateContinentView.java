@@ -49,25 +49,25 @@ public class CreateContinentView extends JFrame implements View {
         mainPanel.setLayout(null);
     	
     	welcomeLabel = new JLabel("Please name the Continents you want in the map and their control values");
-    	welcomeLabel.setBounds(10,10,200,100);
+    	welcomeLabel.setBounds(100, 0, 600, 100);
     	
-		continentListText = new JLabel("Continent");
-		continentListText.setBounds(10,20,50,50);
+		continentListText = new JLabel("Continent Name: ");
+		continentListText.setBounds(100, 100, 200, 40);
 		
 		continentValue = new JTextField();
-		continentValue.setBounds(65,20,50,50);
+		continentValue.setBounds(200, 100, 200, 40);
 		
-		controlValueText = new JLabel("Control Value");
-		controlValueText.setBounds(10,30,50,50);
+		controlValueText = new JLabel("Control Value: ");
+		controlValueText.setBounds(100, 200, 200, 40);
 		
 		controlValue = new JTextField();
-    	controlValue.setBounds(65,30,50,50);
+    	controlValue.setBounds(200, 200, 200, 40);
     	
     	addButton = new JButton("Add");
-    	addButton.setBounds(30,50,50,50);
+    	addButton.setBounds(100, 300, 100, 40);
     	
     	nextButton = new JButton("Next");
-    	nextButton.setBounds(85,50,50,50);
+    	nextButton.setBounds(200, 300, 100, 40);
     
         
         updateScreen();
