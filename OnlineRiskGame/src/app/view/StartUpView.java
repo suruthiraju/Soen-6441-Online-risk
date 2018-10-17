@@ -24,7 +24,6 @@ import app.utilities.ReadFile;
  *
  */
 
-
 public class StartUpView extends JFrame implements View {
 
 	public ArrayList<ContinentsModel> listOfContinents;
@@ -60,7 +59,7 @@ public class StartUpView extends JFrame implements View {
 
 		for (int i = 0; i < n; i++) {
 			button[i] = new JButton(this.listOfCountries.get(i).getCountryName().substring(0, 3));
-			button[i].setBounds(this.listOfCountries.get(i).getXPosition(), this.listOfCountries.get(i).getYPosition(),
+			button[i].setBounds(this.listOfCountries.get(i).getXPosition()*2, this.listOfCountries.get(i).getYPosition()*2,
 					50, 50);
 
 			panel.add(button[i]);
@@ -85,11 +84,13 @@ public class StartUpView extends JFrame implements View {
 			ArrayList<CountryModel> neighbourCountries = (ArrayList<CountryModel>) this.listOfCountries.get(k)
 					.getLinkedCountries();
 
-//			for (int j = 0; j < neighbourCountries.size(); j++) {
-//
-//				g2.drawLine(connectorPoints[j].x, connectorPoints[j].y, connectorPoints[k].x, connectorPoints[k].y);
-//
-//			}
+			for (int j = 0; j < neighbourCountries.size(); j++) {
+				for (int i = 0; i < this.listOfCountries.size(); i++)
+					if (neighbourCountries.get(j).equals(this.listOfCountries.get(i)))
+						g2.drawLine(connectorPoints[i].x, connectorPoints[i].y, connectorPoints[k].x,
+								connectorPoints[k].y);
+
+			}
 		}
 
 	}

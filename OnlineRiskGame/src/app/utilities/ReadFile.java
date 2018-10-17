@@ -87,7 +87,7 @@ public class ReadFile {
 					if (!"".equals(territories)) {
 
 						int indexOfCountryName = territories.indexOf(',');
-						String countryName = territories.substring(0, indexOfCountryName);
+						String countryName = territories.substring(0, indexOfCountryName).trim();
 						CountryModel cm = listOfCountries.get(countryName);
 						if (cm == null) {
 							cm = new CountryModel();
@@ -108,11 +108,11 @@ public class ReadFile {
 					//	int result1 = Integer.parseInt(yPosition);
 
 						int indexOfContinent = territories.indexOf(',', (indexOfYPos + 1));
-						String continent = territories.substring((indexOfYPos + 1), indexOfContinent);
+						String continent = territories.substring((indexOfYPos + 1), indexOfContinent).trim();
 						cm.setContinentName(continent);
 						System.out.println("Continent: " + continent);
 
-						String neighbouringCountries = territories.substring((indexOfContinent + 1));
+						String neighbouringCountries = territories.substring((indexOfContinent + 1)).trim();
 						List<String> listOfNeighbouringCountries = Arrays
 								.asList(neighbouringCountries.split("\\s*,\\s*"));
 						CountryModel newNeighbour;
@@ -120,15 +120,15 @@ public class ReadFile {
 						List<CountryModel> linkedCountriesList = new ArrayList<CountryModel>();
 
 						for (int i = 0; i < listOfNeighbouringCountries.size(); i++) {
-							if (listOfCountries.containsKey(listOfNeighbouringCountries.get(i))) {
-								newNeighbour = listOfCountries.get(listOfNeighbouringCountries.get(i));
+							if (listOfCountries.containsKey(listOfNeighbouringCountries.get(i).trim())) {
+								newNeighbour = listOfCountries.get(listOfNeighbouringCountries.get(i).trim());
 
 							} else {
 								newNeighbour = new CountryModel();
-								newNeighbour.setCountryName(listOfNeighbouringCountries.get(i));
+								newNeighbour.setCountryName(listOfNeighbouringCountries.get(i).trim());
 
 							}
-							listOfCountries.put(listOfNeighbouringCountries.get(i), newNeighbour);
+							listOfCountries.put(listOfNeighbouringCountries.get(i).trim(), newNeighbour);
 							linkedCountriesList.add(newNeighbour);
 
 						}
