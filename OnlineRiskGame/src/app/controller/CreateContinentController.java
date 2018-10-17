@@ -28,6 +28,9 @@ public class CreateContinentController implements ActionListener {
 	private List<ContinentsModel> newContinentList;
 
 	public CreateContinentController() {
+		
+		//need to be changed with a new view for browse button
+		
 		this.mapModel = new GameMapModel();
 		this.newContinentList = new ArrayList<ContinentsModel>();
 		continentList = this.mapModel.getContinents();
