@@ -23,7 +23,7 @@ import app.view.EditContinentView;
  * @author Jatan Gohel
  *
  */
-public class EditContinentController extends Observable implements ActionListener {
+public class EditContinentController implements ActionListener {
 
 	private EditContinentView editContinentView;
 	private GameMapModel mapModel;
@@ -40,8 +40,7 @@ public class EditContinentController extends Observable implements ActionListene
 	    continentList=tempRead.getMapContinentDetails();
 		this.mapModel = new GameMapModel();
 		mapModel.setContinents(continentList);
-		setChanged();
-		notifyObservers();
+		mapModel.callObservers();
 		this.newContinentList = new ArrayList<ContinentsModel>();
 		continentList = this.mapModel.getContinents();
 		this.editContinentView = new EditContinentView(continentList);
