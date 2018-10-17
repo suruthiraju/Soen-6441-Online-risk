@@ -3,6 +3,7 @@ package app.view;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.Observable;
 
 import javax.swing.JButton;
@@ -17,6 +18,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import app.helper.View;
+import app.model.ContinentsModel;
+import app.model.GameMapModel;
 
 /**
  * 
@@ -74,12 +77,24 @@ public class CreateContinentView extends JFrame implements View {
 		nextButton = new JButton("Next");
 		nextButton.setBounds(200, 300, 100, 40);
 		
-		updateScreen();
+		updateScreen(null);
 	}
 
-	public void updateScreen() {
+	public void updateScreen(List<ContinentsModel> listOfContinentModel) {
 		
-		textArea.setText("// update it using observer");
+		StringBuilder textAreaText = new StringBuilder("------------------------------------------------");
+		
+		if(listOfContinentModel==null) {
+			textArea.setText(textAreaText.toString());	
+		}
+		else{
+			textAreaText.setLength(0);
+			for(int i=0;i<listOfContinentModel.size();i++) {
+				textAreaText.append("Continent name : "+listOfContinentModel.get(i).getContinentName()+" ,Control Value : "+listOfContinentModel.get(i).getValueControl()+"\n");
+			}
+		}
+		
+		textArea.setText(textAreaText.toString());
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
 		textArea.setEditable(false);
@@ -111,8 +126,11 @@ public class CreateContinentView extends JFrame implements View {
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		this.updateScreen();
+	public void update(Observable obs, Object arg) {
+		List<ContinentsModel> listOfContinentModel = ((GameMapModel) obs).getContinents();
+		this.updateScreen(listOfContinentModel);
+		this.revalidate();
+		this.repaint();
 	}
 
 }

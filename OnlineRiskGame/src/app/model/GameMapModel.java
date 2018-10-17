@@ -60,6 +60,7 @@ public class GameMapModel extends Observable{
 	 */
 	public void setContinents(List<ContinentsModel> Continents) {
 		this.continentList = Continents;
+		callObservers();
 	}
 
 	/**
@@ -77,6 +78,7 @@ public class GameMapModel extends Observable{
 	 */
 	public void setCountries(List<CountryModel> Countries) {
 		this.countryList = Countries;
+		callObservers();
 	}
 	
 	
