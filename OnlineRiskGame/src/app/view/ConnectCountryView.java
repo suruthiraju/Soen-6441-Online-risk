@@ -71,7 +71,7 @@ public class ConnectCountryView extends JFrame implements View {
 		countryListLabelRight = new JLabel("Country 2");
 		countryListLabelRight.setBounds(40, 300, 100, 25);
 		welcomePanel.add(countryListLabelRight);
-
+		
 		// left panel
 		this.leftCountryList = countryList;
 
@@ -115,12 +115,14 @@ public class ConnectCountryView extends JFrame implements View {
 		saveButton.setFont(smallFont);
 		welcomePanel.add(saveButton);
 		saveButton.setBounds(200, 250, 100, 20);
+		
+		
 
 	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
+		// Auto generated code
 
 	}
 

@@ -8,7 +8,7 @@ import app.model.ContinentsModel;
 import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.view.ConnectCountryView;
-import app.view.CreateContinentView;
+import app.view.EditContinentView;
 
 /**
  * 

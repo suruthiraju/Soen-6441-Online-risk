@@ -21,15 +21,27 @@ public class GameMapModel extends Observable{
 	private List<CountryModel> countryList;
 	private ReadFile readfile;
 
-	public GameMapModel() {
+	/**
+	 * Parameterized constructor that helps edit the map
+	 * @param file
+	 */
+	public GameMapModel(File file) {
 		readfile = new ReadFile();
 		try {
 			this.continentList = readfile.getMapContinentDetails(new File(Constant.FILE_LOCATION));
 			this.countryList = readfile.getMapCountryDetails(new File(Constant.FILE_LOCATION));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			//handle properly
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Default constructor to make new map
+	 */
+	public GameMapModel() {
+		this.continentList = new ArrayList<ContinentsModel>();
+		this.countryList = new ArrayList<CountryModel>();
 	}
 
 	/**

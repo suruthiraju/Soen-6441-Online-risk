@@ -67,7 +67,8 @@ public class WelcomeScreenController implements ActionListener {
 	}
 
 	private void showEditGameWindow() {
-		new EditMapController();
+		//new EditMapController();
+		new EditContinentController();
 		this.theView.dispose();
 	}
 
