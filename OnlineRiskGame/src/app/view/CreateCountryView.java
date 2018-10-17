@@ -1,13 +1,17 @@
 package app.view;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GradientPaint;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.Observable;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -15,8 +19,10 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import app.helper.View;
+import app.model.ContinentsModel;
 
 /**
  * 
@@ -24,49 +30,82 @@ import app.helper.View;
  *
  */
 
-public class CreateContinentView extends JFrame implements View {
+public class CreateCountryView extends JFrame implements View {
 
 	public JLabel welcomeLabel;
 	public JTextField continentValue;
-	public JTextField controlValue;
-	public JLabel continentListText;
-	public JLabel controlValueText;
+	public JComboBox listOfContinents;
+	public JLabel countryListText;
 	public JTextArea observerList;
 	public JButton nextButton;
 	public JButton addButton;
+	public JButton saveButton;
 	public JTextArea consoleTextArea;
 	public JTextArea consoleMainPanel;
 	public JScrollPane consolePanel;
 	public JPanel mainPanel;
 	JTextArea textArea;
 	
-	public CreateContinentView() {
-		this.setTitle("Create Continent");
+	public CreateCountryView(List<ContinentsModel> listOfContinents) {
+
+		welcomeLabel = new JLabel("Please add the Countries in the Continents you created:");
+
+		countryListText = new JLabel("Country");
+		
+		
+		
+		addButton = new JButton("Add");
+		saveButton = new JButton("Save");
+
+		mainPanel = new JPanel();
+		
+		this.setName("RISK GAME");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(300, 200);
 		this.setSize(800, 700);
 		this.setResizable(false);
 		this.setVisible(false);
+		mainPanel.setLayout(null);
+		this.add(mainPanel);
+		this.updateScreen();
+	}
 
+	public class ContinentViewRenderer extends BasicComboBoxRenderer {
+
+		/*
+		 * Getter method that provides us a map model corresponding to a map name
+		 * 
+		 * @see javax.swing.plaf.basic.BasicComboBoxRenderer#
+		 * getListCellRendererComponent(javax.swing.JList, java.lang.Object, int,
+		 * boolean, boolean)
+		 */
+		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+				boolean cellHasFocus) {
+			super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+			ContinentsModel map_model = (ContinentsModel) value;
+			if (map_model != null)
+				setText(map_model.getContinentName());
+
+			return this;
+		}
+	}
+	
+	public CreateCountryView() {
+	
 		mainPanel = new JPanel();
 		mainPanel.setLayout(null);
 		
 		textArea =  new JTextArea("Default text",5,5);
 
-		welcomeLabel = new JLabel("Please name the Continents you want in the map and their control values");
+		welcomeLabel = new JLabel("Please add the Countries in the Continents you created:");
 		welcomeLabel.setBounds(100, 0, 600, 100);
 
-		continentListText = new JLabel("Continent Name: ");
-		continentListText.setBounds(100, 100, 200, 40);
+		countryListText = new JLabel("Country Name: ");
+		countryListText.setBounds(100, 100, 200, 40);
 
 		continentValue = new JTextField();
-		continentValue.setBounds(200, 100, 200, 40);
-
-		controlValueText = new JLabel("Control Value: ");
-		controlValueText.setBounds(100, 200, 200, 40);
-
-		controlValue = new JTextField();
-		controlValue.setBounds(200, 200, 200, 40);
+		continentValue.setBounds(200, 100, 200, 40);	
 
 		addButton = new JButton("Add");
 		addButton.setBounds(100, 300, 100, 40);
@@ -75,9 +114,12 @@ public class CreateContinentView extends JFrame implements View {
 		nextButton.setBounds(200, 300, 100, 40);
 		
 		updateScreen();
+
 	}
 
 	public void updateScreen() {
+		
+		
 		
 		textArea.setText("// update it using observer");
 		textArea.setLineWrap(true);
@@ -88,6 +130,8 @@ public class CreateContinentView extends JFrame implements View {
 		        "Continents added list:"));
 		textArea.setBounds(520, 0, 260, 650);
 		
+		
+		
 		Color main = new Color(230, 230, 255);
 		Color secondary = new Color(0, 0, 26);
 		textArea.setBackground(main);  //sets the background color
@@ -97,10 +141,10 @@ public class CreateContinentView extends JFrame implements View {
 		mainPanel.add(welcomeLabel);
 		mainPanel.add(addButton);
 		mainPanel.add(nextButton);
-		mainPanel.add(continentListText);
+		mainPanel.add(listOfContinents);
+		mainPanel.add(countryListText);
 		mainPanel.add(continentValue);
-		mainPanel.add(controlValue);
-		mainPanel.add(controlValueText);
+		mainPanel.add(countryListText);
 
 	}
 
