@@ -28,8 +28,9 @@ public class GameMapModel extends Observable{
 	public GameMapModel(File file) {
 		readfile = new ReadFile();
 		try {
-			this.continentList = readfile.getMapContinentDetails(new File(Constant.FILE_LOCATION));
-			this.countryList = readfile.getMapCountryDetails(new File(Constant.FILE_LOCATION));
+			readfile.setFile(new File(Constant.FILE_LOCATION));
+			this.continentList = readfile.getMapContinentDetails();
+			this.countryList = readfile.getMapCountryDetails();
 		} catch (Exception e) {
 			//handle properly
 			e.printStackTrace();

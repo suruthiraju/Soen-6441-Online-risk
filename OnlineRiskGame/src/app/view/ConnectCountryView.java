@@ -19,13 +19,6 @@ import javax.swing.ListSelectionModel;
 import app.helper.View;
 import app.model.CountryModel;
 
-/**
- * 
- * @author DELL
- *
- */
-
-
 public class ConnectCountryView extends JFrame implements View {
 
 	public JPanel welcomePanel;
@@ -35,6 +28,7 @@ public class ConnectCountryView extends JFrame implements View {
 	public JLabel countryListLabelLeft;
 	public JLabel countryListLabelRight;
 	public JList countryParentListRight;
+	public JList countryParentListLeft;
 	public List<CountryModel> leftCountryList;
 	public List<CountryModel> rightCountryList;
 
@@ -74,20 +68,21 @@ public class ConnectCountryView extends JFrame implements View {
 		
 		// left panel
 		this.leftCountryList = countryList;
-
-		CountryModel[] countryModelArray = new CountryModel[this.leftCountryList.size()];
+		CountryModel[] countryModelArrayLeft = new CountryModel[this.leftCountryList.size()];
 		for (int i = 0; i < this.leftCountryList.size(); i++) {
-			countryModelArray[i] = this.leftCountryList.get(i);
+			countryModelArrayLeft[i] = this.leftCountryList.get(i);
 		}
-
-		countryParentListRight = new JList<CountryModel>();
-		if (countryModelArray.length > 0) {
-			countryParentListRight.setListData(countryModelArray);
-			countryParentListRight.setCellRenderer(new CountryModelRenderer());
-		}
-		countryParentListRight.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		JScrollPane countryParentListPaneLeft = new JScrollPane(countryParentListRight);
+		
+		countryParentListLeft = new JList<CountryModel>();
+		if (countryModelArrayLeft.length > 0) {
+			countryParentListLeft.setListData(countryModelArrayLeft);
+			countryParentListLeft.setCellRenderer(new CountryModelRenderer());
+		}		
+		
+		countryParentListLeft.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		JScrollPane countryParentListPaneLeft = new JScrollPane(countryParentListLeft);
 		countryParentListPaneLeft.setBounds(50, 100, 150, 150);
+		
 		welcomePanel.add(countryParentListPaneLeft);
 
 		// Right panel

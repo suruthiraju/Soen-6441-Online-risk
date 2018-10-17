@@ -23,7 +23,7 @@ public class NewGameController implements ActionListener {
 
 	private NewGameView theView;
 	private ArrayList<ContinentsModel> listOfContinents;  
-	private ArrayList<CountryModel> listOfCountrys;
+	private ArrayList<CountryModel> listOfCountries;
     
     public NewGameController() {
     	this.theView = new NewGameView();
@@ -38,12 +38,16 @@ public class NewGameController implements ActionListener {
 			int value = theView.chooseMap.showOpenDialog(theView);
 			
 			if(value == JFileChooser.APPROVE_OPTION){
-				File mapFile = theView.chooseMap.getSelectedFile();
-				System.out.println(mapFile);
-				ReadFile rf = new ReadFile();
+				
+				//System.out.println(mapFile);
+				//ReadFile rf;
+				//rf.readFile(mapFile);
 				try {
-					listOfContinents = rf.getMapContinentDetails(mapFile);
-					listOfCountrys = rf.getMapCountryDetails(mapFile);
+					File mapFile = theView.chooseMap.getSelectedFile();
+					ReadFile rf = new ReadFile();
+					rf.setFile(mapFile);
+					listOfContinents = rf.getMapContinentDetails();
+					listOfCountries = rf.getMapCountryDetails();
 					JOptionPane.showMessageDialog(theView, "Map Loaded Successfully! Click Next to Play!","Map Loaded",JOptionPane.INFORMATION_MESSAGE);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -53,7 +57,7 @@ public class NewGameController implements ActionListener {
 			}
 		}else if(arg0.getSource().equals(theView.nextButton)) {
 			int noOfPlayers = (int) theView.numOfPlayers.getSelectedItem();
-			new StartUpController(noOfPlayers, listOfContinents, listOfCountrys);
+			new StartUpController(noOfPlayers, listOfContinents, listOfCountries);
 			 this.theView.dispose();			
 		}else if(arg0.getSource().equals(theView.cancelButton)) {
 			new WelcomeScreenController();
