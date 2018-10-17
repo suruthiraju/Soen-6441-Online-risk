@@ -34,24 +34,22 @@ public class ReinforcementController implements ActionListener {
 		return reinforceArmies;
 	}
 	
-	public void checkControlValue() {
-		String permanentName ="";
-		String tempName ="";
-		boolean controlFlag = false;
-		for (int i = 0; i < listOfContinents.size(); i++) {
-			List<CountryModel> Country = listOfContinents.get(i).getCountries();
-			permanentName = Country.get(0).getRuler().getNamePlayer();
-			for(int j=0; j < Country.size(); j++ ) {
-				 tempName= Country.get(j).getRuler().getNamePlayer();
-				 if (tempName.equals(permanentName)) {
-					 controlFlag = true;
-				 }else {
-					 controlFlag = false;
-					 break;
-				 }
-			}
-		}
-	}
+//	public void checkControlValue() {
+//		String permanentName ="";
+//		String tempName ="";
+//		boolean controlFlag = false;
+//		    Country
+//			permanentName = Country.get(0).getRuler().getNamePlayer();
+//			for(int j=0; j < Country.size(); j++ ) {
+//				 tempName= Country.get(j).getRuler().getNamePlayer();
+//				 if (tempName.equals(permanentName)) {
+//					 controlFlag = true;
+//				 }else {
+//					 controlFlag = false;
+//					 break;
+//				 }
+//			}
+//	}
 	public void addArmies(int armies, String CountryName) {
 		for (int i = 0; i < listOfCountrys.size(); i++) {
 			int previousArmies = 0;

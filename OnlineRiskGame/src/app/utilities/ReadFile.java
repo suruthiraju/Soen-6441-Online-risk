@@ -52,9 +52,7 @@ public class ReadFile {
 					int result = Integer.parseInt(sc4);
 					System.out.println("Value: " + sc4);
 					
-					List<CountryModel> countriesList = new ArrayList<CountryModel>();
-
-					ContinentsModel tempMyContinents = new ContinentsModel(sc3, result, countriesList);
+					ContinentsModel tempMyContinents = new ContinentsModel(sc3, result);
 					listOfContinents.add(tempMyContinents);
 					sc2 = sc.nextLine();
 					sc2.trim();
