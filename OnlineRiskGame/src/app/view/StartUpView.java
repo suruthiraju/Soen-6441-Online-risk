@@ -18,6 +18,13 @@ import app.model.ContinentsModel;
 import app.model.CountryModel;
 import app.utilities.ReadFile;
 
+/**
+ * 
+ * @author DELL
+ *
+ */
+
+
 public class StartUpView extends JFrame implements View {
 
 	public ArrayList<ContinentsModel> listOfContinents;

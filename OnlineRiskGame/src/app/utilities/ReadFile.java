@@ -12,6 +12,13 @@ import java.util.Scanner;
 import app.model.ContinentsModel;
 import app.model.CountryModel;
 
+/**
+ * 
+ * @author DELL
+ *
+ */
+
+
 public class ReadFile {
 	public static File FILE;
 

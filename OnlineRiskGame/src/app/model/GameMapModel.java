@@ -8,6 +8,13 @@ import java.util.Observable;
 import app.utilities.Constant;
 import app.utilities.ReadFile;
 
+/**
+ * 
+ * @author DELL
+ *
+ */
+
+
 public class GameMapModel extends Observable{
 
 	private List<ContinentsModel> continentList;
