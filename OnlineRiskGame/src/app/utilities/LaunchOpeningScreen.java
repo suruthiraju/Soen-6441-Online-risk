@@ -22,6 +22,13 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 
 
+/**
+ * 
+ * @author DELL
+ *
+ */
+
+
 public class LaunchOpeningScreen {
 	@Ignore
 	public static void main(String[] args) {

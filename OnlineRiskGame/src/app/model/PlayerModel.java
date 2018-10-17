@@ -3,6 +3,13 @@ package app.model;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * 
+ * @author DELL
+ *
+ */
+
+
 public class PlayerModel {
 
 	private String namePlayer;

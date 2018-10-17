@@ -19,6 +19,13 @@ import app.helper.View;
 import app.model.ContinentsModel;
 import app.model.GameMapModel;
 
+/**
+ * 
+ * @author DELL
+ *
+ */
+
+
 public class CreateContinentView extends JFrame implements View {
 
 	public JLabel welcomeLabel;

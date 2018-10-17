@@ -3,6 +3,13 @@ package app.model ;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author DELL
+ *
+ */
+
+
 public class CountryModel {
 
 	private String countryName;
@@ -23,6 +30,10 @@ public class CountryModel {
 		this.armies = armies;	
 	}
 	
+	public CountryModel() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * 
 	 * @return the country name.
@@ -97,7 +108,7 @@ public void setContinentName(String continentName) {
  * 
  * @return the list of array.
  */
-public List getlinkedCountries() {
+public List<CountryModel> getLinkedCountries() {
 	return linkedCountries;
 }
 
@@ -105,7 +116,7 @@ public List getlinkedCountries() {
  * Sets the list of array.
  * @param ArrayList
  */
-public void setLinkedCountries(List linkedCountries) {
+public void setLinkedCountries(List<CountryModel> linkedCountries) {
 	this.linkedCountries = linkedCountries;
 }
 

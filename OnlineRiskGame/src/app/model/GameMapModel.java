@@ -8,6 +8,13 @@ import java.util.Observable;
 import app.utilities.Constant;
 import app.utilities.ReadFile;
 
+/**
+ * 
+ * @author DELL
+ *
+ */
+
+
 public class GameMapModel extends Observable{
 
 	private List<ContinentsModel> continentList;
@@ -17,8 +24,8 @@ public class GameMapModel extends Observable{
 	public GameMapModel() {
 		readfile = new ReadFile();
 		try {
-			this.continentList = readfile.getMapContinentDetails(new File(Constant.FILE_LOCATION));
-			this.countryList = readfile.getMapCountryDetails(new File(Constant.FILE_LOCATION));
+			this.continentList = readfile.getMapContinentDetails();
+			this.countryList = readfile.getMapCountryDetails();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
