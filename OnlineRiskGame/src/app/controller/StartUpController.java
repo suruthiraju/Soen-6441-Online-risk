@@ -145,7 +145,7 @@ public class StartUpController implements ActionListener {
 		for (int i = 0; i < listOfCountrys.size(); i++) {
 			if (CountryName.equals(listOfCountrys.get(i).getCountryName())) {
 				int armies;
-				switch (namePlayer) {
+				switch (CountryName) {
 				case "Player1":
 					if (remainArmies[0] != 0) {
 						remainArmies[0] = remainArmies[0] - 1;

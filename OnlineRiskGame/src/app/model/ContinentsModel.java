@@ -1,5 +1,7 @@
 package app.model;
 
+import java.util.List;
+
 public class ContinentsModel {
 
 	/**
@@ -11,9 +13,11 @@ public class ContinentsModel {
 
 	private String continentName;
 	private int valueControl;
-	public ContinentsModel(String continentName, int valueControl ) {
+	private List<CountryModel> Countries;
+	public ContinentsModel(String continentName, int valueControl, List<CountryModel> Countries ) {
 		this.continentName = continentName;
 		this.valueControl = valueControl;
+		this.Countries = Countries;
 	}
 	
 	/**
@@ -46,5 +50,20 @@ public class ContinentsModel {
 	 */
 	public void setValueControl(int valueControl) {
 		this.valueControl = valueControl;
+	}
+	/**
+	 * 
+	 * @return the list of array.
+	 */
+	public List<CountryModel> getCountries() {
+		return Countries;
+	}
+
+	/**
+	 * Sets the list of array.
+	 * @param ArrayList
+	 */
+	public void setCountries(List<CountryModel> Countries) {
+		this.Countries = Countries;
 	}
 }

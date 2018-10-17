@@ -3,6 +3,7 @@ package app.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import app.model.*;
 import app.view.*;
@@ -23,6 +24,65 @@ public class ReinforcementController implements ActionListener {
 		//GamePlayerModel GamePlay = new GamePlayerModel(GameMap, listOfPlayers);
 	}
 	
+	public int calculateArmies() {
+		int reinforceArmies = 0;
+		if (listOfCountrys.size() > 3) {
+			reinforceArmies = Math.round(listOfCountrys.size()/3);
+		}else {
+			reinforceArmies = listOfCountrys.size();
+		}
+		return reinforceArmies;
+	}
+	
+	public void checkControlValue() {
+		String permanentName ="";
+		String tempName ="";
+		boolean controlFlag = false;
+		for (int i = 0; i < listOfContinents.size(); i++) {
+			List<CountryModel> Country = listOfContinents.get(i).getCountries();
+			permanentName = Country.get(0).getRuler().getNamePlayer();
+			for(int j=0; j < Country.size(); j++ ) {
+				 tempName= Country.get(j).getRuler().getNamePlayer();
+				 if (tempName.equals(permanentName)) {
+					 controlFlag = true;
+				 }else {
+					 controlFlag = false;
+					 break;
+				 }
+			}
+		}
+	}
+	public void addArmies(int armies, String CountryName) {
+		for (int i = 0; i < listOfCountrys.size(); i++) {
+			int previousArmies = 0;
+			if (CountryName.equals(listOfCountrys.get(i).getCountryName())) {
+				switch (CountryName) {
+				case "Player1":
+						previousArmies = listOfCountrys.get(i).getArmies();
+						listOfCountrys.get(i).setArmies(armies + previousArmies);
+					break;
+				case "Player2":
+						previousArmies = listOfCountrys.get(i).getArmies();
+						listOfCountrys.get(i).setArmies(armies + previousArmies);
+					break;
+				case "Player3":
+						previousArmies = listOfCountrys.get(i).getArmies();
+						listOfCountrys.get(i).setArmies(armies + previousArmies);
+					break;
+				case "Player4":
+						previousArmies = listOfCountrys.get(i).getArmies();
+						listOfCountrys.get(i).setArmies(armies + previousArmies);
+					break;
+				case "Player5":
+						previousArmies = listOfCountrys.get(i).getArmies();
+						listOfCountrys.get(i).setArmies(armies + previousArmies);
+					break;
+				default:
+					break;
+				}
+			}
+		}
+	}
 	public void validate() {
 		
 	}
