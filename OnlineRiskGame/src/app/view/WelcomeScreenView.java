@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import app.helper.View;
 
+
 /**
  * This is the Welcome Screen of the game. It displays Welcome Message and the
  * options for user to start the game with default map or to create/edit any map
@@ -57,6 +58,10 @@ public class WelcomeScreenView extends JFrame implements View {
 		editMapButton.setFont(smallFont);
 		welcomePanel.add(editMapButton);
 		editMapButton.setBounds(100, 300, 200, 40);
+		
+		playMapButton.setFont(smallFont);
+		welcomePanel.add(playMapButton);
+		playMapButton.setBounds(100, 400, 200, 40);
 
 		exitButton.setFont(smallFont);
 		welcomePanel.add(exitButton);
