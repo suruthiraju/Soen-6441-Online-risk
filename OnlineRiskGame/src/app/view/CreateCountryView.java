@@ -36,7 +36,7 @@ public class CreateCountryView extends JFrame implements View {
 	public JTextField countryValue;
 	public JComboBox continentListCombobox;
 	public Object[] continentListArray;
-	private ContinentViewRenderer continentViewRenderer;
+	private CountryViewRenderer continentViewRenderer;
 	public JLabel countryListText;
 	public JLabel continentNameLabel;
 	public JTextArea observerList;
@@ -120,7 +120,7 @@ public class CreateCountryView extends JFrame implements View {
 		textArea.setBackground(main); // sets the background color
 		textArea.setForeground(secondary);
 
-		continentViewRenderer = new ContinentViewRenderer();
+		continentViewRenderer = new CountryViewRenderer();
 		continentListArray = listOfContinentModel.toArray();
 		continentListCombobox = new JComboBox(continentListArray);
 
@@ -157,7 +157,7 @@ public class CreateCountryView extends JFrame implements View {
 	}
 	
 
-	public class ContinentViewRenderer extends BasicComboBoxRenderer {
+	public class CountryViewRenderer extends BasicComboBoxRenderer {
 
 		/*
 		 * Getter method that provides us a map model corresponding to a map name

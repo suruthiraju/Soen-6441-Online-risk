@@ -41,8 +41,8 @@ public class StartUpController implements ActionListener {
 		noOfPlayers = listOfPlayers.size();
 		
 		allocateArmies();
-		
-		theStartUpView = new StartUpView();
+		// Tejas -- Implement with the constructor of view as seen
+		//theStartUpView = new StartUpView(this.);
 		theStartUpView.setActionListener(this);
 		theStartUpView.setVisible(true);
 	}	
