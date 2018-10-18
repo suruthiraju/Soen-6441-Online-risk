@@ -199,9 +199,9 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 		
 	}
 	
-	/**
-	 * 
-	 */
+/**
+ * 
+ */
 	public void paint(final Graphics g) {
 
 		super.paint(g);
@@ -233,6 +233,10 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 
 	}
 
+/**
+ * Method "update" updates the gameMapModel associated with
+ * @param  gameMapModel 
+ */	
 	@Override
 	public void update(Observable gameMapModel, Object arg1) {
 		
@@ -242,14 +246,21 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 
 	}
 
+/**
+ * Does the actions regarding each button pushed
+ * saveButton, addButton, and removeButton	
+ */
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.saveButton.addActionListener(actionListener);
 		this.addButton.addActionListener(actionListener);
 		this.removeButton.addActionListener(actionListener);
-		
 	}
-	
+
+/**
+ * Sets lists of selections	
+ * @param listSelectionListener
+ */
 	public void setListSelectionListener(ListSelectionListener listSelectionListener) {
 		//this.countryParentListLeft.addListSelectionListener(listSelectionListener);
 		this.listSelectionModelLeft.addListSelectionListener(listSelectionListener);
