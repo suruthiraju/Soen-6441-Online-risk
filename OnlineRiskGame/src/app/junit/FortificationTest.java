@@ -9,5 +9,9 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 
 public class FortificationTest {
+	
+	int a;
+	String nameA;
+	String nameB;
 
 }
