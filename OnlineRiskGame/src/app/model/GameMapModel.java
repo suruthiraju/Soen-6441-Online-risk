@@ -258,5 +258,76 @@ public class GameMapModel extends Observable {
 		callObservers();
 
 	}
+	
+	public void robinTroopAssignButton(int loopvlaue, String namePlayer, CountryModel Country, int selectedArmies,	int[] remainArmies,List<PlayerModel> listOfPlayers) {
+		System.out.println("selectedArmies " + selectedArmies);
+		for (int i = 0; i < this.countryList.size(); i++) {
+			if (Country.getCountryName().equals(this.countryList.get(i).getCountryName())) {
+				int prevArmies; 
+				System.out.println("namePlayer " + namePlayer);
+			
+				switch (namePlayer) {
+				case "Player1":
+					if (remainArmies[0] > 0) {
+						remainArmies[0] = remainArmies[0] - selectedArmies;
+						System.out.println("remainArmies[0] " + remainArmies[0]);
+						prevArmies = this.countryList.get(i).getArmies();
+						this.countryList.get(i).setArmies(prevArmies + selectedArmies);
+					}
+					break;
+				case "Player2":
+					if (remainArmies[1] > 0) {
+						remainArmies[1] = remainArmies[1] - selectedArmies;
+						System.out.println("remainArmies[1] " + remainArmies[1]);
+						prevArmies = this.countryList.get(i).getArmies();
+						this.countryList.get(i).setArmies(prevArmies + selectedArmies);
+					}
+					break;
+				case "Player3":
+					if (remainArmies[2] > 0) {
+						remainArmies[2] = remainArmies[2] - selectedArmies;
+						System.out.println("remainArmies[2] " + remainArmies[2]);
+						prevArmies = this.countryList.get(i).getArmies();
+						this.countryList.get(i).setArmies(prevArmies + selectedArmies);
+					}
+					
+					break;
+				case "Player4":
+					if (remainArmies[3] > 0) {
+						remainArmies[3] = remainArmies[3] - selectedArmies;
+						System.out.println("remainArmies[3] " + remainArmies[3]);
+						prevArmies = this.countryList.get(i).getArmies();
+						this.countryList.get(i).setArmies(prevArmies + selectedArmies);
+					}
+					break;
+				case "Player5":
+					if (remainArmies[4] > 0) {
+						remainArmies[4] = remainArmies[4] - selectedArmies;
+						System.out.println("remainArmies[4] " + remainArmies[4]);
+						prevArmies = this.countryList.get(i).getArmies();
+						this.countryList.get(i).setArmies(prevArmies + selectedArmies);
+					}
+					break;
+				default:
+					break;
+				}
+			}
+		}
+		callObservers();
+	}
+	
+
+	public void checkForRemainArmies(int loopvlaue,List<PlayerModel> listOfPlayers,	int[] remainArmies) {
+		loopvlaue++;
+		
+		while(loopvlaue < listOfPlayers.size()) {
+		
+			if (remainArmies[loopvlaue] == 0) {
+				loopvlaue++;
+			}else {
+				break;
+			}
+		}
+	}
 
 }
