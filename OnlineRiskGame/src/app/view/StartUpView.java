@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 import javax.swing.JButton;
@@ -57,8 +58,9 @@ public class StartUpView extends JFrame implements View {
 	public JButton[] button;
 	public JButton button2;
 	public JButton button3;
+	private List<String> countryOwned;
 
-	public StartUpView(GameMapModel gameMapModel, PlayerModel playerModel) {
+	public StartUpView(GameMapModel gameMapModel, PlayerModel playerModel, int remainArmies ) {
 
 		this.setTitle("Startup Phase");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,12 +79,12 @@ public class StartUpView extends JFrame implements View {
 		
 		this.add(welcomePanel);
 		
-		updateWindow(gameMapModel, playerModel);
+		updateWindow(gameMapModel, playerModel, remainArmies);
 		welcomePanel.setLayout(null);
 		graphicPanel.setLayout(null);
 	}
 
-	public void updateWindow(GameMapModel gameMapModel, PlayerModel playerModel) {
+	public void updateWindow(GameMapModel gameMapModel, PlayerModel playerModel, int remainArmies) {
 		
 		welcomePanel.removeAll();
 		graphicPanel.removeAll();
@@ -91,9 +93,10 @@ public class StartUpView extends JFrame implements View {
 		Font smallFont = new Font("Serif", Font.BOLD, 12);
 		
 		this.gameMapModel = gameMapModel;
+		this.countryOwned = countryOwned;
 		this.playerModel = playerModel;
 
-		this.welcomeLabel = new JLabel("It's Player X's turn");
+		this.welcomeLabel = new JLabel("It's " + playerModel.getNamePlayer() +"'s turn");
 		welcomeLabel.setBounds(1300, 80, 300, 25);
 		welcomeLabel.setFont(largeFont);
 		welcomePanel.add(welcomeLabel);
@@ -101,9 +104,9 @@ public class StartUpView extends JFrame implements View {
 		this.noOfTroopsLabel = new JLabel("Number of Troops :");
 		noOfTroopsLabel.setBounds(1300, 140, 150, 25);
 		welcomePanel.add(noOfTroopsLabel);
-
-		Integer[] troops = new Integer[this.playerModel.getmyTroop()];
-		for (int i = 0; i < this.playerModel.getmyTroop(); i++) {
+		
+		Integer[] troops = new Integer[remainArmies];
+		for (int i = 0; i < remainArmies ; i++) {
 			troops[i] = i+1;
 		}
 
@@ -114,9 +117,16 @@ public class StartUpView extends JFrame implements View {
 		this.countryListLabel = new JLabel("Select Country :");
 		countryListLabel.setBounds(1300, 230, 150, 25);
 		welcomePanel.add(this.countryListLabel);
-
+		
+		ArrayList<CountryModel> listOfCountries = new ArrayList<CountryModel>();
+		for (int i=0; i< this.gameMapModel.getCountries().size() ;i++) {
+		      if (playerModel.getNamePlayer().equals(this.gameMapModel.getCountries().get(i).getRuler().getNamePlayer())){
+		    	  listOfCountries.add(this.gameMapModel.getCountries().get(i));
+		      }
+		}
+		
 		countriesViewRenderer = new CountryViewRenderer();
-		countryListArray = this.gameMapModel.getCountries().toArray();
+		countryListArray = listOfCountries.toArray();
 		countryListComboBox = new JComboBox(countryListArray);
 		welcomePanel.add(this.countryListComboBox);
 

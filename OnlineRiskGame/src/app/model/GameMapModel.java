@@ -62,7 +62,7 @@ public class GameMapModel extends Observable {
 	public GameMapModel(File file) {
 		readfile = new ReadFile();
 		try {
-			readfile.setFile(new File(Constant.FILE_LOCATION));
+			readfile.setFile(file);
 			this.continentList = readfile.getMapContinentDetails();
 			this.countryList = readfile.getMapCountryDetails();
 		} catch (Exception e) {
