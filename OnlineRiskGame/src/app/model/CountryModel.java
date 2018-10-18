@@ -1,6 +1,6 @@
 package app.model ;
 
-import java.util.ArrayList;
+import java.awt.Color;
 import java.util.List;
 
 /**
@@ -19,6 +19,7 @@ public class CountryModel {
 	private List<CountryModel> linkedCountries;
 	private PlayerModel ruler;
 	private int armies;
+	private Color backgroundColor;
 	
 	public CountryModel(String countryName, int xPosition, int yPosition, String continentName, List linkedCountries, PlayerModel ruler, int armies) {
 		this.countryName = countryName;
@@ -150,6 +151,14 @@ public int getArmies() {
  */
 public void setArmies(int armies) {
 	this.armies = armies;
+}
+
+public Color getBackgroundColor() {
+	return backgroundColor;
+}
+
+public void setBackgroundColor(Color backgroundColor) {
+	this.backgroundColor = backgroundColor;
 }
 
 
