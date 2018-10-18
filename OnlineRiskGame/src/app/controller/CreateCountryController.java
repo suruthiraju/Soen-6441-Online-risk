@@ -77,7 +77,6 @@ public class CreateCountryController implements ActionListener {
 				
 				
 				for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
-					for (int j = 0; j < this.mapPointList.size(); j++) {
 						
 						ArrayList<Point> pointList = this.mapPointList.get(this.gameMapModel.getCountries().get(i).getcontinentName());
 						
@@ -89,7 +88,7 @@ public class CreateCountryController implements ActionListener {
 						
 						this.indexMap.put(this.gameMapModel.getCountries().get(i).getcontinentName(),this.indexMap.get(this.gameMapModel.getCountries().get(i).getcontinentName())+1);
 
-					}
+					
 
 				}
 
