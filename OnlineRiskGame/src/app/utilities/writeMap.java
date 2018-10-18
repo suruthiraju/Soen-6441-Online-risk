@@ -43,7 +43,8 @@ public class writeMap {
 	public void writeMapToFile(String fileName,GameMapModel gMM) throws Exception {
 		List<ContinentsModel> listOfContinents=gMM.getContinents();
 		List<CountryModel> listOfCountrys=gMM.getCountries();
-		this.file = new File(System.getProperty("user.dir") + "\\mapfiles\\" + fileName);
+		this.file = new File(System.getProperty("user.dir") + "//mapfiles//" + fileName+".map");
+		System.out.println(this.file);
 		try {
 			// Create new file
 			String content = null;

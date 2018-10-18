@@ -74,7 +74,11 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 						filename=JOptionPane.showInputDialog("File Name");
 						try {
 							System.out.println(filename);
+							tempWrite = new writeMap();
 							tempWrite.writeMapToFile(filename, this.gameMapModel);
+							JOptionPane.showMessageDialog(null, "Map has been created select it before you play");
+							new WelcomeScreenController();
+							this.connectCountryView.dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}						
