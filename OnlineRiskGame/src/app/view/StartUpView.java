@@ -202,8 +202,7 @@ public class StartUpView extends JFrame implements View {
 
 	@Override
 	public void setActionListener(ActionListener actionListener) {
-		// TODO Auto-generated method stub
-
+		this.addButton.addActionListener(actionListener);
 	}
 
 }
