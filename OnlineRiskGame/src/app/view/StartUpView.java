@@ -98,8 +98,8 @@ public class StartUpView extends JFrame implements View {
 		welcomePanel.add(noOfTroopsLabel);
 
 		Integer[] troops = new Integer[this.playerModel.getmyTroop()];
-		for (int i = 1; i <= this.playerModel.getmyTroop(); i++) {
-			troops[i] = i;
+		for (int i = 0; i < this.playerModel.getmyTroop(); i++) {
+			troops[i] = i+1;
 		}
 
 		numOfTroopsComboBox = new JComboBox(troops);
@@ -180,9 +180,9 @@ public class StartUpView extends JFrame implements View {
 				boolean cellHasFocus) {
 			super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 
-			ContinentsModel continentsModel = (ContinentsModel) value;
-			if (continentsModel != null)
-				setText(continentsModel.getContinentName());
+			CountryModel countryModel = (CountryModel) value;
+			if (countryModel != null)
+				setText(countryModel.getCountryName());
 
 			return this;
 		}
