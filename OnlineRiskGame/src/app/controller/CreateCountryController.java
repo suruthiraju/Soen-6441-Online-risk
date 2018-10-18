@@ -1,5 +1,6 @@
 package app.controller;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -15,6 +16,7 @@ public class CreateCountryController implements ActionListener {
 	private GameMapModel gameMapModel;
 	private CreateCountryView createCountryView;
 	private ContinentsModel newContinentModel;
+	static int count = 0;
 
 	public CreateCountryController(GameMapModel gameMapModel) {
 		this.gameMapModel = gameMapModel;
@@ -42,6 +44,17 @@ public class CreateCountryController implements ActionListener {
 							.getSelectedItem();
 					temp.setContinentName(this.newContinentModel.getContinentName());
 					temp.setCountryName(this.createCountryView.countryValue.getText());
+					if(count ==0) {
+					temp.setXPosition(500);
+					temp.setYPosition(100);
+					count++;
+					}
+					else {
+						temp.setXPosition(200);
+						temp.setYPosition(100);
+					}
+					temp.setBackground(Color.WHITE);
+					temp.setBorderColor(Color.BLACK);
 					this.gameMapModel.getCountries().add(temp);
 					this.gameMapModel.setCountries(this.gameMapModel.getCountries());
 				}

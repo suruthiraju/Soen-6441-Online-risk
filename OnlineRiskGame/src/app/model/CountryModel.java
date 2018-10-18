@@ -1,7 +1,11 @@
 package app.model ;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.border.LineBorder;
 
 /**
  * 
@@ -10,7 +14,7 @@ import java.util.List;
  */
 
 
-public class CountryModel {
+public class CountryModel extends JButton{
 
 	private String countryName;
 	private int xPosition;
@@ -19,6 +23,8 @@ public class CountryModel {
 	private List<CountryModel> linkedCountries;
 	private PlayerModel ruler;
 	private int armies;
+	private Color backgroundColor;
+	private Color borderColor;
 	
 	public CountryModel(String countryName, int xPosition, int yPosition, String continentName, List linkedCountries, PlayerModel ruler, int armies) {
 		this.countryName = countryName;
@@ -28,6 +34,8 @@ public class CountryModel {
 		this.linkedCountries = linkedCountries;		
 		this.ruler = ruler;
 		this.armies = armies;	
+		this.backgroundColor = Color.WHITE;
+		this.borderColor = Color.BLACK;
 	}
 	
 	public CountryModel() {
@@ -150,6 +158,37 @@ public int getArmies() {
  */
 public void setArmies(int armies) {
 	this.armies = armies;
+}
+
+/**
+ * @return the color
+ */
+public Color getBackgroundColor() {
+	return backgroundColor;
+}
+
+/**
+ * @param color the color to set
+ */
+public void setBackgroundColor(Color color) {
+	this.setBackground(color);
+	this.backgroundColor = color;
+	
+}
+
+/**
+ * @return the borderColor
+ */
+public Color getBorderColor() {
+	return borderColor;
+}
+
+/**
+ * @param borderColor the borderColor to set
+ */
+public void setBorderColor(Color borderColor) {
+	this.setBorder(new LineBorder(borderColor));
+	this.borderColor = borderColor;
 }
 
 

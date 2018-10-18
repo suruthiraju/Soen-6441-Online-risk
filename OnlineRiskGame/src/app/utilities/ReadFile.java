@@ -109,7 +109,7 @@ public class ReadFile {
 
 						int indexOfContinent = territories.indexOf(',', (indexOfYPos + 1));
 						String continent = territories.substring((indexOfYPos + 1), indexOfContinent).trim();
-						cm.setContinentName(continent);
+						cm.setContinentName(continent.trim());
 						System.out.println("Continent: " + continent);
 
 						String neighbouringCountries = territories.substring((indexOfContinent + 1)).trim();

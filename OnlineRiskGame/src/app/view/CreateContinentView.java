@@ -1,7 +1,6 @@
 package app.view;
 
 import java.awt.Color;
-import java.awt.GradientPaint;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Observable;
@@ -13,10 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
-
 import app.helper.View;
 import app.model.ContinentsModel;
 import app.model.GameMapModel;
@@ -34,6 +31,7 @@ public class CreateContinentView extends JFrame implements View {
 	public JTextField controlValue;
 	public JLabel continentListText;
 	public JLabel controlValueText;
+	public JLabel controlValueInfoText;
 	public JTextArea observerList;
 	public JButton nextButton;
 	public JButton addButton;
@@ -67,9 +65,12 @@ public class CreateContinentView extends JFrame implements View {
 
 		controlValueText = new JLabel("Control Value: ");
 		controlValueText.setBounds(100, 200, 200, 40);
-
+		
 		controlValue = new JTextField();
 		controlValue.setBounds(200, 200, 200, 40);
+		
+		controlValueInfoText = new JLabel("(0 to 10)");
+		controlValueInfoText.setBounds(411, 200, 100, 40);
 
 		addButton = new JButton("Add");
 		addButton.setBounds(100, 300, 100, 40);
@@ -116,6 +117,7 @@ public class CreateContinentView extends JFrame implements View {
 		mainPanel.add(continentValue);
 		mainPanel.add(controlValue);
 		mainPanel.add(controlValueText);
+		mainPanel.add(controlValueInfoText);
 
 	}
 
