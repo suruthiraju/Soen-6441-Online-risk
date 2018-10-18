@@ -56,10 +56,10 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 	
 //	public CountryModel[] countryButton;
 	
-	/**
-	 * Constructor method of ConnectCountryView
-	 * @param gameMapModel
-	 */
+/**
+ * Constructor method of ConnectCountryView
+ * @param gameMapModel
+ */
 	public ConnectCountryView(GameMapModel gameMapModel) {
 		this.gameMapModel = gameMapModel;
 		welcomeLabel = new JLabel("Please select the Continents you want in the map and the control value");
@@ -89,10 +89,10 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 
 	}
 	
-	/**
-	 * The method "updateWindow" updates the panel view after any change
-	 * @param gmm which is a GameMapModel object
-	 */
+/**
+ * The method "updateWindow" updates the panel view after any change
+ * @param gmm which is a GameMapModel object
+ */
 	private void updateWindow(GameMapModel gmm) {
 		welcomePanel.removeAll();
 		graphicPanel.removeAll();
