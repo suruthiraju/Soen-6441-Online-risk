@@ -2,6 +2,7 @@ package app.view;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -62,14 +63,14 @@ public class StartUpView extends JFrame implements View {
 		this.setTitle("Startup Phase");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(300, 200);
-		this.setSize(1400, 800);
+		this.setSize(1600, 1000);
 		this.setResizable(false);
 		this.setVisible(false);
 
 		welcomePanel = new JPanel();
 		graphicPanel = new JPanel();
 		this.add(graphicPanel);
-		graphicPanel.setSize(1200, 800);
+		graphicPanel.setSize(1200, 1000);
 		graphicPanel.setBackground(Color.WHITE);
 		graphicPanel.setLayout(null);
 		
@@ -85,16 +86,20 @@ public class StartUpView extends JFrame implements View {
 		
 		welcomePanel.removeAll();
 		graphicPanel.removeAll();
+		Font largeFont = new Font("Serif", Font.BOLD, 18);
+		Font mediumFont = new Font("Serif", Font.BOLD, 14);
+		Font smallFont = new Font("Serif", Font.BOLD, 12);
 		
 		this.gameMapModel = gameMapModel;
 		this.playerModel = playerModel;
 
 		this.welcomeLabel = new JLabel("It's Player X's turn");
-		welcomeLabel.setBounds(100, 0, 600, 100);
+		welcomeLabel.setBounds(1300, 80, 300, 25);
+		welcomeLabel.setFont(largeFont);
 		welcomePanel.add(welcomeLabel);
 
 		this.noOfTroopsLabel = new JLabel("Number of Troops :");
-		noOfTroopsLabel.setBounds(100, 0, 600, 100);
+		noOfTroopsLabel.setBounds(1300, 140, 150, 25);
 		welcomePanel.add(noOfTroopsLabel);
 
 		Integer[] troops = new Integer[this.playerModel.getmyTroop()];
@@ -103,11 +108,11 @@ public class StartUpView extends JFrame implements View {
 		}
 
 		numOfTroopsComboBox = new JComboBox(troops);
-		numOfTroopsComboBox.setBounds(200, 200, 100, 40);
+		numOfTroopsComboBox.setBounds(1300, 170, 150, 25);
 		welcomePanel.add(numOfTroopsComboBox);
 
 		this.countryListLabel = new JLabel("Select Country :");
-		countryListLabel.setBounds(100, 0, 600, 100);
+		countryListLabel.setBounds(1300, 230, 150, 25);
 		welcomePanel.add(this.countryListLabel);
 
 		countriesViewRenderer = new CountryViewRenderer();
@@ -118,11 +123,11 @@ public class StartUpView extends JFrame implements View {
 		if (countryListArray.length > 0) {
 			countryListComboBox.setRenderer(countriesViewRenderer);
 		}
-		countryListComboBox.setBounds(200, 200, 100, 40);
+		countryListComboBox.setBounds(1300, 260, 150, 25);
 		welcomePanel.add(countryListComboBox);
 
 		this.addButton = new JButton("Add");
-		this.addButton.setBounds(100, 300, 100, 40);
+		this.addButton.setBounds(1300, 300, 150, 25);
 		welcomePanel.add(this.addButton);
 
 		int n = this.gameMapModel.getCountries().size();
