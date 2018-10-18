@@ -18,6 +18,13 @@ import app.utilities.validation;
 import app.utilities.writeMap;
 import app.view.ConnectCountryView;
 
+/**
+ * ConnectCountryController Class ....
+ * 
+ * @author user
+ *
+ */
+
 public class ConnectCountryController implements ActionListener, ListSelectionListener {
 
 	private GameMapModel gameMapModel;
