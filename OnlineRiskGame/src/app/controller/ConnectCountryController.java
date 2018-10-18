@@ -4,11 +4,8 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Observable;
 
-import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -16,7 +13,6 @@ import javax.swing.event.ListSelectionListener;
 import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.view.ConnectCountryView;
-import app.view.EditContinentView;
 
 public class ConnectCountryController implements ActionListener, ListSelectionListener{
 
@@ -33,6 +29,7 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 		this.countryList = this.gameMapModel.getCountries();
 		this.countryListLinks = new ArrayList<CountryModel>();
 		this.connectCountryView = new ConnectCountryView(this.gameMapModel);
+
 		this.connectCountryView.setActionListener(this);
 		this.connectCountryView.setListSelectionListener(this);
 		this.connectCountryView.setVisible(true);

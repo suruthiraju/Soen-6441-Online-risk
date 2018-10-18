@@ -1,8 +1,11 @@
 package app.controller;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -17,9 +20,16 @@ public class CreateCountryController implements ActionListener {
 	private CreateCountryView createCountryView;
 	private ContinentsModel newContinentModel;
 	static int count = 0;
+	private HashMap<String, ArrayList<Point>> mapPointList;
+	private HashMap<String, Color> colorMapList;
+	private  HashMap<String, Integer> indexMap;
 
-	public CreateCountryController(GameMapModel gameMapModel) {
+	public CreateCountryController(GameMapModel gameMapModel, HashMap<String, ArrayList<Point>> mapPointList,
+			HashMap<String, Color> colorMapList, HashMap<String, Integer> indexMap) {
 		this.gameMapModel = gameMapModel;
+		this.mapPointList = mapPointList;
+		this.colorMapList = colorMapList;
+		this.indexMap = indexMap;
 		this.createCountryView = new CreateCountryView(this.gameMapModel.getContinents());
 		this.createCountryView.setVisible(true);
 		this.gameMapModel.addObserver(this.createCountryView);
@@ -66,11 +76,29 @@ public class CreateCountryController implements ActionListener {
 			}
 		} else if (actionEvent.getSource().equals(this.createCountryView.nextButton)) {
 			if (emptyContinentValidation()) {
-				JOptionPane.showOptionDialog(null, "Please enter at least one country for each continent",
-						"Invalid", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
-						new Object[] {}, null);
+				JOptionPane.showOptionDialog(null, "Please enter at least one country for each continent", "Invalid",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
 				return;
 			} else {
+
+				
+				
+				
+				for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
+					for (int j = 0; j < this.mapPointList.size(); j++) {
+						
+						ArrayList<Point> pointList = this.mapPointList.get(this.gameMapModel.getCountries().get(i).getcontinentName());
+						
+						int index = this.indexMap.get(this.gameMapModel.getCountries().get(i).getcontinentName());
+						
+						this.gameMapModel.getCountries().get(i).setXPosition(this.mapPointList.get(j).get(index).x);
+						this.gameMapModel.getCountries().get(i).setYPosition(this.mapPointList.get(j).get(index).y);
+						this.gameMapModel.getCountries().get(i).setBackgroundColor(this.colorMapList.get(i));
+
+					}
+
+				}
+
 				new ConnectCountryController(this.gameMapModel);
 				this.createCountryView.dispose();
 			}
