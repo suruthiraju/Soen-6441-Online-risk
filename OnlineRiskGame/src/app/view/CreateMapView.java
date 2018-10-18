@@ -15,15 +15,13 @@ import javax.swing.ListSelectionModel;
 import app.helper.View;
 
 /**
- * 
- * @author DELL
+ * "CreateMapView" class represents an object of map view
+ * Properties are containing labels, text fields, buttons, a pane, and a panel
+ * @author GROUP-35
  *
  */
-
-
 public class CreateMapView extends JFrame implements View {
 
-    //creating all the components of the current view
     private JTextField enterContinent = new JTextField(20);
     private JButton addContinent = new JButton("Push to the list");
     private DefaultListModel modelContinent = new DefaultListModel<>();
@@ -38,6 +36,9 @@ public class CreateMapView extends JFrame implements View {
     private JButton removeCountry = new JButton("Pull from the list");
     private JButton finalizeCountries = new JButton("Finalize the list");
 
+/**
+ * Constructor of CreateMapView    
+ */
     public CreateMapView()
     {
         //initialization of the panel and all the components
@@ -80,18 +81,28 @@ public class CreateMapView extends JFrame implements View {
         this.add(mapPanel);
 
     }
+/**
+ * @return continent name entered by user
+ */
     public String getContinentName()
     {
         String tempStore = this.enterContinent.getText();
         return tempStore;
     }
 
+/**    
+ * @return country name entered by user
+ */
     public String getCountryName()
     {
         String tempStore = this.enterCountry.getText();
         return tempStore;
     }
 
+/**
+ * Adds entered "parmContinent" continents to the existing list    
+ * @param parmContinent
+ */
     public void setContinentsList(String parmContinent[])
     {
         for(int counter=0; counter < parmContinent.length; counter++)
@@ -102,6 +113,10 @@ public class CreateMapView extends JFrame implements View {
 
     }
 
+/**
+ * Adds entered "parmCountry" countries to the existing list    
+ * @param parmCountry
+ */
     public void setCountriesList(String parmCountry[])
     {
         for(int counter=0; counter < parmCountry.length; counter++)
@@ -112,24 +127,39 @@ public class CreateMapView extends JFrame implements View {
 
     }
 
+/**
+ * Sets action to "addContinent" button    
+ * @param listenAddContinent
+ */
    public void addContinentListner(ActionListener listenAddContinent)
     {
         addContinent.addActionListener(listenAddContinent);
         
     }
+
+/**
+ * @return tempIndex, index of selected continent
+ */
    public int selectContinentListner()
    {
 	   int tempIndex = currentContinentList.getSelectedIndex();
 	   return tempIndex;
    }
    
+/**
+ * @return tempIndex, index of selected country
+ */
    public int selectCountryListner()
    {
 	   int tempIndex = currentCountryList.getSelectedIndex();
 	   return tempIndex;
    }
 
-    public void removeContinentListner(ActionListener listenRemoveContinent)
+/**
+ * 
+ * @param listenRemoveContinent
+ */
+   public void removeContinentListner(ActionListener listenRemoveContinent)
     {
         removeContinent.addActionListener(listenRemoveContinent);
 
