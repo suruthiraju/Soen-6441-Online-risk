@@ -143,11 +143,17 @@ public class StartUpView extends JFrame implements View {
 		int n = this.gameMapModel.getCountries().size();
 		button = new JButton[n];
 		for (int i = 0; i < n; i++) {
-			button[i] = new JButton(this.gameMapModel.getCountries().get(i).getCountryName().substring(0, 3));
-			button[i].setBounds(this.gameMapModel.getCountries().get(i).getXPosition() * 2,
-					this.gameMapModel.getCountries().get(i).getYPosition() * 2, 50, 50);
+CountryModel country = this.gameMapModel.getCountries().get(i);
+			
+			country.setBackground(this.gameMapModel.getCountries().get(i).getBackgroundColor());
+			country.setText(this.gameMapModel.getCountries().get(i).getCountryName());
+			country.setBorderColor(this.gameMapModel.getCountries().get(i).getBorderColor());
+			//countryButton[i].setForeground(Color.GREEN);
+			country.setOpaque(true);
+			country.setBounds(this.gameMapModel.getCountries().get(i).getXPosition()*2, this.gameMapModel.getCountries().get(i).getYPosition()*2,
+					50, 50);
 
-			graphicPanel.add(button[i]);
+			graphicPanel.add(country);
 		}
 	}
 

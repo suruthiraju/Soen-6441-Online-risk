@@ -20,29 +20,35 @@ import app.model.*;
 
 
 public class writeMap {
+	File file;
 
-	public static void createNewFile(String fileName) {
+	public File createNewFile(String fileName) {
 		try {
-			File file = new File(System.getProperty("user.dir") + "\\mapfiles\\" + fileName);
+			this.file = new File(System.getProperty("user.dir") + "\\mapfiles\\" + fileName);
 			boolean fvar = file.createNewFile();
 			if (fvar) {
 				System.out.println("File has been created successfully");
+				return file;
 			} else {
 				System.out.println("File already present at the specified location");
+				return null;
 			}
 		} catch (IOException e) {
 			System.out.println("Exception Occurred:");
 			e.printStackTrace();
 		}
+		return this.file;
 	}
 
-	public static void writeMapToFile(File path, ArrayList<ContinentsModel> listOfContinents,
-			ArrayList<CountryModel> listOfCountrys) throws Exception {
-
+	public void writeMapToFile(String fileName,GameMapModel gMM) throws Exception {
+		List<ContinentsModel> listOfContinents=gMM.getContinents();
+		List<CountryModel> listOfCountrys=gMM.getCountries();
+		this.file = new File(System.getProperty("user.dir") + "//mapfiles//" + fileName+".map");
+		System.out.println(this.file);
 		try {
 			// Create new file
 			String content = null;
-			File file = path;
+			File file = this.file;
 
 			// If file doesn't exists, then create it
 			if (!file.exists()) {

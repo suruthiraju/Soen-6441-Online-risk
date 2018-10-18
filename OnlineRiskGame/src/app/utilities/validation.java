@@ -10,24 +10,34 @@ import java.util.Set;
 
 import app.model.ContinentsModel;
 import app.model.CountryModel;
+import app.model.GameMapModel;
 import app.utilities.*;
 public class validation {
 	
+	public boolean emptyLinkCountryValidation(GameMapModel mapModel) {
+		List<CountryModel> listOfCountrys = mapModel.getCountries();
+		List<CountryModel> linkedCountry; 
+			for (int j=0; j<listOfCountrys.size(); j++) {
+				linkedCountry =  listOfCountrys.get(j).getLinkedCountries();
+				if (linkedCountry == null || linkedCountry.isEmpty()) {
+					return true;
+				}
+			}
+			return false;
+	}
+	
 
-	public static void main(String[] args) {
+	public boolean checkInterlinkedContinent(GameMapModel mapModel) {
 		
-		ReadFile rf = new ReadFile();
-		rf.setFile(new File("C:\\Users\\sukuri\\Documents\\Montreal.map"));
 		String continent = ""; 
-		List<ContinentsModel> listOfContinents = rf.getMapContinentDetails();
-		List<CountryModel> listOfCountrys = rf.getMapCountryDetails();
+		List<ContinentsModel> listOfContinents = mapModel.getContinents();
+		List<CountryModel> listOfCountrys = mapModel.getCountries();
 		List<String> Countryname = new ArrayList<String>();;
 		int numb;
 		boolean emptyLinkContinent=false;
 			for (int j=0; j<listOfContinents.size(); j++) {
 				continent = listOfContinents.get(j).getContinentName();
 				numb = 0;
-				System.out.println("XXX " + continent );
 				for (int i=0; i<listOfCountrys.size();i++) {
 					if(continent.equals(listOfCountrys.get(i).getcontinentName())) {
 					  Countryname.add(listOfCountrys.get(i).getCountryName());
@@ -46,11 +56,31 @@ public class validation {
 				}
 				if(numb == 0) {
 					emptyLinkContinent = true;
-					break;					
+					return emptyLinkContinent;				
 				}
 			}	
-			System.out.println("Boolean value " + emptyLinkContinent);
+			return emptyLinkContinent;
 	
+	
+	}
+	public boolean emptyContinentValidation(GameMapModel mapModel) {
+		List<ContinentsModel> listOfContinents = mapModel.getContinents();
+		List<CountryModel> listOfCountrys = mapModel.getCountries();
+		String continentName = " ";
+		int numb;
+		for (int i=0; i< listOfContinents.size(); i++) {
+			continentName = listOfContinents.get(i).getContinentName(); 
+			numb =0;
+			for (int j=0; j<listOfCountrys.size(); j++) {
+				if(continentName.equals(listOfCountrys.get(j).getcontinentName())) {
+					numb++;
+				}				
+			}
+			if (numb == 0) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
