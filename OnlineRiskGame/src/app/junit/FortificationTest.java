@@ -20,10 +20,11 @@ public class FortificationTest {
 	int a;
 	String nameA;
 	String nameB;
+	
 	ArrayList<ContinentsModel> listOfContinents = new ArrayList<ContinentsModel>();
 	ArrayList<CountryModel> listOfCountrys = new ArrayList<CountryModel>();
 	
-	 
+	int b = listOfCountrys.size();
 	
 	@Test public void testFortificationMovingArmies() {
 		
