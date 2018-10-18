@@ -54,15 +54,7 @@ public class CreateCountryController implements ActionListener {
 							.getSelectedItem();
 					temp.setContinentName(this.newContinentModel.getContinentName());
 					temp.setCountryName(this.createCountryView.countryValue.getText());
-					if(count ==0) {
-					temp.setXPosition(500);
-					temp.setYPosition(100);
-					count++;
-					}
-					else {
-						temp.setXPosition(200);
-						temp.setYPosition(100);
-					}
+					
 					temp.setBackground(Color.WHITE);
 					temp.setBorderColor(Color.BLACK);
 					this.gameMapModel.getCountries().add(temp);
@@ -91,9 +83,11 @@ public class CreateCountryController implements ActionListener {
 						
 						int index = this.indexMap.get(this.gameMapModel.getCountries().get(i).getcontinentName());
 						
-						this.gameMapModel.getCountries().get(i).setXPosition(this.mapPointList.get(j).get(index).x);
-						this.gameMapModel.getCountries().get(i).setYPosition(this.mapPointList.get(j).get(index).y);
+						this.gameMapModel.getCountries().get(i).setXPosition(this.mapPointList.get(this.gameMapModel.getCountries().get(i).getcontinentName()).get(index).x);
+						this.gameMapModel.getCountries().get(i).setYPosition(this.mapPointList.get(this.gameMapModel.getCountries().get(i).getcontinentName()).get(index).y);
 						this.gameMapModel.getCountries().get(i).setBackgroundColor(this.colorMapList.get(i));
+						
+						this.indexMap.put(this.gameMapModel.getCountries().get(i).getcontinentName(),this.indexMap.get(this.gameMapModel.getCountries().get(i).getcontinentName())+1);
 
 					}
 

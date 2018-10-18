@@ -21,7 +21,6 @@ import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
-import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionListener;
 
 import app.helper.View;
@@ -157,7 +156,7 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 			country.setBorderColor(this.leftCountryList.get(i).getBorderColor());
 			//countryButton[i].setForeground(Color.GREEN);
 			country.setOpaque(true);
-			country.setBounds(this.leftCountryList.get(i).getXPosition(), this.leftCountryList.get(i).getYPosition(),
+			country.setBounds(this.leftCountryList.get(i).getXPosition()*2, this.leftCountryList.get(i).getYPosition()*2,
 					50, 50);
 
 			graphicPanel.add(country);
@@ -170,7 +169,7 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 			country.setBorderColor(this.rightCountryList.get(i).getBorderColor());
 			//countryButton[i].setForeground(Color.GREEN);
 			country.setOpaque(true);
-			country.setBounds(this.rightCountryList.get(i).getXPosition(), this.rightCountryList.get(i).getYPosition(),
+			country.setBounds(this.rightCountryList.get(i).getXPosition()*2, this.rightCountryList.get(i).getYPosition()*2,
 					50, 50);
 
 			graphicPanel.add(country);
