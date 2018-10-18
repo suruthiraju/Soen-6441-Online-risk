@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -77,6 +78,9 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 				{
 					if(!(MapValidation.emptyContinentValidation(this.gameMapModel)))
 					{
+						if(!(MapValidation.unlinkedContinentVAlidation(this.gameMapModel)))
+						{
+							
 						System.out.println(" All the map validations are correct");
 							filename=JOptionPane.showInputDialog("File Name");
 						try {
@@ -88,7 +92,15 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 							this.connectCountryView.dispose();
 						} catch (Exception e) {
 							e.printStackTrace();
-						}						
+							}	
+						}
+						else 
+						{
+						System.out.println("All continents are not linked");
+							JOptionPane.showOptionDialog(null, "All continents are not linked", "Invalid", JOptionPane.DEFAULT_OPTION,
+								JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
+							
+						}
 						
 					}
 					else
