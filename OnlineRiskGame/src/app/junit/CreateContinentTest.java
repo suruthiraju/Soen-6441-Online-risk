@@ -8,5 +8,12 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 
 public class CreateContinentTest {
+	
+	
+	@Test public void testCreateContinentAddButton() {
+		
+		
+	}
+
 
 }
