@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -14,15 +15,14 @@ import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.view.ConnectCountryView;
 
-public class ConnectCountryController implements ActionListener, ListSelectionListener{
+public class ConnectCountryController implements ActionListener, ListSelectionListener {
 
 	private GameMapModel gameMapModel;
 	private ConnectCountryView connectCountryView;
 	private List<CountryModel> countryList;
 	private List<CountryModel> countryListLinks;
 	private CountryModel newCountryModel;
-	
-	
+
 	public ConnectCountryController(GameMapModel mapModel) {
 
 		this.gameMapModel = mapModel;
@@ -38,14 +38,20 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		if (actionEvent.getSource().equals(this.connectCountryView.addButton)
-				&& connectCountryView.countryParentListLeft.getSelectedValue()
-						.equals(connectCountryView.countryParentListRight.getSelectedValue())) {
-			System.out.println("Cannot create a self link");
-		} else {
-			
-			this.gameMapModel.setNeighbouringCountry((CountryModel)this.connectCountryView.countryParentListLeft.getSelectedValue(), (CountryModel)this.connectCountryView.countryParentListRight.getSelectedValue());
-			
+		if (actionEvent.getSource().equals(this.connectCountryView.addButton)) {
+			if (connectCountryView.countryParentListLeft.getSelectedValue()
+					.equals(connectCountryView.countryParentListRight.getSelectedValue())) {
+				JOptionPane.showOptionDialog(null, "Cannot create a self link", "Invalid", JOptionPane.DEFAULT_OPTION,
+						JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
+				return;
+			} else {
+
+				this.gameMapModel.setNeighbouringCountry(
+						(CountryModel) this.connectCountryView.countryParentListLeft.getSelectedValue(),
+						(CountryModel) this.connectCountryView.countryParentListRight.getSelectedValue());
+
+			}
+		}else if(actionEvent.getSource().equals(this.connectCountryView.saveButton)) {
 			
 		}
 
@@ -53,51 +59,44 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		
-		ListSelectionModel lsm = (ListSelectionModel)e.getSource();
-		 
-        int firstIndex = e.getFirstIndex();
-        int lastIndex = e.getLastIndex();
-        boolean isAdjusting = e.getValueIsAdjusting(); 
-        System.out.println("Event for indexes "
-                      + firstIndex + " - " + lastIndex
-                      + "; isAdjusting is " + isAdjusting
-                      + "; selected indexes:");
 
-        if (lsm.isSelectionEmpty()) {
-        	System.out.println(" <none>");
-        } else {
-            // Find out which indexes are selected.
-        	int minRightIndex = lsm.getMinSelectionIndex();
-            int maxRightIndex = lsm.getMaxSelectionIndex();
-            int finalRightModelIndex = 0;
-            for (int i = minRightIndex; i <= maxRightIndex; i++) {
-                if (this.connectCountryView.listSelectionModelLeft.isSelectedIndex(i)) {
-                	finalRightModelIndex = i;
-                }
-            }
-            System.out.println(finalRightModelIndex);
-        }
-		
-		//ListSelectionModel lsm = (ListSelectionModel)actionEvent.getSource();
-		if (e.getSource().equals(this.connectCountryView.countryParentListLeft)) {
-			
-			this.gameMapModel.setColorToCountry((CountryModel)this.connectCountryView.countryParentListLeft.getSelectedValue(),Color.GREEN);
-			
-			
-			
+		ListSelectionModel lsm = (ListSelectionModel) e.getSource();
 
+		int firstIndex = e.getFirstIndex();
+		int lastIndex = e.getLastIndex();
+		boolean isAdjusting = e.getValueIsAdjusting();
+		System.out.println("Event for indexes " + firstIndex + " - " + lastIndex + "; isAdjusting is " + isAdjusting
+				+ "; selected indexes:");
+
+		if (lsm.isSelectionEmpty()) {
+			System.out.println(" <none>");
+		} else {
+			// Find out which indexes are selected.
+			int minRightIndex = lsm.getMinSelectionIndex();
+			int maxRightIndex = lsm.getMaxSelectionIndex();
+			int finalRightModelIndex = 0;
+			for (int i = minRightIndex; i <= maxRightIndex; i++) {
+				if (this.connectCountryView.listSelectionModelLeft.isSelectedIndex(i)) {
+					finalRightModelIndex = i;
+				}
+			}
+			System.out.println(finalRightModelIndex);
 		}
-		else if (e.getSource().equals(this.connectCountryView.countryParentListRight)) {
-			
-			this.gameMapModel.setColorToCountry((CountryModel)this.connectCountryView.countryParentListRight.getSelectedValue(),Color.YELLOW);
-			//CountryModel cm = (CountryModel)this.connectCountryView.countryParentListLeft.getSelectedValue();
-			
-			
+
+		// ListSelectionModel lsm = (ListSelectionModel)actionEvent.getSource();
+		if (e.getSource().equals(this.connectCountryView.countryParentListLeft)) {
+
+			this.gameMapModel.setColorToCountry(
+					(CountryModel) this.connectCountryView.countryParentListLeft.getSelectedValue(), Color.GREEN);
+
+		} else if (e.getSource().equals(this.connectCountryView.countryParentListRight)) {
+
+			this.gameMapModel.setColorToCountry(
+					(CountryModel) this.connectCountryView.countryParentListRight.getSelectedValue(), Color.YELLOW);
+			// CountryModel cm =
+			// (CountryModel)this.connectCountryView.countryParentListLeft.getSelectedValue();
 
 		}
 	}
-
-	
 
 }

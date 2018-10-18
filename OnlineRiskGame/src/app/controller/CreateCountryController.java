@@ -85,7 +85,7 @@ public class CreateCountryController implements ActionListener {
 						
 						this.gameMapModel.getCountries().get(i).setXPosition(this.mapPointList.get(this.gameMapModel.getCountries().get(i).getcontinentName()).get(index).x);
 						this.gameMapModel.getCountries().get(i).setYPosition(this.mapPointList.get(this.gameMapModel.getCountries().get(i).getcontinentName()).get(index).y);
-						this.gameMapModel.getCountries().get(i).setBackgroundColor(this.colorMapList.get(i));
+						this.gameMapModel.getCountries().get(i).setBackgroundColor(this.colorMapList.get(this.gameMapModel.getCountries().get(i).getcontinentName()));
 						
 						this.indexMap.put(this.gameMapModel.getCountries().get(i).getcontinentName(),this.indexMap.get(this.gameMapModel.getCountries().get(i).getcontinentName())+1);
 
