@@ -77,18 +77,20 @@ public class CreateCountryController implements ActionListener {
 				
 				
 				for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
+					//for (int j = 0; j < this.mapPointList.size(); j++) {
 						
 						ArrayList<Point> pointList = this.mapPointList.get(this.gameMapModel.getCountries().get(i).getcontinentName());
 						
 						int index = this.indexMap.get(this.gameMapModel.getCountries().get(i).getcontinentName());
 						
+						System.out.println("==>" + this.mapPointList.get(this.gameMapModel.getCountries().get(i).getcontinentName()).get(index).x);
 						this.gameMapModel.getCountries().get(i).setXPosition(this.mapPointList.get(this.gameMapModel.getCountries().get(i).getcontinentName()).get(index).x);
 						this.gameMapModel.getCountries().get(i).setYPosition(this.mapPointList.get(this.gameMapModel.getCountries().get(i).getcontinentName()).get(index).y);
 						this.gameMapModel.getCountries().get(i).setBackgroundColor(this.colorMapList.get(this.gameMapModel.getCountries().get(i).getcontinentName()));
 						
 						this.indexMap.put(this.gameMapModel.getCountries().get(i).getcontinentName(),this.indexMap.get(this.gameMapModel.getCountries().get(i).getcontinentName())+1);
 
-					
+				//	}
 
 				}
 
