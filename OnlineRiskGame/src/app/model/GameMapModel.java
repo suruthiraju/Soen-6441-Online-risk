@@ -186,4 +186,33 @@ public class GameMapModel extends Observable {
 		callObservers();
 	}
 
+	public void removeNeighbouringCountry(CountryModel leftModelCountry, CountryModel rightModelCountry) {
+		
+		for (int i = 0; i < this.getCountries().size(); i++) {
+			if (this.getCountries().get(i).equals(leftModelCountry)) {
+
+				List<CountryModel> temp = this.getCountries().get(i).getLinkedCountries();
+
+				if (temp == null) {
+					temp = new ArrayList<CountryModel>();
+				}
+				temp.remove((CountryModel) rightModelCountry);
+				this.getCountries().get(i).setLinkedCountries(temp);
+				this.setLeftModelIndex(i);
+			} else if (this.getCountries().get(i).equals(rightModelCountry)) {
+				List<CountryModel> temp = this.getCountries().get(i).getLinkedCountries();
+
+				if (temp == null) {
+					temp = new ArrayList<CountryModel>();
+				}
+				temp.remove((CountryModel) leftModelCountry);
+				this.getCountries().get(i).setLinkedCountries(temp);
+				this.setRightModelIndex(i);
+			}
+
+		}
+		callObservers();
+		
+	}
+
 }

@@ -51,7 +51,13 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 						(CountryModel) this.connectCountryView.countryParentListRight.getSelectedValue());
 
 			}
-		}else if(actionEvent.getSource().equals(this.connectCountryView.saveButton)) {
+		} else if (actionEvent.getSource().equals(this.connectCountryView.saveButton)) {
+
+		} else if (actionEvent.getSource().equals(this.connectCountryView.removeButton)) {
+			
+			this.gameMapModel.removeNeighbouringCountry(
+					(CountryModel) this.connectCountryView.countryParentListLeft.getSelectedValue(),
+					(CountryModel) this.connectCountryView.countryParentListRight.getSelectedValue());
 			
 		}
 

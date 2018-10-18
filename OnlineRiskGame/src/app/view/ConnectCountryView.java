@@ -33,6 +33,7 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 	public JPanel graphicPanel;
 	public JButton saveButton;
 	public JButton addButton;
+	public JButton removeButton;
 	public JLabel welcomeLabel;
 	public JLabel countryListLabelLeft;
 	public JLabel countryListLabelRight;
@@ -52,6 +53,7 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 		
 		saveButton = new JButton("Save");
 		addButton = new JButton("Add");
+		removeButton = new JButton("Remove");
 
 		welcomePanel = new JPanel();
 		graphicPanel = new JPanel();
@@ -85,7 +87,7 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 		Font smallFont = new Font("Serif", Font.BOLD, 12);
 
 		countryListLabelLeft = new JLabel("Country 1");
-		countryListLabelLeft.setBounds(1200, 50, 100, 25);
+		countryListLabelLeft.setBounds(1200, 80, 100, 25);
 		welcomePanel.add(countryListLabelLeft);
 
 		countryListLabelRight = new JLabel("Country 2");
@@ -143,7 +145,12 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 
 		saveButton.setFont(smallFont);
 		welcomePanel.add(saveButton);
-		saveButton.setBounds(1300, 250, 100, 20);
+		saveButton.setBounds(1200, 460, 100, 20);
+		
+		
+		removeButton.setFont(smallFont);
+		welcomePanel.add(removeButton);
+		removeButton.setBounds(1300, 250, 100, 20);
 		
 		
 		//countryButton = new CountryModel[this.leftCountryList.size()];
@@ -226,6 +233,7 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 	public void setActionListener(ActionListener actionListener) {
 		this.saveButton.addActionListener(actionListener);
 		this.addButton.addActionListener(actionListener);
+		this.removeButton.addActionListener(actionListener);
 		
 	}
 	
