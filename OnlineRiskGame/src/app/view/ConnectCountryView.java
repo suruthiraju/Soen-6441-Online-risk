@@ -56,10 +56,10 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 	
 //	public CountryModel[] countryButton;
 	
-	/**
-	 * Constructor method of ConnectCountryView
-	 * @param gameMapModel
-	 */
+/**
+ * Constructor method of ConnectCountryView
+ * @param gameMapModel
+ */
 	public ConnectCountryView(GameMapModel gameMapModel) {
 		this.gameMapModel = gameMapModel;
 		welcomeLabel = new JLabel("Please select the Continents you want in the map and the control value");
@@ -89,10 +89,10 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 
 	}
 	
-	/**
-	 * The method "updateWindow" updates the panel view after any change
-	 * @param gmm which is a GameMapModel object
-	 */
+/**
+ * The method "updateWindow" updates the panel view after any change
+ * @param gmm which is a GameMapModel object
+ */
 	private void updateWindow(GameMapModel gmm) {
 		welcomePanel.removeAll();
 		graphicPanel.removeAll();
@@ -199,9 +199,9 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 		
 	}
 	
-	/**
-	 * 
-	 */
+/**
+ * 
+ */
 	public void paint(final Graphics g) {
 
 		super.paint(g);
@@ -233,6 +233,10 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 
 	}
 
+/**
+ * Method "update" updates the gameMapModel associated with
+ * @param  gameMapModel 
+ */	
 	@Override
 	public void update(Observable gameMapModel, Object arg1) {
 		
@@ -242,14 +246,21 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 
 	}
 
+/**
+ * Does the actions regarding each button pushed
+ * saveButton, addButton, and removeButton	
+ */
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.saveButton.addActionListener(actionListener);
 		this.addButton.addActionListener(actionListener);
 		this.removeButton.addActionListener(actionListener);
-		
 	}
-	
+
+/**
+ * Sets lists of selections	
+ * @param listSelectionListener
+ */
 	public void setListSelectionListener(ListSelectionListener listSelectionListener) {
 		//this.countryParentListLeft.addListSelectionListener(listSelectionListener);
 		this.listSelectionModelLeft.addListSelectionListener(listSelectionListener);

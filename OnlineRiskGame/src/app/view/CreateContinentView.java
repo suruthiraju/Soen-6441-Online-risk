@@ -19,13 +19,18 @@ import app.model.ContinentsModel;
 import app.model.GameMapModel;
 
 /**
+ * "CreateContinentView" class represents a view object for
+ * creating continent 
+ * Properties are containing labels, text fields, buttons, a pane, and a panel
  * 
  * @author Jatan Gohel
- *
  */
 
 public class CreateContinentView extends JFrame implements View {
 
+/**
+ * Properties of view
+ */
 	public JLabel welcomeLabel;
 	public JTextField continentValue;
 	public JTextField controlValue;
@@ -40,7 +45,9 @@ public class CreateContinentView extends JFrame implements View {
 	public JScrollPane consolePanel;
 	public JPanel mainPanel;
 	JTextArea textArea;
-	
+/**
+ * Construction of CreateContinentView	
+ */
 	public CreateContinentView() {
 		this.setTitle("Create Continent");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -81,6 +88,10 @@ public class CreateContinentView extends JFrame implements View {
 		updateScreen(null);
 	}
 
+/**
+ * Updates view regarding continents belong to	
+ * @param listOfContinentModel
+ */
 	public void updateScreen(List<ContinentsModel> listOfContinentModel) {
 		
 		StringBuilder textAreaText = new StringBuilder("------------------------------------------------");
@@ -120,13 +131,18 @@ public class CreateContinentView extends JFrame implements View {
 		mainPanel.add(controlValueInfoText);
 
 	}
-
+/**
+ * Sets actions to "addButton" and "nextButton" 
+ */
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.addButton.addActionListener(actionListener);
 		this.nextButton.addActionListener(actionListener);
 	}
 
+/**
+ * 	
+ */
 	@Override
 	public void update(Observable obs, Object arg) {
 		List<ContinentsModel> listOfContinentModel = ((GameMapModel) obs).getContinents();
