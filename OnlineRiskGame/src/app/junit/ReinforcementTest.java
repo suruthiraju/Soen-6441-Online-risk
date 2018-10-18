@@ -9,5 +9,16 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 
 public class ReinforcementTest {
-
+	
+	
+	
+	@Test public void testArmiesCalculation() {
+		
+		
+	}
+	
+	@Test public void testAddArmies() {
+		
+		
+	}
 }

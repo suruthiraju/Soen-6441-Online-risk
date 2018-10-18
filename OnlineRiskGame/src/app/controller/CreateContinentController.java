@@ -36,11 +36,14 @@ public class CreateContinentController implements ActionListener {
 
 		String contName;
 		int controlValue;
-		ContinentsModel tempContinent = new ContinentsModel(this.createContinentView.continentValue.getText(),
-				Integer.parseInt(this.createContinentView.controlValue.getText()));
-		if (actionEvent.getSource().equals(this.createContinentView.addButton)) {
-			if (this.createContinentView.controlValue.getText() != null
-					&& this.createContinentView.controlValue.getText() != "") {
+		ContinentsModel tempContinent;
+		if (actionEvent.getSource().equals(this.createContinentView.addButton)) 
+		{
+			if (!("".equals(this.createContinentView.controlValue.getText()) || this.createContinentView.controlValue.getText().isEmpty()||this.createContinentView.continentValue.getText().isEmpty()||"".equals(this.createContinentView.continentValue.getText()))) 
+			{
+				System.out.println("the input from the view is"+this.createContinentView.controlValue.getText()+this.createContinentView.continentValue.getText());
+				tempContinent= new ContinentsModel(this.createContinentView.continentValue.getText(),
+						Integer.parseInt(this.createContinentView.controlValue.getText()));				
 				if (0 < Integer.parseInt(this.createContinentView.controlValue.getText())
 						&& Integer.parseInt(this.createContinentView.controlValue.getText()) < 10) {
 					if (this.createContinentView.continentValue != null) {
@@ -68,7 +71,7 @@ public class CreateContinentController implements ActionListener {
 					return;
 				}
 			} else {
-				JOptionPane.showOptionDialog(null, "Please enter a non empty control value", "Invalid",
+				JOptionPane.showOptionDialog(null, "Please enter values in all the fields", "Invalid",
 						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
 				return;
 			}

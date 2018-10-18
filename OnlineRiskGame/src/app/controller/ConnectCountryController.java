@@ -18,6 +18,13 @@ import app.utilities.validation;
 import app.utilities.writeMap;
 import app.view.ConnectCountryView;
 
+/**
+ * ConnectCountryController Class ....
+ * 
+ * @author user
+ *
+ */
+
 public class ConnectCountryController implements ActionListener, ListSelectionListener {
 
 	private GameMapModel gameMapModel;
@@ -25,7 +32,7 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 	private List<CountryModel> countryList;
 	private List<CountryModel> countryListLinks;
 	private CountryModel newCountryModel;
-	private String filename;
+	private String filename=null;
 	private writeMap tempWrite;
 
 	public ConnectCountryController(GameMapModel mapModel) {
@@ -71,7 +78,7 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 					if(!(MapValidation.emptyContinentValidation(this.gameMapModel)))
 					{
 						System.out.println(" All the map validations are correct");
-						filename=JOptionPane.showInputDialog("File Name");
+							filename=JOptionPane.showInputDialog("File Name");
 						try {
 							System.out.println(filename);
 							tempWrite = new writeMap();

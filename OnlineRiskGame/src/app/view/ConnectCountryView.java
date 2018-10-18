@@ -27,6 +27,15 @@ import app.helper.View;
 import app.model.CountryModel;
 import app.model.GameMapModel;
 
+
+/**
+ * "ConnectCountryView" Class displays a view to enable the players
+ * to connect a country to any other one during map creation.
+ * It contains buttons, labels, and lists
+ * 
+ * @author SOEN-6441, Group-35
+ * 
+ */
 public class ConnectCountryView extends JFrame implements View,Observer {
 
 	public JPanel welcomePanel;
@@ -46,7 +55,11 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 	public GameMapModel gameMapModel;
 	
 //	public CountryModel[] countryButton;
-
+	
+/**
+ * Constructor method of ConnectCountryView
+ * @param gameMapModel
+ */
 	public ConnectCountryView(GameMapModel gameMapModel) {
 		this.gameMapModel = gameMapModel;
 		welcomeLabel = new JLabel("Please select the Continents you want in the map and the control value");
@@ -63,9 +76,6 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 		graphicPanel.setLayout(null);
 		//setSize(1000, 1000);
 		
-		
-		
-		
 		this.setName("RISK GAME");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(300, 200);
@@ -78,7 +88,11 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
-
+	
+/**
+ * The method "updateWindow" updates the panel view after any change
+ * @param gmm which is a GameMapModel object
+ */
 	private void updateWindow(GameMapModel gmm) {
 		welcomePanel.removeAll();
 		graphicPanel.removeAll();
@@ -183,12 +197,11 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 		}
 		graphicPanel.setLayout(null);
 		
-		
-		
-		
-
 	}
 	
+/**
+ * 
+ */
 	public void paint(final Graphics g) {
 
 		super.paint(g);
@@ -220,6 +233,10 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 
 	}
 
+/**
+ * Method "update" updates the gameMapModel associated with
+ * @param  gameMapModel 
+ */	
 	@Override
 	public void update(Observable gameMapModel, Object arg1) {
 		
@@ -229,21 +246,31 @@ public class ConnectCountryView extends JFrame implements View,Observer {
 
 	}
 
+/**
+ * Does the actions regarding each button pushed
+ * saveButton, addButton, and removeButton	
+ */
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.saveButton.addActionListener(actionListener);
 		this.addButton.addActionListener(actionListener);
 		this.removeButton.addActionListener(actionListener);
-		
 	}
-	
+
+/**
+ * Sets lists of selections	
+ * @param listSelectionListener
+ */
 	public void setListSelectionListener(ListSelectionListener listSelectionListener) {
 		//this.countryParentListLeft.addListSelectionListener(listSelectionListener);
 		this.listSelectionModelLeft.addListSelectionListener(listSelectionListener);
 		this.listSelectionModelRight.addListSelectionListener(listSelectionListener);
 		//this.countryParentListRight.addListSelectionListener(listSelectionListener);
 	}
-
+	
+	/**
+	 * "CountryModelRenderer" changes ....
+	 */
 	class CountryModelRenderer extends JLabel implements ListCellRenderer<CountryModel> {
 
 		private static final long serialVersionUID = 1L;
