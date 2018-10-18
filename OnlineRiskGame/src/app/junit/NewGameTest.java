@@ -9,5 +9,13 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 
 public class NewGameTest {
+	
+	
+	
+	
+	@Test public void testNewGamePlayerValidation() {
+		
+		
+	}
 
 }

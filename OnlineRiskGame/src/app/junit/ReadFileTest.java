@@ -9,5 +9,18 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 
 public class ReadFileTest {
+	
+	
+	
+	
+	@Test public void testReadFileGetContinent() {
+		
+		
+	}
+
+	@Test public void testReadFileGetCountry() {
+		
+		
+	}
 
 }
