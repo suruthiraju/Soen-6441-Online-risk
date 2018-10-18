@@ -8,12 +8,13 @@ import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
 /**
- * 
+ * "CountryModel" represents a country's properties
+ * such as name, position, continent name that it belongs to, 
+ * countries that it connected to, owner (player who owns it) name,
+ * Number of armies in, and color. 
  * @author DELL
  *
  */
-
-
 public class CountryModel extends JButton{
 
 	private String countryName;
@@ -25,7 +26,17 @@ public class CountryModel extends JButton{
 	private int armies;
 	private Color backgroundColor;
 	private Color borderColor;
-	
+
+/**
+ * Constructor of CountryModel with parameters	
+ * @param countryName
+ * @param xPosition
+ * @param yPosition
+ * @param continentName
+ * @param linkedCountries
+ * @param ruler
+ * @param armies
+ */
 	public CountryModel(String countryName, int xPosition, int yPosition, String continentName, List linkedCountries, PlayerModel ruler, int armies) {
 		this.countryName = countryName;
 		this.xPosition = xPosition;
@@ -37,47 +48,45 @@ public class CountryModel extends JButton{
 		this.backgroundColor = Color.WHITE;
 		this.borderColor = Color.BLACK;
 	}
-	
+
+/**
+ * Default constructor	
+ */
 	public CountryModel() {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * 
-	 * @return the country name.
-	 */
+/**
+ * @return the country name.
+ */
 	public String getCountryName() {
 		return countryName;
 	}
 	
-	/**
-	 * Sets the country name.
-	 * @param countryName
-	 */
+/**
+ * Sets the country name.
+ * @param countryName
+ */
 	public void setCountryName(String countryName) {
 		this.countryName = countryName;
 	}
 	
-	/**
-	 * 
-	 * @return the X Position Value.
-	 */
+/**
+ * @return the X Position Value.
+ */
 	public int getXPosition() {
 		return xPosition;
 	}
 	
-	/**
-	 * Sets the X Position Value.
-	 * @param xPosition
-	 */
+/**
+ * Sets the X Position Value.
+ * @param xPosition
+ */
 	public void setXPosition(int xPosition) {
 		this.xPosition = xPosition;
 	}
 
-
-
 /**
- * 
  * @return the Y Position Value.
  */
 public int getYPosition() {
@@ -92,10 +101,7 @@ public void setYPosition(int yPosition) {
 	this.yPosition = yPosition;
 }
 
-
-
 /**
- * 
  * @return the Continent Name.
  */
 public String getcontinentName() {
@@ -110,10 +116,7 @@ public void setContinentName(String continentName) {
 	this.continentName = continentName;
 }
 
-
-
 /**
- * 
  * @return the list of array.
  */
 public List<CountryModel> getLinkedCountries() {
@@ -130,14 +133,14 @@ public void setLinkedCountries(List<CountryModel> linkedCountries) {
 
 /**
  * 
- * @return the Player.
+ * @return the Player who owns the country.
  */
 public PlayerModel getRuler() {
 	return ruler;
 }
 
 /**
- * Sets the Player.
+ * Sets the Player as the owner of the country.
  * @param PlayerModel
  */
 public void setRuler(PlayerModel ruler) {
@@ -145,15 +148,14 @@ public void setRuler(PlayerModel ruler) {
 }
 
 /**
- * 
- * @return the army Value.
+ * @return the army number of the country.
  */
 public int getArmies() {
 	return armies;
 }
 
 /**
- * Sets the army Value.
+ * Sets the army number of the country.
  * @param armies
  */
 public void setArmies(int armies) {
@@ -168,7 +170,8 @@ public Color getBackgroundColor() {
 }
 
 /**
- * @param color the color to set
+ * Sets the color of the country
+ * @param color 
  */
 public void setBackgroundColor(Color color) {
 	this.setBackground(color);
@@ -184,12 +187,12 @@ public Color getBorderColor() {
 }
 
 /**
- * @param borderColor the borderColor to set
+ * Sets the borderColor
+ * @param borderColor
  */
 public void setBorderColor(Color borderColor) {
 	this.setBorder(new LineBorder(borderColor));
 	this.borderColor = borderColor;
 }
-
 
 }
