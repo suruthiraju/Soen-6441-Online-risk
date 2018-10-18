@@ -39,6 +39,7 @@ public class EditContinentController implements ActionListener {
 	    tempRead.setFile(file);
 	    continentList=tempRead.getMapContinentDetails();
 		this.mapModel = new GameMapModel();
+		this.mapModel.setCountries(tempRead.getMapCountryDetails());
 		mapModel.setContinents(continentList);
 		mapModel.callObservers();
 		this.newContinentList = new ArrayList<ContinentsModel>();
