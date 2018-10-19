@@ -3,10 +3,8 @@ package app.controller;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -20,10 +18,12 @@ import app.utilities.WriteMap;
 import app.view.ConnectCountryView;
 
 /**
- * ConnectCountryController Class ....
- * 
- * @author user
+ * In ConnectCountryController, the data flow into model object and updates the
+ * view whenever data changes.
  *
+ * @author Rohit
+ * @version 1.0.0
+ * 
  */
 
 public class ConnectCountryController implements ActionListener, ListSelectionListener {
@@ -33,9 +33,14 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 	private List<CountryModel> countryList;
 	private List<CountryModel> countryListLinks;
 	private CountryModel newCountryModel;
-	private String filename=null;
+	private String filename = null;
 	private WriteMap tempWrite;
 
+	/**
+	 * Constructor initializes values and sets the screen too visible
+	 * 
+	 * @param mapModel
+	 */
 	public ConnectCountryController(GameMapModel mapModel) {
 
 		this.gameMapModel = mapModel;
@@ -49,6 +54,11 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 		this.gameMapModel.addObserver(this.connectCountryView);
 	}
 
+	/**
+	 * This method performs action, by Listening the action event set in view.
+	 * 
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		if (actionEvent.getSource().equals(this.connectCountryView.addButton)) {
@@ -64,78 +74,71 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 						(CountryModel) this.connectCountryView.countryParentListRight.getSelectedValue());
 
 			}
-		} else if (actionEvent.getSource().equals(this.connectCountryView.saveButton)) 
-		{
+		} else if (actionEvent.getSource().equals(this.connectCountryView.saveButton)) {
 			Validation MapValidation = new Validation();
 			boolean flag1 = MapValidation.emptyLinkCountryValidation(this.gameMapModel);
-			
+
 			boolean flag3 = MapValidation.emptyContinentValidation(this.gameMapModel);
 			boolean flag2 = MapValidation.checkInterlinkedContinent(this.gameMapModel);
-			System.out.println(flag1 +" "+ flag2 +" " + flag3);
-			if(!(MapValidation.emptyLinkCountryValidation(this.gameMapModel)))
-			{
-				if((!MapValidation.checkInterlinkedContinent(this.gameMapModel)))
-				{
-					if(!(MapValidation.emptyContinentValidation(this.gameMapModel)))
-					{
-						if(!(MapValidation.unlinkedContinentValidation(this.gameMapModel)))
-						{
-							
-						System.out.println(" All the map validations are correct");
-							filename=JOptionPane.showInputDialog("File Name");
-						try {
-							System.out.println(filename);
-							tempWrite = new WriteMap();
-							tempWrite.writeMapToFile(filename, this.gameMapModel);
-							JOptionPane.showMessageDialog(null, "Map has been created select it before you play");
-							new WelcomeScreenController();
-							this.connectCountryView.dispose();
-						} catch (Exception e) {
-							e.printStackTrace();
-							}	
+			System.out.println(flag1 + " " + flag2 + " " + flag3);
+			if (!(MapValidation.emptyLinkCountryValidation(this.gameMapModel))) {
+				if ((!MapValidation.checkInterlinkedContinent(this.gameMapModel))) {
+					if (!(MapValidation.emptyContinentValidation(this.gameMapModel))) {
+						if (!(MapValidation.unlinkedContinentValidation(this.gameMapModel))) {
+
+							System.out.println(" All the map validations are correct");
+							filename = JOptionPane.showInputDialog("File Name");
+							try {
+								System.out.println(filename);
+								tempWrite = new WriteMap();
+								tempWrite.writeMapToFile(filename, this.gameMapModel);
+								JOptionPane.showMessageDialog(null, "Map has been created select it before you play");
+								new WelcomeScreenController();
+								this.connectCountryView.dispose();
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						} else {
+							System.out.println("All continents are not linked");
+							JOptionPane.showOptionDialog(null, "All continents are not linked", "Invalid",
+									JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {},
+									null);
+
 						}
-						else 
-						{
-						System.out.println("All continents are not linked");
-							JOptionPane.showOptionDialog(null, "All continents are not linked", "Invalid", JOptionPane.DEFAULT_OPTION,
-								JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
-							
-						}
-						
-					}
-					else
-					{
+
+					} else {
 						System.out.println("Empty link country validation failed");
-							JOptionPane.showOptionDialog(null, "Empty continent validation failed", "Invalid", JOptionPane.DEFAULT_OPTION,
-								JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
+						JOptionPane.showOptionDialog(null, "Empty continent validation failed", "Invalid",
+								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {},
+								null);
 					}
-				}
-				else 
-				{
+				} else {
 					System.out.println("ECheck interlinked Continent validation failed");
-					JOptionPane.showOptionDialog(null, "Check interlinedContinent validation failed", "Invalid", JOptionPane.DEFAULT_OPTION,
-							JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
-					
+					JOptionPane.showOptionDialog(null, "Check interlinedContinent validation failed", "Invalid",
+							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
+
 				}
-			}
-			else 
-			{
-					System.out.println("Empty continent validation failed");
-					JOptionPane.showOptionDialog(null, "Empty link country validation failed", "Invalid", JOptionPane.DEFAULT_OPTION,
-							JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
+			} else {
+				System.out.println("Empty continent validation failed");
+				JOptionPane.showOptionDialog(null, "Empty link country validation failed", "Invalid",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
 			}
 
-		} 
-		else if (actionEvent.getSource().equals(this.connectCountryView.removeButton)) {
-			
+		} else if (actionEvent.getSource().equals(this.connectCountryView.removeButton)) {
+
 			this.gameMapModel.removeNeighbouringCountry(
 					(CountryModel) this.connectCountryView.countryParentListLeft.getSelectedValue(),
 					(CountryModel) this.connectCountryView.countryParentListRight.getSelectedValue());
-			
+
 		}
 
 	}
 
+	/**
+	 * Check for the List is changed
+	 * 
+	 * @see javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event.ListSelectionEvent)
+	 */
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 
@@ -162,7 +165,6 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 			System.out.println(finalRightModelIndex);
 		}
 
-		// ListSelectionModel lsm = (ListSelectionModel)actionEvent.getSource();
 		if (e.getSource().equals(this.connectCountryView.countryParentListLeft)) {
 
 			this.gameMapModel.setColorToCountry(
@@ -172,8 +174,6 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 
 			this.gameMapModel.setColorToCountry(
 					(CountryModel) this.connectCountryView.countryParentListRight.getSelectedValue(), Color.YELLOW);
-			// CountryModel cm =
-			// (CountryModel)this.connectCountryView.countryParentListLeft.getSelectedValue();
 
 		}
 	}

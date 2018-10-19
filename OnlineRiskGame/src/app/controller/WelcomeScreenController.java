@@ -6,13 +6,10 @@ import java.awt.event.ActionListener;
 import app.model.WelcomeScreenModel;
 import app.view.WelcomeScreenView;
 
-//The Controller coordinates interactions
-//between the View and Model
-
 /**
- * "WelcomeScreenController" is the main class. 
- * It represents a welcome window containing main buttons to edit/create
- * map file and start playing game
+ * "WelcomeScreenController" is the main class. It represents a welcome window
+ * containing main buttons to edit/create map file and start playing game
+ * 
  * @author GROUP-35
  */
 public class WelcomeScreenController implements ActionListener {
@@ -24,6 +21,9 @@ public class WelcomeScreenController implements ActionListener {
 	private WelcomeScreenView theView;
 	private WelcomeScreenModel theModel;
 
+	/**
+	 * Constructor initializes values and sets the screen too visible
+	 */
 	public WelcomeScreenController() {
 		this.theView = new WelcomeScreenView();
 
@@ -34,9 +34,11 @@ public class WelcomeScreenController implements ActionListener {
 
 	}
 
-/**
- * Sets actions to clicked buttons	
- */
+	/**
+	 * This method performs action, by Listening the action event set in view.
+	 * 
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		if (actionEvent.getSource().equals(theView.createMapButton)) {
@@ -54,7 +56,6 @@ public class WelcomeScreenController implements ActionListener {
 		}
 	}
 
-	
 	private void exitGame() {
 		this.theView.dispose();
 	}
@@ -65,7 +66,6 @@ public class WelcomeScreenController implements ActionListener {
 	}
 
 	private void showEditGameWindow() {
-		//new EditMapController();
 		new EditContinentController();
 		this.theView.dispose();
 	}

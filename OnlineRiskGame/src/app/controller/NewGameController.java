@@ -16,9 +16,12 @@ import app.model.PlayerModel;
 import app.view.NewGameView;
 
 /**
- * The Class NewGameController 
+ * In NewGameController, the data flow into model object and updates the view
+ * whenever data changes.
  *
  * @author Suruthi Raju
+ * @version 1.0.0
+ * 
  */
 
 public class NewGameController implements ActionListener {
@@ -28,13 +31,21 @@ public class NewGameController implements ActionListener {
 	private GameMapModel gmM = new GameMapModel();
 	private int noOfPlayers;
     
+    /**
+     * Constructor initializes values and sets the screen too visible
+     */
     public NewGameController() {
     	this.theView = new NewGameView();
     	this.theView.setActionListener(this);
     	this.theView.setVisible(true);
         
     }
-
+    
+    /**
+	 * This method performs action, by Listening the action event set in view.
+	 * 
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		if (actionEvent.getSource().equals(theView.browseMapButton)) {		
@@ -59,6 +70,9 @@ public class NewGameController implements ActionListener {
 		
 	}
     
+	/**
+	 *  Check for the player validation
+	 */
 	public void playerValidation() {
 		if ( gmM.getCountries().size() > noOfPlayers) {
 			System.out.println("no of players");
