@@ -282,7 +282,7 @@ public class StartUpView extends JFrame implements View {
 	 * This method convert string to color
 	 * 
 	 * @param value
-	 * @return
+	 * @return color
 	 */
 	public static Color stringToColor(final String value) {
 		if (value == null) {

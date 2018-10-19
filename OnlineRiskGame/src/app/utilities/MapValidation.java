@@ -1,18 +1,14 @@
 package app.utilities;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
 import java.io.File;
+import java.util.ArrayList;
 
-import app.model.*;
-import app.view.*;
+import app.model.ContinentsModel;
+import app.model.CountryModel;
 
 public class MapValidation {
 	
 	public static void main(String[] args) throws Exception {
-	//public static void isMapValid() throws Exception {
 		
 		File myMap = new File("D:\\Concordia\\SOEN6441\\ProjectFiles\\Maps\\map1.txt");
 		ReadFile rf = new ReadFile();
@@ -20,13 +16,7 @@ public class MapValidation {
 		ArrayList<ContinentsModel> listOfContinents = new ArrayList<ContinentsModel>();
 		ArrayList<CountryModel> listOfCountries = new ArrayList<CountryModel>();
 		listOfContinents = rf.getMapContinentDetails();
-		listOfCountries = rf.getMapCountryDetails();
-		
-		//int arrSize = listOfCountries.size();
-		//System.out.println("Initial arraySize is:" + arrSize);
-		
-		//String errorMessage = "";
-		
+		listOfCountries = rf.getMapCountryDetails();		
 		
 		if ( noContinentOverlap(listOfCountries) ) {
 			System.out.println("Good! No continent overlap!");
@@ -40,8 +30,6 @@ public class MapValidation {
 		} else {
 			System.out.println("Error!....Map has some errors!");
 		}
-		
-		//System.out.println( errorCollection(listOfCountries) );
 
 	}
 	
@@ -50,9 +38,7 @@ public class MapValidation {
 	public static boolean noSoloCountry (ArrayList<CountryModel> tempCountryList) throws Exception {
 		
 		int arraySize = tempCountryList.size();
-		//System.out.println("arraySize is:" + arraySize);
 		String nameOfCountry1;
-		//String nameOfCountry2;
 		
 		for (int i = 0; i < arraySize; i++) {
 			nameOfCountry1 = (tempCountryList.get(i)).getCountryName();
@@ -76,7 +62,6 @@ public class MapValidation {
 			nameOfCountry1 = (tempCountryList.get(i)).getCountryName();
 			for (int j=arraySize-1; j > i; j-- ) {
 				nameOfCountry2 = (tempCountryList.get(j)).getCountryName();
-				//System.out.println(nameOfCountry1 + " ... " + nameOfCountry2);
 				if ( nameOfCountry1.equals(nameOfCountry2) ) {
 					if ( !(tempCountryList.get(i)).getcontinentName().equals( (tempCountryList.get(j)).getcontinentName() )) {
 						return false;
@@ -92,7 +77,6 @@ public class MapValidation {
 	public static String errorCollection (ArrayList<CountryModel> tempCountryList) throws Exception {
 		String result = "No error!";
 		int arraySize = tempCountryList.size();
-		//System.out.println("arraySize is:" + arraySize);
 		String nameOfCountry1;
 		String nameOfCountry2;
 		
@@ -100,7 +84,6 @@ public class MapValidation {
 			nameOfCountry1 = (tempCountryList.get(i)).getCountryName();
 			for (int j=arraySize-1; j > i; j-- ) {
 				nameOfCountry2 = (tempCountryList.get(j)).getCountryName();
-				//System.out.println(nameOfCountry1 + " ... " + nameOfCountry2);
 				if ( nameOfCountry1.equals(nameOfCountry2) ) {
 					result += " ... Country name error!. Two names are same!";
 					System.out.println(nameOfCountry1 + " is same as " + nameOfCountry2);
@@ -135,32 +118,5 @@ public class MapValidation {
 		}
 		return true;
 	}
-/*	
-	public boolean emptyLinkCountryValidation() {
-		List<CountryModel> listOfCountrys = this.mapModel.getCountries();
-		List<CountryModel> linkedCountry; 
-			for (int j=0; j<listOfCountrys.size(); j++) {
-				linkedCountry =  listOfCountrys.get(j).getLinkedCountries();
-				if (linkedCountry == null || linkedCountry.isEmpty()) {
-					return true;
-				}
-			}
-			return false;
-	}
-	
-	public void emptyContinentValidation() {
-		List<ContinentsModel> listOfContinents = this.mapModel.getContinents();
-		List<CountryModel> listOfCountrys = this.mapModel.getCountries();
-		String continentName = " ";
-		for (int i=0; i< listOfContinents.size(); i++) {
-			continentName = listOfContinents.get(i).getContinentName(); 
-			for (int j=0; j<listOfCountrys.size(); j++) {
-				if(continentName.equals(listOfCountrys.get(j).getcontinentName())) {
-					break;
-				}				
-			}
-		}
-	}
-	
-	*/
+
 }
