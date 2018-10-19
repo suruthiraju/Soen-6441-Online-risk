@@ -1,28 +1,19 @@
- package app.junit;
+package app.junit;
+
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+
+import org.junit.Before;
 import org.junit.Test;
 
-import app.model.ContinentsModel;
-import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.utilities.Constant;
 import app.utilities.ReadFile;
 import app.utilities.Validation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+public class CheckValidMove {
 
-import java.io.File;
-import java.util.List;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-
-public class EmptyLinkCountryValidationTest {
-	
 	private static final boolean False = false;
 	GameMapModel gameMapModel;
 	Validation val;
@@ -46,9 +37,8 @@ public class EmptyLinkCountryValidationTest {
 	    setUpIsDone = true;
 	}
 	@Test 
-	public void testUnlinkedContinentValidation() 
+	public void testUnlinkedContinentVAlidation() 
 	{
-		assertFalse(val.emptyContinentValidation(gameMapModel));
+		assertTrue(val.checkIfValidMove(gameMapModel, gameMapModel.getCountries().get(0), gameMapModel.getCountries().get(1)));
 	}
-	
 }
