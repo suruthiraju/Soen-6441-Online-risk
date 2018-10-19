@@ -13,7 +13,7 @@ import app.model.GameMapModel;
 import app.utilities.Constant;
 import app.utilities.ReadFile;
 
-public class CreateContinentTest {
+public class SetNeighbouringCountriesTest {
 	
 	List<ContinentsModel> continentList;
 	List<CountryModel> countryList;

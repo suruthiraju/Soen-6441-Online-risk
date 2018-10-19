@@ -18,19 +18,16 @@ import app.model.CountryModel;
  *
  */
 
-
 public class ReadFile {
 	public static File FILE;
 
 	public ArrayList<ContinentsModel> getMapContinentDetails() {
 
-		// pass the path to the file as a parameter
 		File file = getFile();
 		Scanner sc = null;
 		try {
 			sc = new Scanner(file);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -51,7 +48,7 @@ public class ReadFile {
 					String sc4 = sc2.substring(positionEqual + 1);
 					int result = Integer.parseInt(sc4);
 					System.out.println("Value: " + sc4);
-					
+
 					ContinentsModel tempMyContinents = new ContinentsModel(sc3, result);
 					listOfContinents.add(tempMyContinents);
 					sc2 = sc.nextLine();
@@ -63,7 +60,7 @@ public class ReadFile {
 		return listOfContinents;
 	}
 
-	public ArrayList<CountryModel> getMapCountryDetails()  {
+	public ArrayList<CountryModel> getMapCountryDetails() {
 		File file = getFile();
 		Scanner sc = null;
 		try {
@@ -99,13 +96,13 @@ public class ReadFile {
 						String xPosition = territories.substring((indexOfCountryName + 1), indexOfXPos);
 						cm.setXPosition(Integer.parseInt(xPosition.trim()));
 						System.out.println("xposition: " + xPosition);
-					//	int result = Integer.parseInt(xPosition);
+						// int result = Integer.parseInt(xPosition);
 
 						int indexOfYPos = territories.indexOf(',', (indexOfXPos + 1));
 						String yPosition = territories.substring((indexOfXPos + 1), indexOfYPos);
 						cm.setYPosition(Integer.parseInt(yPosition.trim()));
 						System.out.println("yPosition" + yPosition);
-					//	int result1 = Integer.parseInt(yPosition);
+						// int result1 = Integer.parseInt(yPosition);
 
 						int indexOfContinent = territories.indexOf(',', (indexOfYPos + 1));
 						String continent = territories.substring((indexOfYPos + 1), indexOfContinent).trim();
@@ -144,13 +141,15 @@ public class ReadFile {
 		listOfCountryModel = new ArrayList<CountryModel>(c);
 		return listOfCountryModel;
 	}
+
 	public void setFile(File file) {
-		
+
 		FILE = file;
-		
+
 	}
+
 	public File getFile() {
 		return FILE;
 	}
-	
+
 }

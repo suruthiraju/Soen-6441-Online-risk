@@ -12,6 +12,7 @@ import app.helper.View;
  * This is the Welcome Screen of the game. It displays Welcome Message and the
  * options for user to start the game with default map or to create/edit any map
  * before starting the game
+ * @author GROUP-35
  */
 public class WelcomeScreenView extends JFrame implements View {
 

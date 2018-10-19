@@ -21,33 +21,33 @@ import javax.swing.JComboBox;
 
 public class NewGameView extends JFrame implements View {
 
-	/** The Constant serialVersionUID. */
+/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
-	/** The browse map. */
+/** The browse map. */
 	public JButton browseMapButton;
 	
-	/** The next button. */
+/** The next button. */
 	public JButton nextButton;
 	
-	/** The cancel button. */
+/** The cancel button. */
 	public JButton cancelButton;
 	
 	
-	/** The choose map. */
+/** The choose map. */
 	public JComboBox<Integer> numOfPlayers;
 
 	public JFileChooser chooseMap;
 	
-	/** The label map file. */
+/** The label map file. */
 	public JLabel labelPlayers, labelMapFile;
 	
-	/** The final players. */
+/** The final players. */
 	public int finalPlayers;
 	
-	/**
-	 * Create the application.
-	 */
+/**
+ * Create the application.
+ */
 	public NewGameView() {
 		getContentPane().setLayout(null);
 		
@@ -83,9 +83,9 @@ public class NewGameView extends JFrame implements View {
 		
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+/**
+ * Initialize the contents of the frame.
+ */
 	private void initialize() {
 		setBounds(100, 100, 500, 500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

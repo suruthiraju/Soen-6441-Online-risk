@@ -4,20 +4,17 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
-import app.model.*;
+
+import app.model.ContinentsModel;
+import app.model.CountryModel;
+import app.model.GameMapModel;
 
 /**
  * 
  * @author DELL
  *
  */
-
 
 public class WriteMap {
 	File file;
@@ -40,10 +37,10 @@ public class WriteMap {
 		return this.file;
 	}
 
-	public void writeMapToFile(String fileName,GameMapModel gMM) throws Exception {
-		List<ContinentsModel> listOfContinents=gMM.getContinents();
-		List<CountryModel> listOfCountrys=gMM.getCountries();
-		this.file = new File(System.getProperty("user.dir") + "//mapfiles//" + fileName+".map");
+	public void writeMapToFile(String fileName, GameMapModel gMM) throws Exception {
+		List<ContinentsModel> listOfContinents = gMM.getContinents();
+		List<CountryModel> listOfCountrys = gMM.getCountries();
+		this.file = new File(System.getProperty("user.dir") + "//mapfiles//" + fileName + ".map");
 		System.out.println(this.file);
 		try {
 			// Create new file
@@ -127,7 +124,7 @@ public class WriteMap {
 					country = country + countryModel.getLinkedCountries().get(i).getCountryName() + ",";
 				}
 			}
-			//String csv = String.join(",", countryModel.getlinkedCountries());
+			// String csv = String.join(",", countryModel.getlinkedCountries());
 			content = content + country;
 		}
 		return content;

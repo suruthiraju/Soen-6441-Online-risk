@@ -89,110 +89,109 @@ public class CountryModel extends JButton{
 /**
  * @return the Y Position Value.
  */
-public int getYPosition() {
-	return yPosition;
-}
+	public int getYPosition() {
+		return yPosition;
+	}
 
 /**
  * Sets the Y Position Value.
  * @param yPosition
  */
-public void setYPosition(int yPosition) {
-	this.yPosition = yPosition;
-}
+	public void setYPosition(int yPosition) {
+		this.yPosition = yPosition;
+	}
 
 /**
  * @return the Continent Name.
  */
-public String getcontinentName() {
-	return continentName;
-}
+	public String getcontinentName() {
+		return continentName;
+	}
 
 /**
  * Sets the Continent Name.
  * @param continentName
  */
-public void setContinentName(String continentName) {
-	this.continentName = continentName;
-}
+	public void setContinentName(String continentName) {
+		this.continentName = continentName;
+	}
 
 /**
  * @return the list of array.
  */
-public List<CountryModel> getLinkedCountries() {
-	return linkedCountries;
-}
+	public List<CountryModel> getLinkedCountries() {
+		return linkedCountries;
+	}
 
 /**
  * Sets the list of array.
  * @param ArrayList
  */
-public void setLinkedCountries(List<CountryModel> linkedCountries) {
-	this.linkedCountries = linkedCountries;
-}
+	public void setLinkedCountries(List<CountryModel> linkedCountries) {
+		this.linkedCountries = linkedCountries;
+	}
 
 /**
  * 
  * @return the Player who owns the country.
  */
-public PlayerModel getRuler() {
-	return ruler;
-}
+	public PlayerModel getRuler() {
+		return ruler;
+	}
 
 /**
  * Sets the Player as the owner of the country.
  * @param PlayerModel
  */
-public void setRuler(PlayerModel ruler) {
-	this.ruler = ruler;
-}
+	public void setRuler(PlayerModel ruler) {
+		this.ruler = ruler;
+	}
 
 /**
  * @return the army number of the country.
  */
-public int getArmies() {
-	return armies;
-}
+	public int getArmies() {
+		return armies;
+	}
 
 /**
  * Sets the army number of the country.
  * @param armies
  */
-public void setArmies(int armies) {
-	this.armies = armies;
-}
+	public void setArmies(int armies) {
+		this.armies = armies;
+	}
 
 /**
  * @return the color
  */
-public Color getBackgroundColor() {
-	return backgroundColor;
-}
+	public Color getBackgroundColor() {
+		return backgroundColor;
+	}
 
 /**
  * Sets the color of the country
  * @param color 
  */
-public void setBackgroundColor(Color color) {
-	this.setBackground(color);
-	this.backgroundColor = color;
-	
-}
+	public void setBackgroundColor(Color color) {
+		this.setBackground(color);
+		this.backgroundColor = color;
+	}
 
 /**
  * @return the borderColor
  */
-public Color getBorderColor() {
-	return borderColor;
-}
+	public Color getBorderColor() {
+		return borderColor;
+	}
 
 /**
  * Sets the borderColor
  * @param borderColor
  */
-public void setBorderColor(Color borderColor) {
-	this.setBorder(new LineBorder(borderColor));
-	this.borderColor = borderColor;
-}
+	public void setBorderColor(Color borderColor) {
+		this.setBorder(new LineBorder(borderColor));
+		this.borderColor = borderColor;
+	}
 
 }

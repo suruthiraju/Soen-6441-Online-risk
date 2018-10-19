@@ -34,11 +34,12 @@ import app.model.GameMapModel;
 import app.model.PlayerModel;
 
 /**
+ * "FortificationView" class represents a view object of fortification 
+ * phase.
  * 
- * @author DELL
+ * @author GROUP-35
  *
  */
-
 public class FortificationView extends JFrame implements View {
 
 	public GameMapModel gameMapModel;
@@ -66,6 +67,10 @@ public class FortificationView extends JFrame implements View {
 	public JButton[] button;
 	private ActionListener actionListener;
 
+/**
+ * Constructor of FortificationView	
+ * @param gameMapModel
+ */
 	public FortificationView(GameMapModel gameMapModel) {
 		this.gameMapModel = gameMapModel;
 		this.setTitle("Fortification Phase");
@@ -90,6 +95,11 @@ public class FortificationView extends JFrame implements View {
 		graphicPanel.setLayout(null);
 	}
 
+/**
+ * Updates the window based on new data in fortification phase	
+ * @param gameMapModel
+ * @param playerModel
+ */
 	public void updateWindow(GameMapModel gameMapModel, PlayerModel playerModel) {
 
 		welcomePanel.removeAll();
@@ -199,6 +209,9 @@ public class FortificationView extends JFrame implements View {
 		
 	}
 
+/**
+ * 	
+ */
 	public void paint(final Graphics g) {
 
 		super.paint(g);
@@ -229,6 +242,10 @@ public class FortificationView extends JFrame implements View {
 
 	}
 
+/**
+ * Provides a dynamic comboBox of country names	
+ * @author GROUPE-35
+ */
 	public class CountryViewRenderer extends BasicComboBoxRenderer {
 
 		/*
@@ -251,6 +268,9 @@ public class FortificationView extends JFrame implements View {
 	}
 	// }
 
+/**
+ * 	
+ */
 	@Override
 	public void update(Observable obs, Object arg) {
 
@@ -260,6 +280,9 @@ public class FortificationView extends JFrame implements View {
 
 	}
 
+/**
+ * Sets "moveButton" action	
+ */
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.actionListener = actionListener;
@@ -267,6 +290,7 @@ public class FortificationView extends JFrame implements View {
 		this.fromCountryListComboBox.addActionListener(actionListener);
 	}
 
+	
 	public static Color stringToColor(final String value) {
 		if (value == null) {
 			return Color.black;
