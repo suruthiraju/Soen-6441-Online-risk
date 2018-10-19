@@ -53,20 +53,32 @@ public class WelcomeScreenController implements ActionListener {
 		}
 	}
 
+	/**
+	 * exit game
+	 */
 	private void exitGame() {
 		this.theView.dispose();
 	}
 
+	/**
+	 * show play game window
+	 */
 	private void showPlayGameWindow() {
 		new NewGameController();
 		this.theView.dispose();
 	}
 
+	/**
+	 *  show edit game window
+	 */
 	private void showEditGameWindow() {
 		new EditContinentController();
 		this.theView.dispose();
 	}
 
+	/**
+	 * show create map window
+	 */
 	private void showCreateMapWindow() {
 		new CreateContinentController();
 		this.theView.dispose();

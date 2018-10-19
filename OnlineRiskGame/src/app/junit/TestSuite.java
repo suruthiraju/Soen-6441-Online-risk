@@ -13,8 +13,8 @@ import app.utilities.*;
 				EmptyContinentValidationTest.class,
 				ReadFileContinent.class,
 				ReadFileCountry.class,
-				EmptyLinkCountryValidationTest.class,
-				ReinforcementArmyNumberTest.class})
+				EmptyLinkCountryValidationTest.class
+				})
 
 /**
  * Test suite 
