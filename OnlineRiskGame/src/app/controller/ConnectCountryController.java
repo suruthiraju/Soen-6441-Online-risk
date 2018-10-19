@@ -15,8 +15,8 @@ import javax.swing.event.ListSelectionListener;
 
 import app.model.CountryModel;
 import app.model.GameMapModel;
-import app.utilities.validation;
-import app.utilities.writeMap;
+import app.utilities.Validation;
+import app.utilities.WriteMap;
 import app.view.ConnectCountryView;
 
 /**
@@ -34,7 +34,7 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 	private List<CountryModel> countryListLinks;
 	private CountryModel newCountryModel;
 	private String filename=null;
-	private writeMap tempWrite;
+	private WriteMap tempWrite;
 
 	public ConnectCountryController(GameMapModel mapModel) {
 
@@ -66,7 +66,7 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 			}
 		} else if (actionEvent.getSource().equals(this.connectCountryView.saveButton)) 
 		{
-			validation MapValidation = new validation();
+			Validation MapValidation = new Validation();
 			boolean flag1 = MapValidation.emptyLinkCountryValidation(this.gameMapModel);
 			
 			boolean flag3 = MapValidation.emptyContinentValidation(this.gameMapModel);
@@ -85,7 +85,7 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 							filename=JOptionPane.showInputDialog("File Name");
 						try {
 							System.out.println(filename);
-							tempWrite = new writeMap();
+							tempWrite = new WriteMap();
 							tempWrite.writeMapToFile(filename, this.gameMapModel);
 							JOptionPane.showMessageDialog(null, "Map has been created select it before you play");
 							new WelcomeScreenController();

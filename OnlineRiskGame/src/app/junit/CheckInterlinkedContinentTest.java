@@ -6,7 +6,7 @@ import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.utilities.Constant;
 import app.utilities.ReadFile;
-import app.utilities.validation;
+import app.utilities.Validation;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -25,7 +25,7 @@ public class CheckInterlinkedContinentTest {
 	
 	private static final boolean False = false;
 	GameMapModel gameMapModel;
-	validation val;
+	Validation val;
 	ReadFile readFile;
 	File file;
 	
@@ -41,7 +41,7 @@ public class CheckInterlinkedContinentTest {
 	    readFile = new ReadFile();
 	    file = new File(Constant.FILE_LOCATION);
 	    readFile.setFile(file);
-	    val = new validation();
+	    val = new Validation();
 	    gameMapModel = new GameMapModel(file);
 	    setUpIsDone = true;
 	}

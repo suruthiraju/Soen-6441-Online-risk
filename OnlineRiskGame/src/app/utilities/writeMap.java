@@ -19,7 +19,7 @@ import app.model.*;
  */
 
 
-public class writeMap {
+public class WriteMap {
 	File file;
 
 	public File createNewFile(String fileName) {

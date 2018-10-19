@@ -12,7 +12,7 @@ import app.model.ContinentsModel;
 import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.utilities.*;
-public class validation {
+public class Validation {
 	public boolean unlinkedContinentValidation(GameMapModel mapModel)
 	{
 		boolean flag= true;
