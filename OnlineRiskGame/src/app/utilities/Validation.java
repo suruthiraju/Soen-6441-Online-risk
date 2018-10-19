@@ -149,6 +149,7 @@ public class Validation {
 		return false;
 	}
 
+
 	/**
 	 * Check on valid move for fortification
 	 * 
@@ -199,6 +200,7 @@ public class Validation {
 			}
 
 			i = m.listIterator();
+
 
 			while (i.hasNext()) {
 				n = i.next();

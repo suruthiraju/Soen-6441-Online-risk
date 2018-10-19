@@ -161,5 +161,39 @@ public class ReadFile {
 	public File getFile() {
 		return FILE;
 	}
+	
+	public boolean validateReadContinent(List<ContinentsModel> list, List<ContinentsModel> arrayList) {
+		int counter = 0;
+		for (int i = 0; i < list.size(); i++) {
+			for (int j = 0; j < arrayList.size(); j++) {
+				if (list.get(i).getContinentName().equals(arrayList.get(j).getContinentName())) {
+					counter++;
+				}
+			}
+			if (counter == 1) {
+				counter = 0;
+			} else {
+				return false;
+			}
+		}
+		return true;
+	}
 
+	public boolean validateReadCountry(List<CountryModel> list, List<CountryModel> arrayList) {
+		int counter = 0;
+		for (int i = 0; i < list.size(); i++) {
+			for (int j = 0; j < arrayList.size(); j++) {
+				if (list.get(i).getCountryName().equals(arrayList.get(j).getCountryName())) {
+					counter++;
+				}
+			}
+			if (counter == 1) {
+				counter = 0;
+			} else {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 }

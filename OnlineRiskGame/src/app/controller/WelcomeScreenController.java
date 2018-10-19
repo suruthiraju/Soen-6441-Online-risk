@@ -3,7 +3,6 @@ package app.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import app.model.WelcomeScreenModel;
 import app.view.WelcomeScreenView;
 
 /**
@@ -19,7 +18,6 @@ public class WelcomeScreenController implements ActionListener {
 	}
 
 	private WelcomeScreenView theView;
-	private WelcomeScreenModel theModel;
 
 	/**
 	 * Constructor initializes values and sets the screen too visible
@@ -30,7 +28,6 @@ public class WelcomeScreenController implements ActionListener {
 		this.theView.setActionListener(this);
 		this.theView.setVisible(true);
 
-		this.theModel = new WelcomeScreenModel();
 
 	}
 

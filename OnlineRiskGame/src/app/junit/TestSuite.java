@@ -9,11 +9,12 @@ import app.utilities.*;
 @SuiteClasses({ 
 				UnlinkedContinentValidationTest.class,
 				CheckInterlinkedContinentTest.class,
+				CheckValidMove.class,
 				EmptyContinentValidationTest.class,
-				ReadFileTest.class,
-				ReinforcementArmyNumberTest.class,
+				ReadFileContinent.class,
+				ReadFileCountry.class,
 				EmptyLinkCountryValidationTest.class,
-				WriteFileTest.class})
+				ReinforcementArmyNumberTest.class})
 public class TestSuite {
 	
 }
