@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +23,10 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
+import app.controller.FortificationController;
 import app.helper.View;
 import app.model.ContinentsModel;
 import app.model.CountryModel;
@@ -53,14 +56,15 @@ public class FortificationView extends JFrame implements View {
 
 	public JLabel fromCountryListLabel;
 	public JLabel toCountryListLabel;
-	public JComboBox<Object> countryListComboBox;
-	public JComboBox<Object> countryListComboBox1;
-	public Object[] countryListArray;
-	private CountryViewRenderer countriesViewRenderer;
-	public Object[] countryListArray1;
-	private CountryViewRenderer countriesViewRenderer1;
+	public JComboBox<Object> fromCountryListComboBox;
+	public JComboBox<Object> toCountryListComboBox;
+	public Object[] fromCountryListArray;
+	private CountryViewRenderer fromCountriesViewRenderer;
+	public Object[] toCountryListArray;
+	private CountryViewRenderer toCountriesViewRenderer;
 
 	public JButton[] button;
+	private ActionListener actionListener;
 
 	public FortificationView(GameMapModel gameMapModel) {
 		this.gameMapModel = gameMapModel;
@@ -106,43 +110,26 @@ public class FortificationView extends JFrame implements View {
 		fromCountryListLabel.setBounds(1300, 120, 150, 25);
 		welcomePanel.add(this.fromCountryListLabel);
 
-		// to country comboBox
+		// from country comboBox
 		ArrayList<CountryModel> fromListOfCountries = new ArrayList<CountryModel>();
 		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
-			if (playerModel.getNamePlayer()
-					.equals(this.gameMapModel.getCountries().get(i).getRuler().getNamePlayer())) {
+			if (playerModel.getNamePlayer().equals(this.gameMapModel.getCountries().get(i).getRuler().getNamePlayer())
+					&& this.gameMapModel.getCountries().get(i).getArmies() >= 2) {
 				fromListOfCountries.add(this.gameMapModel.getCountries().get(i));
 			}
 		}
-		countriesViewRenderer1 = new CountryViewRenderer();
-		countryListArray1 = fromListOfCountries.toArray();
-		countryListComboBox1 = new JComboBox(countryListArray1);
-		welcomePanel.add(this.countryListComboBox1);
+		fromCountriesViewRenderer = new CountryViewRenderer();
+		fromCountryListArray = fromListOfCountries.toArray();
 
-		if (countryListArray1.length > 0) {
-			countryListComboBox1.setRenderer(countriesViewRenderer1);
-		}
-		countryListComboBox1.setBounds(1300, 150, 150, 25);
-		welcomePanel.add(countryListComboBox1);
+		fromCountryListComboBox = new JComboBox(fromCountryListArray);
+		fromCountryListComboBox.setSelectedIndex(this.gameMapModel.getSelectedComboBoxIndex());
+		welcomePanel.add(this.fromCountryListComboBox);
 
-		this.noOfTroopsLabel = new JLabel("Number of Troops :");
-		noOfTroopsLabel.setBounds(1300, 180, 150, 25);
-		welcomePanel.add(noOfTroopsLabel);
 		
-		CountryModel countryName = (CountryModel) this.countryListComboBox1.getSelectedItem();
-		Integer[] troops = new Integer[countryName.getArmies()-1];
-		for (int i = 0; i < (countryName.getArmies()-1); i++) {
-			troops[i] = i + 1;
-		}
-
-		numOfTroopsComboBox = new JComboBox(troops);
-		numOfTroopsComboBox.setBounds(1300, 210, 150, 25);
-		welcomePanel.add(numOfTroopsComboBox);
-
 		this.toCountryListLabel = new JLabel("To Country :");
 		toCountryListLabel.setBounds(1300, 240, 150, 25);
 		welcomePanel.add(this.toCountryListLabel);
-
+		
 		// to country comboBox
 		ArrayList<CountryModel> toListOfCountries = new ArrayList<CountryModel>();
 		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
@@ -151,45 +138,65 @@ public class FortificationView extends JFrame implements View {
 				toListOfCountries.add(this.gameMapModel.getCountries().get(i));
 			}
 		}
-		countriesViewRenderer = new CountryViewRenderer();
-		countryListArray = toListOfCountries.toArray();
-		countryListComboBox = new JComboBox(countryListArray);
-		welcomePanel.add(this.countryListComboBox);
+		toCountriesViewRenderer = new CountryViewRenderer();
+		toCountryListArray = toListOfCountries.toArray();
+		toCountryListComboBox = new JComboBox(toCountryListArray);
+		welcomePanel.add(this.toCountryListComboBox);
 
-		if (countryListArray.length > 0) {
-			countryListComboBox.setRenderer(countriesViewRenderer);
+		if (toCountryListArray.length > 0) {
+			toCountryListComboBox.setRenderer(toCountriesViewRenderer);
 		}
-		countryListComboBox.setBounds(1300, 270, 150, 25);
-		welcomePanel.add(countryListComboBox);
+		toCountryListComboBox.setBounds(1300, 270, 150, 25);
+		welcomePanel.add(toCountryListComboBox);
+
+		this.noOfTroopsLabel = new JLabel("Number of Troops :");
+		noOfTroopsLabel.setBounds(1300, 180, 150, 25);
+		welcomePanel.add(noOfTroopsLabel);
+
+		
+		CountryModel countryName = (CountryModel) this.fromCountryListComboBox.getSelectedItem();
+		Integer[] troops = new Integer[countryName.getArmies() - 1];
+		for (int i = 0; i < (countryName.getArmies() - 1); i++) {
+			troops[i] = i + 1;
+		}
+
+		numOfTroopsComboBox = new JComboBox(troops);
+		numOfTroopsComboBox.setBounds(1300, 210, 150, 25);
+		welcomePanel.add(numOfTroopsComboBox);
+
+		if (fromCountryListArray.length > 0) {
+			fromCountryListComboBox.setRenderer(fromCountriesViewRenderer);
+		}
+		fromCountryListComboBox.setBounds(1300, 150, 150, 25);
+		welcomePanel.add(fromCountryListComboBox);
+		
 
 		this.moveButton.setBounds(1300, 330, 150, 25);
 		welcomePanel.add(this.moveButton);
 
 		int n = this.gameMapModel.getCountries().size();
 		button = new JButton[n];
-		for (int i = 0; i < n; i++) {
-			CountryModel country = this.gameMapModel.getCountries().get(i);
-
-			country.setBackground(this.gameMapModel.getCountries().get(i).getBackgroundColor());
-			country.setText(this.gameMapModel.getCountries().get(i).getCountryName().substring(0, 3));
-			country.setToolTipText("Troops: " + this.gameMapModel.getCountries().get(i).getArmies());
-			country.setFont(smallFont);
-
-			Border border = BorderFactory
-					.createLineBorder(stringToColor(this.gameMapModel.getCountries().get(i).getRuler().getColor()), 3);
-
-			country.setBorder(border);
-
-			// countryButton[i].setForeground(Color.GREEN);
-
-			country.setOpaque(true);
-			country.setBounds(this.gameMapModel.getCountries().get(i).getXPosition() * 2,
+		
+		//graphicPanel.add(button[0]);
+		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
+			
+			button[i] = new JButton();
+			button[i].setText(this.gameMapModel.getCountries().get(i).getCountryName().substring(0,3));
+			button[i].setBackground(this.gameMapModel.getCountries().get(i).getBackgroundColor());
+			button[i].setToolTipText("Troops: "+this.gameMapModel.getCountries().get(i).getArmies());
+			button[i].setBorder(new LineBorder(stringToColor(this.gameMapModel.getCountries().get(i).getRuler().getColor()), 3));
+			button[i].setOpaque(true);
+			button[i].setBounds(this.gameMapModel.getCountries().get(i).getXPosition() * 2,
 					this.gameMapModel.getCountries().get(i).getYPosition() * 2, 50, 50);
 
-			country.setMargin(new Insets(0, 0, 0, 0));
 
-			graphicPanel.add(country);
+
+			graphicPanel.add(button[i]);
 		}
+		if(null!=this.actionListener) {
+			this.setActionListener(this.actionListener);
+		}
+		
 	}
 
 	public void paint(final Graphics g) {
@@ -255,7 +262,9 @@ public class FortificationView extends JFrame implements View {
 
 	@Override
 	public void setActionListener(ActionListener actionListener) {
+		this.actionListener = actionListener;
 		this.moveButton.addActionListener(actionListener);
+		this.fromCountryListComboBox.addActionListener(actionListener);
 	}
 
 	public static Color stringToColor(final String value) {
@@ -277,6 +286,11 @@ public class FortificationView extends JFrame implements View {
 				return Color.black;
 			}
 		}
+	}
+
+	public void setItemListener(ItemListener itemListener) {
+		this.fromCountryListComboBox.addItemListener(itemListener);
+
 	}
 
 }

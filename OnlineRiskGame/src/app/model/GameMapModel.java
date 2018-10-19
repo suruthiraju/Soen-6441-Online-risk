@@ -45,6 +45,8 @@ public class GameMapModel extends Observable {
 	private int playerIndex;
 	
 	private ArrayList<PlayerModel> listOfPlayers;
+	
+	private int selectedComboBoxIndex;
 
 
 
@@ -318,6 +320,21 @@ public class GameMapModel extends Observable {
 			}
 		}
 	}
+	
+	public void setMovingArmies(int armies, CountryModel fromCountryName, CountryModel toCountryName) {
+		int previousArmies = 0;
+		for (int i = 0; i < this.getCountries().size(); i++) {			
+			if (fromCountryName.equals(this.getCountries().get(i))) {
+				previousArmies = this.getCountries().get(i).getArmies();
+				this.getCountries().get(i).setArmies( previousArmies - armies);
+			}
+			if (toCountryName.equals(this.getCountries().get(i))) {
+				previousArmies = this.getCountries().get(i).getArmies();
+				this.getCountries().get(i).setArmies( previousArmies + armies);
+			}
+		}
+	}
+	
 
 		/**
 		 * set player's turn
@@ -373,7 +390,15 @@ public class GameMapModel extends Observable {
 	public void setListOfPlayers(ArrayList<PlayerModel> listOfPlayers) {
 		this.listOfPlayers = listOfPlayers;
 	}
+
+	public void setSelectedComboBoxIndex(int selectedComboBoxIndex) {
+		this.selectedComboBoxIndex = selectedComboBoxIndex;
+		callObservers();
+		
+	}
 	
 
-
+	public int getSelectedComboBoxIndex() {
+		return this.selectedComboBoxIndex;
+	}
 }

@@ -2,13 +2,15 @@ package app.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
-import app.model.*;
-import app.view.*;
+import app.model.CountryModel;
+import app.model.GameMapModel;
+import app.utilities.Validation;
+import app.view.FortificationView;
 
-public class FortificationController implements ActionListener {
+public class FortificationController implements ActionListener, ItemListener {
 
     private FortificationView theFortificationView;
 	private GameMapModel gameMapModel = null ;
@@ -17,27 +19,25 @@ public class FortificationController implements ActionListener {
 		this.gameMapModel = gameMapModel;
 		theFortificationView = new FortificationView(this.gameMapModel);
 		theFortificationView.setActionListener(this);
+		theFortificationView.setItemListener(this);
 		theFortificationView.setVisible(true);
+		this.gameMapModel.addObserver(this.theFortificationView);
 		//GamePlayerModel GamePlay = new GamePlayerModel(GameMap, listOfPlayers);
 	}
 	
-	public void movingArmies(int armies, String fromCountryName, String toCountryName) {
-		int previousArmies = 0;
-		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {			
-			if (fromCountryName.equals(this.gameMapModel.getCountries().get(i).getCountryName())) {
-				previousArmies = this.gameMapModel.getCountries().get(i).getArmies();
-				this.gameMapModel.getCountries().get(i).setArmies( previousArmies - armies);
-			}
-			if (toCountryName.equals(this.gameMapModel.getCountries().get(i).getCountryName())) {
-				previousArmies = this.gameMapModel.getCountries().get(i).getArmies();
-				this.gameMapModel.getCountries().get(i).setArmies( previousArmies + armies);
-			}
-		}
-	}	
+		
 	
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		if(actionEvent.getSource().equals(this.theFortificationView.moveButton)) {
+			
+			
+			//BFS
+			Validation val = new Validation();
+			if(val.checkIfValidMove(gameMapModel, (CountryModel)this.theFortificationView.fromCountryListComboBox.getSelectedItem(),(CountryModel)this.theFortificationView.toCountryListComboBox.getSelectedItem())) {
+				this.gameMapModel.setMovingArmies((Integer)this.theFortificationView.numOfTroopsComboBox.getSelectedItem(),(CountryModel)this.theFortificationView.fromCountryListComboBox.getSelectedItem(),(CountryModel)this.theFortificationView.toCountryListComboBox.getSelectedItem());
+			}
+			
 			int index = this.gameMapModel.getPlayerIndex();
 			index++;
 			if(this.gameMapModel.getListOfPlayers().size()>index) {
@@ -50,6 +50,22 @@ public class FortificationController implements ActionListener {
 				this.theFortificationView.dispose();
 			}
 		}
+		else if(actionEvent.getSource().equals(this.theFortificationView.fromCountryListComboBox)) {
+			//CountryModel country  = (CountryModel) this.theFortificationView.fromCountryListComboBox.getSelectedItem();
+			this.gameMapModel.setSelectedComboBoxIndex(this.theFortificationView.fromCountryListComboBox.getSelectedIndex());
+			//this.theFortificationView.set
+		}
+		
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent itemEvent) {
+		if(itemEvent.getSource().equals(this.theFortificationView.fromCountryListComboBox)) {
+			//CountryModel country  = (CountryModel) this.theFortificationView.fromCountryListComboBox.getSelectedItem();
+			this.gameMapModel.setSelectedComboBoxIndex(this.theFortificationView.fromCountryListComboBox.getSelectedIndex());
+			//this.theFortificationView.set
+		}
+		
 		
 	}
 }
