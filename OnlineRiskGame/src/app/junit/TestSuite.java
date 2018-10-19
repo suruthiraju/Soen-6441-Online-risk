@@ -7,7 +7,7 @@ import app.utilities.*;
 
 @RunWith(Suite.class)
 @SuiteClasses({ MapValidation.class,
-				CreateCountryTest.class,
+				UnlinkedContinentValidationTest.class,
 				FortificationTest.class,
 				NewGameTest.class,
 				ReadFileTest.class,

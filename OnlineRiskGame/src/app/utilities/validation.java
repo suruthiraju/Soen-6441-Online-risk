@@ -13,26 +13,40 @@ import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.utilities.*;
 public class validation {
-	public boolean unlinkedContinentVAlidation(GameMapModel mapModel)
+	public boolean unlinkedContinentValidation(GameMapModel mapModel)
 	{
 		boolean flag= true;
 		List<CountryModel> listOfCountrys = mapModel.getCountries();
 		List<CountryModel> listOfLinkedCountries;
-		for(int index=0; index<listOfCountrys.size();index++)
-			for(int index2 =0;index<=listOfCountrys.get(index).getLinkedCountries().size(); index2++)
+		
+		HashMap<CountryModel,CountryModel> listOfCountriesInContinent = new HashMap<CountryModel,CountryModel>();
+		
+		for(int i=0;i < mapModel.getContinents().size();i++)
+		{
+			for(int j=0; j < listOfCountrys.size() ;j++)
 			{
-				listOfLinkedCountries=listOfCountrys.get(index).getLinkedCountries();
-			     if(listOfLinkedCountries.get(index2).getcontinentName().equals(listOfCountrys.get(index).getcontinentName()))
-			     {
-			    	flag = true; 
-			    	return flag;
-			     }
-			     else
-			     {
-			    	 flag = false;
-			     }
-			    
+				if(mapModel.getContinents().get(i).getContinentName().equals(listOfCountrys.get(j).getcontinentName())) {
+					listOfCountriesInContinent.put(listOfCountrys.get(j), listOfCountrys.get(j));
+				}
+				
 			}
+			Iterator it = listOfCountriesInContinent.entrySet().iterator();
+		    while (it.hasNext()) {
+		        Map.Entry<CountryModel,CountryModel>pair = (Map.Entry<CountryModel,CountryModel>)it.next();
+		        listOfLinkedCountries = pair.getValue().getLinkedCountries();
+		        int counter = 0;
+		        for(int k=0;k<listOfLinkedCountries.size();k++) {
+		        	if(listOfCountriesInContinent.containsValue((listOfLinkedCountries.get(k)))) {
+		        		counter++;
+		        	}
+		        }
+		        
+		        if(counter==listOfLinkedCountries.size()-1) {
+		        	return false;
+		        }
+		    }
+			
+		}
 		return flag;
 	}
 	public boolean emptyLinkCountryValidation(GameMapModel mapModel) {
