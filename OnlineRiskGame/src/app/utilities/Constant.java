@@ -1,6 +1,7 @@
 package app.utilities;
 
 /**
+ * Constant file to load the map fie
  * 
  * @author Jatan
  *

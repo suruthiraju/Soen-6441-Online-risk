@@ -13,19 +13,20 @@ import app.model.ContinentsModel;
 import app.model.CountryModel;
 
 /**
- * "ReadFile" class reads map file and gives 
- * continents and countries details
+ * "ReadFile" class reads map file and gives continents and countries details
+ * 
  * @author GROUP-35
  */
 public class ReadFile {
-	
+
 	public static File FILE;
 
-/**
- * This method reads the map file and returns continent details such 
- * as name and its value-control.
- * @return the array list of continents
- */
+	/**
+	 * This method reads the map file and returns continent details such as name and
+	 * its value-control.
+	 * 
+	 * @return the array list of continents
+	 */
 	public ArrayList<ContinentsModel> getMapContinentDetails() {
 
 		File file = getFile();
@@ -62,12 +63,13 @@ public class ReadFile {
 		return listOfContinents;
 	}
 
-/**	
- * This method reads the map file and returns country details such 
- * as name, position, continent that it belongs to, and list of countries that
- * it is connected to.
- * @return the array list of countries
- */
+	/**
+	 * This method reads the map file and returns country details such as name,
+	 * position, continent that it belongs to, and list of countries that it is
+	 * connected to.
+	 * 
+	 * @return the array list of countries
+	 */
 	public ArrayList<CountryModel> getMapCountryDetails() {
 		File file = getFile();
 		Scanner sc = null;
@@ -142,10 +144,20 @@ public class ReadFile {
 		return listOfCountryModel;
 	}
 
+	/**
+	 * Setting Set file
+	 * 
+	 * @param file
+	 */
 	public void setFile(File file) {
 		FILE = file;
 	}
 
+	/**
+	 * Getting File
+	 * 
+	 * @return
+	 */
 	public File getFile() {
 		return FILE;
 	}

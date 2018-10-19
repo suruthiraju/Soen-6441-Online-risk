@@ -11,14 +11,19 @@ import app.model.CountryModel;
 import app.model.GameMapModel;
 
 /**
- * 
- * @author DELL
+ * This Class has validation, creation and writing to map file
+ * @author Suruthi
  *
  */
 
 public class WriteMap {
 	File file;
 
+	/**
+	 * Create a new File
+	 * @param fileName
+	 * @return
+	 */
 	public File createNewFile(String fileName) {
 		try {
 			this.file = new File(System.getProperty("user.dir") + "\\mapfiles\\" + fileName);
@@ -37,6 +42,12 @@ public class WriteMap {
 		return this.file;
 	}
 
+	/**
+	 * This method Writes Map to file
+	 * @param fileName
+	 * @param gMM
+	 * @throws Exception
+	 */
 	public void writeMapToFile(String fileName, GameMapModel gMM) throws Exception {
 		List<ContinentsModel> listOfContinents = gMM.getContinents();
 		List<CountryModel> listOfCountrys = gMM.getCountries();
@@ -103,6 +114,11 @@ public class WriteMap {
 		}
 	}
 
+	/**
+	 * Get the continents
+	 * @param continentsModel
+	 * @return
+	 */
 	public static String getContinet(ContinentsModel continentsModel) {
 		String content = null;
 		if (!"".equals(continentsModel.getContinentName())) {
@@ -111,6 +127,11 @@ public class WriteMap {
 		return content;
 	}
 
+	/**
+	 * Get the country
+	 * @param countryModel
+	 * @return
+	 */
 	public static String getCountry(CountryModel countryModel) {
 		String content = null;
 		if (!"".equals(countryModel.getCountryName())) {
@@ -124,7 +145,6 @@ public class WriteMap {
 					country = country + countryModel.getLinkedCountries().get(i).getCountryName() + ",";
 				}
 			}
-			// String csv = String.join(",", countryModel.getlinkedCountries());
 			content = content + country;
 		}
 		return content;
