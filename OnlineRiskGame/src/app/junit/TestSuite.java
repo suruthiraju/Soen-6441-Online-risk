@@ -6,7 +6,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import app.utilities.*;
 
 @RunWith(Suite.class)
-@SuiteClasses({ CreateContinentTest.class,
+@SuiteClasses({ MapValidation.class,
 				CreateCountryTest.class,
 				FortificationTest.class,
 				NewGameTest.class,
