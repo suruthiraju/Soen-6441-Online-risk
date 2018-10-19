@@ -156,34 +156,52 @@ public class CreateMapView extends JFrame implements View {
    }
 
 /**
- * 
+ * Sets action to "removeContinent" button 
  * @param listenRemoveContinent
  */
    public void removeContinentListner(ActionListener listenRemoveContinent)
     {
         removeContinent.addActionListener(listenRemoveContinent);
-
     }
-    public void addCountryListner(ActionListener listenAddCountry)
+
+/**
+ * Sets action to "addCountry" button    
+ * @param listenAddCountry
+ */
+   public void addCountryListner(ActionListener listenAddCountry)
     {
         addCountry.addActionListener(listenAddCountry);
-
     }
-    public void removeCountryListner(ActionListener listenRemoveCountry)
+
+/**
+ * Sets action to "removeCountry" button    
+ * @param listenRemoveCountry
+ */
+   public void removeCountryListner(ActionListener listenRemoveCountry)
     {
         removeContinent.addActionListener(listenRemoveCountry);
-
     }
+   
+/**
+ * Finalizes the continents added to map by 
+ * "finalizeContinent" button  
+ * @param listenfinalizeContinents
+ */
     public void finalizeContinentsListner(ActionListener listenfinalizeContinents)
     {
         finalizeContinents.addActionListener(listenfinalizeContinents);
-
     }
+    
+/**
+ * Finalizes the countries added to map by 
+ * "finalizeCountry" button 
+ * @param listenfinalizeCountries
+ */
     public void finalizeCountriesListner(ActionListener listenfinalizeCountries)
     {
         finalizeCountries.addActionListener(listenfinalizeCountries);
-
     }
+   
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		
