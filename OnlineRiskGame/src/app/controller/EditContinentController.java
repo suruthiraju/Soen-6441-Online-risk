@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package app.controller;
 
 import java.awt.event.ActionEvent;
@@ -8,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -20,9 +17,14 @@ import app.utilities.ReadFile;
 import app.view.EditContinentView;
 
 /**
- * @author Jatan Gohel
+ * In EditContinentController, the data flow into model object and updates the
+ * view whenever data changes.
  *
+ * @author Jatan
+ * @version 1.0.0
+ * 
  */
+
 public class EditContinentController implements ActionListener {
 
 	private EditContinentView editContinentView;
@@ -33,11 +35,14 @@ public class EditContinentController implements ActionListener {
 	private ContinentsModel newContinentModel;
 	private List<ContinentsModel> newContinentList;
 
+	/**
+	 * Constructor initializes values and sets the screen too visible
+	 */
 	public EditContinentController() {
-		
-		file=this.selectFile();
-	    tempRead.setFile(file);
-	    continentList=tempRead.getMapContinentDetails();
+
+		file = this.selectFile();
+		tempRead.setFile(file);
+		continentList = tempRead.getMapContinentDetails();
 		this.mapModel = new GameMapModel();
 		this.mapModel.setCountries(tempRead.getMapCountryDetails());
 		mapModel.setContinents(continentList);
@@ -49,9 +54,13 @@ public class EditContinentController implements ActionListener {
 		this.editContinentView.setVisible(true);
 		this.mapModel.addObserver(this.editContinentView);
 	}
-	
-	public File selectFile()
-	{
+
+	/**
+	 * Browsing a file
+	 * 
+	 * @return File
+	 */
+	public File selectFile() {
 		JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 		File file;
 		int returnValue = jfc.showOpenDialog(this.editContinentView);
@@ -59,14 +68,18 @@ public class EditContinentController implements ActionListener {
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			File selectedFile = jfc.getSelectedFile();
 			System.out.println(selectedFile.getAbsolutePath());
-			 file= new File(selectedFile.getAbsolutePath());
-			 return file;
-		}
-		else
+			file = new File(selectedFile.getAbsolutePath());
+			return file;
+		} else
 			return null;
 
-}
+	}
 
+	/**
+	 * This method performs action, by Listening the action event set in view.
+	 * 
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		if (actionEvent.getSource().equals(this.editContinentView.addButton)) {
@@ -107,9 +120,10 @@ public class EditContinentController implements ActionListener {
 						new ConnectCountryController(this.mapModel);
 						this.editContinentView.dispose();
 						// open connectCountries Controller and pass the map model
-					}else {
+					} else {
 						JOptionPane.showOptionDialog(null, "Please add atleast one continent first.", "Invalid",
-								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
+								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {},
+								null);
 						return;
 					}
 				} else {
@@ -126,5 +140,3 @@ public class EditContinentController implements ActionListener {
 	}
 
 }
-
-	

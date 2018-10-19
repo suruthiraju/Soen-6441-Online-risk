@@ -15,6 +15,15 @@ import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.view.CreateCountryView;
 
+/**
+ * In CreateCountryController, the data flow into model object and updates the view
+ * whenever data changes.
+ *
+ * @author Rohit
+ * @version 1.0.0
+ * 
+ */
+
 public class CreateCountryController implements ActionListener {
 	private GameMapModel gameMapModel;
 	private CreateCountryView createCountryView;
@@ -24,6 +33,13 @@ public class CreateCountryController implements ActionListener {
 	private HashMap<String, Color> colorMapList;
 	private  HashMap<String, Integer> indexMap;
 
+	/**
+	 * Constructor initializes values and sets the screen too visible
+	 * @param gameMapModel
+	 * @param mapPointList
+	 * @param colorMapList
+	 * @param indexMap
+	 */
 	public CreateCountryController(GameMapModel gameMapModel, HashMap<String, ArrayList<Point>> mapPointList,
 			HashMap<String, Color> colorMapList, HashMap<String, Integer> indexMap) {
 		this.gameMapModel = gameMapModel;
@@ -35,15 +51,20 @@ public class CreateCountryController implements ActionListener {
 		this.gameMapModel.addObserver(this.createCountryView);
 		this.createCountryView.setActionListener(this);
 	}
-
+	
+	/**
+	 * This method performs action, by Listening the action event set in view.
+	 * 
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 
 		CountryModel temp = new CountryModel();
 
 		if (actionEvent.getSource().equals(this.createCountryView.addButton)) {
-			if (this.createCountryView.countryValue.getText() != null
-					&& this.createCountryView.countryValue.getText() != "") {
+			if (this.createCountryView.countryValue.getText().equals(null)
+					&& "".equals(this.createCountryView.countryValue.getText())) {
 
 				if (sameCountryValidation()) {
 					JOptionPane.showOptionDialog(null, "Please enter a different country", "Invalid",
@@ -77,7 +98,6 @@ public class CreateCountryController implements ActionListener {
 				
 				
 				for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
-					//for (int j = 0; j < this.mapPointList.size(); j++) {
 						
 						ArrayList<Point> pointList = this.mapPointList.get(this.gameMapModel.getCountries().get(i).getcontinentName());
 						
@@ -100,6 +120,10 @@ public class CreateCountryController implements ActionListener {
 		}
 	}
 
+	/**
+	 * Check for same country validation
+	 * @return boolean
+	 */
 	private boolean sameCountryValidation() {
 		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
 			if (this.gameMapModel.getCountries().get(i).getCountryName()
@@ -110,6 +134,10 @@ public class CreateCountryController implements ActionListener {
 		return false;
 	}
 
+	/**
+	 * Check for empty continent Value
+	 * @return boolean
+	 */
 	public boolean emptyContinentValidation() {
 		List<ContinentsModel> listOfContinents = this.gameMapModel.getContinents();
 		List<CountryModel> listOfCountrys = this.gameMapModel.getCountries();

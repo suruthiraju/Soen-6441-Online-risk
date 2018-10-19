@@ -16,12 +16,25 @@ import app.model.ContinentsModel;
 import app.model.GameMapModel;
 import app.view.CreateContinentView;
 
+/**
+ * In CreateContinentController, the data flow into model object and updates the view
+ * whenever data changes.
+ *
+ * @author Rohit
+ * @version 1.0.0
+ * 
+ */
+
 public class CreateContinentController implements ActionListener {
 
 	private GameMapModel gameMapModel;
 	private CreateContinentView createContinentView;
 	private List<ContinentsModel> continentModelList;
 
+	/**
+	 * Constructor initializes values and sets the screen too visible
+	 * 
+	 */
 	public CreateContinentController() {
 		this.gameMapModel = new GameMapModel();
 		this.createContinentView = new CreateContinentView();
@@ -30,12 +43,15 @@ public class CreateContinentController implements ActionListener {
 		this.createContinentView.setActionListener(this);
 		this.createContinentView.setVisible(true);
 	}
-
+	
+	/**
+	 * This method performs action, by Listening the action event set in view.
+	 * 
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 
-		String contName;
-		int controlValue;
 		ContinentsModel tempContinent;
 		if (actionEvent.getSource().equals(this.createContinentView.addButton)) 
 		{

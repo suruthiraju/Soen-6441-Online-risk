@@ -8,6 +8,7 @@ import app.model.CountryModel;
 
 /**
  * "MapButton" class gives the positioning of the country
+ * 
  * @author GROUP-35
  */
 public class MapButton extends JButton {
@@ -17,62 +18,66 @@ public class MapButton extends JButton {
 	private CountryModel country;
 	private Color color;
 
-/**	 
- * @return the xPos
- */
+	/**
+	 * @return the xPos
+	 */
 	public int getxPos() {
 		return xPos;
 	}
 
-/**
- * Sets x
- * @param xPos
- */
+	/**
+	 * Sets x
+	 * 
+	 * @param xPos
+	 */
 	public void setxPos(int xPos) {
 		this.xPos = xPos;
 	}
 
-/**
- * @return the yPos
- */
+	/**
+	 * @return the yPos
+	 */
 	public int getyPos() {
 		return yPos;
 	}
 
-/**
- * Sets y
- * @param yPos
- */
+	/**
+	 * Sets y
+	 * 
+	 * @param yPos
+	 */
 	public void setyPos(int yPos) {
 		this.yPos = yPos;
 	}
 
-/**
- * @return the country
- */
+	/**
+	 * @return the country
+	 */
 	public CountryModel getCountry() {
 		return country;
 	}
 
-/**
- * Sets the parameter to the country
- * @param country
- */
+	/**
+	 * Sets the parameter to the country
+	 * 
+	 * @param country
+	 */
 	public void setCountry(CountryModel country) {
 		this.country = country;
 	}
 
-/**
- * @return the color
- */
+	/**
+	 * @return the color
+	 */
 	public Color getColor() {
 		return color;
 	}
 
-/**
- * Sets the color
- * @param color
- */
+	/**
+	 * Sets the color
+	 * 
+	 * @param color
+	 */
 	public void setColor(Color color) {
 		this.color = color;
 	}

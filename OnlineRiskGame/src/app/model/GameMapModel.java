@@ -3,13 +3,9 @@ package app.model;
 import java.awt.Color;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 
-import javax.net.ssl.HandshakeCompletedListener;
-
-import app.utilities.Constant;
 import app.utilities.ReadFile;
 
 /**
@@ -21,70 +17,82 @@ import app.utilities.ReadFile;
 
 public class GameMapModel extends Observable {
 
-/** List of Continents	 */
+	/**
+	 * List of Continents
+	 */
 	private List<ContinentsModel> continentList;
 
-/** List of Countries	 */
+	/**
+	 * List of Countries
+	 */
 	private List<CountryModel> countryList;
 
-/** 
- * Read file object for creating a file in parameterized constructor
- */
+	/**
+	 * Read file object for creating a file in parameterized constructor
+	 */
 	private ReadFile readfile;
-	
-/**
- * to save player's turn
- */
-	private PlayerModel playerTurn ;
-	
+
+	/**
+	 * to save player's turn
+	 */
+	private PlayerModel playerTurn;
+
+	/**
+	 * to save player's index
+	 */
 	private int playerIndex;
-	
+	/**
+	 * to save list of player Model
+	 */
 	private ArrayList<PlayerModel> listOfPlayers;
-	
+	/**
+	 * to save Selected ComboBox index
+	 */
 	private int selectedComboBoxIndex;
 
-/**
- * Index to fetch the left model in list view
- */
+	/**
+	 * Index to fetch the left model in list view
+	 */
 	private int leftModelIndex = 0;
 
-/**
- * Index to fetch the right model in list view
- */
+	/**
+	 * Index to fetch the right model in list view
+	 */
 	private int rightModelIndex = 0;
 
-/**
- * @return the leftModelIndex to get
- */
+	/**
+	 * @return the leftModelIndex to get
+	 */
 	public int getLeftModelIndex() {
 		return leftModelIndex;
 	}
 
-/**
- * @param leftModelIndex to set
- */
+	/**
+	 * @param leftModelIndex to set
+	 */
 	public void setLeftModelIndex(int leftModelIndex) {
 		this.leftModelIndex = leftModelIndex;
 	}
 
-/**
- * @return the rightModelIndex to get
- */
+	/**
+	 * @return the rightModelIndex to get
+	 */
 	public int getRightModelIndex() {
 		return rightModelIndex;
 	}
 
-/**
- * @param rightModelIndex to set
- */
+	/**
+	 * @param rightModelIndex to set
+	 */
 	public void setRightModelIndex(int rightModelIndex) {
 		this.rightModelIndex = rightModelIndex;
 	}
-	
-/**
- * Parameterized constructor that helps edit the map
- * @param file
- */
+
+	/**
+	 * Parameterized constructor that helps edit the map
+	 * 
+	 * @param file
+	 */
 	public GameMapModel(File file) {
 		readfile = new ReadFile();
 		try {
@@ -97,69 +105,73 @@ public class GameMapModel extends Observable {
 		}
 	}
 
-/**
- * Default constructor to make new map
- */
+	/**
+	 * Default constructor to make new map
+	 */
 	public GameMapModel() {
 		this.continentList = new ArrayList<ContinentsModel>();
 		this.countryList = new ArrayList<CountryModel>();
 	}
 
-/**
- * @return the list of Continents.
- */
+	/**
+	 * @return the list of Continents.
+	 */
 	public List<ContinentsModel> getContinents() {
 		return this.continentList;
 	}
 
-/**
- * Sets the value Control.
- * @param valueControl
- */
+	/**
+	 * Sets the value Control.
+	 * 
+	 * @param valueControl
+	 */
 	public void setContinents(List<ContinentsModel> Continents) {
 		this.continentList = Continents;
 		callObservers();
 	}
 
-/**
- * @return the list of Countries.
- */
+	/**
+	 * @return the list of Countries.
+	 */
 	public List<CountryModel> getCountries() {
 		return countryList;
 	}
 
-/**
- * Sets the list of Countries.
- * @param valueControl
- */
+	/**
+	 * Sets the list of Countries.
+	 * 
+	 * @param valueControl
+	 */
 	public void setCountries(List<CountryModel> Countries) {
 		this.countryList = Countries;
 		callObservers();
 	}
 
-/**
- * Method used to notify state change whenever any change is reflected by
- * CreateContinentController via CreateContinentView
- */
+	/**
+	 * Method used to notify state change whenever any change is reflected by
+	 * CreateContinentController via CreateContinentView
+	 */
 	public void callObservers() {
 		setChanged();
 		notifyObservers(this);
 	}
 
-/**
- * Remove continent with the continent model name
- * @param newContinentModel
- */
+	/**
+	 * Remove continent with the continent model name
+	 * 
+	 * @param newContinentModel
+	 */
 	public void removeContinent(ContinentsModel newContinentModel) {
 		this.continentList.remove(newContinentModel);
 		callObservers();
 	}
 
-/**
- * Update countries when added
- * @param mapModel
- * @return
- */
+	/**
+	 * Update countries when added
+	 * 
+	 * @param mapModel
+	 * @return
+	 */
 	public GameMapModel updateCountries(GameMapModel mapModel) {
 		List<CountryModel> newCountryList = new ArrayList<CountryModel>();
 		for (int i = 0; i < mapModel.continentList.size(); i++) {
@@ -175,11 +187,12 @@ public class GameMapModel extends Observable {
 		return mapModel;
 	}
 
-/**
- * Set color to a country during create phases
- * @param country
- * @param color
- */
+	/**
+	 * Set color to a country during create phases
+	 * 
+	 * @param country
+	 * @param color
+	 */
 	public void setColorToCountry(CountryModel country, Color color) {
 		for (int i = 0; i < this.countryList.size(); i++) {
 			if (this.countryList.get(i).equals(country)) {
@@ -190,11 +203,12 @@ public class GameMapModel extends Observable {
 		System.out.println(this.countryList);
 	}
 
-/**
- * Set neighboring country for the countries entered during create screens
- * @param leftModel
- * @param rightModel
- */
+	/**
+	 * Set neighboring country for the countries entered during create screens
+	 * 
+	 * @param leftModel
+	 * @param rightModel
+	 */
 	public boolean setNeighbouringCountry(CountryModel leftModel, CountryModel rightModel) {
 		for (int i = 0; i < this.getCountries().size(); i++) {
 			if (this.getCountries().get(i).equals(leftModel)) {
@@ -219,11 +233,12 @@ public class GameMapModel extends Observable {
 		return true;
 	}
 
-/**
- * Remove neighbouring country whenever remove button is pressed upon in view
- * @param leftModelCountry
- * @param rightModelCountry
- */
+	/**
+	 * Remove neighbouring country whenever remove button is pressed upon in view
+	 * 
+	 * @param leftModelCountry
+	 * @param rightModelCountry
+	 */
 	public void removeNeighbouringCountry(CountryModel leftModelCountry, CountryModel rightModelCountry) {
 
 		for (int i = 0; i < this.getCountries().size(); i++) {
@@ -248,6 +263,15 @@ public class GameMapModel extends Observable {
 		callObservers();
 	}
 
+	/**
+	 * Assign armies in robin round fashion
+	 * 
+	 * @param loopvlaue
+	 * @param namePlayer
+	 * @param Country
+	 * @param selectedArmies
+	 * @param listOfPlayers
+	 */
 	public void robinTroopAssignButton(int loopvlaue, String namePlayer, CountryModel Country, int selectedArmies,
 			List<PlayerModel> listOfPlayers) {
 		System.out.println("selectedArmies " + selectedArmies);
@@ -273,6 +297,12 @@ public class GameMapModel extends Observable {
 		callObservers();
 	}
 
+	/**
+	 * Check on Remaining Armies
+	 * 
+	 * @param loopvlaue
+	 * @param listOfPlayers
+	 */
 	public void checkForRemainArmies(int loopvlaue, List<PlayerModel> listOfPlayers) {
 		loopvlaue++;
 
@@ -286,71 +316,78 @@ public class GameMapModel extends Observable {
 			}
 		}
 	}
-	
+
+	/**
+	 * Assign moving armies in fortification
+	 * 
+	 * @param armies
+	 * @param fromCountryName
+	 * @param toCountryName
+	 */
 	public void setMovingArmies(int armies, CountryModel fromCountryName, CountryModel toCountryName) {
 		int previousArmies = 0;
-		for (int i = 0; i < this.getCountries().size(); i++) {			
+		for (int i = 0; i < this.getCountries().size(); i++) {
 			if (fromCountryName.equals(this.getCountries().get(i))) {
 				previousArmies = this.getCountries().get(i).getArmies();
-				this.getCountries().get(i).setArmies( previousArmies - armies);
+				this.getCountries().get(i).setArmies(previousArmies - armies);
 			}
 			if (toCountryName.equals(this.getCountries().get(i))) {
 				previousArmies = this.getCountries().get(i).getArmies();
-				this.getCountries().get(i).setArmies( previousArmies + armies);
+				this.getCountries().get(i).setArmies(previousArmies + armies);
 			}
 		}
 	}
-	
 
-/**
- * set player's turn
- */
+	/**
+	 * set player's turn
+	 */
 	public void setPlayerTurn(PlayerModel playerModel) {
 		this.playerTurn = playerModel;
 	}
-	
-/**
- * @return the playerTurn
- */
+
+	/**
+	 * @return the playerTurn
+	 */
 	public PlayerModel getPlayerTurn() {
 		return this.playerTurn;
 	}
 
 	public void setSelectedArmiesToCountries(int selectedArmies, CountryModel countryName) {
-		for(int i = 0;i<this.getCountries().size();i++){
-			if(this.getCountries().get(i).equals(countryName)) {
-				this.getCountries().get(i).setArmies(this.getCountries().get(i).getArmies()+selectedArmies);
-				this.getCountries().get(i).getRuler().setmyTroop(this.getCountries().get(i).getRuler().getmyTroop()-selectedArmies);
-				this.getPlayerTurn().setmyTroop(this.getPlayerTurn().getmyTroop()-selectedArmies);
+		for (int i = 0; i < this.getCountries().size(); i++) {
+			if (this.getCountries().get(i).equals(countryName)) {
+				this.getCountries().get(i).setArmies(this.getCountries().get(i).getArmies() + selectedArmies);
+				this.getCountries().get(i).getRuler()
+						.setmyTroop(this.getCountries().get(i).getRuler().getmyTroop() - selectedArmies);
+				this.getPlayerTurn().setmyTroop(this.getPlayerTurn().getmyTroop() - selectedArmies);
 			}
 		}
 		callObservers();
 	}
 
-/**
- * @return the playerIndex
- */
+	/**
+	 * @return the playerIndex
+	 */
 	public int getPlayerIndex() {
 		return playerIndex;
 	}
 
-/**
- * @param playerIndex the playerIndex to set
- */
+	/**
+	 * @param playerIndex the playerIndex to set
+	 */
 	public void setPlayerIndex(int playerIndex) {
 		this.playerIndex = playerIndex;
 	}
 
-/**
- * @return the listOfPlayers
- */
+	/**
+	 * @return the listOfPlayers
+	 */
 	public ArrayList<PlayerModel> getListOfPlayers() {
 		return listOfPlayers;
 	}
 
-/**
- * @param listOfPlayers the listOfPlayers to set
- */
+	/**
+	 * @param listOfPlayers the listOfPlayers to set
+	 */
 	public void setListOfPlayers(ArrayList<PlayerModel> listOfPlayers) {
 		this.listOfPlayers = listOfPlayers;
 	}
@@ -358,9 +395,8 @@ public class GameMapModel extends Observable {
 	public void setSelectedComboBoxIndex(int selectedComboBoxIndex) {
 		this.selectedComboBoxIndex = selectedComboBoxIndex;
 		callObservers();
-		
+
 	}
-	
 
 	public int getSelectedComboBoxIndex() {
 		return this.selectedComboBoxIndex;

@@ -11,7 +11,20 @@ import app.model.ContinentsModel;
 import app.model.CountryModel;
 import app.model.GameMapModel;
 
+/**
+ * This class is to valdiate map for its correctness
+ * 
+ * @author Rohit
+ *
+ */
 public class Validation {
+
+	/**
+	 * Check on un linked Continent Validation
+	 * 
+	 * @param mapModel
+	 * @return
+	 */
 	public boolean unlinkedContinentValidation(GameMapModel mapModel) {
 		boolean flag = true;
 		List<CountryModel> listOfCountrys = mapModel.getCountries();
@@ -47,6 +60,12 @@ public class Validation {
 		return flag;
 	}
 
+	/**
+	 * Check on empty link Country Validation
+	 * 
+	 * @param mapModel
+	 * @return boolean
+	 */
 	public boolean emptyLinkCountryValidation(GameMapModel mapModel) {
 		List<CountryModel> listOfCountrys = mapModel.getCountries();
 		List<CountryModel> linkedCountry;
@@ -59,6 +78,12 @@ public class Validation {
 		return false;
 	}
 
+	/**
+	 * Check on Inter Linked Contient
+	 * 
+	 * @param mapModel
+	 * @return boolean
+	 */
 	public boolean checkInterlinkedContinent(GameMapModel mapModel) {
 
 		String continent = "";
@@ -97,6 +122,12 @@ public class Validation {
 
 	}
 
+	/**
+	 * Check on empty Continent Validation
+	 * 
+	 * @param mapModel
+	 * @return boolean
+	 */
 	public boolean emptyContinentValidation(GameMapModel mapModel) {
 		List<ContinentsModel> listOfContinents = mapModel.getContinents();
 		List<CountryModel> listOfCountrys = mapModel.getCountries();
@@ -118,6 +149,15 @@ public class Validation {
 		return false;
 	}
 
+
+	/**
+	 * Check on valid move for fortification
+	 * 
+	 * @param gameMapModel
+	 * @param fromCountryModel
+	 * @param toCountryModel
+	 * @return
+	 */
 	public boolean checkIfValidMove(GameMapModel gameMapModel, CountryModel fromCountryModel,
 			CountryModel toCountryModel) {
 
@@ -140,21 +180,16 @@ public class Validation {
 	Boolean isReachable(int s, int d, GameMapModel gameMapModel, HashMap<CountryModel, Integer> mapOfCountries) {
 		LinkedList<Integer> temp;
 
-		// Mark all the vertices as not visited(By default set
-		// as false)
 		boolean visited[] = new boolean[gameMapModel.getCountries().size()];
 
 		// Create a queue for BFS
 		LinkedList<Integer> queue = new LinkedList<Integer>();
 
-		// Mark the current node as visited and enqueue it
 		visited[s] = true;
 		queue.add(s);
 
-		// 'i' will be used to get all adjacent vertices of a vertex
 		Iterator<Integer> i;
 		while (queue.size() != 0) {
-			// Dequeue a vertex from queue and print it
 			s = queue.poll();
 
 			int n;
@@ -166,9 +201,7 @@ public class Validation {
 
 			i = m.listIterator();
 
-			// Get all adjacent vertices of the dequeued vertex s
-			// If a adjacent has not been visited, then mark it
-			// visited and enqueue it
+
 			while (i.hasNext()) {
 				n = i.next();
 
