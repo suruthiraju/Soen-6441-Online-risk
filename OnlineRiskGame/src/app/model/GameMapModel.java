@@ -123,7 +123,7 @@ public class GameMapModel extends Observable {
 	/**
 	 * Sets the value Control.
 	 * 
-	 * @param valueControl
+	 * @param Continents
 	 */
 	public void setContinents(List<ContinentsModel> Continents) {
 		this.continentList = Continents;
@@ -140,7 +140,7 @@ public class GameMapModel extends Observable {
 	/**
 	 * Sets the list of Countries.
 	 * 
-	 * @param valueControl
+	 * @param Countries
 	 */
 	public void setCountries(List<CountryModel> Countries) {
 		this.countryList = Countries;

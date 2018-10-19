@@ -200,9 +200,6 @@ public class ReinforcementView extends JFrame implements View {
 	/**
 	 * Getter method that provides us a map model corresponding to a map name
 	 * 
-	 * @see javax.swing.plaf.basic.BasicComboBoxRenderer#
-	 *      getListCellRendererComponent(javax.swing.JList, java.lang.Object, int,
-	 *      boolean, boolean)
 	 */
 
 	public class CountryViewRenderer extends BasicComboBoxRenderer {

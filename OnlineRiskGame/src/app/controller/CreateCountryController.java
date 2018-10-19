@@ -16,8 +16,8 @@ import app.model.GameMapModel;
 import app.view.CreateCountryView;
 
 /**
- * In CreateCountryController, the data flow into model object and updates the view
- * whenever data changes.
+ * In CreateCountryController, the data flow into model object and updates the
+ * view whenever data changes.
  *
  * @author Rohit
  * @version 1.0.0
@@ -31,10 +31,11 @@ public class CreateCountryController implements ActionListener {
 	static int count = 0;
 	private HashMap<String, ArrayList<Point>> mapPointList;
 	private HashMap<String, Color> colorMapList;
-	private  HashMap<String, Integer> indexMap;
+	private HashMap<String, Integer> indexMap;
 
 	/**
 	 * Constructor initializes values and sets the screen too visible
+	 * 
 	 * @param gameMapModel
 	 * @param mapPointList
 	 * @param colorMapList
@@ -51,7 +52,7 @@ public class CreateCountryController implements ActionListener {
 		this.gameMapModel.addObserver(this.createCountryView);
 		this.createCountryView.setActionListener(this);
 	}
-	
+
 	/**
 	 * This method performs action, by Listening the action event set in view.
 	 * 
@@ -63,8 +64,8 @@ public class CreateCountryController implements ActionListener {
 		CountryModel temp = new CountryModel();
 
 		if (actionEvent.getSource().equals(this.createCountryView.addButton)) {
-			if (this.createCountryView.countryValue.getText().equals(null)
-					&& "".equals(this.createCountryView.countryValue.getText())) {
+			if (this.createCountryView.countryValue.getText() != null
+					&& this.createCountryView.countryValue.getText() != "") {
 
 				if (sameCountryValidation()) {
 					JOptionPane.showOptionDialog(null, "Please enter a different country", "Invalid",
@@ -75,7 +76,7 @@ public class CreateCountryController implements ActionListener {
 							.getSelectedItem();
 					temp.setContinentName(this.newContinentModel.getContinentName());
 					temp.setCountryName(this.createCountryView.countryValue.getText());
-					
+
 					temp.setBackground(Color.WHITE);
 					temp.setBorderColor(Color.BLACK);
 					this.gameMapModel.getCountries().add(temp);
@@ -94,23 +95,26 @@ public class CreateCountryController implements ActionListener {
 				return;
 			} else {
 
-				
-				
-				
 				for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
-						
-						ArrayList<Point> pointList = this.mapPointList.get(this.gameMapModel.getCountries().get(i).getcontinentName());
-						
-						int index = this.indexMap.get(this.gameMapModel.getCountries().get(i).getcontinentName());
-						
-						System.out.println("==>" + this.mapPointList.get(this.gameMapModel.getCountries().get(i).getcontinentName()).get(index).x);
-						this.gameMapModel.getCountries().get(i).setXPosition(this.mapPointList.get(this.gameMapModel.getCountries().get(i).getcontinentName()).get(index).x);
-						this.gameMapModel.getCountries().get(i).setYPosition(this.mapPointList.get(this.gameMapModel.getCountries().get(i).getcontinentName()).get(index).y);
-						this.gameMapModel.getCountries().get(i).setBackgroundColor(this.colorMapList.get(this.gameMapModel.getCountries().get(i).getcontinentName()));
-						
-						this.indexMap.put(this.gameMapModel.getCountries().get(i).getcontinentName(),this.indexMap.get(this.gameMapModel.getCountries().get(i).getcontinentName())+1);
 
-				//	}
+					ArrayList<Point> pointList = this.mapPointList
+							.get(this.gameMapModel.getCountries().get(i).getcontinentName());
+
+					int index = this.indexMap.get(this.gameMapModel.getCountries().get(i).getcontinentName());
+
+					System.out.println("==>" + this.mapPointList
+							.get(this.gameMapModel.getCountries().get(i).getcontinentName()).get(index).x);
+					this.gameMapModel.getCountries().get(i).setXPosition(this.mapPointList
+							.get(this.gameMapModel.getCountries().get(i).getcontinentName()).get(index).x);
+					this.gameMapModel.getCountries().get(i).setYPosition(this.mapPointList
+							.get(this.gameMapModel.getCountries().get(i).getcontinentName()).get(index).y);
+					this.gameMapModel.getCountries().get(i).setBackgroundColor(
+							this.colorMapList.get(this.gameMapModel.getCountries().get(i).getcontinentName()));
+
+					this.indexMap.put(this.gameMapModel.getCountries().get(i).getcontinentName(),
+							this.indexMap.get(this.gameMapModel.getCountries().get(i).getcontinentName()) + 1);
+
+					// }
 
 				}
 
@@ -122,6 +126,7 @@ public class CreateCountryController implements ActionListener {
 
 	/**
 	 * Check for same country validation
+	 * 
 	 * @return boolean
 	 */
 	private boolean sameCountryValidation() {
@@ -136,6 +141,7 @@ public class CreateCountryController implements ActionListener {
 
 	/**
 	 * Check for empty continent Value
+	 * 
 	 * @return boolean
 	 */
 	public boolean emptyContinentValidation() {

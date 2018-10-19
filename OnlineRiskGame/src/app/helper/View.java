@@ -9,10 +9,11 @@ import java.util.Observer;
  * @author j_gohel
  *
  */
-public interface View extends Observer{
-	
+public interface View extends Observer {
+
 	/**
 	 * Sets Action Listener
+	 * 
 	 * @param actionListener
 	 */
 	public void setActionListener(ActionListener actionListener);

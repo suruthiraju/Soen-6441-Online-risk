@@ -1,0 +1,15 @@
+[Map]
+author=
+image=new.bmp
+
+
+[Continents]
+C1=2
+C2=2
+
+
+[Territories]
+A1,330,40,C1,B1,
+A2,230,160,C2,B2,B1,
+B1,300,95,C1,A1,A2,
+B2,265,150,C2,A2,

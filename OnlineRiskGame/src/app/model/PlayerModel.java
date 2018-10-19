@@ -48,7 +48,7 @@ public class PlayerModel extends Observable {
 	/**
 	 * Sets the value Control.
 	 * 
-	 * @param valueControl
+	 * @param myTroop
 	 */
 	public void setmyTroop(int myTroop) {
 		this.myTroop = myTroop;
@@ -64,7 +64,7 @@ public class PlayerModel extends Observable {
 	/**
 	 * Sets the continent name.
 	 * 
-	 * @param continentName
+	 * @param namePlayer
 	 */
 	public void setNamePlayer(String namePlayer) {
 		this.namePlayer = namePlayer;
@@ -80,7 +80,7 @@ public class PlayerModel extends Observable {
 	/**
 	 * Sets the continent name.
 	 * 
-	 * @param continentName
+	 * @param color
 	 */
 	public void setColor(String color) {
 		this.color = color;
@@ -96,7 +96,7 @@ public class PlayerModel extends Observable {
 	/**
 	 * Sets the value Control.
 	 * 
-	 * @param valueControl
+	 * @param remainTroop
 	 */
 	public void setremainTroop(int remainTroop) {
 		this.remainTroop = remainTroop;

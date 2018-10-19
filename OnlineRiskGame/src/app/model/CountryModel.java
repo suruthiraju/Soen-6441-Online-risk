@@ -131,7 +131,7 @@ public class CountryModel extends JButton {
 	/**
 	 * Sets the list of array.
 	 * 
-	 * @param ArrayList
+	 * @param linkedCountries
 	 */
 	public void setLinkedCountries(List<CountryModel> linkedCountries) {
 		this.linkedCountries = linkedCountries;
@@ -148,7 +148,7 @@ public class CountryModel extends JButton {
 	/**
 	 * Sets the Player as the owner of the country.
 	 * 
-	 * @param PlayerModel
+	 * @param ruler
 	 */
 	public void setRuler(PlayerModel ruler) {
 		this.ruler = ruler;

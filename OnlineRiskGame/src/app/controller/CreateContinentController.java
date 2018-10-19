@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JOptionPane;
 
@@ -17,8 +16,8 @@ import app.model.GameMapModel;
 import app.view.CreateContinentView;
 
 /**
- * In CreateContinentController, the data flow into model object and updates the view
- * whenever data changes.
+ * In CreateContinentController, the data flow into model object and updates the
+ * view whenever data changes.
  *
  * @author Rohit
  * @version 1.0.0
@@ -43,7 +42,7 @@ public class CreateContinentController implements ActionListener {
 		this.createContinentView.setActionListener(this);
 		this.createContinentView.setVisible(true);
 	}
-	
+
 	/**
 	 * This method performs action, by Listening the action event set in view.
 	 * 
@@ -53,13 +52,15 @@ public class CreateContinentController implements ActionListener {
 	public void actionPerformed(ActionEvent actionEvent) {
 
 		ContinentsModel tempContinent;
-		if (actionEvent.getSource().equals(this.createContinentView.addButton)) 
-		{
-			if (!("".equals(this.createContinentView.controlValue.getText()) || this.createContinentView.controlValue.getText().isEmpty()||this.createContinentView.continentValue.getText().isEmpty()||"".equals(this.createContinentView.continentValue.getText()))) 
-			{
-				System.out.println("the input from the view is"+this.createContinentView.controlValue.getText()+this.createContinentView.continentValue.getText());
-				tempContinent= new ContinentsModel(this.createContinentView.continentValue.getText(),
-						Integer.parseInt(this.createContinentView.controlValue.getText()));				
+		if (actionEvent.getSource().equals(this.createContinentView.addButton)) {
+			if (!("".equals(this.createContinentView.controlValue.getText())
+					|| this.createContinentView.controlValue.getText().isEmpty()
+					|| this.createContinentView.continentValue.getText().isEmpty()
+					|| "".equals(this.createContinentView.continentValue.getText()))) {
+				System.out.println("the input from the view is" + this.createContinentView.controlValue.getText()
+						+ this.createContinentView.continentValue.getText());
+				tempContinent = new ContinentsModel(this.createContinentView.continentValue.getText(),
+						Integer.parseInt(this.createContinentView.controlValue.getText()));
 				if (0 < Integer.parseInt(this.createContinentView.controlValue.getText())
 						&& Integer.parseInt(this.createContinentView.controlValue.getText()) < 10) {
 					if (this.createContinentView.continentValue != null) {
@@ -113,7 +114,7 @@ public class CreateContinentController implements ActionListener {
 			p.add(new Point(270, 120));
 			p.add(new Point(325, 130));
 			pointsList.add(p);
-			
+
 			p = new ArrayList<>();
 			p.add(new Point(230, 160));
 			p.add(new Point(265, 150));
@@ -121,7 +122,7 @@ public class CreateContinentController implements ActionListener {
 			p.add(new Point(300, 180));
 			p.add(new Point(270, 195));
 			pointsList.add(p);
-			
+
 			p = new ArrayList<>();
 			p.add(new Point(200, 210));
 			p.add(new Point(240, 200));
@@ -129,7 +130,7 @@ public class CreateContinentController implements ActionListener {
 			p.add(new Point(230, 245));
 			p.add(new Point(275, 225));
 			pointsList.add(p);
-			
+
 			p = new ArrayList<>();
 			p.add(new Point(300, 210));
 			p.add(new Point(290, 240));
@@ -137,7 +138,7 @@ public class CreateContinentController implements ActionListener {
 			p.add(new Point(260, 285));
 			p.add(new Point(210, 270));
 			pointsList.add(p);
-			
+
 			p = new ArrayList<>();
 			p.add(new Point(165, 260));
 			p.add(new Point(125, 220));
@@ -149,15 +150,14 @@ public class CreateContinentController implements ActionListener {
 			HashMap<String, Color> colorMapList = new HashMap<String, Color>();
 			HashMap<String, ArrayList<Point>> mapPointList = new HashMap<String, ArrayList<Point>>();
 			HashMap<String, Integer> indexMap = new HashMap<String, Integer>();
-			
-			
+
 			for (int i = 0; i < this.gameMapModel.getContinents().size(); i++) {
 				mapPointList.put(this.gameMapModel.getContinents().get(i).getContinentName(), pointsList.get(i));
 				colorMapList.put(this.gameMapModel.getContinents().get(i).getContinentName(), colorList.get(i));
 				indexMap.put(this.gameMapModel.getContinents().get(i).getContinentName(), 0);
 			}
 
-			new CreateCountryController(this.gameMapModel, mapPointList, colorMapList,indexMap);
+			new CreateCountryController(this.gameMapModel, mapPointList, colorMapList, indexMap);
 			this.createContinentView.dispose();
 		}
 
