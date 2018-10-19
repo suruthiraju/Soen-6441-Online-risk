@@ -202,7 +202,7 @@ public class GameMapModel extends Observable {
 	 * @param leftModel
 	 * @param rightModel
 	 */
-	public void setNeighbouringCountry(CountryModel leftModel, CountryModel rightModel) {
+	public boolean setNeighbouringCountry(CountryModel leftModel, CountryModel rightModel) {
 		for (int i = 0; i < this.getCountries().size(); i++) {
 			if (this.getCountries().get(i).equals(leftModel)) {
 
@@ -227,6 +227,7 @@ public class GameMapModel extends Observable {
 
 		}
 		callObservers();
+		return true;
 	}
 
 	/**
