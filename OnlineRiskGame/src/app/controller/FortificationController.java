@@ -46,6 +46,7 @@ public class FortificationController implements ActionListener {
 			index++;
 			if(this.gameMapModel.getListOfPlayers().size()>index) {
 				this.gameMapModel.setPlayerIndex(index);
+				this.gameMapModel.getListOfPlayers().get(index).callObservers();
 				new GamePlayController(this.gameMapModel, this.gameMapModel.getListOfPlayers());
 				this.theFortificationView.dispose();
 			}

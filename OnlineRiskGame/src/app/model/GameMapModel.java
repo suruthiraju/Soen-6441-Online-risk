@@ -339,7 +339,7 @@ public class GameMapModel extends Observable {
 			if(this.getCountries().get(i).equals(countryName)) {
 				this.getCountries().get(i).setArmies(this.getCountries().get(i).getArmies()+selectedArmies);
 				this.getCountries().get(i).getRuler().setmyTroop(this.getCountries().get(i).getRuler().getmyTroop()-selectedArmies);
-				this.setPlayerTurn(this.getPlayerTurn());
+				this.getPlayerTurn().setmyTroop(this.getPlayerTurn().getmyTroop()-selectedArmies);
 			}
 		}
 		callObservers();

@@ -33,6 +33,7 @@ public class GamePlayController implements ActionListener {
 			this.gameMapModel.setPlayerTurn(this.listOfPlayers.get(this.gameMapModel.getPlayerIndex()));
 			new ReinforcementController(this.gameMapModel);
 			
+			
 		
 	}
 	
