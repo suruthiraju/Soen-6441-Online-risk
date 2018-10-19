@@ -6,7 +6,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import app.utilities.*;
 
 @RunWith(Suite.class)
-@SuiteClasses({ MapValidation.class,
+@SuiteClasses({ 
 				UnlinkedContinentValidationTest.class,
 				CheckInterlinkedContinentTest.class,
 				EmptyContinentValidationTest.class,
