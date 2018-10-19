@@ -3,19 +3,20 @@ package app.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
-import javax.swing.JOptionPane;
-
-import app.view.*;
-import app.model.*;
+import app.model.CountryModel;
+import app.model.GameMapModel;
+import app.model.PlayerModel;
+import app.view.StartUpView;
 
 /**
- * The Class StartUpController
+ * In StartUpController, the data flow into model object and updates the view
+ * whenever data changes.
  *
  * @author Suruthi Raju
+ * @version 1.0.0
+ * 
  */
 
 public class StartUpController implements ActionListener {
@@ -23,7 +24,7 @@ public class StartUpController implements ActionListener {
 	private StartUpView theStartUpView;
 	private List<CountryModel> listOfCountrys = new ArrayList<CountryModel>();
 	private ArrayList<PlayerModel> listOfPlayers = new ArrayList<PlayerModel>();
-	private GameMapModel gmM;
+	private GameMapModel gameMapModel;
 	private int noOfPlayers;
 	private int[] noOfCountryForRuler = new int[5];
 	private String[] colorForRuler = new String[5];
@@ -33,25 +34,31 @@ public class StartUpController implements ActionListener {
 	private boolean armiesNull = false;
 	private int initial = 0;
 
+	/**
+	 * Initialization of controller
+	 */
 	public StartUpController() {
-
 	}
 
-	public StartUpController(ArrayList<PlayerModel> listOfPlayers, GameMapModel gmM) {
+	/**
+	 * Constructor initializes values and sets the screen too visible
+	 * 
+	 * @param listOfPlayers
+	 * @param gameMapModel
+	 */
+	public StartUpController(ArrayList<PlayerModel> listOfPlayers, GameMapModel gameMapModel) {
+
 		this.listOfPlayers = listOfPlayers;
+		this.gameMapModel = gameMapModel;
 
-		this.gmM = gmM;
-
-		listOfCountrys = this.gmM.getCountries();
+		listOfCountrys = this.gameMapModel.getCountries();
 		noOfPlayers = listOfPlayers.size();
 
 		allocateArmies();
 		checkForOverallArmies();
 		initial = 1;
-		// Tejas -- Implement with the constructor of view as seen
 
 		if (armiesNull == false) {
-			System.out.println("ss" + listOfPlayers.get(0).getremainTroop());
 			while (listOfPlayers.get(loopValue).getremainTroop() == 0) {
 				loopValue++;
 				if (loopValue > listOfPlayers.size()) {
@@ -59,17 +66,20 @@ public class StartUpController implements ActionListener {
 					break;
 				}
 			}
-			this.theStartUpView = new StartUpView(this.gmM, this.listOfPlayers.get(loopValue));
+			this.theStartUpView = new StartUpView(this.gameMapModel, this.listOfPlayers.get(loopValue));
 			this.theStartUpView.setActionListener(this);
 			for (int i = 0; i < noOfPlayers; i++) {
 				this.listOfPlayers.get(i).addObserver(this.theStartUpView);
 			}
-			this.gmM.addObserver(theStartUpView);
+			this.gameMapModel.addObserver(theStartUpView);
 			this.theStartUpView.setVisible(true);
 		}
-		this.gmM.setListOfPlayers(listOfPlayers);
+		this.gameMapModel.setListOfPlayers(listOfPlayers);
 	}
 
+	/**
+	 * This method allocates Player and Armies to the country to start the game play
+	 */
 	public void allocateArmies() {
 
 		noOfCountryForRuler[0] = 0;
@@ -83,6 +93,7 @@ public class StartUpController implements ActionListener {
 		colorForRuler[2] = "green";
 		colorForRuler[3] = "yellow";
 		colorForRuler[4] = "grey";
+
 		for (int i = 0; i < listOfCountrys.size(); i++) {
 			int playerNumber = getRandomBetweenRange(1, noOfPlayers);
 			System.out.println("playerNumber " + playerNumber);
@@ -127,7 +138,6 @@ public class StartUpController implements ActionListener {
 				+ " " + totalArmiesPlayer[3]);
 
 		assignPlayerModel();
-		// assignTroops();
 		for (int i = 0; i < listOfCountrys.size(); i++) {
 			System.out.println(listOfCountrys.get(i).getCountryName());
 			System.out.println(listOfCountrys.get(i).getRuler());
@@ -135,6 +145,9 @@ public class StartUpController implements ActionListener {
 		}
 	}
 
+	/**
+	 * This method assign Player to PlayerModel
+	 */
 	public void assignPlayerModel() {
 		for (int i = 0; i < noOfPlayers; i++) {
 			listOfPlayers.get(i).setColor(colorForRuler[i]);
@@ -147,11 +160,23 @@ public class StartUpController implements ActionListener {
 		}
 	}
 
+	/**
+	 * This method gives the Random generation of numbers within two values
+	 * 
+	 * @param min
+	 * @param max
+	 * @return
+	 */
 	public int getRandomBetweenRange(double min, double max) {
 		int x = (int) ((Math.random() * ((max - min) + 1)) + min);
 		return x;
 	}
 
+	/**
+	 * This method performs action, by Listening the action event set in view.
+	 * 
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		if (actionEvent.getSource().equals(this.theStartUpView.addButton)) {
@@ -163,7 +188,7 @@ public class StartUpController implements ActionListener {
 				System.out.println("loopvlaue " + loopValue);
 				System.out.println("playername " + this.listOfPlayers.get(loopValue).getNamePlayer());
 
-				this.gmM.robinTroopAssignButton(loopValue, this.listOfPlayers.get(loopValue).getNamePlayer(),
+				this.gameMapModel.robinTroopAssignButton(loopValue, this.listOfPlayers.get(loopValue).getNamePlayer(),
 						countryName, selectedArmies, listOfPlayers);
 			}
 			loopValue++;
@@ -187,13 +212,17 @@ public class StartUpController implements ActionListener {
 				}
 			}
 
-		}else if (actionEvent.getSource().equals(theStartUpView.nextButton)) {
-			this.gmM.setPlayerIndex(0);
-			new GamePlayController(gmM, listOfPlayers);
+		} else if (actionEvent.getSource().equals(theStartUpView.nextButton)) {
+			this.gameMapModel.setPlayerIndex(0);
+			new GamePlayController(gameMapModel, listOfPlayers);
 			this.theStartUpView.dispose();
-		} 
+		}
 	}
 
+	/**
+	 * Check if the remaining armies allocated to each player has been reached to
+	 * zero.
+	 */
 	private void checkForOverallArmies() {
 		int numb = 0;
 		for (int i = 0; i < listOfPlayers.size(); i++) {
@@ -202,9 +231,9 @@ public class StartUpController implements ActionListener {
 			}
 		}
 		if (numb == 0) {
-			this.gmM.setPlayerIndex(0);
+			this.gameMapModel.setPlayerIndex(0);
 			armiesNull = true;
-			new GamePlayController(gmM, listOfPlayers);
+			new GamePlayController(gameMapModel, listOfPlayers);
 			if (initial == 1) {
 				this.theStartUpView.dispose();
 			}

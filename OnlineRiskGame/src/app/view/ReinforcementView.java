@@ -5,15 +5,12 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -21,20 +18,20 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import app.helper.View;
-import app.model.ContinentsModel;
 import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.model.PlayerModel;
-import app.view.StartUpView.CountryViewRenderer;
 
 /**
+ * This View provides the reinforcementView of the Game Play. It also provides
+ * the observer pattern when the data is modified
  * 
- * @author DELL
+ * @author Suruthi Raju
+ * @version 1.0.0
  *
  */
 
@@ -59,11 +56,9 @@ public class ReinforcementView extends JFrame implements View {
 	private CountryViewRenderer countriesViewRenderer;
 
 	public JButton[] button;
-	//public JLabel playerLabel;
-	private int remainArmies;
 
 	public ReinforcementView(GameMapModel gameMapModel) {
-		this.gameMapModel =gameMapModel;
+		this.gameMapModel = gameMapModel;
 		this.setTitle("Reinforcement Phase");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(300, 200);
@@ -71,27 +66,31 @@ public class ReinforcementView extends JFrame implements View {
 		this.setResizable(false);
 		this.setVisible(false);
 		this.addButton = new JButton("Add");
-		//this.nextButton = new JButton("Next");
 		welcomePanel = new JPanel();
 		graphicPanel = new JPanel();
 		this.add(graphicPanel);
 		graphicPanel.setSize(1200, 1000);
 		graphicPanel.setBackground(Color.WHITE);
-		
+
 		this.addButton = new JButton("Add");
 		this.add(welcomePanel);
-		
+
 		this.playerModel = this.gameMapModel.getPlayerTurn();
-		//this.remainArmies = remainArmies;
 		this.welcomeLabel = new JLabel("It's " + playerModel.getNamePlayer() + "'s turn");
-		//this.welcomeLabel1 = new JLabel("Remaining Armies: " + playerModel.getremainTroop() );
 
 		welcomePanel.setLayout(null);
 		graphicPanel.setLayout(null);
-		
+
 		updateWindow(gameMapModel, playerModel);
 	}
 
+	/**
+	 * This updateWindow method is called whenever the model is updated. It updates
+	 * the Screen for Reinforcement Phase
+	 * 
+	 * @param gameMapModel
+	 * @param playerModel
+	 */
 	public void updateWindow(GameMapModel gameMapModel, PlayerModel playerModel) {
 
 		Font largeFont = new Font("Serif", Font.BOLD, 18);
@@ -101,7 +100,6 @@ public class ReinforcementView extends JFrame implements View {
 		this.gameMapModel = gameMapModel;
 		this.playerModel = this.gameMapModel.getPlayerTurn();
 
-		
 		welcomeLabel.setBounds(1300, 80, 300, 25);
 		welcomeLabel.setFont(largeFont);
 		welcomePanel.add(welcomeLabel);
@@ -111,26 +109,20 @@ public class ReinforcementView extends JFrame implements View {
 		welcomePanel.add(noOfTroopsLabel);
 
 		Integer[] troops = new Integer[this.gameMapModel.getPlayerTurn().getmyTroop()];
-		for (int i = 0; i < this.gameMapModel.getPlayerTurn().getmyTroop() ; i++) {
+		for (int i = 0; i < this.gameMapModel.getPlayerTurn().getmyTroop(); i++) {
 			troops[i] = i + 1;
 		}
-		
+
 		numOfTroopsComboBox = new JComboBox(troops);
 		numOfTroopsComboBox.setBounds(1300, 170, 150, 25);
-		//numOfTroopsComboBox.setEnabled(false);
 		welcomePanel.add(numOfTroopsComboBox);
-		
-//		welcomeLabel1 = new JLabel("Remaining Armies: " + playerModel.getremainTroop() );
-//		welcomeLabel1.setBounds(1450, 170, 300, 25);
-//		welcomeLabel1.setFont(smallFont);
-//		welcomePanel.add(welcomeLabel1);
 
 		this.countryListLabel = new JLabel("Select Country :");
 		countryListLabel.setBounds(1300, 230, 150, 25);
 		welcomePanel.add(this.countryListLabel);
 
 		ArrayList<CountryModel> listOfCountries = new ArrayList<CountryModel>();
-		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {			
+		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
 			if (playerModel.getNamePlayer()
 					.equals(this.gameMapModel.getCountries().get(i).getRuler().getNamePlayer())) {
 				listOfCountries.add(this.gameMapModel.getCountries().get(i));
@@ -147,36 +139,34 @@ public class ReinforcementView extends JFrame implements View {
 		}
 		countryListComboBox.setBounds(1300, 260, 150, 25);
 
-		
 		this.addButton.setBounds(1300, 300, 150, 25);
 		welcomePanel.add(this.addButton);
-		
-		
-//		this.nextButton.setBounds(1400,600,150,25);
-//		welcomePanel.add(this.nextButton);
 
 		int n = this.gameMapModel.getCountries().size();
 		button = new JButton[n];
-		
-		//graphicPanel.add(button[0]);
+
 		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
-			
+
 			button[i] = new JButton();
-			button[i].setText(this.gameMapModel.getCountries().get(i).getCountryName().substring(0,3));
+			button[i].setText(this.gameMapModel.getCountries().get(i).getCountryName().substring(0, 3));
 			button[i].setBackground(this.gameMapModel.getCountries().get(i).getBackgroundColor());
-			button[i].setToolTipText("Troops: "+this.gameMapModel.getCountries().get(i).getArmies());
-			button[i].setBorder(new LineBorder(stringToColor(this.gameMapModel.getCountries().get(i).getRuler().getColor()), 3));
+			button[i].setToolTipText("Troops: " + this.gameMapModel.getCountries().get(i).getArmies());
+			button[i].setBorder(
+					new LineBorder(stringToColor(this.gameMapModel.getCountries().get(i).getRuler().getColor()), 3));
 			button[i].setOpaque(true);
 			button[i].setBounds(this.gameMapModel.getCountries().get(i).getXPosition() * 2,
 					this.gameMapModel.getCountries().get(i).getYPosition() * 2, 50, 50);
-
-
 
 			graphicPanel.add(button[i]);
 		}
 
 	}
 
+	/**
+	 * Countries are rendered as button and linked with Swing using Graphics.
+	 * 
+	 * @see java.awt.Window#paint(java.awt.Graphics)
+	 */
 	public void paint(final Graphics g) {
 
 		super.paint(g);
@@ -207,15 +197,16 @@ public class ReinforcementView extends JFrame implements View {
 
 	}
 
+	/**
+	 * Getter method that provides us a map model corresponding to a map name
+	 * 
+	 * @see javax.swing.plaf.basic.BasicComboBoxRenderer#
+	 *      getListCellRendererComponent(javax.swing.JList, java.lang.Object, int,
+	 *      boolean, boolean)
+	 */
+
 	public class CountryViewRenderer extends BasicComboBoxRenderer {
 
-		/*
-		 * Getter method that provides us a map model corresponding to a map name
-		 * 
-		 * @see javax.swing.plaf.basic.BasicComboBoxRenderer#
-		 * getListCellRendererComponent(javax.swing.JList, java.lang.Object, int,
-		 * boolean, boolean)
-		 */
 		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
 				boolean cellHasFocus) {
 			super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
@@ -227,18 +218,23 @@ public class ReinforcementView extends JFrame implements View {
 			return this;
 		}
 	}
-	// }
 
+	/**
+	 * Update method is to Update the start up Phase. This is declared as
+	 * observable. so when the values are changed the view is updated automatically
+	 * by notifying the observer.
+	 * 
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
 	@Override
 	public void update(Observable obs, Object arg) {
 
-
 		welcomePanel.removeAll();
 		graphicPanel.removeAll();
-		if(obs instanceof GameMapModel) {
-			this.gameMapModel = (GameMapModel)obs;
-		}else if(obs instanceof PlayerModel) {
-			this.playerModel = (PlayerModel)obs;
+		if (obs instanceof GameMapModel) {
+			this.gameMapModel = (GameMapModel) obs;
+		} else if (obs instanceof PlayerModel) {
+			this.playerModel = (PlayerModel) obs;
 		}
 		this.updateWindow(this.gameMapModel, this.playerModel);
 		this.revalidate();
@@ -246,27 +242,34 @@ public class ReinforcementView extends JFrame implements View {
 
 	}
 
+	/**
+	 * This is actionListener method to listen the action events in the screen
+	 * 
+	 * @see app.helper.View#setActionListener(java.awt.event.ActionListener)
+	 */
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.addButton.addActionListener(actionListener);
 	}
 
+	/**
+	 * This method convert string to color
+	 * 
+	 * @param value
+	 * @return
+	 */
 	public static Color stringToColor(final String value) {
 		if (value == null) {
 			return Color.black;
 		}
 		try {
-			// get color by hex or octal value
 			return Color.decode(value);
 		} catch (NumberFormatException nfe) {
-			// if we can't decode lets try to get it by name
 			try {
-				// try to get a color by name using reflection
 				final Field f = Color.class.getField(value);
 
 				return (Color) f.get(null);
 			} catch (Exception ce) {
-				// if we can't get any color return black
 				return Color.black;
 			}
 		}
