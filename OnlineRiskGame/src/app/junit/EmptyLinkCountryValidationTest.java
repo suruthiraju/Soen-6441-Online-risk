@@ -21,6 +21,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 
+/**
+ * EmptyLinkCountryValidationTest
+ * @author team 35
+ *
+ */
 public class EmptyLinkCountryValidationTest {
 	
 	private static final boolean False = false;
@@ -31,6 +36,9 @@ public class EmptyLinkCountryValidationTest {
 	
 	private static boolean setUpIsDone = false;
 	
+	/**
+	 * Set up variables
+	 */
 	@Before
 	public void setUp() 
 	{

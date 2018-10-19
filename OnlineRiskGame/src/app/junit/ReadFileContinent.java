@@ -13,6 +13,11 @@ import app.utilities.Constant;
 import app.utilities.ReadFile;
 import app.utilities.Validation;
 
+/**
+ * ReadFileContinent
+ * @author team 35
+ *
+ */
 public class ReadFileContinent {
 
 	private static final boolean False = false;
@@ -23,6 +28,9 @@ public class ReadFileContinent {
 
 	private static boolean setUpIsDone = false;
 	
+	/**
+	 * Set up variables
+	 */
 	@Before
 	public void setUp() {
 		if (setUpIsDone) {
@@ -35,7 +43,10 @@ public class ReadFileContinent {
 		gameMapModel = new GameMapModel(file);
 		setUpIsDone = true;
 	}
-
+	
+	/**
+	 * Test read File get continent
+	 */
 	@Test
 	public void testReadFileGetContinent() {
 		Assert.assertEquals(true, readFile.validateReadContinent(gameMapModel.getContinents(), readFile.getMapContinentDetails()));

@@ -23,6 +23,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 
+/**
+ * ReinforcementArmyNumberTest
+ * @author team 35
+ *
+ */
 public class ReinforcementArmyNumberTest {
 	
 	private static final boolean False = false;
@@ -35,6 +40,9 @@ public class ReinforcementArmyNumberTest {
 	
 	private static boolean setUpIsDone = false;
 	
+	/**
+	 * Set up variables
+	 */
 	@Before
 	public void setUp() 
 	{
@@ -47,7 +55,6 @@ public class ReinforcementArmyNumberTest {
 	    readFile.setFile(file);
 	    gameMapModel = new GameMapModel(file);
 	    rC = new ReinforcementController(gameMapModel);
-	   // gameMapModel.setPlayerTurn(1);
 	    for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
 			if (this.gameMapModel.getCountries().get(i).getRuler().equals(this.gameMapModel.getPlayerTurn())) {
 				this.listOfCountrys.add(this.gameMapModel.getCountries().get(i));
@@ -63,6 +70,9 @@ public class ReinforcementArmyNumberTest {
 		}
 	    setUpIsDone = true;
 	}
+	/**
+	 * Test unlink continent validation
+	 */
 	@Test 
 	public void testUnlinkedContinentValidation()
 	{

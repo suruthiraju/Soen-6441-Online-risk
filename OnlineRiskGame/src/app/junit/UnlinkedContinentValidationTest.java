@@ -21,6 +21,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 
+/**
+ * UnlinkedContinentValidationTest
+ * @author team 35
+ *
+ */
 public class UnlinkedContinentValidationTest {
 	
 	private static final boolean False = false;
@@ -31,6 +36,9 @@ public class UnlinkedContinentValidationTest {
 	
 	private static boolean setUpIsDone = false;
 	
+	/**
+	 * Set up variables
+	 */
 	@Before
 	public void setUp() 
 	{
@@ -45,6 +53,9 @@ public class UnlinkedContinentValidationTest {
 	    gameMapModel = new GameMapModel(file);
 	    setUpIsDone = true;
 	}
+	/**
+	 * Test unlink continent validation
+	 */
 	@Test 
 	public void testUnlinkedContinentVAlidation() 
 	{

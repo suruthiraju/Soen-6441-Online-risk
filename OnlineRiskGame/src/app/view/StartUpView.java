@@ -10,7 +10,6 @@ import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 
 import javax.swing.BorderFactory;

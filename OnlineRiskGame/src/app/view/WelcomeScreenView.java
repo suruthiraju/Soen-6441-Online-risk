@@ -1,17 +1,21 @@
 package app.view;
 
+import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.Observable;
-import java.awt.Font;
-import javax.swing.*;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import app.helper.View;
-
 
 /**
  * This is the Welcome Screen of the game. It displays Welcome Message and the
  * options for user to start the game with default map or to create/edit any map
  * before starting the game
+ * 
  * @author GROUP-35
  */
 public class WelcomeScreenView extends JFrame implements View {
@@ -27,6 +31,9 @@ public class WelcomeScreenView extends JFrame implements View {
 	public JButton playMapButton = new JButton("Play");
 	public JButton exitButton = new JButton("Exit");
 
+	/**
+	 * Constructor
+	 */
 	public WelcomeScreenView() {
 		// Sets up the view and adds the components
 		JPanel welcomePanel = new JPanel();
@@ -59,7 +66,7 @@ public class WelcomeScreenView extends JFrame implements View {
 		editMapButton.setFont(smallFont);
 		welcomePanel.add(editMapButton);
 		editMapButton.setBounds(100, 300, 200, 40);
-		
+
 		playMapButton.setFont(smallFont);
 		welcomePanel.add(playMapButton);
 		playMapButton.setBounds(100, 400, 200, 40);
@@ -70,6 +77,11 @@ public class WelcomeScreenView extends JFrame implements View {
 
 	}
 
+	/**
+	 * Set the Action Listener
+	 * 
+	 * @see app.helper.View#setActionListener(java.awt.event.ActionListener)
+	 */
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		createMapButton.addActionListener(actionListener);
@@ -82,6 +94,11 @@ public class WelcomeScreenView extends JFrame implements View {
 
 	}
 
+	/**
+	 * Update the view based on changes
+	 * 
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub

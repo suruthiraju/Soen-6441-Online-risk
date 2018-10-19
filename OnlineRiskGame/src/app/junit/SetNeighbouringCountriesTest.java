@@ -13,6 +13,12 @@ import app.model.GameMapModel;
 import app.utilities.Constant;
 import app.utilities.ReadFile;
 
+
+/**
+ * SetNeighbouringCountriesTest
+ * @author team 35
+ *
+ */
 public class SetNeighbouringCountriesTest {
 	
 	List<ContinentsModel> continentList;
@@ -24,6 +30,9 @@ public class SetNeighbouringCountriesTest {
 	
 	private static boolean setUpIsDone = false;
 	
+	/**
+	 * Set up variables
+	 */
 	@Before
 	public void setUp() {
 	    if (setUpIsDone) {
@@ -39,6 +48,9 @@ public class SetNeighbouringCountriesTest {
 	    setUpIsDone = true;
 	}
 	
+	/**
+	 * Test adding Neighbour validation
+	 */
 	@Test 
 	public void testAddingNeighboringCountries() {
 		assertEquals(true,gameMapModel.setNeighbouringCountry(this.countryList.get(0),this.countryList.get(1)));

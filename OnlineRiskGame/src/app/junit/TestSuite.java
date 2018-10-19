@@ -15,6 +15,10 @@ import app.utilities.*;
 				ReadFileCountry.class,
 				EmptyLinkCountryValidationTest.class,
 				ReinforcementArmyNumberTest.class})
+
+/**
+ * Test suite 
+ */
 public class TestSuite {
 	
 }

@@ -3,19 +3,16 @@ package app.view;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.List;
 import java.util.Observable;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.filechooser.FileSystemView;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import app.helper.View;
@@ -23,9 +20,9 @@ import app.model.ContinentsModel;
 import app.model.GameMapModel;
 
 /**
- * "EditContinentView" represents a view object for editing 
- * a continent
- * It contains Labels, text fields, and buttons
+ * "EditContinentView" represents a view object for editing a continent It
+ * contains Labels, text fields, and buttons
+ * 
  * @author Jatan Gohel
  *
  */
@@ -42,10 +39,11 @@ public class EditContinentView extends JFrame implements View {
 	public JButton addButton;
 	public JPanel welcomePanel;
 
-/**
- * Constructor of EditContinentView
- * @param listOfContinents
- */
+	/**
+	 * Constructor of EditContinentView
+	 * 
+	 * @param listOfContinents
+	 */
 	public EditContinentView(List<ContinentsModel> listOfContinents) {
 
 		welcomeLabel = new JLabel("Please select the Continents you want in the map and the control value");
@@ -71,12 +69,11 @@ public class EditContinentView extends JFrame implements View {
 
 	}
 
-/**
-* Inner Class Continent View Renderer class that is used to generate a dynamic
-* combobox
-*/
+	/**
+	 * Inner Class Continent View Renderer class that is used to generate a dynamic
+	 * combobox
+	 */
 	public class ContinentViewRenderer extends BasicComboBoxRenderer {
-
 
 		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
 				boolean cellHasFocus) {
@@ -90,18 +87,23 @@ public class EditContinentView extends JFrame implements View {
 		}
 	}
 
-/**
- * Sets actions to "addButton" and "saveButton"	
- */
+	/**
+	 * Sets actions to "addButton" and "saveButton"
+	 */
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		addButton.addActionListener(actionListener);
 		saveButton.addActionListener(actionListener);
 	}
-	
-/**
- * 
- */
+
+	/**
+	 * 
+	 */
+	/**
+	 * Update the view based on observer
+	 * 
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
 	@Override
 	public void update(Observable obs, Object obj) {
 		List<ContinentsModel> listOfContinentModel = ((GameMapModel) obs).getContinents();
@@ -110,10 +112,11 @@ public class EditContinentView extends JFrame implements View {
 		this.repaint();
 	}
 
-/**
- * Updating window components
- * @param listOfContinentModel
- */
+	/**
+	 * Updating window components
+	 * 
+	 * @param listOfContinentModel
+	 */
 	private void updateWindow(List<ContinentsModel> listOfContinentModel) {
 		welcomePanel.removeAll();
 		Font largeFont = new Font("Serif", Font.BOLD, 18);
@@ -133,10 +136,6 @@ public class EditContinentView extends JFrame implements View {
 		controlValueText.setBounds(100, 150, 200, 100);
 
 		continentViewRenderer = new ContinentViewRenderer();
-		/*
-		 * Combo-box for selecting a particular map from list of maps available in the
-		 * gameMapModel
-		 */
 		continentListArray = listOfContinentModel.toArray();
 		continentListCombobox = new JComboBox(continentListArray);
 
@@ -158,6 +157,5 @@ public class EditContinentView extends JFrame implements View {
 		welcomePanel.add(saveButton);
 		saveButton.setBounds(200, 250, 100, 20);
 	}
-	
-	
+
 }
