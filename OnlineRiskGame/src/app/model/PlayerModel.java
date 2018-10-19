@@ -17,12 +17,13 @@ public class PlayerModel extends Observable {
 	private String color;
 	private int remainTroop;
 
-/**
- * Constructor of PlayerModel
- * @param namePlayer
- * @param myTroop
- * @param color
- */
+	/**
+	 * Constructor of PlayerModel
+	 * 
+	 * @param namePlayer
+	 * @param myTroop
+	 * @param color
+	 */
 	public PlayerModel(String namePlayer, int myTroop, String color, int remainTroop) {
 		this.namePlayer = namePlayer;
 		this.myTroop = myTroop;
@@ -30,74 +31,80 @@ public class PlayerModel extends Observable {
 		this.remainTroop = remainTroop;
 	}
 
-/**
- * Default constructor
- */
+	/**
+	 * Default constructor
+	 */
 	public PlayerModel() {
 		// TODO Auto-generated constructor stub
 	}
 
-/**
- * @return the value Control.
- */
+	/**
+	 * @return the value Control.
+	 */
 	public int getmyTroop() {
 		return myTroop;
 	}
 
-/**
- * Sets the value Control.
- * @param valueControl
- */
+	/**
+	 * Sets the value Control.
+	 * 
+	 * @param valueControl
+	 */
 	public void setmyTroop(int myTroop) {
 		this.myTroop = myTroop;
 	}
 
-/**
- * @return the continent name.
- */
+	/**
+	 * @return the continent name.
+	 */
 	public String getNamePlayer() {
 		return namePlayer;
 	}
 
-/**
- * Sets the continent name.
- * @param continentName
- */
+	/**
+	 * Sets the continent name.
+	 * 
+	 * @param continentName
+	 */
 	public void setNamePlayer(String namePlayer) {
 		this.namePlayer = namePlayer;
 	}
 
-/**
- * @return the continent name.
- */
+	/**
+	 * @return the continent name.
+	 */
 	public String getColor() {
 		return color;
 	}
 
-/**
- * Sets the continent name.
- * @param continentName
- */
+	/**
+	 * Sets the continent name.
+	 * 
+	 * @param continentName
+	 */
 	public void setColor(String color) {
 		this.color = color;
 	}
-	
-/**
- * @return the .
- */
+
+	/**
+	 * @return the .
+	 */
 	public int getremainTroop() {
 		return remainTroop;
 	}
 
-/**
- * Sets the value Control.
- * @param valueControl
- */
+	/**
+	 * Sets the value Control.
+	 * 
+	 * @param valueControl
+	 */
 	public void setremainTroop(int remainTroop) {
 		this.remainTroop = remainTroop;
 	}
 
-
+	/**
+	 * Calling Observer
+	 */
 	public void callObservers() {
 		setChanged();
 		notifyObservers(this);
