@@ -14,13 +14,13 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+
 import app.helper.View;
 import app.model.ContinentsModel;
 import app.model.GameMapModel;
 
 /**
- * "CreateContinentView" class represents a view object for
- * creating continent 
+ * "CreateContinentView" class represents a view object for creating continent
  * Properties are containing labels, text fields, buttons, a pane, and a panel
  * 
  * @author Jatan Gohel
@@ -28,9 +28,9 @@ import app.model.GameMapModel;
 
 public class CreateContinentView extends JFrame implements View {
 
-/**
- * Properties of view
- */
+	/**
+	 * Properties of view
+	 */
 	public JLabel welcomeLabel;
 	public JTextField continentValue;
 	public JTextField controlValue;
@@ -45,9 +45,10 @@ public class CreateContinentView extends JFrame implements View {
 	public JScrollPane consolePanel;
 	public JPanel mainPanel;
 	JTextArea textArea;
-/**
- * Construction of CreateContinentView	
- */
+
+	/**
+	 * Construction of CreateContinentView
+	 */
 	public CreateContinentView() {
 		this.setTitle("Create Continent");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,8 +59,8 @@ public class CreateContinentView extends JFrame implements View {
 
 		mainPanel = new JPanel();
 		mainPanel.setLayout(null);
-		
-		textArea =  new JTextArea("Default text",5,5);
+
+		textArea = new JTextArea("Default text", 5, 5);
 
 		welcomeLabel = new JLabel("Please name the Continents you want in the map and their control values");
 		welcomeLabel.setBounds(100, 0, 600, 100);
@@ -72,10 +73,10 @@ public class CreateContinentView extends JFrame implements View {
 
 		controlValueText = new JLabel("Control Value: ");
 		controlValueText.setBounds(100, 200, 200, 40);
-		
+
 		controlValue = new JTextField();
 		controlValue.setBounds(200, 200, 200, 40);
-		
+
 		controlValueInfoText = new JLabel("(0 to 10)");
 		controlValueInfoText.setBounds(411, 200, 100, 40);
 
@@ -84,40 +85,40 @@ public class CreateContinentView extends JFrame implements View {
 
 		nextButton = new JButton("Next");
 		nextButton.setBounds(200, 300, 100, 40);
-		
+
 		updateScreen(null);
 	}
 
-/**
- * Updates view regarding continents belong to	
- * @param listOfContinentModel
- */
+	/**
+	 * Updates view regarding continents belong to
+	 * 
+	 * @param listOfContinentModel
+	 */
 	public void updateScreen(List<ContinentsModel> listOfContinentModel) {
-		
+
 		StringBuilder textAreaText = new StringBuilder("------------------------------------------------");
-		
-		if(listOfContinentModel==null) {
-			textArea.setText(textAreaText.toString());	
-		}
-		else{
+
+		if (listOfContinentModel == null) {
+			textArea.setText(textAreaText.toString());
+		} else {
 			textAreaText.setLength(0);
-			for(int i=0;i<listOfContinentModel.size();i++) {
-				textAreaText.append("Continent name : "+listOfContinentModel.get(i).getContinentName()+" ,Control Value : "+listOfContinentModel.get(i).getValueControl()+"\n");
+			for (int i = 0; i < listOfContinentModel.size(); i++) {
+				textAreaText.append("Continent name : " + listOfContinentModel.get(i).getContinentName()
+						+ " ,Control Value : " + listOfContinentModel.get(i).getValueControl() + "\n");
 			}
 		}
-		
+
 		textArea.setText(textAreaText.toString());
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
 		textArea.setEditable(false);
 		mainPanel.add(textArea);
-		textArea.setBorder(new TitledBorder(new LineBorder(Color.black, 5),
-		        "Continents added list:"));
+		textArea.setBorder(new TitledBorder(new LineBorder(Color.black, 5), "Continents added list:"));
 		textArea.setBounds(520, 0, 260, 650);
-		
+
 		Color main = new Color(230, 230, 255);
 		Color secondary = new Color(0, 0, 26);
-		textArea.setBackground(main);  //sets the background color
+		textArea.setBackground(main);
 		textArea.setForeground(secondary);
 
 		this.add(mainPanel);
@@ -131,18 +132,23 @@ public class CreateContinentView extends JFrame implements View {
 		mainPanel.add(controlValueInfoText);
 
 	}
-/**
- * Sets actions to "addButton" and "nextButton" 
- */
+
+	/**
+	 * Sets actions to "addButton" and "nextButton"
+	 * 
+	 * @see app.helper.View#setActionListener(java.awt.event.ActionListener)
+	 */
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.addButton.addActionListener(actionListener);
 		this.nextButton.addActionListener(actionListener);
 	}
 
-/**
- * 	
- */
+	/**
+	 * Update the view based on observer
+	 * 
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
 	@Override
 	public void update(Observable obs, Object arg) {
 		List<ContinentsModel> listOfContinentModel = ((GameMapModel) obs).getContinents();

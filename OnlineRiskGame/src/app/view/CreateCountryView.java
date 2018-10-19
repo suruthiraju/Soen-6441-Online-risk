@@ -25,10 +25,9 @@ import app.model.CountryModel;
 import app.model.GameMapModel;
 
 /**
- * "CreateCountryView" class represents a view object for
- * creating a country view
- * Properties are containing labels, text fields, buttons,
- * combo-boxes, a pane, and a panel
+ * "CreateCountryView" class represents a view object for creating a country
+ * view Properties are containing labels, text fields, buttons, combo-boxes, a
+ * pane, and a panel
  * 
  * @author Jatan Gohel
  */
@@ -52,10 +51,11 @@ public class CreateCountryView extends JFrame implements View {
 	public JPanel mainPanel;
 	JTextArea textArea;
 
-/**
- * Construction of "CreateCountryView"
- * @param listOfContinents
- */
+	/**
+	 * Construction of "CreateCountryView"
+	 * 
+	 * @param listOfContinents
+	 */
 	public CreateCountryView(List<ContinentsModel> listOfContinents) {
 		this.setTitle("Create Country");
 
@@ -87,26 +87,27 @@ public class CreateCountryView extends JFrame implements View {
 
 		countryValue = new JTextField();
 		countryValue.setBounds(200, 100, 200, 40);
-		
+
 		continentNameLabel = new JLabel("Continent Name: ");
-		continentNameLabel.setBounds(100,200,200,40);
+		continentNameLabel.setBounds(100, 200, 200, 40);
 
 		addButton = new JButton("Add");
 		addButton.setBounds(100, 400, 100, 40);
 
 		nextButton = new JButton("Next");
 		nextButton.setBounds(200, 400, 100, 40);
-		updateScreen(listOfContinents,null);
+		updateScreen(listOfContinents, null);
 	}
 
-/**
- * Updates the screen after creating a country
- * @param listOfContinentModel
- * @param listOfCountryModel
- */
+	/**
+	 * Updates the screen after creating a country
+	 * 
+	 * @param listOfContinentModel
+	 * @param listOfCountryModel
+	 */
 	public void updateScreen(List<ContinentsModel> listOfContinentModel, List<CountryModel> listOfCountryModel) {
 		mainPanel.removeAll();
-		
+
 		StringBuilder textAreaText = new StringBuilder("------------------------------------------------");
 
 		if (listOfCountryModel == null) {
@@ -114,8 +115,8 @@ public class CreateCountryView extends JFrame implements View {
 		} else {
 			textAreaText.setLength(0);
 			for (int i = 0; i < listOfCountryModel.size(); i++) {
-				textAreaText.append("Country: " + listOfCountryModel.get(i).getCountryName()
-						+ " ,Continent: " + listOfCountryModel.get(i).getcontinentName() + "\n");
+				textAreaText.append("Country: " + listOfCountryModel.get(i).getCountryName() + " ,Continent: "
+						+ listOfCountryModel.get(i).getcontinentName() + "\n");
 			}
 		}
 		textArea.setText(textAreaText.toString());
@@ -151,30 +152,36 @@ public class CreateCountryView extends JFrame implements View {
 		mainPanel.add(countryListText);
 
 	}
-/**
- * Sets actions to "addButton" and "nextButton"
- */
+
+	/**
+	 * Sets actions to "addButton" and "nextButton"
+	 * 
+	 * @see app.helper.View#setActionListener(java.awt.event.ActionListener)
+	 */
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.addButton.addActionListener(actionListener);
 		this.nextButton.addActionListener(actionListener);
 	}
 
-/**
- * 
- */
+	/**
+	 * Update the view based on observer
+	 * 
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
 	@Override
 	public void update(Observable obs, Object arg) {
 		List<CountryModel> listOfCountryModel = ((GameMapModel) obs).getCountries();
 		List<ContinentsModel> listOfContinentModel = ((GameMapModel) obs).getContinents();
-		this.updateScreen(listOfContinentModel,listOfCountryModel);
+		this.updateScreen(listOfContinentModel, listOfCountryModel);
 		this.revalidate();
 		this.repaint();
 	}
-	
-/**
- * Inside, getter method that provides us a map model corresponding to a map name
- */
+
+	/**
+	 * Inside, getter method that provides us a map model corresponding to a map
+	 * name
+	 */
 	public class CountryViewRenderer extends BasicComboBoxRenderer {
 		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
 				boolean cellHasFocus) {
