@@ -31,6 +31,7 @@ public class StartUpController implements ActionListener {
 	private int[] remainArmies = new int[5];
 	private int loopValue = 0;
 	private boolean armiesNull = false;
+	private int initial = 0;
 
 	public StartUpController() {
 
@@ -42,23 +43,28 @@ public class StartUpController implements ActionListener {
 
 		listOfCountrys = this.gmM.getCountries();
 		noOfPlayers = listOfPlayers.size();
-
+		
 		allocateArmies();
 		checkForOverallArmies();
+		initial = 1;
 		// Tejas -- Implement with the constructor of view as seen
+		
 		if (armiesNull == false) {
-			System.out.println("ss" + remainArmies[0]);
-			while (remainArmies[loopValue] == 0) {
+			System.out.println("ss" + listOfPlayers.get(0).getremainTroop());
+			while (listOfPlayers.get(loopValue).getremainTroop() == 0) {
 				loopValue++;
 				if (loopValue > listOfPlayers.size()) {
 					loopValue = 0;
 					break;
 				}
 			}
-			theStartUpView = new StartUpView(this.gmM, this.listOfPlayers.get(loopValue), remainArmies[loopValue]);
-			theStartUpView.setActionListener(this);
+			this.theStartUpView = new StartUpView(this.gmM, this.listOfPlayers.get(loopValue));
+			this.theStartUpView.setActionListener(this);
+			for(int i =0;i<noOfPlayers;i++) {
+				this.listOfPlayers.get(i).addObserver(this.theStartUpView);
+			}
 			this.gmM.addObserver(theStartUpView);
-			theStartUpView.setVisible(true);
+			this.theStartUpView.setVisible(true);
 		}
 	}
 
@@ -79,7 +85,7 @@ public class StartUpController implements ActionListener {
 			int playerNumber = getRandomBetweenRange(1, noOfPlayers);
 			System.out.println("playerNumber " + playerNumber);
 			String namePlayer = "Player" + playerNumber;
-			PlayerModel tempMyPlayers = new PlayerModel(namePlayer, 0, colorForRuler[playerNumber - 1]);
+			PlayerModel tempMyPlayers = new PlayerModel(namePlayer, 0, colorForRuler[playerNumber - 1],0);
 			listOfCountrys.get(i).setRuler(tempMyPlayers);
 			listOfCountrys.get(i).setArmies(1);
 			switch (namePlayer) {
@@ -131,6 +137,7 @@ public class StartUpController implements ActionListener {
 		for (int i = 0; i < noOfPlayers; i++) {
 			listOfPlayers.get(i).setColor(colorForRuler[i]);
 			listOfPlayers.get(i).setmyTroop(totalArmiesPlayer[i]);
+			listOfPlayers.get(i).setremainTroop(remainArmies[i]);
 		}
 		for (int i = 0; i < listOfPlayers.size(); i++) {
 			System.out.println(
@@ -145,56 +152,54 @@ public class StartUpController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		if (actionEvent.getSource().equals(theStartUpView.addButton)) {
-			int selectedArmies = (int) theStartUpView.numOfTroopsComboBox.getSelectedItem();
-			CountryModel countryName = (CountryModel) theStartUpView.countryListComboBox.getSelectedItem();
+		if (actionEvent.getSource().equals(this.theStartUpView.addButton)) {
+			if (this.theStartUpView.numOfTroopsComboBox.getSelectedItem() != null) {
+			int selectedArmies = (int) this.theStartUpView.numOfTroopsComboBox.getSelectedItem();
+			CountryModel countryName = (CountryModel) this.theStartUpView.countryListComboBox.getSelectedItem();
 			System.out.println("selectedArmies " + selectedArmies);
-			System.out.println("playername " + this.listOfPlayers.get(loopValue).getNamePlayer());
+
 			System.out.println("loopvlaue " + loopValue);
-
+			System.out.println("playername " + this.listOfPlayers.get(loopValue).getNamePlayer());
+			
 			this.gmM.robinTroopAssignButton(loopValue, this.listOfPlayers.get(loopValue).getNamePlayer(), countryName,
-					selectedArmies, remainArmies, listOfPlayers);
+					selectedArmies, listOfPlayers);
+			}
 			loopValue++;
-
-			if (loopValue < listOfPlayers.size()) {
+			
+			if (loopValue<listOfPlayers.size()) {
 				System.out.println("loopvlaue - " + loopValue);
 				this.theStartUpView.welcomeLabel
-						.setText("It's " + this.listOfPlayers.get(loopValue).getNamePlayer() + "'s turn");
+						.setText("It's " + this.listOfPlayers.get(loopValue).getNamePlayer() + "'s turn");				
+				this.listOfPlayers.get(loopValue).callObservers();
 
 			} else {
-				checkForOverallArmies1();
-				loopValue = 0;
-				System.out.println("loopvlaue -> " + loopValue);
-				this.theStartUpView.welcomeLabel
+				System.out.println("here");
+				armiesNull = false;
+				checkForOverallArmies();
+				if(armiesNull == false) {
+					loopValue = 0;
+					System.out.println("loopvlaue -> " + loopValue);
+					this.theStartUpView.welcomeLabel
 						.setText("It's " + this.listOfPlayers.get(loopValue).getNamePlayer() + "'s turn");
-			}
-		}
-	}
-
-	private void checkForOverallArmies1() {
-		int numb = 0;
-		for (int i = 0; i < listOfPlayers.size(); i++) {
-			if (remainArmies[i] != 0) {
-				numb++;
-			}
-		}
-		if (numb == 0) {
-			armiesNull = true;
-			new GamePlayController(gmM, listOfPlayers);
-			// this.theStartUpView.dispose();
+					this.listOfPlayers.get(loopValue).callObservers();
+				}
+			}			
 		}
 	}
 
 	private void checkForOverallArmies() {
 		int numb = 0;
 		for (int i = 0; i < listOfPlayers.size(); i++) {
-			if (remainArmies[i] != 0) {
+			if (listOfPlayers.get(i).getremainTroop() != 0) {
 				numb++;
 			}
 		}
 		if (numb == 0) {
 			armiesNull = true;
 			new GamePlayController(gmM, listOfPlayers);
+			if (initial == 1 ) {
+				this.theStartUpView.dispose();
+			}
 		}
 	}
 

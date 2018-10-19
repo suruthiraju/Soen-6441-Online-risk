@@ -65,7 +65,7 @@ public class NewGameController implements ActionListener {
 			String PlayerName = "";
 			for (int i=0; i<noOfPlayers; i++) {
 				PlayerName = "Player"+ (i+1);
-				PlayerModel pm = new PlayerModel(PlayerName, 0, "");
+				PlayerModel pm = new PlayerModel(PlayerName, 0, "",0);
 				listOfPlayers.add(pm);				
 			}
 			new StartUpController(listOfPlayers, gmM);
