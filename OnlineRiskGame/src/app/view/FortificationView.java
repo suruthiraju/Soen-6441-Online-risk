@@ -54,13 +54,13 @@ public class FortificationView extends JFrame implements View {
 	public JLabel fromCountryListLabel;
 	public JLabel toCountryListLabel;
 	public JComboBox<Object> countryListComboBox;
+	public JComboBox<Object> countryListComboBox1;
 	public Object[] countryListArray;
 	private CountryViewRenderer countriesViewRenderer;
+	public Object[] countryListArray1;
+	private CountryViewRenderer countriesViewRenderer1;
 
 	public JButton[] button;
-	
-
-	private int remainArmies;
 
 	public FortificationView(GameMapModel gameMapModel) {
 		this.gameMapModel = gameMapModel;
@@ -80,14 +80,13 @@ public class FortificationView extends JFrame implements View {
 
 		this.add(welcomePanel);
 		this.playerModel = this.gameMapModel.getPlayerTurn();
-		this.remainArmies = 1;
 		this.moveButton = new JButton("Move");
-		updateWindow(this.gameMapModel, this.playerModel, remainArmies);
+		updateWindow(this.gameMapModel, this.playerModel);
 		welcomePanel.setLayout(null);
 		graphicPanel.setLayout(null);
 	}
 
-	public void updateWindow(GameMapModel gameMapModel, PlayerModel playerModel, int remainArmies) {
+	public void updateWindow(GameMapModel gameMapModel, PlayerModel playerModel) {
 
 		welcomePanel.removeAll();
 		graphicPanel.removeAll();
@@ -103,29 +102,11 @@ public class FortificationView extends JFrame implements View {
 		welcomeLabel.setFont(largeFont);
 		welcomePanel.add(welcomeLabel);
 
-		this.noOfTroopsLabel = new JLabel("Number of Troops :");
-		noOfTroopsLabel.setBounds(1300, 140, 150, 25);
-		welcomePanel.add(noOfTroopsLabel);
-
-		Integer[] troops = new Integer[remainArmies];
-		for (int i = 0; i < remainArmies; i++) {
-			troops[i] = i + 1;
-		}
-
-		numOfTroopsComboBox = new JComboBox(troops);
-		numOfTroopsComboBox.setBounds(1300, 170, 150, 25);
-		numOfTroopsComboBox.setEnabled(false);
-		welcomePanel.add(numOfTroopsComboBox);
-
 		this.fromCountryListLabel = new JLabel("From Country :");
-		fromCountryListLabel.setBounds(1300, 230, 150, 25);
+		fromCountryListLabel.setBounds(1300, 120, 150, 25);
 		welcomePanel.add(this.fromCountryListLabel);
-		
-		this.toCountryListLabel = new JLabel("To Country :");
-		toCountryListLabel.setBounds(1600, 230, 150, 25);
-		welcomePanel.add(this.toCountryListLabel);
 
-		//from country comboBox
+		// to country comboBox
 		ArrayList<CountryModel> fromListOfCountries = new ArrayList<CountryModel>();
 		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
 			if (playerModel.getNamePlayer()
@@ -133,8 +114,36 @@ public class FortificationView extends JFrame implements View {
 				fromListOfCountries.add(this.gameMapModel.getCountries().get(i));
 			}
 		}
+		countriesViewRenderer1 = new CountryViewRenderer();
+		countryListArray1 = fromListOfCountries.toArray();
+		countryListComboBox1 = new JComboBox(countryListArray1);
+		welcomePanel.add(this.countryListComboBox1);
 
-		//to country comboBox
+		if (countryListArray1.length > 0) {
+			countryListComboBox1.setRenderer(countriesViewRenderer1);
+		}
+		countryListComboBox1.setBounds(1300, 150, 150, 25);
+		welcomePanel.add(countryListComboBox1);
+
+		this.noOfTroopsLabel = new JLabel("Number of Troops :");
+		noOfTroopsLabel.setBounds(1300, 180, 150, 25);
+		welcomePanel.add(noOfTroopsLabel);
+		
+		CountryModel countryName = (CountryModel) this.countryListComboBox1.getSelectedItem();
+		Integer[] troops = new Integer[countryName.getArmies()-1];
+		for (int i = 0; i < (countryName.getArmies()-1); i++) {
+			troops[i] = i + 1;
+		}
+
+		numOfTroopsComboBox = new JComboBox(troops);
+		numOfTroopsComboBox.setBounds(1300, 210, 150, 25);
+		welcomePanel.add(numOfTroopsComboBox);
+
+		this.toCountryListLabel = new JLabel("To Country :");
+		toCountryListLabel.setBounds(1300, 240, 150, 25);
+		welcomePanel.add(this.toCountryListLabel);
+
+		// to country comboBox
 		ArrayList<CountryModel> toListOfCountries = new ArrayList<CountryModel>();
 		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
 			if (playerModel.getNamePlayer()
@@ -144,18 +153,16 @@ public class FortificationView extends JFrame implements View {
 		}
 		countriesViewRenderer = new CountryViewRenderer();
 		countryListArray = toListOfCountries.toArray();
-		countryListArray = fromListOfCountries.toArray();
 		countryListComboBox = new JComboBox(countryListArray);
 		welcomePanel.add(this.countryListComboBox);
 
 		if (countryListArray.length > 0) {
 			countryListComboBox.setRenderer(countriesViewRenderer);
 		}
-		countryListComboBox.setBounds(1300, 260, 150, 25);
+		countryListComboBox.setBounds(1300, 270, 150, 25);
 		welcomePanel.add(countryListComboBox);
 
-		
-		this.moveButton.setBounds(1300, 300, 150, 25);
+		this.moveButton.setBounds(1300, 330, 150, 25);
 		welcomePanel.add(this.moveButton);
 
 		int n = this.gameMapModel.getCountries().size();
@@ -164,10 +171,10 @@ public class FortificationView extends JFrame implements View {
 			CountryModel country = this.gameMapModel.getCountries().get(i);
 
 			country.setBackground(this.gameMapModel.getCountries().get(i).getBackgroundColor());
-			country.setText(this.gameMapModel.getCountries().get(i).getCountryName().substring(0,3));
-			country.setToolTipText("Troops: "+this.gameMapModel.getCountries().get(i).getArmies());
+			country.setText(this.gameMapModel.getCountries().get(i).getCountryName().substring(0, 3));
+			country.setToolTipText("Troops: " + this.gameMapModel.getCountries().get(i).getArmies());
 			country.setFont(smallFont);
-			
+
 			Border border = BorderFactory
 					.createLineBorder(stringToColor(this.gameMapModel.getCountries().get(i).getRuler().getColor()), 3);
 
@@ -178,9 +185,8 @@ public class FortificationView extends JFrame implements View {
 			country.setOpaque(true);
 			country.setBounds(this.gameMapModel.getCountries().get(i).getXPosition() * 2,
 					this.gameMapModel.getCountries().get(i).getYPosition() * 2, 50, 50);
-			
-			country.setMargin(new Insets(0,0,0,0));
 
+			country.setMargin(new Insets(0, 0, 0, 0));
 
 			graphicPanel.add(country);
 		}
@@ -241,7 +247,7 @@ public class FortificationView extends JFrame implements View {
 	@Override
 	public void update(Observable obs, Object arg) {
 
-		this.updateWindow(((GameMapModel) obs), this.playerModel, this.remainArmies);
+		this.updateWindow(((GameMapModel) obs), this.playerModel);
 		this.revalidate();
 		this.repaint();
 

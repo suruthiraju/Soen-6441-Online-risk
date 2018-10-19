@@ -11,11 +11,7 @@ import app.view.*;
 public class FortificationController implements ActionListener {
 
     private FortificationView theFortificationView;
-	private ArrayList<ContinentsModel> listOfContinents = new ArrayList<ContinentsModel>();
-	private ArrayList<CountryModel> listOfCountrys = new ArrayList<CountryModel>();
-	private ArrayList<PlayerModel> listOfPlayers = new ArrayList<PlayerModel>();
 	private GameMapModel gameMapModel = null ;
-	private int noOfPlayers;
 
 	public FortificationController(GameMapModel gameMapModel) {
 		this.gameMapModel = gameMapModel;
@@ -27,14 +23,14 @@ public class FortificationController implements ActionListener {
 	
 	public void movingArmies(int armies, String fromCountryName, String toCountryName) {
 		int previousArmies = 0;
-		for (int i = 0; i < listOfCountrys.size(); i++) {			
-			if (fromCountryName.equals(listOfCountrys.get(i).getCountryName())) {
-				previousArmies = listOfCountrys.get(i).getArmies();
-				listOfCountrys.get(i).setArmies( previousArmies - armies);
+		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {			
+			if (fromCountryName.equals(this.gameMapModel.getCountries().get(i).getCountryName())) {
+				previousArmies = this.gameMapModel.getCountries().get(i).getArmies();
+				this.gameMapModel.getCountries().get(i).setArmies( previousArmies - armies);
 			}
-			if (toCountryName.equals(listOfCountrys.get(i).getCountryName())) {
-				previousArmies = listOfCountrys.get(i).getArmies();
-				listOfCountrys.get(i).setArmies( previousArmies + armies);
+			if (toCountryName.equals(this.gameMapModel.getCountries().get(i).getCountryName())) {
+				previousArmies = this.gameMapModel.getCountries().get(i).getArmies();
+				this.gameMapModel.getCountries().get(i).setArmies( previousArmies + armies);
 			}
 		}
 	}	
