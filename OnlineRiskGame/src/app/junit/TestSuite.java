@@ -11,7 +11,7 @@ import app.utilities.*;
 				CheckInterlinkedContinentTest.class,
 				EmptyContinentValidationTest.class,
 				ReadFileTest.class,
-				ReinforcementTest.class,
+				ReinforcementArmyNumberTest.class,
 				EmptyLinkCountryValidationTest.class,
 				WriteFileTest.class})
 public class TestSuite {
