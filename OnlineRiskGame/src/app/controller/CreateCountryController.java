@@ -42,8 +42,8 @@ public class CreateCountryController implements ActionListener {
 		CountryModel temp = new CountryModel();
 
 		if (actionEvent.getSource().equals(this.createCountryView.addButton)) {
-			if (this.createCountryView.countryValue.getText() != null
-					&& this.createCountryView.countryValue.getText() != "") {
+			if (this.createCountryView.countryValue.getText().equals(null)
+					&& "".equals(this.createCountryView.countryValue.getText())) {
 
 				if (sameCountryValidation()) {
 					JOptionPane.showOptionDialog(null, "Please enter a different country", "Invalid",
