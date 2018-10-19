@@ -78,7 +78,7 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 				{
 					if(!(MapValidation.emptyContinentValidation(this.gameMapModel)))
 					{
-						if(!(MapValidation.unlinkedContinentVAlidation(this.gameMapModel)))
+						if(!(MapValidation.unlinkedContinentValidation(this.gameMapModel)))
 						{
 							
 						System.out.println(" All the map validations are correct");

@@ -7,12 +7,12 @@ import app.utilities.*;
 
 @RunWith(Suite.class)
 @SuiteClasses({ MapValidation.class,
-				CreateCountryTest.class,
-				FortificationTest.class,
-				NewGameTest.class,
+				UnlinkedContinentValidationTest.class,
+				CheckInterlinkedContinentTest.class,
+				EmptyContinentValidationTest.class,
 				ReadFileTest.class,
 				ReinforcementTest.class,
-				StartUpTest.class,
+				EmptyLinkCountryValidationTest.class,
 				WriteFileTest.class})
 public class TestSuite {
 	
