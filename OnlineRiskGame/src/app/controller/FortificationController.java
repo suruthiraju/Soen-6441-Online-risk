@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
+import javax.swing.JOptionPane;
+
 import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.utilities.Validation;
@@ -47,8 +49,12 @@ public class FortificationController implements ActionListener, ItemListener {
 				this.theFortificationView.dispose();
 			}
 			else {
+				JOptionPane.showOptionDialog(null, "Bravo! Game is over! No one won!", "Valid", JOptionPane.DEFAULT_OPTION,
+						JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
 				this.theFortificationView.dispose();
 			}
+			
+			
 		}
 		else if(actionEvent.getSource().equals(this.theFortificationView.fromCountryListComboBox)) {
 			//CountryModel country  = (CountryModel) this.theFortificationView.fromCountryListComboBox.getSelectedItem();
