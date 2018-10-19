@@ -13,14 +13,19 @@ import app.model.ContinentsModel;
 import app.model.CountryModel;
 
 /**
- * 
- * @author DELL
- *
+ * "ReadFile" class reads map file and gives 
+ * continents and countries details
+ * @author GROUP-35
  */
-
 public class ReadFile {
+	
 	public static File FILE;
 
+/**
+ * This method reads the map file and returns continent details such 
+ * as name and its value-control.
+ * @return the array list of continents
+ */
 	public ArrayList<ContinentsModel> getMapContinentDetails() {
 
 		File file = getFile();
@@ -35,11 +40,9 @@ public class ReadFile {
 
 		while (sc.hasNextLine()) {
 			String sc1 = sc.nextLine();
-
 			if (sc1.contains("[Continents]")) {
 				String sc2 = sc.nextLine();
 				sc2.trim();
-
 				while (!"".equals(sc2)) {
 					int positionEqual = sc2.indexOf('=');
 					String sc3 = sc2.substring(0, positionEqual);
@@ -55,11 +58,16 @@ public class ReadFile {
 					sc2.trim();
 				}
 			}
-
 		}
 		return listOfContinents;
 	}
 
+/**	
+ * This method reads the map file and returns country details such 
+ * as name, position, continent that it belongs to, and list of countries that
+ * it is connected to.
+ * @return the array list of countries
+ */
 	public ArrayList<CountryModel> getMapCountryDetails() {
 		File file = getFile();
 		Scanner sc = null;
@@ -96,13 +104,11 @@ public class ReadFile {
 						String xPosition = territories.substring((indexOfCountryName + 1), indexOfXPos);
 						cm.setXPosition(Integer.parseInt(xPosition.trim()));
 						System.out.println("xposition: " + xPosition);
-						// int result = Integer.parseInt(xPosition);
 
 						int indexOfYPos = territories.indexOf(',', (indexOfXPos + 1));
 						String yPosition = territories.substring((indexOfXPos + 1), indexOfYPos);
 						cm.setYPosition(Integer.parseInt(yPosition.trim()));
 						System.out.println("yPosition" + yPosition);
-						// int result1 = Integer.parseInt(yPosition);
 
 						int indexOfContinent = territories.indexOf(',', (indexOfYPos + 1));
 						String continent = territories.substring((indexOfYPos + 1), indexOfContinent).trim();
@@ -119,33 +125,25 @@ public class ReadFile {
 						for (int i = 0; i < listOfNeighbouringCountries.size(); i++) {
 							if (listOfCountries.containsKey(listOfNeighbouringCountries.get(i).trim())) {
 								newNeighbour = listOfCountries.get(listOfNeighbouringCountries.get(i).trim());
-
 							} else {
 								newNeighbour = new CountryModel();
 								newNeighbour.setCountryName(listOfNeighbouringCountries.get(i).trim());
-
 							}
 							listOfCountries.put(listOfNeighbouringCountries.get(i).trim(), newNeighbour);
 							linkedCountriesList.add(newNeighbour);
-
 						}
-
 						cm.setLinkedCountries(linkedCountriesList);
-
 					}
 				}
 			}
 		}
-
 		Collection<CountryModel> c = (Collection<CountryModel>) listOfCountries.values();
 		listOfCountryModel = new ArrayList<CountryModel>(c);
 		return listOfCountryModel;
 	}
 
 	public void setFile(File file) {
-
 		FILE = file;
-
 	}
 
 	public File getFile() {
