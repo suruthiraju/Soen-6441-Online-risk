@@ -57,13 +57,10 @@ public class StartUpView extends JFrame implements View {
 	private CountryViewRenderer countriesViewRenderer;
 
 	public JButton[] button;
-<<<<<<< HEAD
 	public JButton nextButton;
 	private List<String> countryOwned;
-=======
 	public JButton button2;
 	public JButton button3;
->>>>>>> bf23ff02532d19a21b7acefbb82b2789a052f8e0
 	private int remainArmies;
 
 	public StartUpView(GameMapModel gameMapModel, PlayerModel playerModel) {
