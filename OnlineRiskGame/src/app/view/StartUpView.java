@@ -25,7 +25,6 @@ import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import app.helper.View;
-import app.model.ContinentsModel;
 import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.model.PlayerModel;
@@ -45,6 +44,7 @@ public class StartUpView extends JFrame implements View {
 	public JPanel graphicPanel;
 
 	public JLabel welcomeLabel;
+	public JLabel welcomeLabel1;
 	public JLabel noOfTroopsLabel;
 
 	public JComboBox<Integer> numOfTroopsComboBox;
@@ -57,11 +57,16 @@ public class StartUpView extends JFrame implements View {
 	private CountryViewRenderer countriesViewRenderer;
 
 	public JButton[] button;
+<<<<<<< HEAD
 	public JButton nextButton;
 	private List<String> countryOwned;
+=======
+	public JButton button2;
+	public JButton button3;
+>>>>>>> bf23ff02532d19a21b7acefbb82b2789a052f8e0
 	private int remainArmies;
 
-	public StartUpView(GameMapModel gameMapModel, PlayerModel playerModel, int remainArmies) {
+	public StartUpView(GameMapModel gameMapModel, PlayerModel playerModel) {
 
 		this.setTitle("Startup Phase");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,17 +82,18 @@ public class StartUpView extends JFrame implements View {
 		graphicPanel.setSize(1200, 1000);
 		graphicPanel.setBackground(Color.WHITE);
 		graphicPanel.setLayout(null);
-
+		this.addButton = new JButton("Add");
 		this.add(welcomePanel);
 		this.playerModel = playerModel;
 		this.remainArmies = remainArmies;
-
-		updateWindow(gameMapModel, playerModel, remainArmies);
+		this.welcomeLabel = new JLabel("It's " + playerModel.getNamePlayer() + "'s turn");
+		this.welcomeLabel1 = new JLabel("Remaining Armies: " + playerModel.getremainTroop() );
+		updateWindow(gameMapModel, playerModel);
 		welcomePanel.setLayout(null);
 		graphicPanel.setLayout(null);
 	}
 
-	public void updateWindow(GameMapModel gameMapModel, PlayerModel playerModel, int remainArmies) {
+	public void updateWindow(GameMapModel gameMapModel, PlayerModel playerModel) {
 
 		welcomePanel.removeAll();
 		graphicPanel.removeAll();
@@ -98,7 +104,7 @@ public class StartUpView extends JFrame implements View {
 		this.gameMapModel = gameMapModel;
 		this.playerModel = playerModel;
 
-		this.welcomeLabel = new JLabel("It's " + playerModel.getNamePlayer() + "'s turn");
+		
 		welcomeLabel.setBounds(1300, 80, 300, 25);
 		welcomeLabel.setFont(largeFont);
 		welcomePanel.add(welcomeLabel);
@@ -107,22 +113,27 @@ public class StartUpView extends JFrame implements View {
 		noOfTroopsLabel.setBounds(1300, 140, 150, 25);
 		welcomePanel.add(noOfTroopsLabel);
 
-		Integer[] troops = new Integer[remainArmies];
-		for (int i = 0; i < remainArmies; i++) {
+		Integer[] troops = new Integer[playerModel.getremainTroop()];
+		for (int i = 0; i < playerModel.getremainTroop() ; i++) {
 			troops[i] = i + 1;
 		}
-
+		
 		numOfTroopsComboBox = new JComboBox(troops);
 		numOfTroopsComboBox.setBounds(1300, 170, 150, 25);
 		numOfTroopsComboBox.setEnabled(false);
 		welcomePanel.add(numOfTroopsComboBox);
+		
+		welcomeLabel1 = new JLabel("Remaining Armies: " + playerModel.getremainTroop() );
+		welcomeLabel1.setBounds(1450, 170, 300, 25);
+		welcomeLabel1.setFont(smallFont);
+		welcomePanel.add(welcomeLabel1);
 
 		this.countryListLabel = new JLabel("Select Country :");
 		countryListLabel.setBounds(1300, 230, 150, 25);
 		welcomePanel.add(this.countryListLabel);
 
 		ArrayList<CountryModel> listOfCountries = new ArrayList<CountryModel>();
-		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
+		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {			
 			if (playerModel.getNamePlayer()
 					.equals(this.gameMapModel.getCountries().get(i).getRuler().getNamePlayer())) {
 				listOfCountries.add(this.gameMapModel.getCountries().get(i));
@@ -231,7 +242,13 @@ public class StartUpView extends JFrame implements View {
 	@Override
 	public void update(Observable obs, Object arg) {
 
-		this.updateWindow(((GameMapModel) obs), this.playerModel, this.remainArmies);
+		
+		if(obs instanceof GameMapModel) {
+			this.gameMapModel = (GameMapModel)obs;
+		}else if(obs instanceof PlayerModel) {
+			this.playerModel = (PlayerModel)obs;
+		}
+		this.updateWindow(this.gameMapModel, this.playerModel);
 		this.revalidate();
 		this.repaint();
 
