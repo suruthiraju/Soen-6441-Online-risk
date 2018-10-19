@@ -13,7 +13,28 @@ import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.utilities.*;
 public class validation {
-	
+	public boolean unlinkedContinentVAlidation(GameMapModel mapModel)
+	{
+		boolean flag= true;
+		List<CountryModel> listOfCountrys = mapModel.getCountries();
+		List<CountryModel> listOfLinkedCountries;
+		for(int index=0; index<listOfCountrys.size();index++)
+			for(int index2 =0;index<=listOfCountrys.get(index).getLinkedCountries().size(); index2++)
+			{
+				listOfLinkedCountries=listOfCountrys.get(index).getLinkedCountries();
+			     if(listOfLinkedCountries.get(index2).getcontinentName().equals(listOfCountrys.get(index).getcontinentName()))
+			     {
+			    	flag = true; 
+			    	return flag;
+			     }
+			     else
+			     {
+			    	 flag = false;
+			     }
+			    
+			}
+		return flag;
+	}
 	public boolean emptyLinkCountryValidation(GameMapModel mapModel) {
 		List<CountryModel> listOfCountrys = mapModel.getCountries();
 		List<CountryModel> linkedCountry; 

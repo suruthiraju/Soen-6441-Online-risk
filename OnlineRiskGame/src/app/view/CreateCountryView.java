@@ -25,9 +25,12 @@ import app.model.CountryModel;
 import app.model.GameMapModel;
 
 /**
+ * "CreateCountryView" class represents a view object for
+ * creating a country view
+ * Properties are containing labels, text fields, buttons,
+ * combo-boxes, a pane, and a panel
  * 
  * @author Jatan Gohel
- *
  */
 
 public class CreateCountryView extends JFrame implements View {
@@ -49,6 +52,10 @@ public class CreateCountryView extends JFrame implements View {
 	public JPanel mainPanel;
 	JTextArea textArea;
 
+/**
+ * Construction of "CreateCountryView"
+ * @param listOfContinents
+ */
 	public CreateCountryView(List<ContinentsModel> listOfContinents) {
 		this.setTitle("Create Country");
 
@@ -92,7 +99,11 @@ public class CreateCountryView extends JFrame implements View {
 		updateScreen(listOfContinents,null);
 	}
 
-
+/**
+ * Updates the screen after creating a country
+ * @param listOfContinentModel
+ * @param listOfCountryModel
+ */
 	public void updateScreen(List<ContinentsModel> listOfContinentModel, List<CountryModel> listOfCountryModel) {
 		mainPanel.removeAll();
 		
@@ -140,13 +151,18 @@ public class CreateCountryView extends JFrame implements View {
 		mainPanel.add(countryListText);
 
 	}
-
+/**
+ * Sets actions to "addButton" and "nextButton"
+ */
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.addButton.addActionListener(actionListener);
 		this.nextButton.addActionListener(actionListener);
 	}
 
+/**
+ * 
+ */
 	@Override
 	public void update(Observable obs, Object arg) {
 		List<CountryModel> listOfCountryModel = ((GameMapModel) obs).getCountries();
@@ -156,16 +172,10 @@ public class CreateCountryView extends JFrame implements View {
 		this.repaint();
 	}
 	
-
+/**
+ * Inside, getter method that provides us a map model corresponding to a map name
+ */
 	public class CountryViewRenderer extends BasicComboBoxRenderer {
-
-		/*
-		 * Getter method that provides us a map model corresponding to a map name
-		 * 
-		 * @see javax.swing.plaf.basic.BasicComboBoxRenderer#
-		 * getListCellRendererComponent(javax.swing.JList, java.lang.Object, int,
-		 * boolean, boolean)
-		 */
 		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
 				boolean cellHasFocus) {
 			super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
