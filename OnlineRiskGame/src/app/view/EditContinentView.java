@@ -23,12 +23,12 @@ import app.model.ContinentsModel;
 import app.model.GameMapModel;
 
 /**
- * 
+ * "EditContinentView" represents a view object for editing 
+ * a continent
+ * It contains Labels, text fields, and buttons
  * @author Jatan Gohel
  *
  */
-
-
 public class EditContinentView extends JFrame implements View {
 
 	public JLabel welcomeLabel;
@@ -42,6 +42,10 @@ public class EditContinentView extends JFrame implements View {
 	public JButton addButton;
 	public JPanel welcomePanel;
 
+/**
+ * Constructor of EditContinentView
+ * @param listOfContinents
+ */
 	public EditContinentView(List<ContinentsModel> listOfContinents) {
 
 		welcomeLabel = new JLabel("Please select the Continents you want in the map and the control value");
@@ -67,19 +71,13 @@ public class EditContinentView extends JFrame implements View {
 
 	}
 
-	/*
-	 * Inner Class Continent View Renderer class that is used to generate a dynamic
-	 * combobox
-	 */
+/**
+* Inner Class Continent View Renderer class that is used to generate a dynamic
+* combobox
+*/
 	public class ContinentViewRenderer extends BasicComboBoxRenderer {
 
-		/*
-		 * Getter method that provides us a map model corresponding to a map name
-		 * 
-		 * @see javax.swing.plaf.basic.BasicComboBoxRenderer#
-		 * getListCellRendererComponent(javax.swing.JList, java.lang.Object, int,
-		 * boolean, boolean)
-		 */
+
 		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
 				boolean cellHasFocus) {
 			super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
@@ -92,12 +90,18 @@ public class EditContinentView extends JFrame implements View {
 		}
 	}
 
+/**
+ * Sets actions to "addButton" and "saveButton"	
+ */
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		addButton.addActionListener(actionListener);
 		saveButton.addActionListener(actionListener);
 	}
-
+	
+/**
+ * 
+ */
 	@Override
 	public void update(Observable obs, Object obj) {
 		List<ContinentsModel> listOfContinentModel = ((GameMapModel) obs).getContinents();
@@ -106,6 +110,10 @@ public class EditContinentView extends JFrame implements View {
 		this.repaint();
 	}
 
+/**
+ * Updating window components
+ * @param listOfContinentModel
+ */
 	private void updateWindow(List<ContinentsModel> listOfContinentModel) {
 		welcomePanel.removeAll();
 		Font largeFont = new Font("Serif", Font.BOLD, 18);
