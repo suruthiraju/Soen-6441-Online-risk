@@ -57,13 +57,11 @@ public class ReinforcementView extends JFrame implements View {
 	private CountryViewRenderer countriesViewRenderer;
 
 	public JButton[] button;
-	public JButton button2;
-	public JButton button3;
-	private List<String> countryOwned;
+	//public JLabel playerLabel;
 	private int remainArmies;
 
-	public ReinforcementView(GameMapModel gameMapModel, PlayerModel playerModel, int remainArmies) {
-
+	public ReinforcementView(GameMapModel gameMapModel) {
+		this.gameMapModel = gameMapModel;
 		this.setTitle("Reinforcement Phase");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(300, 200);
@@ -77,17 +75,19 @@ public class ReinforcementView extends JFrame implements View {
 		graphicPanel.setSize(1200, 1000);
 		graphicPanel.setBackground(Color.WHITE);
 		graphicPanel.setLayout(null);
-
+		
 		this.add(welcomePanel);
-		this.playerModel = playerModel;
-		this.remainArmies = remainArmies;
-
-		updateWindow(gameMapModel, playerModel, remainArmies);
+		this.playerModel = this.gameMapModel.getPlayerTurn();
+		
+		this.addButton = new JButton("Add");
+		
+		//this.playerLabel = new JLabel();
+		updateWindow(this.gameMapModel, this.playerModel);
 		welcomePanel.setLayout(null);
 		graphicPanel.setLayout(null);
 	}
 
-	public void updateWindow(GameMapModel gameMapModel, PlayerModel playerModel, int remainArmies) {
+	public void updateWindow(GameMapModel gameMapModel, PlayerModel playerModel) {
 
 		welcomePanel.removeAll();
 		graphicPanel.removeAll();
@@ -107,14 +107,14 @@ public class ReinforcementView extends JFrame implements View {
 		noOfTroopsLabel.setBounds(1300, 140, 150, 25);
 		welcomePanel.add(noOfTroopsLabel);
 
-		Integer[] troops = new Integer[remainArmies];
+		Integer[] troops = new Integer[this.gameMapModel.getPlayerTurn().getmyTroop()];
 		for (int i = 0; i < remainArmies; i++) {
 			troops[i] = i + 1;
 		}
 
 		numOfTroopsComboBox = new JComboBox(troops);
 		numOfTroopsComboBox.setBounds(1300, 170, 150, 25);
-		numOfTroopsComboBox.setEnabled(false);
+		numOfTroopsComboBox.setEnabled(true);
 		welcomePanel.add(numOfTroopsComboBox);
 
 		this.countryListLabel = new JLabel("Select Country :");
@@ -140,10 +140,10 @@ public class ReinforcementView extends JFrame implements View {
 		countryListComboBox.setBounds(1300, 260, 150, 25);
 		welcomePanel.add(countryListComboBox);
 
-		this.addButton = new JButton("Add");
+		
 		this.addButton.setBounds(1300, 300, 150, 25);
 		welcomePanel.add(this.addButton);
-
+		
 		int n = this.gameMapModel.getCountries().size();
 		button = new JButton[n];
 		for (int i = 0; i < n; i++) {
@@ -227,7 +227,7 @@ public class ReinforcementView extends JFrame implements View {
 	@Override
 	public void update(Observable obs, Object arg) {
 
-		this.updateWindow(((GameMapModel) obs), this.playerModel, this.remainArmies);
+		this.updateWindow(((GameMapModel) obs), this.playerModel);
 		this.revalidate();
 		this.repaint();
 

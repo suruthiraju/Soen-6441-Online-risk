@@ -34,6 +34,18 @@ public class GameMapModel extends Observable {
  * Read file object for creating a file in parameterized constructor
  */
 	private ReadFile readfile;
+	
+	
+	/**
+	 * to save player's turn
+	 */
+	private PlayerModel playerTurn ;
+	
+	private int playerIndex;
+	
+	private ArrayList<PlayerModel> listOfPlayers;
+
+
 
 /**
  * Index to fetch the left model in list view
@@ -72,6 +84,8 @@ public class GameMapModel extends Observable {
 	public void setRightModelIndex(int rightModelIndex) {
 		this.rightModelIndex = rightModelIndex;
 	}
+	
+	
 
 /**
  * Parameterized constructor that helps edit the map
@@ -329,5 +343,62 @@ public class GameMapModel extends Observable {
 			}
 		}
 	}
+
+		/**
+		 * set player's turn
+		 */
+	public void setPlayerTurn(PlayerModel playerModel) {
+		this.playerTurn = playerModel;
+		
+	}
+	
+	/**
+	 * @return the playerTurn
+	 */
+	public PlayerModel getPlayerTurn() {
+		return this.playerTurn;
+	}
+
+	public void setSelectedArmiesToCountries(int selectedArmies, CountryModel countryName) {
+		for(int i = 0;i<this.getCountries().size();i++){
+			if(this.getCountries().get(i).equals(countryName)) {
+				this.getCountries().get(i).setArmies(this.getCountries().get(i).getArmies()+selectedArmies);
+				this.getCountries().get(i).getRuler().setmyTroop(this.getCountries().get(i).getRuler().getmyTroop()-selectedArmies);
+				this.setPlayerTurn(this.getPlayerTurn());
+			}
+		}
+		callObservers();
+		
+	}
+
+	/**
+	 * @return the playerIndex
+	 */
+	public int getPlayerIndex() {
+		return playerIndex;
+	}
+
+	/**
+	 * @param playerIndex the playerIndex to set
+	 */
+	public void setPlayerIndex(int playerIndex) {
+		this.playerIndex = playerIndex;
+	}
+
+	/**
+	 * @return the listOfPlayers
+	 */
+	public ArrayList<PlayerModel> getListOfPlayers() {
+		return listOfPlayers;
+	}
+
+	/**
+	 * @param listOfPlayers the listOfPlayers to set
+	 */
+	public void setListOfPlayers(ArrayList<PlayerModel> listOfPlayers) {
+		this.listOfPlayers = listOfPlayers;
+	}
+	
+
 
 }

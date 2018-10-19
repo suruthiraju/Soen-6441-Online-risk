@@ -57,8 +57,7 @@ public class StartUpView extends JFrame implements View {
 	private CountryViewRenderer countriesViewRenderer;
 
 	public JButton[] button;
-	public JButton button2;
-	public JButton button3;
+	public JButton nextButton;
 	private List<String> countryOwned;
 	private int remainArmies;
 
@@ -70,7 +69,8 @@ public class StartUpView extends JFrame implements View {
 		this.setSize(1600, 1000);
 		this.setResizable(false);
 		this.setVisible(false);
-
+		this.addButton = new JButton("Add");
+		this.nextButton = new JButton("Next");
 		welcomePanel = new JPanel();
 		graphicPanel = new JPanel();
 		this.add(graphicPanel);
@@ -140,9 +140,13 @@ public class StartUpView extends JFrame implements View {
 		countryListComboBox.setBounds(1300, 260, 150, 25);
 		welcomePanel.add(countryListComboBox);
 
-		this.addButton = new JButton("Add");
+		
 		this.addButton.setBounds(1300, 300, 150, 25);
 		welcomePanel.add(this.addButton);
+		
+		
+		this.nextButton.setBounds(1400,600,150,25);
+		welcomePanel.add(this.nextButton);
 
 		int n = this.gameMapModel.getCountries().size();
 		button = new JButton[n];
@@ -236,6 +240,7 @@ public class StartUpView extends JFrame implements View {
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.addButton.addActionListener(actionListener);
+		this.nextButton.addActionListener(actionListener);
 	}
 
 	public static Color stringToColor(final String value) {

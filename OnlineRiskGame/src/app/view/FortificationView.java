@@ -58,13 +58,12 @@ public class FortificationView extends JFrame implements View {
 	private CountryViewRenderer countriesViewRenderer;
 
 	public JButton[] button;
-	public JButton button2;
-	public JButton button3;
-	private List<String> countryOwned;
+	
+
 	private int remainArmies;
 
-	public FortificationView(GameMapModel gameMapModel, PlayerModel playerModel, int remainArmies) {
-
+	public FortificationView(GameMapModel gameMapModel) {
+		this.gameMapModel = gameMapModel;
 		this.setTitle("Fortification Phase");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(300, 200);
@@ -80,10 +79,10 @@ public class FortificationView extends JFrame implements View {
 		graphicPanel.setLayout(null);
 
 		this.add(welcomePanel);
-		this.playerModel = playerModel;
-		this.remainArmies = remainArmies;
-
-		updateWindow(gameMapModel, playerModel, remainArmies);
+		this.playerModel = this.gameMapModel.getPlayerTurn();
+		this.remainArmies = 1;
+		this.moveButton = new JButton("Move");
+		updateWindow(this.gameMapModel, this.playerModel, remainArmies);
 		welcomePanel.setLayout(null);
 		graphicPanel.setLayout(null);
 	}
@@ -155,7 +154,7 @@ public class FortificationView extends JFrame implements View {
 		countryListComboBox.setBounds(1300, 260, 150, 25);
 		welcomePanel.add(countryListComboBox);
 
-		this.moveButton = new JButton("Move");
+		
 		this.moveButton.setBounds(1300, 300, 150, 25);
 		welcomePanel.add(this.moveButton);
 

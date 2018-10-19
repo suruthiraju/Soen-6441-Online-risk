@@ -14,11 +14,12 @@ public class FortificationController implements ActionListener {
 	private ArrayList<ContinentsModel> listOfContinents = new ArrayList<ContinentsModel>();
 	private ArrayList<CountryModel> listOfCountrys = new ArrayList<CountryModel>();
 	private ArrayList<PlayerModel> listOfPlayers = new ArrayList<PlayerModel>();
-	private GameMapModel GameMap = new GameMapModel();
+	private GameMapModel gameMapModel = null ;
 	private int noOfPlayers;
 
-	public FortificationController() {
-		theFortificationView = new FortificationView();
+	public FortificationController(GameMapModel gameMapModel) {
+		this.gameMapModel = gameMapModel;
+		theFortificationView = new FortificationView(this.gameMapModel);
 		theFortificationView.setActionListener(this);
 		theFortificationView.setVisible(true);
 		//GamePlayerModel GamePlay = new GamePlayerModel(GameMap, listOfPlayers);
@@ -39,6 +40,19 @@ public class FortificationController implements ActionListener {
 	}	
 	
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent actionEvent) {
+		if(actionEvent.getSource().equals(this.theFortificationView.moveButton)) {
+			int index = this.gameMapModel.getPlayerIndex();
+			index++;
+			if(this.gameMapModel.getListOfPlayers().size()>index) {
+				this.gameMapModel.setPlayerIndex(index);
+				new GamePlayController(this.gameMapModel, this.gameMapModel.getListOfPlayers());
+				this.theFortificationView.dispose();
+			}
+			else {
+				this.theFortificationView.dispose();
+			}
+		}
+		
 	}
 }

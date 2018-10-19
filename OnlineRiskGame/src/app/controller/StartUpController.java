@@ -38,11 +38,12 @@ public class StartUpController implements ActionListener {
 
 	public StartUpController(ArrayList<PlayerModel> listOfPlayers, GameMapModel gmM) {
 		this.listOfPlayers = listOfPlayers;
+		
 		this.gmM = gmM;
 
 		listOfCountrys = this.gmM.getCountries();
 		noOfPlayers = listOfPlayers.size();
-
+		
 		allocateArmies();
 		checkForOverallArmies();
 		// Tejas -- Implement with the constructor of view as seen
@@ -60,6 +61,7 @@ public class StartUpController implements ActionListener {
 			this.gmM.addObserver(theStartUpView);
 			theStartUpView.setVisible(true);
 		}
+		this.gmM.setListOfPlayers(listOfPlayers);
 	}
 
 	public void allocateArmies() {
@@ -169,6 +171,11 @@ public class StartUpController implements ActionListener {
 						.setText("It's " + this.listOfPlayers.get(loopValue).getNamePlayer() + "'s turn");
 			}
 		}
+		else if(actionEvent.getSource().equals(theStartUpView.nextButton)) {
+			this.gmM.setPlayerIndex(0);
+			new GamePlayController(gmM, listOfPlayers);
+			this.theStartUpView.dispose();
+		}
 	}
 
 	private void checkForOverallArmies1() {
@@ -179,6 +186,7 @@ public class StartUpController implements ActionListener {
 			}
 		}
 		if (numb == 0) {
+			this.gmM.setPlayerIndex(0);
 			armiesNull = true;
 			new GamePlayController(gmM, listOfPlayers);
 			// this.theStartUpView.dispose();
@@ -193,6 +201,7 @@ public class StartUpController implements ActionListener {
 			}
 		}
 		if (numb == 0) {
+			this.gmM.setPlayerIndex(0);
 			armiesNull = true;
 			new GamePlayController(gmM, listOfPlayers);
 		}

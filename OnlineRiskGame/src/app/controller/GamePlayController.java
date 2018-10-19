@@ -21,17 +21,19 @@ import app.model.*;
 public class GamePlayController implements ActionListener {
 	
 	private ArrayList<PlayerModel> listOfPlayers = new ArrayList<PlayerModel>();
-
-	public GamePlayController(GameMapModel gMM, ArrayList<PlayerModel> listOfPlayers) {
+	public GameMapModel gameMapModel = null;
+	public GamePlayController(GameMapModel gameMapModel, ArrayList<PlayerModel> listOfPlayers) {
+		this.gameMapModel = gameMapModel;
 		this.listOfPlayers = listOfPlayers;
 		gamePlay();		
 	}
 	
 	public void gamePlay() {
-		for (int i=0; i<listOfPlayers.size();i++) {
-			new ReinforcementController();
-			new FortificationController();
-		}
+		
+			this.gameMapModel.setPlayerTurn(this.listOfPlayers.get(this.gameMapModel.getPlayerIndex()));
+			new ReinforcementController(this.gameMapModel);
+			
+		
 	}
 	
 	@Override
