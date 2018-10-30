@@ -62,9 +62,11 @@ public class CreateCountryController implements ActionListener {
 
 		CountryModel temp = new CountryModel();
 
-		if (actionEvent.getSource().equals(this.createCountryView.addButton)) {
-			if (this.createCountryView.countryValue.getText().equals(null)
-					&& ("".equals(this.createCountryView.countryValue.getText()))) {
+		if (actionEvent.getSource().equals(this.createCountryView.addButton)) 
+		{
+			if (this.createCountryView.countryValue.getText() != null
+					&& this.createCountryView.countryValue.getText() != "") 
+			{
 
 				if (sameCountryValidation()) {
 					JOptionPane.showOptionDialog(null, "Please enter a different country", "Invalid",
@@ -82,7 +84,9 @@ public class CreateCountryController implements ActionListener {
 					this.gameMapModel.setCountries(this.gameMapModel.getCountries());
 				}
 
-			} else {
+			} 
+			else 
+			{
 				JOptionPane.showOptionDialog(null, "Please enter a valid input", "Invalid", JOptionPane.DEFAULT_OPTION,
 						JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
 				return;
