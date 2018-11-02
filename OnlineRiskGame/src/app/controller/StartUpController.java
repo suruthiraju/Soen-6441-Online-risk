@@ -1,12 +1,16 @@
 package app.controller;
 
+import java.awt.Color;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import app.model.CountryModel;
 import app.model.GameMapModel;
+import app.model.GamePlayModel;
 import app.model.PlayerModel;
 import app.view.StartUpView;
 
@@ -22,18 +26,24 @@ import app.view.StartUpView;
 public class StartUpController implements ActionListener {
 
 	private StartUpView theStartUpView;
-	private List<CountryModel> listOfCountrys = new ArrayList<CountryModel>();
-	private ArrayList<PlayerModel> listOfPlayers = new ArrayList<PlayerModel>();
-	private GameMapModel gameMapModel;
+	private GamePlayModel gamePlayModel;
 	private int noOfPlayers;
 	private int[] noOfCountryForRuler = new int[5];
-	private String[] colorForRuler = new String[5];
+	private Color[] colorForRuler = new Color[5];
 	private int[] totalArmiesPlayer = new int[5];
 	private int[] remainArmies = new int[5];
 	private int loopValue = 0;
 	private boolean armiesNull = false;
 	private int initial = 0;
-
+	//private ArrayList<CountryModel>[] ownedCountry = (ArrayList<CountryModel>[])new ArrayList[5];
+	//private ArrayList<List<CountryModel>>[] ownedCountry = new ArrayList<List<CountryModel>>[5];
+	
+	private List<CountryModel> ownedCountry0 = new ArrayList<>();
+	private List<CountryModel> ownedCountry1 = new ArrayList<>();
+	private List<CountryModel> ownedCountry2 = new ArrayList<>();
+	private List<CountryModel> ownedCountry3 = new ArrayList<>();
+	private List<CountryModel> ownedCountry4 = new ArrayList<>();
+	
 	/**
 	 * Initialization of controller
 	 */
@@ -43,38 +53,33 @@ public class StartUpController implements ActionListener {
 	/**
 	 * Constructor initializes values and sets the screen too visible
 	 * 
-	 * @param listOfPlayers
-	 * @param gameMapModel
+	 * @param gamePlayModel
 	 */
-	public StartUpController(ArrayList<PlayerModel> listOfPlayers, GameMapModel gameMapModel) {
+	public StartUpController(GamePlayModel gamePlayModel) {
 
-		this.listOfPlayers = listOfPlayers;
-		this.gameMapModel = gameMapModel;
-
-		listOfCountrys = this.gameMapModel.getCountries();
-		noOfPlayers = listOfPlayers.size();
+		this.gamePlayModel = gamePlayModel;
+		noOfPlayers = this.gamePlayModel.getPlayers().size();
 
 		allocateArmies();
 		checkForOverallArmies();
 		initial = 1;
 
 		if (armiesNull == false) {
-			while (listOfPlayers.get(loopValue).getremainTroop() == 0) {
+			while (this.gamePlayModel.getPlayers().get(loopValue).getremainTroop() == 0) {
 				loopValue++;
-				if (loopValue > listOfPlayers.size()) {
+				if (loopValue > this.gamePlayModel.getPlayers().size()) {
 					loopValue = 0;
 					break;
 				}
 			}
-			this.theStartUpView = new StartUpView(this.gameMapModel, this.listOfPlayers.get(loopValue));
+			this.theStartUpView = new StartUpView(this.gamePlayModel.getGameMap(), this.gamePlayModel.getPlayers().get(loopValue));
 			this.theStartUpView.setActionListener(this);
 			for (int i = 0; i < noOfPlayers; i++) {
-				this.listOfPlayers.get(i).addObserver(this.theStartUpView);
+				this.gamePlayModel.getPlayers().get(i).addObserver(this.theStartUpView);
 			}
-			this.gameMapModel.addObserver(theStartUpView);
+			this.gamePlayModel.getGameMap().addObserver(theStartUpView);
 			this.theStartUpView.setVisible(true);
 		}
-		this.gameMapModel.setListOfPlayers(listOfPlayers);
 	}
 
 	/**
@@ -88,34 +93,41 @@ public class StartUpController implements ActionListener {
 		noOfCountryForRuler[3] = 0;
 		noOfCountryForRuler[4] = 0;
 
-		colorForRuler[0] = "red";
-		colorForRuler[1] = "blue";
-		colorForRuler[2] = "green";
-		colorForRuler[3] = "yellow";
-		colorForRuler[4] = "grey";
-
-		for (int i = 0; i < listOfCountrys.size(); i++) {
-			int playerNumber = getRandomBetweenRange(1, noOfPlayers);
+		colorForRuler[0] = Color.RED;
+		colorForRuler[1] = Color.BLUE;
+		colorForRuler[2] = Color.GREEN;
+		colorForRuler[3] = Color.YELLOW;
+		colorForRuler[4] = Color.GRAY;
+		
+		int playerNumber = 0;
+		
+		for (int i = 0; i < this.gamePlayModel.getGameMap().getCountries().size(); i++) {
+			playerNumber = getRandomBetweenRange(1, noOfPlayers);
 			System.out.println("playerNumber " + playerNumber);
 			String namePlayer = "Player" + playerNumber;
-			PlayerModel tempMyPlayers = new PlayerModel(namePlayer, 0, colorForRuler[playerNumber - 1], 0);
-			listOfCountrys.get(i).setRuler(tempMyPlayers);
-			listOfCountrys.get(i).setArmies(1);
+			
+			this.gamePlayModel.getGameMap().getCountries().get(i).setRulerName(namePlayer);
+			this.gamePlayModel.getGameMap().getCountries().get(i).setArmies(1);
 			switch (namePlayer) {
 			case "Player1":
 				noOfCountryForRuler[0]++;
+				ownedCountry0.add(this.gamePlayModel.getGameMap().getCountries().get(i));
 				break;
 			case "Player2":
 				noOfCountryForRuler[1]++;
+				ownedCountry1.add(this.gamePlayModel.getGameMap().getCountries().get(i));
 				break;
 			case "Player3":
 				noOfCountryForRuler[2]++;
+				ownedCountry2.add(this.gamePlayModel.getGameMap().getCountries().get(i));
 				break;
 			case "Player4":
 				noOfCountryForRuler[3]++;
+				ownedCountry3.add(this.gamePlayModel.getGameMap().getCountries().get(i));
 				break;
 			case "Player5":
 				noOfCountryForRuler[4]++;
+				ownedCountry4.add(this.gamePlayModel.getGameMap().getCountries().get(i));
 				break;
 			default:
 				break;
@@ -138,11 +150,6 @@ public class StartUpController implements ActionListener {
 				+ " " + totalArmiesPlayer[3]);
 
 		assignPlayerModel();
-		for (int i = 0; i < listOfCountrys.size(); i++) {
-			System.out.println(listOfCountrys.get(i).getCountryName());
-			System.out.println(listOfCountrys.get(i).getRuler());
-			System.out.println(listOfCountrys.get(i).getArmies());
-		}
 	}
 
 	/**
@@ -150,13 +157,25 @@ public class StartUpController implements ActionListener {
 	 */
 	public void assignPlayerModel() {
 		for (int i = 0; i < noOfPlayers; i++) {
-			listOfPlayers.get(i).setColor(colorForRuler[i]);
-			listOfPlayers.get(i).setmyTroop(totalArmiesPlayer[i]);
-			listOfPlayers.get(i).setremainTroop(remainArmies[i]);
+			if ("Player1".equals(this.gamePlayModel.getPlayers().get(i).getNamePlayer())) {
+				this.gamePlayModel.getPlayers().get(i).setOwnedCountries(ownedCountry0);
+			}else if ("Player2".equals(this.gamePlayModel.getPlayers().get(i).getNamePlayer())){
+				this.gamePlayModel.getPlayers().get(i).setOwnedCountries(ownedCountry1);
+			}else if ("Player3".equals(this.gamePlayModel.getPlayers().get(i).getNamePlayer())){
+				this.gamePlayModel.getPlayers().get(i).setOwnedCountries(ownedCountry2);
+			}else if ("Player4".equals(this.gamePlayModel.getPlayers().get(i).getNamePlayer())){
+				this.gamePlayModel.getPlayers().get(i).setOwnedCountries(ownedCountry3);
+			}else if ("Player5".equals(this.gamePlayModel.getPlayers().get(i).getNamePlayer())){
+				this.gamePlayModel.getPlayers().get(i).setOwnedCountries(ownedCountry4);
+			}
+			
+			this.gamePlayModel.getPlayers().get(i).setColor(colorForRuler[i]);
+			this.gamePlayModel.getPlayers().get(i).setmyTroop(totalArmiesPlayer[i]);
+			this.gamePlayModel.getPlayers().get(i).setremainTroop(remainArmies[i]);
 		}
-		for (int i = 0; i < listOfPlayers.size(); i++) {
+		for (int i = 0; i < this.gamePlayModel.getPlayers().size(); i++) {
 			System.out.println(
-					"player Model " + listOfPlayers.get(i).getNamePlayer() + " " + listOfPlayers.get(i).getmyTroop());
+					"player Model " + this.gamePlayModel.getPlayers().get(i).getNamePlayer() + " " + this.gamePlayModel.getPlayers().get(i).getmyTroop());
 		}
 	}
 
@@ -186,18 +205,18 @@ public class StartUpController implements ActionListener {
 				System.out.println("selectedArmies " + selectedArmies);
 
 				System.out.println("loopvlaue " + loopValue);
-				System.out.println("playername " + this.listOfPlayers.get(loopValue).getNamePlayer());
+				System.out.println("playername " + this.gamePlayModel.getPlayers().get(loopValue).getNamePlayer());
 
-				this.gameMapModel.robinTroopAssignButton(loopValue, this.listOfPlayers.get(loopValue).getNamePlayer(),
-						countryName, selectedArmies, listOfPlayers);
+				this.gamePlayModel.getGameMap().robinTroopAssignButton(loopValue, this.gamePlayModel.getPlayers().get(loopValue).getNamePlayer(),
+						countryName, selectedArmies, this.gamePlayModel.getPlayers());
 			}
 			loopValue++;
 
-			if (loopValue < listOfPlayers.size()) {
+			if (loopValue < this.gamePlayModel.getPlayers().size()) {
 				System.out.println("loopvlaue - " + loopValue);
 				this.theStartUpView.welcomeLabel
-						.setText("It's " + this.listOfPlayers.get(loopValue).getNamePlayer() + "'s turn");
-				this.listOfPlayers.get(loopValue).callObservers();
+						.setText("It's " + this.gamePlayModel.getPlayers().get(loopValue).getNamePlayer() + "'s turn");
+				this.gamePlayModel.getPlayers().get(loopValue).callObservers();
 
 			} else {
 				System.out.println("here");
@@ -207,14 +226,14 @@ public class StartUpController implements ActionListener {
 					loopValue = 0;
 					System.out.println("loopvlaue -> " + loopValue);
 					this.theStartUpView.welcomeLabel
-							.setText("It's " + this.listOfPlayers.get(loopValue).getNamePlayer() + "'s turn");
-					this.listOfPlayers.get(loopValue).callObservers();
+							.setText("It's " + this.gamePlayModel.getPlayers().get(loopValue).getNamePlayer() + "'s turn");
+					this.gamePlayModel.getPlayers().get(loopValue).callObservers();
 				}
 			}
 
 		} else if (actionEvent.getSource().equals(theStartUpView.nextButton)) {
-			this.gameMapModel.setPlayerIndex(0);
-			new GamePlayController(gameMapModel, listOfPlayers);
+			this.gamePlayModel.getGameMap().setPlayerIndex(0);
+			new GamePlayController(gamePlayModel);
 			this.theStartUpView.dispose();
 		}
 	}
@@ -225,15 +244,15 @@ public class StartUpController implements ActionListener {
 	 */
 	private void checkForOverallArmies() {
 		int numb = 0;
-		for (int i = 0; i < listOfPlayers.size(); i++) {
-			if (listOfPlayers.get(i).getremainTroop() != 0) {
+		for (int i = 0; i < this.gamePlayModel.getPlayers().size(); i++) {
+			if (this.gamePlayModel.getPlayers().get(i).getremainTroop() != 0) {
 				numb++;
 			}
 		}
 		if (numb == 0) {
-			this.gameMapModel.setPlayerIndex(0);
+			this.gamePlayModel.getGameMap().setPlayerIndex(0);
 			armiesNull = true;
-			new GamePlayController(gameMapModel, listOfPlayers);
+			new GamePlayController(gamePlayModel);
 			if (initial == 1) {
 				this.theStartUpView.dispose();
 			}

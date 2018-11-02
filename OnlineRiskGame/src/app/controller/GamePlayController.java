@@ -4,7 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import app.model.CountryModel;
 import app.model.GameMapModel;
+import app.model.GamePlayModel;
 import app.model.PlayerModel;
 
 /**
@@ -17,28 +19,57 @@ import app.model.PlayerModel;
  */
 
 public class GamePlayController implements ActionListener {
-
-	private ArrayList<PlayerModel> listOfPlayers = new ArrayList<PlayerModel>();
-	public GameMapModel gameMapModel = null;
+	
+	//use the model gameplay instead of member variables
+	public GamePlayModel gamePlayModel = null;
 
 	/**
 	 * Constructor initializes values and sets the screen too visible
 	 * 
-	 * @param gameMapModel
-	 * @param listOfPlayers
+	 * @param gamePlayModel
 	 */
-	public GamePlayController(GameMapModel gameMapModel, ArrayList<PlayerModel> listOfPlayers) {
-		this.gameMapModel = gameMapModel;
-		this.listOfPlayers = listOfPlayers;
+	public GamePlayController(GamePlayModel gamePlayModel) {
+		this.gamePlayModel = gamePlayModel;
 		gamePlay();
 	}
 
 	public void gamePlay() {
 
-		this.gameMapModel.setPlayerTurn(this.listOfPlayers.get(this.gameMapModel.getPlayerIndex()));
-		new ReinforcementController(this.gameMapModel);
+		this.gamePlayModel.getGameMap().setPlayerTurn(this.gamePlayModel.getPlayers().get(this.gamePlayModel.getGameMap().getPlayerIndex()));
+		new ReinforcementController(this.gamePlayModel.getGameMap());
 
 	}
+	public int calculateArmies() {
+		
+		ArrayList<CountryModel> listOfCountrys = new ArrayList<CountryModel>();
+		
+		int reinforceArmies = 0;
+
+		for (int i = 0; i < this.gamePlayModel.getGameMap().getCountries().size(); i++) {
+			if (this.gamePlayModel.getGameMap().getCountries().get(i).getRulerName().equals(this.gamePlayModel.getGameMap().getPlayerTurn())) {
+				listOfCountrys.add(this.gamePlayModel.getGameMap().getCountries().get(i));
+			}
+		}
+		if (listOfCountrys.size() > 3) {
+			reinforceArmies = 3 + Math.round(listOfCountrys.size() / 3);
+		} else {
+			reinforceArmies = 3;
+		}
+		if (reinforceArmies > 12) {
+			reinforceArmies = 12;
+		}
+		return reinforceArmies;
+	
+	}
+		
+		public void attack(PlayerModel currentPlayer)
+		{
+			PlayerModel defender; // take the country detail from the view and fill the player controlling it.
+		}
+		public void reinforcement(PlayerModel currentPlayer)
+		{
+			 // take the country detail from the view and fill the player controlling it.
+		}
 
 	/**
 	 * This method performs action, by Listening the action event set in view.

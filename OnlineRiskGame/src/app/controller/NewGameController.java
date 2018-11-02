@@ -1,10 +1,12 @@
 package app.controller;
 
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -12,6 +14,7 @@ import javax.swing.JOptionPane;
 import app.model.ContinentsModel;
 import app.model.CountryModel;
 import app.model.GameMapModel;
+import app.model.GamePlayModel;
 import app.model.PlayerModel;
 import app.view.NewGameView;
 
@@ -28,7 +31,8 @@ public class NewGameController implements ActionListener {
 
 	private NewGameView theView;
 	private ArrayList<PlayerModel> listOfPlayers = new ArrayList<PlayerModel>();
-	private GameMapModel gmM = new GameMapModel();
+	private GameMapModel gameMapModel = new GameMapModel();
+	private GamePlayModel gamePlayModel = new GamePlayModel();
 	private int noOfPlayers;
     
     /**
@@ -53,7 +57,7 @@ public class NewGameController implements ActionListener {
 			if(value == JFileChooser.APPROVE_OPTION){				
 				try {
 					File mapFile = theView.chooseMap.getSelectedFile();
-					gmM = new GameMapModel(mapFile);
+					gameMapModel = new GameMapModel(mapFile);
 					JOptionPane.showMessageDialog(theView, "File Loaded Successfully! Click Next to Play!","Map Loaded",JOptionPane.INFORMATION_MESSAGE);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -74,15 +78,18 @@ public class NewGameController implements ActionListener {
 	 *  Check for the player validation
 	 */
 	public void playerValidation() {
-		if ( gmM.getCountries().size() > noOfPlayers) {
+		if ( gameMapModel.getCountries().size() > noOfPlayers) {
 			System.out.println("no of players");
 			String PlayerName = "";
+			List<CountryModel> listOfCountry = null;
 			for (int i=0; i<noOfPlayers; i++) {
 				PlayerName = "Player"+ (i+1);
-				PlayerModel pm = new PlayerModel(PlayerName, 0, "",0);
+				PlayerModel pm = new PlayerModel(PlayerName, 0, Color.WHITE,0,listOfCountry);
 				listOfPlayers.add(pm);				
 			}
-			new StartUpController(listOfPlayers, gmM);
+			gamePlayModel.setGameMap(gameMapModel);
+			gamePlayModel.setPlayers(listOfPlayers);
+			new StartUpController(gamePlayModel);
 			this.theView.dispose();
 		} else {
 			JOptionPane.showMessageDialog(theView,

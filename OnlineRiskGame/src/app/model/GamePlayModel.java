@@ -1,5 +1,6 @@
 package app.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,20 +9,23 @@ import java.util.List;
  * 
  * @author GROUP-35
  */
-public class GamePlayerModel {
+public class GamePlayModel {
 
 	private GameMapModel gameMap;
-	private List<PlayerModel> players;
-
+	private ArrayList<PlayerModel> players;
 	/**
 	 * Constructor
 	 * 
 	 * @param gameMap
 	 * @param players
 	 */
-	public GamePlayerModel(GameMapModel gameMap, List<PlayerModel> players) {
+	public GamePlayModel(GameMapModel gameMap, ArrayList<PlayerModel> players) {
 		this.gameMap = gameMap;
 		this.players = players;
+	}
+
+	public GamePlayModel() {
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -43,7 +47,7 @@ public class GamePlayerModel {
 	/**
 	 * @return the list of players.
 	 */
-	public List<PlayerModel> getPlayers() {
+	public ArrayList<PlayerModel> getPlayers() {
 		return players;
 	}
 
@@ -52,7 +56,11 @@ public class GamePlayerModel {
 	 * 
 	 * @param players
 	 */
-	public void setPlayers(List<PlayerModel> players) {
+	public void setPlayers(ArrayList<PlayerModel> players) {
 		this.players = players;
 	}
+
+	
+	
+	
 }

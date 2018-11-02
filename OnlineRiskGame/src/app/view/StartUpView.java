@@ -65,7 +65,7 @@ public class StartUpView extends JFrame implements View {
 	/**
 	 * constructor for Start Up Phase View where the variables are initialized
 	 * 
-	 * @param gameMapModel
+	 * @param gamePlayModel
 	 * @param playerModel
 	 */
 	public StartUpView(GameMapModel gameMapModel, PlayerModel playerModel) {
@@ -142,7 +142,7 @@ public class StartUpView extends JFrame implements View {
 		ArrayList<CountryModel> listOfCountries = new ArrayList<CountryModel>();
 		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
 			if (playerModel.getNamePlayer()
-					.equals(this.gameMapModel.getCountries().get(i).getRuler().getNamePlayer())) {
+					.equals(this.gameMapModel.getCountries().get(i).getRulerName())) {
 				listOfCountries.add(this.gameMapModel.getCountries().get(i));
 			}
 		}
@@ -174,10 +174,10 @@ public class StartUpView extends JFrame implements View {
 			country.setToolTipText("Troops: " + this.gameMapModel.getCountries().get(i).getArmies());
 			country.setFont(smallFont);
 
-			Border border = BorderFactory
-					.createLineBorder(stringToColor(this.gameMapModel.getCountries().get(i).getRuler().getColor()), 3);
+//			Border border = BorderFactory
+//					.createLineBorder(stringToColor(this.gameMapModel.getCountries().get(i).getRuler().getColor()), 3);
 
-			country.setBorder(border);
+//			country.setBorder(border);
 
 			country.setOpaque(true);
 			country.setBounds(this.gameMapModel.getCountries().get(i).getXPosition() * 2,

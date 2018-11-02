@@ -21,10 +21,10 @@ public class CountryModel extends JButton {
 	private int yPosition;
 	private String continentName;
 	private List<CountryModel> linkedCountries;
-	private PlayerModel ruler;
 	private int armies;
 	private Color backgroundColor;
 	private Color borderColor;
+	private String rulerName;
 
 	/**
 	 * Constructor of CountryModel with parameters
@@ -38,16 +38,16 @@ public class CountryModel extends JButton {
 	 * @param armies
 	 */
 	public CountryModel(String countryName, int xPosition, int yPosition, String continentName, List linkedCountries,
-			PlayerModel ruler, int armies) {
+			PlayerModel ruler, int armies, String rulerName ) {
 		this.countryName = countryName;
 		this.xPosition = xPosition;
 		this.yPosition = yPosition;
 		this.continentName = continentName;
 		this.linkedCountries = linkedCountries;
-		this.ruler = ruler;
 		this.armies = armies;
 		this.backgroundColor = Color.WHITE;
 		this.borderColor = Color.BLACK;
+		this.rulerName = rulerName;
 	}
 
 	/**
@@ -138,23 +138,6 @@ public class CountryModel extends JButton {
 	}
 
 	/**
-	 * 
-	 * @return the Player who owns the country.
-	 */
-	public PlayerModel getRuler() {
-		return ruler;
-	}
-
-	/**
-	 * Sets the Player as the owner of the country.
-	 * 
-	 * @param ruler
-	 */
-	public void setRuler(PlayerModel ruler) {
-		this.ruler = ruler;
-	}
-
-	/**
 	 * @return the army number of the country.
 	 */
 	public int getArmies() {
@@ -203,5 +186,21 @@ public class CountryModel extends JButton {
 		this.setBorder(new LineBorder(borderColor));
 		this.borderColor = borderColor;
 	}
+	/**
+	 * @return the ruler name of the country.
+	 */
+	public String getRulerName() {
+		return rulerName;
+	}
+
+	/**
+	 * Sets the ruler name of the country.
+	 * 
+	 * @param rulerName
+	 */
+	public void setRulerName(String rulerName) {
+		this.rulerName = rulerName;
+	}
+
 
 }

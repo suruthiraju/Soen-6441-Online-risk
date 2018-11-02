@@ -1,5 +1,7 @@
 package app.model;
 
+import java.awt.Color;
+import java.util.List;
 import java.util.Observable;
 
 /**
@@ -14,8 +16,9 @@ public class PlayerModel extends Observable {
 
 	private String namePlayer;
 	private int myTroop;
-	private String color;
+	private Color color;
 	private int remainTroop;
+	private List<CountryModel> ownedCountries;
 
 	/**
 	 * Constructor of PlayerModel
@@ -24,11 +27,12 @@ public class PlayerModel extends Observable {
 	 * @param myTroop
 	 * @param color
 	 */
-	public PlayerModel(String namePlayer, int myTroop, String color, int remainTroop) {
+	public PlayerModel(String namePlayer, int myTroop, Color color, int remainTroop, List ownedCountries) {
 		this.namePlayer = namePlayer;
 		this.myTroop = myTroop;
 		this.color = color;
 		this.remainTroop = remainTroop;
+		this.ownedCountries = ownedCountries;
 	}
 
 	/**
@@ -73,7 +77,7 @@ public class PlayerModel extends Observable {
 	/**
 	 * @return the continent name.
 	 */
-	public String getColor() {
+	public Color getColor() {
 		return color;
 	}
 
@@ -82,7 +86,7 @@ public class PlayerModel extends Observable {
 	 * 
 	 * @param color
 	 */
-	public void setColor(String color) {
+	public void setColor(Color color) {
 		this.color = color;
 	}
 
@@ -109,5 +113,20 @@ public class PlayerModel extends Observable {
 		setChanged();
 		notifyObservers(this);
 
+	}
+	/**
+	 * @return the list of array.
+	 */
+	public List<CountryModel> getOwnedCountries() {
+		return ownedCountries;
+	}
+
+	/**
+	 * Sets the list of array.
+	 * 
+	 * @param ownedCountries
+	 */
+	public void setOwnedCountries(List<CountryModel> ownedCountries) {
+		this.ownedCountries = ownedCountries;
 	}
 }
