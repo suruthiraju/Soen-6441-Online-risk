@@ -60,6 +60,27 @@ public class GamePlayModel {
 		this.players = players;
 	}
 
+	public PlayerModel getPlayer(CountryModel parmCountry)
+	{
+		int i,j;
+		for(i = 0; i<= players.size(); i++)
+		{
+			for (j=0; j<= players.get(i).getOwnedCountries().size();j++)
+			{
+				if(parmCountry.equals(players.get(i).getOwnedCountries().get(j)))
+				{
+					break;
+				}
+				else
+				{
+					continue;
+				}
+			}
+		}
+		return players.get(i);
+		
+		
+	}
 	
 	
 	
