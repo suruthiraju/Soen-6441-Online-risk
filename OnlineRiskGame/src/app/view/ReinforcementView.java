@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -38,7 +39,7 @@ import app.model.PlayerModel;
  *
  */
 
-public class ReinforcementView extends JFrame implements View {
+public class ReinforcementView extends JFrame implements Observer {
 
 	public GameMapModel gameMapModel;
 	public PlayerModel playerModel;
@@ -92,7 +93,7 @@ public class ReinforcementView extends JFrame implements View {
 	 * This updateWindow method is called whenever the model is updated. It updates
 	 * the Screen for Reinforcement Phase
 	 * 
-	 * @param gameMapModel
+	 * @param gamePlayModel
 	 * @param playerModel
 	 */
 	public void updateWindow(GamePlayModel gamePlayModel, PlayerModel playerModel) {
@@ -242,6 +243,8 @@ public class ReinforcementView extends JFrame implements View {
 			this.gameMapModel = (GameMapModel) obs;
 		} else if (obs instanceof PlayerModel) {
 			this.playerModel = (PlayerModel) obs;
+		} else if (obs instanceof GamePlayModel) {
+			this.gamePlayModel = (GamePlayModel) obs;
 		}
 		this.updateWindow(this.gamePlayModel, this.playerModel);
 		this.revalidate();
@@ -254,7 +257,6 @@ public class ReinforcementView extends JFrame implements View {
 	 * 
 	 * @see app.helper.View#setActionListener(java.awt.event.ActionListener)
 	 */
-	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.addButton.addActionListener(actionListener);
 	}

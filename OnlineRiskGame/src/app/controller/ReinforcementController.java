@@ -38,6 +38,7 @@ public class ReinforcementController implements ActionListener {
 		theReinforcementView.setVisible(true);
 
 		this.gamePlayModel.getGameMap().addObserver(theReinforcementView);
+		this.gamePlayModel.addObserver(theReinforcementView);
 		for (int i = 0; i < noOfPlayers; i++) {
 			this.listOfPlayers.get(i).addObserver(this.theReinforcementView);
 		}

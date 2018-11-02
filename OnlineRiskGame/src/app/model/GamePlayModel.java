@@ -82,15 +82,15 @@ public class GamePlayModel extends Observable  {
 		
 	}
 	public void setSelectedArmiesToCountries(int selectedArmies, CountryModel countryName) {
-		for (int i = 0; i < this.getGameMap().getCountries().size(); i++) {
-			if (this.getGameMap().getCountries().get(i).equals(countryName)) {
-				this.getGameMap().getCountries().get(i).setArmies(this.getGameMap().getCountries().get(i).getArmies() + selectedArmies);
+		for (int i = 0; i < this.gameMap.getCountries().size(); i++) {
+			if (this.gameMap.getCountries().get(i).equals(countryName)) {
+				this.gameMap.getCountries().get(i).setArmies(this.gameMap.getCountries().get(i).getArmies() + selectedArmies);
 				for (int j=0; j<this.getPlayers().size();j++) {
-					if(this.getPlayers().get(j).getNamePlayer().equals(this.getGameMap().getCountries().get(i).getRulerName())) {
+					if(this.getPlayers().get(j).getNamePlayer().equals(this.gameMap.getCountries().get(i).getRulerName())) {
 						this.getPlayers().get(j).setmyTroop(this.getPlayers().get(j).getmyTroop() - selectedArmies);
 					}
 				}
-				this.getGameMap().getPlayerTurn().setmyTroop(this.getGameMap().getPlayerTurn().getmyTroop() - selectedArmies);
+				//this.gameMap.getPlayerTurn().setmyTroop(this.gameMap.getPlayerTurn().getmyTroop() - selectedArmies);
 			}
 		}
 		callObservers();
