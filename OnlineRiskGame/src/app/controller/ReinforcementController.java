@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import app.model.CountryModel;
 import app.model.GameMapModel;
+import app.model.GamePlayModel;
 import app.model.PlayerModel;
 import app.view.ReinforcementView;
 
@@ -21,7 +22,7 @@ public class ReinforcementController implements ActionListener {
 	private ReinforcementView theReinforcementView;
 	private ArrayList<CountryModel> listOfCountrys = new ArrayList<CountryModel>();
 	private ArrayList<PlayerModel> listOfPlayers = new ArrayList<PlayerModel>();
-	private GameMapModel gameMapModel = null;
+	private GamePlayModel gamePlayModel = null;
 	private int noOfPlayers;
 
 	/**
@@ -29,14 +30,14 @@ public class ReinforcementController implements ActionListener {
 	 * 
 	 * @param gameMapModel
 	 */
-	public ReinforcementController(GameMapModel gameMapModel) {
-		this.gameMapModel = gameMapModel;
-		this.gameMapModel.getPlayerTurn().setmyTroop(this.calculateArmies());
-		theReinforcementView = new ReinforcementView(this.gameMapModel);
+	public ReinforcementController(GamePlayModel gamePlayModel) {
+		this.gamePlayModel = gamePlayModel;
+		this.gamePlayModel.getGameMap().getPlayerTurn().setmyTroop(this.calculateArmies());
+		theReinforcementView = new ReinforcementView(this.gamePlayModel.getGameMap());
 		theReinforcementView.setActionListener(this);
 		theReinforcementView.setVisible(true);
 
-		this.gameMapModel.addObserver(theReinforcementView);
+		this.gamePlayModel.getGameMap().addObserver(theReinforcementView);
 		for (int i = 0; i < noOfPlayers; i++) {
 			this.listOfPlayers.get(i).addObserver(this.theReinforcementView);
 		}
@@ -50,9 +51,9 @@ public class ReinforcementController implements ActionListener {
 	public int calculateArmies() {
 		int reinforceArmies = 0;
 
-		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
-			if (this.gameMapModel.getCountries().get(i).getRuler().equals(this.gameMapModel.getPlayerTurn())) {
-				this.listOfCountrys.add(this.gameMapModel.getCountries().get(i));
+		for (int i = 0; i < this.gamePlayModel.getGameMap().getCountries().size(); i++) {
+			if (this.gamePlayModel.getGameMap().getCountries().get(i).getRuler().equals(this.gamePlayModel.getGameMap().getPlayerTurn())) {
+				this.listOfCountrys.add(this.gamePlayModel.getGameMap().getCountries().get(i));
 			}
 		}
 		if (listOfCountrys.size() > 3) {
@@ -78,10 +79,10 @@ public class ReinforcementController implements ActionListener {
 			if (theReinforcementView.numOfTroopsComboBox.getSelectedItem() != null) {
 				selectedArmies = (int) theReinforcementView.numOfTroopsComboBox.getSelectedItem();
 				CountryModel countryName = (CountryModel) theReinforcementView.countryListComboBox.getSelectedItem();
-				this.gameMapModel.setSelectedArmiesToCountries(selectedArmies, countryName);
+				this.gamePlayModel.getGameMap().setSelectedArmiesToCountries(selectedArmies, countryName);
 			} else {
 
-				new FortificationController(this.gameMapModel);
+				new FortificationController(this.gamePlayModel);
 				this.theReinforcementView.dispose();
 			}
 		}

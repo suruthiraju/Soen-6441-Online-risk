@@ -36,7 +36,7 @@ public class GamePlayController implements ActionListener {
 	public void gamePlay() {
 
 		this.gamePlayModel.getGameMap().setPlayerTurn(this.gamePlayModel.getPlayers().get(this.gamePlayModel.getGameMap().getPlayerIndex()));
-		new ReinforcementController(this.gamePlayModel.getGameMap());
+		new ReinforcementController(this.gamePlayModel);
 
 	}
 	public int calculateArmies() {

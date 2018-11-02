@@ -63,13 +63,14 @@ public class GamePlayModel {
 	public PlayerModel getPlayer(CountryModel parmCountry)
 	{
 		int i,j;
-		for(i = 0; i<= players.size(); i++)
+		for(i = 0; i< players.size(); i++)
 		{
-			for (j=0; j<= players.get(i).getOwnedCountries().size();j++)
+			for (j=0; j< players.get(i).getOwnedCountries().size();j++)
 			{
 				if(parmCountry.equals(players.get(i).getOwnedCountries().get(j)))
 				{
-					break;
+					return players.get(i);
+					
 				}
 				else
 				{
@@ -77,8 +78,8 @@ public class GamePlayModel {
 				}
 			}
 		}
-		return players.get(i);
-		
+
+		return null;
 		
 	}
 	

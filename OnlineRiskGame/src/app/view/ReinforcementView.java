@@ -24,6 +24,7 @@ import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import app.helper.View;
 import app.model.CountryModel;
 import app.model.GameMapModel;
+import app.model.GamePlayModel;
 import app.model.PlayerModel;
 
 /**
@@ -39,6 +40,7 @@ public class ReinforcementView extends JFrame implements View {
 
 	public GameMapModel gameMapModel;
 	public PlayerModel playerModel;
+	public GamePlayModel gamePlayModel;
 
 	public JPanel welcomePanel;
 	public JPanel graphicPanel;
@@ -124,7 +126,7 @@ public class ReinforcementView extends JFrame implements View {
 		ArrayList<CountryModel> listOfCountries = new ArrayList<CountryModel>();
 		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
 			if (playerModel.getNamePlayer()
-					.equals(this.gameMapModel.getCountries().get(i).getRuler().getNamePlayer())) {
+					.equals(this.gameMapModel.getCountries().get(i).getRulerName())) {
 				listOfCountries.add(this.gameMapModel.getCountries().get(i));
 			}
 		}

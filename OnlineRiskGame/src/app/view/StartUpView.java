@@ -26,6 +26,7 @@ import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import app.helper.View;
 import app.model.CountryModel;
 import app.model.GameMapModel;
+import app.model.GamePlayModel;
 import app.model.PlayerModel;
 
 /**
@@ -40,6 +41,7 @@ public class StartUpView extends JFrame implements View {
 	private static final long serialVersionUID = 1L;
 	public GameMapModel gameMapModel;
 	public PlayerModel playerModel;
+	public GamePlayModel gamePlayModel;
 
 	public JPanel welcomePanel;
 	public JPanel graphicPanel;
@@ -68,7 +70,7 @@ public class StartUpView extends JFrame implements View {
 	 * @param gamePlayModel
 	 * @param playerModel
 	 */
-	public StartUpView(GameMapModel gameMapModel, PlayerModel playerModel) {
+	public StartUpView(GamePlayModel gamePlayModel, PlayerModel playerModel) {
 
 		this.setTitle("Startup Phase");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,9 +89,10 @@ public class StartUpView extends JFrame implements View {
 		this.addButton = new JButton("Add");
 		this.add(welcomePanel);
 		this.playerModel = playerModel;
+		this.gamePlayModel = gamePlayModel;
 		this.welcomeLabel = new JLabel("It's " + playerModel.getNamePlayer() + "'s turn");
 		this.welcomeLabel1 = new JLabel("Remaining Armies: " + playerModel.getremainTroop());
-		updateWindow(gameMapModel, playerModel);
+		updateWindow(gamePlayModel, playerModel);
 		welcomePanel.setLayout(null);
 		graphicPanel.setLayout(null);
 	}
@@ -98,10 +101,10 @@ public class StartUpView extends JFrame implements View {
 	 * This updateWindow method is called whenever the model is updated. It updates
 	 * the Screen for Start Up Phase
 	 * 
-	 * @param gameMapModel
+	 * @param gamePlayModel
 	 * @param playerModel
 	 */
-	public void updateWindow(GameMapModel gameMapModel, PlayerModel playerModel) {
+	public void updateWindow(GamePlayModel gamePlayModel, PlayerModel playerModel) {
 
 		welcomePanel.removeAll();
 		graphicPanel.removeAll();
@@ -109,7 +112,8 @@ public class StartUpView extends JFrame implements View {
 		Font mediumFont = new Font("Serif", Font.BOLD, 14);
 		Font smallFont = new Font("Serif", Font.BOLD, 12);
 
-		this.gameMapModel = gameMapModel;
+		this.gameMapModel = gamePlayModel.getGameMap();
+		this.gamePlayModel = gamePlayModel;
 		this.playerModel = playerModel;
 
 		welcomeLabel.setBounds(1300, 80, 300, 25);
@@ -173,11 +177,11 @@ public class StartUpView extends JFrame implements View {
 			country.setText(this.gameMapModel.getCountries().get(i).getCountryName().substring(0, 3));
 			country.setToolTipText("Troops: " + this.gameMapModel.getCountries().get(i).getArmies());
 			country.setFont(smallFont);
+			PlayerModel pm = this.gamePlayModel.getPlayer(country);
+			Border border = BorderFactory
+					.createLineBorder(pm.getColor(), 3);
 
-//			Border border = BorderFactory
-//					.createLineBorder(stringToColor(this.gameMapModel.getCountries().get(i).getRuler().getColor()), 3);
-
-//			country.setBorder(border);
+			country.setBorder(border);
 
 			country.setOpaque(true);
 			country.setBounds(this.gameMapModel.getCountries().get(i).getXPosition() * 2,
@@ -257,7 +261,7 @@ public class StartUpView extends JFrame implements View {
 		} else if (obs instanceof PlayerModel) {
 			this.playerModel = (PlayerModel) obs;
 		}
-		this.updateWindow(this.gameMapModel, this.playerModel);
+		this.updateWindow(this.gamePlayModel, this.playerModel);
 		this.revalidate();
 		this.repaint();
 

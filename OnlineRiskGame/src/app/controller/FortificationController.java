@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import app.model.CountryModel;
 import app.model.GameMapModel;
+import app.model.GamePlayModel;
 import app.utilities.Validation;
 import app.view.FortificationView;
 
@@ -24,6 +25,7 @@ import app.view.FortificationView;
 public class FortificationController implements ActionListener, ItemListener {
 
 	private FortificationView theFortificationView;
+	private GamePlayModel gamePlayModel = null;
 	private GameMapModel gameMapModel = null;
 
 	/**
@@ -31,13 +33,14 @@ public class FortificationController implements ActionListener, ItemListener {
 	 * 
 	 * @param gameMapModel
 	 */
-	public FortificationController(GameMapModel gameMapModel) {
-		this.gameMapModel = gameMapModel;
-		theFortificationView = new FortificationView(this.gameMapModel);
+	public FortificationController(GamePlayModel gamePlayModel) {
+		this.gamePlayModel = gamePlayModel;
+		this.gameMapModel =  this.gamePlayModel.getGameMap();
+		theFortificationView = new FortificationView(this.gamePlayModel.getGameMap());
 		theFortificationView.setActionListener(this);
 		theFortificationView.setItemListener(this);
 		theFortificationView.setVisible(true);
-		this.gameMapModel.addObserver(this.theFortificationView);
+		this.gamePlayModel.getGameMap().addObserver(this.theFortificationView);
 	}
 
 	/**
@@ -54,7 +57,7 @@ public class FortificationController implements ActionListener, ItemListener {
 			if (val.checkIfValidMove(gameMapModel,
 					(CountryModel) this.theFortificationView.fromCountryListComboBox.getSelectedItem(),
 					(CountryModel) this.theFortificationView.toCountryListComboBox.getSelectedItem())) {
-				this.gameMapModel.setMovingArmies(
+				this.gamePlayModel.getGameMap().setMovingArmies(
 						(Integer) this.theFortificationView.numOfTroopsComboBox.getSelectedItem(),
 						(CountryModel) this.theFortificationView.fromCountryListComboBox.getSelectedItem(),
 						(CountryModel) this.theFortificationView.toCountryListComboBox.getSelectedItem());
@@ -65,7 +68,7 @@ public class FortificationController implements ActionListener, ItemListener {
 			if (this.gameMapModel.getListOfPlayers().size() > index) {
 				this.gameMapModel.setPlayerIndex(index);
 				this.gameMapModel.getListOfPlayers().get(index).callObservers();
-				new GamePlayController(this.gameMapModel, this.gameMapModel.getListOfPlayers());
+				new GamePlayController(this.gamePlayModel);
 				this.theFortificationView.dispose();
 			} else {
 				JOptionPane.showOptionDialog(null, "Bravo! Game is over! No one won!", "Valid",

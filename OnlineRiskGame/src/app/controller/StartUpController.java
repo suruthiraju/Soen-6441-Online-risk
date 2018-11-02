@@ -72,7 +72,7 @@ public class StartUpController implements ActionListener {
 					break;
 				}
 			}
-			this.theStartUpView = new StartUpView(this.gamePlayModel.getGameMap(), this.gamePlayModel.getPlayers().get(loopValue));
+			this.theStartUpView = new StartUpView(this.gamePlayModel, this.gamePlayModel.getPlayers().get(loopValue));
 			this.theStartUpView.setActionListener(this);
 			for (int i = 0; i < noOfPlayers; i++) {
 				this.gamePlayModel.getPlayers().get(i).addObserver(this.theStartUpView);

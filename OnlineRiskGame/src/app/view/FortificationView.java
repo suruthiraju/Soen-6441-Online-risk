@@ -118,7 +118,7 @@ public class FortificationView extends JFrame implements View {
 		// from country comboBox
 		ArrayList<CountryModel> fromListOfCountries = new ArrayList<CountryModel>();
 		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
-			if (playerModel.getNamePlayer().equals(this.gameMapModel.getCountries().get(i).getRuler().getNamePlayer())
+			if (playerModel.getNamePlayer().equals(this.gameMapModel.getCountries().get(i).getRulerName())
 					&& this.gameMapModel.getCountries().get(i).getArmies() >= 2) {
 				fromListOfCountries.add(this.gameMapModel.getCountries().get(i));
 			}
@@ -138,7 +138,7 @@ public class FortificationView extends JFrame implements View {
 		ArrayList<CountryModel> toListOfCountries = new ArrayList<CountryModel>();
 		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
 			if (playerModel.getNamePlayer()
-					.equals(this.gameMapModel.getCountries().get(i).getRuler().getNamePlayer())) {
+					.equals(this.gameMapModel.getCountries().get(i).getRulerName())) {
 				toListOfCountries.add(this.gameMapModel.getCountries().get(i));
 			}
 		}
