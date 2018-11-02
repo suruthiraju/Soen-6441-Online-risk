@@ -88,7 +88,7 @@ public class FortificationView extends JFrame implements View {
 		this.add(welcomePanel);
 		this.playerModel = this.gameMapModel.getPlayerTurn();
 		this.moveButton = new JButton("Move");
-		updateWindow(this.gamePlayModel, this.playerModel);
+		updateWindow(gamePlayModel, this.playerModel);
 		welcomePanel.setLayout(null);
 		graphicPanel.setLayout(null);
 	}

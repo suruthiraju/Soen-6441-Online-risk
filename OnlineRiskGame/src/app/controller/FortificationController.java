@@ -25,8 +25,8 @@ import app.view.FortificationView;
 public class FortificationController implements ActionListener, ItemListener {
 
 	private FortificationView theFortificationView;
-	private GamePlayModel gamePlayModel = null;
-	private GameMapModel gameMapModel = null;
+	private GamePlayModel gamePlayModel;
+	private GameMapModel gameMapModel;
 
 	/**
 	 * Constructor initializes values and sets the screen too visible
@@ -65,9 +65,9 @@ public class FortificationController implements ActionListener, ItemListener {
 
 			int index = this.gameMapModel.getPlayerIndex();
 			index++;
-			if (this.gameMapModel.getListOfPlayers().size() > index) {
+			if (this.gamePlayModel.getPlayers().size() > index) {
 				this.gameMapModel.setPlayerIndex(index);
-				this.gameMapModel.getListOfPlayers().get(index).callObservers();
+				this.gamePlayModel.getPlayers().get(index).callObservers();
 				new GamePlayController(this.gamePlayModel);
 				this.theFortificationView.dispose();
 			} else {
