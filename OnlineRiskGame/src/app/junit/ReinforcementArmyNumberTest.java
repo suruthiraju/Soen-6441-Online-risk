@@ -5,6 +5,7 @@ import app.controller.ReinforcementController;
 import app.model.ContinentsModel;
 import app.model.CountryModel;
 import app.model.GameMapModel;
+import app.model.GamePlayModel;
 import app.utilities.Constant;
 import app.utilities.ReadFile;
 import app.utilities.Validation;
@@ -31,6 +32,7 @@ import org.junit.Ignore;
 public class ReinforcementArmyNumberTest {
 	
 	private static final boolean False = false;
+	GamePlayModel gamePlayModel;
 	GameMapModel gameMapModel;
 	ReinforcementController rC;
 	ReadFile readFile;
@@ -54,13 +56,15 @@ public class ReinforcementArmyNumberTest {
 	    file = new File(Constant.FILE_LOCATION);
 	    readFile.setFile(file);
 	    gameMapModel = new GameMapModel(file);
-	    rC = new ReinforcementController(gameMapModel);
-	    for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
-			if (this.gameMapModel.getCountries().get(i).getRuler().equals(this.gameMapModel.getPlayerTurn())) {
-				this.listOfCountrys.add(this.gameMapModel.getCountries().get(i));
+	    rC = new ReinforcementController(gamePlayModel); 
+	    int numberOfCountries=0;
+	    for (int i = 0; i < this.gamePlayModel.getPlayers().size(); i++) {
+			
+			if (this.gamePlayModel.getPlayers().get(i).getNamePlayer().equals(this.gamePlayModel.getGameMap().getPlayerTurn())) {
+				numberOfCountries = this.gamePlayModel.getPlayers().get(i).getOwnedCountries().size();
 			}
 		}
-		if (listOfCountrys.size() > 3) {
+		if (numberOfCountries > 3) {
 			reinforceArmies = 3 + Math.round(listOfCountrys.size() / 3);
 		} else {
 			reinforceArmies = 3;

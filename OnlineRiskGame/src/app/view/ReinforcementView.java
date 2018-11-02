@@ -11,6 +11,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -18,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
@@ -59,8 +61,8 @@ public class ReinforcementView extends JFrame implements View {
 
 	public JButton[] button;
 
-	public ReinforcementView(GameMapModel gameMapModel) {
-		this.gameMapModel = gameMapModel;
+	public ReinforcementView(GamePlayModel gamePlayModel) {
+		this.gameMapModel = gamePlayModel.getGameMap();
 		this.setTitle("Reinforcement Phase");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(300, 200);
@@ -83,7 +85,7 @@ public class ReinforcementView extends JFrame implements View {
 		welcomePanel.setLayout(null);
 		graphicPanel.setLayout(null);
 
-		updateWindow(gameMapModel, playerModel);
+		updateWindow(gamePlayModel, playerModel);
 	}
 
 	/**
@@ -93,13 +95,13 @@ public class ReinforcementView extends JFrame implements View {
 	 * @param gameMapModel
 	 * @param playerModel
 	 */
-	public void updateWindow(GameMapModel gameMapModel, PlayerModel playerModel) {
+	public void updateWindow(GamePlayModel gamePlayModel, PlayerModel playerModel) {
 
 		Font largeFont = new Font("Serif", Font.BOLD, 18);
 		Font mediumFont = new Font("Serif", Font.BOLD, 14);
 		Font smallFont = new Font("Serif", Font.BOLD, 12);
 
-		this.gameMapModel = gameMapModel;
+		this.gameMapModel = gamePlayModel.getGameMap();
 		this.playerModel = this.gameMapModel.getPlayerTurn();
 
 		welcomeLabel.setBounds(1300, 80, 300, 25);
@@ -147,17 +149,23 @@ public class ReinforcementView extends JFrame implements View {
 		int n = this.gameMapModel.getCountries().size();
 		button = new JButton[n];
 
-		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
+		PlayerModel pm = new PlayerModel();
+		CountryModel cm = new CountryModel();
+
+		for (int i = 0; i < gameMapModel.getCountries().size(); i++) {
 
 			button[i] = new JButton();
-			button[i].setText(this.gameMapModel.getCountries().get(i).getCountryName().substring(0, 3));
-			button[i].setBackground(this.gameMapModel.getCountries().get(i).getBackgroundColor());
-			button[i].setToolTipText("Troops: " + this.gameMapModel.getCountries().get(i).getArmies());
-			button[i].setBorder(
-					new LineBorder(stringToColor(this.gameMapModel.getCountries().get(i).getRuler().getColor()), 3));
+			button[i].setText(gameMapModel.getCountries().get(i).getCountryName().substring(0, 3));
+			button[i].setBackground(gameMapModel.getCountries().get(i).getBackgroundColor());
+			button[i].setToolTipText("Troops: " + gameMapModel.getCountries().get(i).getArmies());
+			cm = gameMapModel.getCountries().get(i);
+			pm = gamePlayModel.getPlayer(cm);
+			Border border = BorderFactory.createLineBorder(pm.getColor(), 3);
+
+			button[i].setBorder(border);
 			button[i].setOpaque(true);
-			button[i].setBounds(this.gameMapModel.getCountries().get(i).getXPosition() * 2,
-					this.gameMapModel.getCountries().get(i).getYPosition() * 2, 50, 50);
+			button[i].setBounds(gameMapModel.getCountries().get(i).getXPosition() * 2,
+					gameMapModel.getCountries().get(i).getYPosition() * 2, 50, 50);
 
 			graphicPanel.add(button[i]);
 		}
@@ -235,7 +243,7 @@ public class ReinforcementView extends JFrame implements View {
 		} else if (obs instanceof PlayerModel) {
 			this.playerModel = (PlayerModel) obs;
 		}
-		this.updateWindow(this.gameMapModel, this.playerModel);
+		this.updateWindow(this.gamePlayModel, this.playerModel);
 		this.revalidate();
 		this.repaint();
 

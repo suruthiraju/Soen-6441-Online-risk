@@ -12,6 +12,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -19,12 +20,14 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import app.helper.View;
 import app.model.CountryModel;
 import app.model.GameMapModel;
+import app.model.GamePlayModel;
 import app.model.PlayerModel;
 
 /**
@@ -37,6 +40,7 @@ public class FortificationView extends JFrame implements View {
 
 	public GameMapModel gameMapModel;
 	public PlayerModel playerModel;
+	public GamePlayModel gamePlayModel;
 
 	public JPanel welcomePanel;
 	public JPanel graphicPanel;
@@ -63,10 +67,10 @@ public class FortificationView extends JFrame implements View {
 	/**
 	 * Constructor of FortificationView
 	 * 
-	 * @param gameMapModel
+	 * @param gamePlayModel
 	 */
-	public FortificationView(GameMapModel gameMapModel) {
-		this.gameMapModel = gameMapModel;
+	public FortificationView(GamePlayModel gamePlayModel) {
+		this.gameMapModel = gamePlayModel.getGameMap();
 		this.setTitle("Fortification Phase");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(300, 200);
@@ -84,7 +88,7 @@ public class FortificationView extends JFrame implements View {
 		this.add(welcomePanel);
 		this.playerModel = this.gameMapModel.getPlayerTurn();
 		this.moveButton = new JButton("Move");
-		updateWindow(this.gameMapModel, this.playerModel);
+		updateWindow(this.gamePlayModel, this.playerModel);
 		welcomePanel.setLayout(null);
 		graphicPanel.setLayout(null);
 	}
@@ -92,10 +96,10 @@ public class FortificationView extends JFrame implements View {
 	/**
 	 * Updates the window based on new data in fortification phase
 	 * 
-	 * @param gameMapModel
+	 * @param gamePlayModel
 	 * @param playerModel
 	 */
-	public void updateWindow(GameMapModel gameMapModel, PlayerModel playerModel) {
+	public void updateWindow(GamePlayModel gamePlayModel, PlayerModel playerModel) {
 
 		welcomePanel.removeAll();
 		graphicPanel.removeAll();
@@ -103,7 +107,7 @@ public class FortificationView extends JFrame implements View {
 		Font mediumFont = new Font("Serif", Font.BOLD, 14);
 		Font smallFont = new Font("Serif", Font.BOLD, 12);
 
-		this.gameMapModel = gameMapModel;
+		this.gameMapModel = gamePlayModel.getGameMap();
 		this.playerModel = playerModel;
 
 		this.welcomeLabel = new JLabel("It's " + playerModel.getNamePlayer() + "'s turn");
@@ -178,19 +182,24 @@ public class FortificationView extends JFrame implements View {
 
 		int n = this.gameMapModel.getCountries().size();
 		button = new JButton[n];
-
-		// graphicPanel.add(button[0]);
-		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
+		
+		PlayerModel pm = new PlayerModel();
+		CountryModel cm = new CountryModel();
+		
+		for (int i = 0; i < gameMapModel.getCountries().size(); i++) {
 
 			button[i] = new JButton();
-			button[i].setText(this.gameMapModel.getCountries().get(i).getCountryName().substring(0, 3));
-			button[i].setBackground(this.gameMapModel.getCountries().get(i).getBackgroundColor());
-			button[i].setToolTipText("Troops: " + this.gameMapModel.getCountries().get(i).getArmies());
-			button[i].setBorder(
-					new LineBorder(stringToColor(this.gameMapModel.getCountries().get(i).getRuler().getColor()), 3));
+			button[i].setText(gameMapModel.getCountries().get(i).getCountryName().substring(0, 3));
+			button[i].setBackground(gameMapModel.getCountries().get(i).getBackgroundColor());
+			button[i].setToolTipText("Troops: " + gameMapModel.getCountries().get(i).getArmies());
+			cm = gameMapModel.getCountries().get(i);
+			pm = gamePlayModel.getPlayer(cm);
+			Border border = BorderFactory.createLineBorder(pm.getColor(), 3);
+
+			button[i].setBorder(border);
 			button[i].setOpaque(true);
-			button[i].setBounds(this.gameMapModel.getCountries().get(i).getXPosition() * 2,
-					this.gameMapModel.getCountries().get(i).getYPosition() * 2, 50, 50);
+			button[i].setBounds(gameMapModel.getCountries().get(i).getXPosition() * 2,
+					gameMapModel.getCountries().get(i).getYPosition() * 2, 50, 50);
 
 			graphicPanel.add(button[i]);
 		}
@@ -267,8 +276,10 @@ public class FortificationView extends JFrame implements View {
 	 */
 	@Override
 	public void update(Observable obs, Object arg) {
-
-		this.updateWindow(((GameMapModel) obs), this.playerModel);
+		if (obs instanceof GameMapModel) {
+			this.gameMapModel = (GameMapModel) obs;
+		} 
+		this.updateWindow(this.gamePlayModel, this.playerModel);
 		this.revalidate();
 		this.repaint();
 

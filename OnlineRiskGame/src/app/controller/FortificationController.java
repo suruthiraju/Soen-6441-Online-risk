@@ -36,7 +36,7 @@ public class FortificationController implements ActionListener, ItemListener {
 	public FortificationController(GamePlayModel gamePlayModel) {
 		this.gamePlayModel = gamePlayModel;
 		this.gameMapModel =  this.gamePlayModel.getGameMap();
-		theFortificationView = new FortificationView(this.gamePlayModel.getGameMap());
+		theFortificationView = new FortificationView(this.gamePlayModel);
 		theFortificationView.setActionListener(this);
 		theFortificationView.setItemListener(this);
 		theFortificationView.setVisible(true);

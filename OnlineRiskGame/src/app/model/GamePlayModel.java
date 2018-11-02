@@ -2,6 +2,7 @@ package app.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 /**
  * "GamePlayerModel" class represents an object containing current map and
@@ -9,7 +10,7 @@ import java.util.List;
  * 
  * @author GROUP-35
  */
-public class GamePlayModel {
+public class GamePlayModel extends Observable  {
 
 	private GameMapModel gameMap;
 	private ArrayList<PlayerModel> players;
@@ -67,10 +68,9 @@ public class GamePlayModel {
 		{
 			for (j=0; j< players.get(i).getOwnedCountries().size();j++)
 			{
-				if(parmCountry.equals(players.get(i).getOwnedCountries().get(j)))
+				if(parmCountry.getCountryName().equals(players.get(i).getOwnedCountries().get(j).getCountryName()))
 				{
 					return players.get(i);
-					
 				}
 				else
 				{
@@ -78,11 +78,30 @@ public class GamePlayModel {
 				}
 			}
 		}
-
 		return null;
 		
 	}
+	public void setSelectedArmiesToCountries(int selectedArmies, CountryModel countryName) {
+		for (int i = 0; i < this.getGameMap().getCountries().size(); i++) {
+			if (this.getGameMap().getCountries().get(i).equals(countryName)) {
+				this.getGameMap().getCountries().get(i).setArmies(this.getGameMap().getCountries().get(i).getArmies() + selectedArmies);
+				for (int j=0; j<this.getPlayers().size();j++) {
+					if(this.getPlayers().get(j).getNamePlayer().equals(this.getGameMap().getCountries().get(i).getRulerName())) {
+						this.getPlayers().get(j).setmyTroop(this.getPlayers().get(j).getmyTroop() - selectedArmies);
+					}
+				}
+				this.getGameMap().getPlayerTurn().setmyTroop(this.getGameMap().getPlayerTurn().getmyTroop() - selectedArmies);
+			}
+		}
+		callObservers();
+	}
 	
-	
-	
+	/**
+	 * Method used to notify state change whenever any change is reflected by
+	 * CreateContinentController via CreateContinentView
+	 */
+	public void callObservers() {
+		setChanged();
+		notifyObservers(this);
+	}
 }

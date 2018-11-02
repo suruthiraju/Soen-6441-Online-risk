@@ -33,7 +33,7 @@ public class ReinforcementController implements ActionListener {
 	public ReinforcementController(GamePlayModel gamePlayModel) {
 		this.gamePlayModel = gamePlayModel;
 		this.gamePlayModel.getGameMap().getPlayerTurn().setmyTroop(this.calculateArmies());
-		theReinforcementView = new ReinforcementView(this.gamePlayModel.getGameMap());
+		theReinforcementView = new ReinforcementView(this.gamePlayModel);
 		theReinforcementView.setActionListener(this);
 		theReinforcementView.setVisible(true);
 
@@ -50,13 +50,15 @@ public class ReinforcementController implements ActionListener {
 	 */
 	public int calculateArmies() {
 		int reinforceArmies = 0;
-
-		for (int i = 0; i < this.gamePlayModel.getGameMap().getCountries().size(); i++) {
-			if (this.gamePlayModel.getGameMap().getCountries().get(i).getRuler().equals(this.gamePlayModel.getGameMap().getPlayerTurn())) {
-				this.listOfCountrys.add(this.gamePlayModel.getGameMap().getCountries().get(i));
+		int numberOfCountries = 0;
+		
+		for (int i = 0; i < this.gamePlayModel.getPlayers().size(); i++) {
+			
+			if (this.gamePlayModel.getPlayers().get(i).getNamePlayer().equals(this.gamePlayModel.getGameMap().getPlayerTurn())) {
+				numberOfCountries = this.gamePlayModel.getPlayers().get(i).getOwnedCountries().size();
 			}
 		}
-		if (listOfCountrys.size() > 3) {
+		if (numberOfCountries > 3) {
 			reinforceArmies = 3 + Math.round(listOfCountrys.size() / 3);
 		} else {
 			reinforceArmies = 3;
@@ -79,7 +81,8 @@ public class ReinforcementController implements ActionListener {
 			if (theReinforcementView.numOfTroopsComboBox.getSelectedItem() != null) {
 				selectedArmies = (int) theReinforcementView.numOfTroopsComboBox.getSelectedItem();
 				CountryModel countryName = (CountryModel) theReinforcementView.countryListComboBox.getSelectedItem();
-				this.gamePlayModel.getGameMap().setSelectedArmiesToCountries(selectedArmies, countryName);
+				System.out.println("countryName" +selectedArmies + countryName);
+				this.gamePlayModel.setSelectedArmiesToCountries(selectedArmies, countryName);
 			} else {
 
 				new FortificationController(this.gamePlayModel);
