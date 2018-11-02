@@ -8,6 +8,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 import app.helper.View;
 
@@ -37,10 +38,13 @@ public class NewGameView extends JFrame implements View {
 	public JFileChooser chooseMap;
 
 	/** The label map file. */
-	public JLabel labelPlayers, labelMapFile;
+	public JLabel labelPlayers, labelMapFile, PlayerText, PlayerText2 ;
 
 	/** The final players. */
 	public int finalPlayers;
+
+	/** The final players. */
+	public JTextField PlayerName, PlayerName1, PlayerName2, PlayerName3, PlayerName4;
 
 	/**
 	 * Create the application.
@@ -56,21 +60,65 @@ public class NewGameView extends JFrame implements View {
 		numOfPlayers = new JComboBox<>(items);
 		numOfPlayers.setBounds(202, 49, 116, 22);
 		getContentPane().add(numOfPlayers);
+		
+		PlayerText2 = new JLabel("Fill the names as per the number selected");
+		PlayerText2.setBounds(53, 83, 311, 27);
+		getContentPane().add(PlayerText2);
+		
+		PlayerText = new JLabel("Player 1 Name: ");
+		PlayerText.setBounds(53, 110, 311, 27);
+		getContentPane().add(PlayerText);
+
+		PlayerName = new JTextField();
+		PlayerName.setBounds(202, 116, 100, 20);
+		getContentPane().add(PlayerName);
+		
+		PlayerText = new JLabel("Player 2 Name: ");
+		PlayerText.setBounds(53, 140, 311, 27);
+		getContentPane().add(PlayerText);
+		
+		PlayerName = new JTextField();
+		PlayerName.setBounds(202, 146, 100, 20);
+		getContentPane().add(PlayerName);
+
+		PlayerText = new JLabel("Player 3 Name: ");
+		PlayerText.setBounds(53, 170, 311, 27);
+		getContentPane().add(PlayerText);
+		
+		PlayerName = new JTextField();
+		PlayerName.setBounds(202, 176, 100, 20);
+		getContentPane().add(PlayerName);
+		
+		PlayerText = new JLabel("Player 4 Name: ");
+		PlayerText.setBounds(53, 200, 311, 27);
+		getContentPane().add(PlayerText);
+		
+		PlayerName = new JTextField();
+		PlayerName.setBounds(202, 206, 100, 20);
+		getContentPane().add(PlayerName);
+		
+		PlayerText = new JLabel("Player 5 Name: ");
+		PlayerText.setBounds(53, 230, 311, 27);
+		getContentPane().add(PlayerText);
+		
+		PlayerName = new JTextField();
+		PlayerName.setBounds(202, 236, 100, 20);
+		getContentPane().add(PlayerName);
 
 		labelMapFile = new JLabel("Please Select Map File");
-		labelMapFile.setBounds(53, 133, 157, 27);
+		labelMapFile.setBounds(53, 280, 157, 27);
 		getContentPane().add(labelMapFile);
 
 		browseMapButton = new JButton("Browse");
-		browseMapButton.setBounds(202, 134, 116, 27);
+		browseMapButton.setBounds(202, 279, 116, 27);
 		getContentPane().add(browseMapButton);
 
 		nextButton = new JButton("Next");
-		nextButton.setBounds(202, 237, 116, 25);
+		nextButton.setBounds(202, 337, 116, 25);
 		getContentPane().add(nextButton);
 
 		cancelButton = new JButton("Cancel");
-		cancelButton.setBounds(53, 237, 97, 25);
+		cancelButton.setBounds(53, 337, 97, 25);
 		getContentPane().add(cancelButton);
 
 		chooseMap = new JFileChooser();
