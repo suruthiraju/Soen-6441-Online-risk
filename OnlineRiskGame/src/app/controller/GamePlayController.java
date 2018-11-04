@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import app.model.CountryModel;
+import app.model.GameMapModel;
 import app.model.GamePlayModel;
 import app.model.PlayerModel;
 
