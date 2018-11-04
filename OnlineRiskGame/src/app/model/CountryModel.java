@@ -37,8 +37,7 @@ public class CountryModel extends JButton {
 	 * @param ruler
 	 * @param armies
 	 */
-	public CountryModel(String countryName, int xPosition, int yPosition, String continentName, List linkedCountries,
-			PlayerModel ruler, int armies, String rulerName ) {
+	public CountryModel(String countryName, int xPosition, int yPosition, String continentName, List linkedCountries, int armies, String rulerName ) {
 		this.countryName = countryName;
 		this.xPosition = xPosition;
 		this.yPosition = yPosition;
