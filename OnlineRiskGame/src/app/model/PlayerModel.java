@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.util.List;
 import java.util.Observable;
 
+import app.view.ReinforcementView;
+
 /**
  * "PlayerModel" class represents an object of a player. The properties are:
  * Player name, player's troop number, the color in view screen (displaying)
