@@ -103,29 +103,29 @@ public class StartUpController implements ActionListener {
 		
 		for (int i = 0; i < this.gamePlayModel.getGameMap().getCountries().size(); i++) {
 			playerNumber = getRandomBetweenRange(1, noOfPlayers);
-			System.out.println("playerNumber " + playerNumber);
-			String namePlayer = "Player" + playerNumber;
+			System.out.println("playerNumber " + playerNumber);			
+			String namePlayer = this.gamePlayModel.getPlayers().get(playerNumber-1).getNamePlayer();
 			
 			this.gamePlayModel.getGameMap().getCountries().get(i).setRulerName(namePlayer);
 			this.gamePlayModel.getGameMap().getCountries().get(i).setArmies(1);
-			switch (namePlayer) {
-			case "Player1":
+			switch (playerNumber) {
+			case 1:
 				noOfCountryForRuler[0]++;
 				ownedCountry0.add(this.gamePlayModel.getGameMap().getCountries().get(i));
 				break;
-			case "Player2":
+			case 2:
 				noOfCountryForRuler[1]++;
 				ownedCountry1.add(this.gamePlayModel.getGameMap().getCountries().get(i));
 				break;
-			case "Player3":
+			case 3:
 				noOfCountryForRuler[2]++;
 				ownedCountry2.add(this.gamePlayModel.getGameMap().getCountries().get(i));
 				break;
-			case "Player4":
+			case 4:
 				noOfCountryForRuler[3]++;
 				ownedCountry3.add(this.gamePlayModel.getGameMap().getCountries().get(i));
 				break;
-			case "Player5":
+			case 5:
 				noOfCountryForRuler[4]++;
 				ownedCountry4.add(this.gamePlayModel.getGameMap().getCountries().get(i));
 				break;
@@ -157,15 +157,15 @@ public class StartUpController implements ActionListener {
 	 */
 	public void assignPlayerModel() {
 		for (int i = 0; i < noOfPlayers; i++) {
-			if ("Player1".equals(this.gamePlayModel.getPlayers().get(i).getNamePlayer())) {
+			if (i==0) {
 				this.gamePlayModel.getPlayers().get(i).setOwnedCountries(ownedCountry0);
-			}else if ("Player2".equals(this.gamePlayModel.getPlayers().get(i).getNamePlayer())){
+			}else if (i==1){
 				this.gamePlayModel.getPlayers().get(i).setOwnedCountries(ownedCountry1);
-			}else if ("Player3".equals(this.gamePlayModel.getPlayers().get(i).getNamePlayer())){
+			}else if (i==2){
 				this.gamePlayModel.getPlayers().get(i).setOwnedCountries(ownedCountry2);
-			}else if ("Player4".equals(this.gamePlayModel.getPlayers().get(i).getNamePlayer())){
+			}else if (i==3){
 				this.gamePlayModel.getPlayers().get(i).setOwnedCountries(ownedCountry3);
-			}else if ("Player5".equals(this.gamePlayModel.getPlayers().get(i).getNamePlayer())){
+			}else if (i==4){
 				this.gamePlayModel.getPlayers().get(i).setOwnedCountries(ownedCountry4);
 			}
 			

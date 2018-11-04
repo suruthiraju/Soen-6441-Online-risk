@@ -44,7 +44,7 @@ public class NewGameView extends JFrame implements View {
 	public int finalPlayers;
 
 	/** The final players. */
-	public JTextField PlayerName, PlayerName1, PlayerName2, PlayerName3, PlayerName4;
+	public JTextField PlayerName5, PlayerName1, PlayerName2, PlayerName3, PlayerName4;
 
 	/**
 	 * Create the application.
@@ -69,41 +69,41 @@ public class NewGameView extends JFrame implements View {
 		PlayerText.setBounds(53, 110, 311, 27);
 		getContentPane().add(PlayerText);
 
-		PlayerName = new JTextField();
-		PlayerName.setBounds(202, 116, 100, 20);
-		getContentPane().add(PlayerName);
+		PlayerName1 = new JTextField();
+		PlayerName1.setBounds(202, 116, 100, 20);
+		getContentPane().add(PlayerName1);
 		
 		PlayerText = new JLabel("Player 2 Name: ");
 		PlayerText.setBounds(53, 140, 311, 27);
 		getContentPane().add(PlayerText);
 		
-		PlayerName = new JTextField();
-		PlayerName.setBounds(202, 146, 100, 20);
-		getContentPane().add(PlayerName);
+		PlayerName2 = new JTextField();
+		PlayerName2.setBounds(202, 146, 100, 20);
+		getContentPane().add(PlayerName2);
 
 		PlayerText = new JLabel("Player 3 Name: ");
 		PlayerText.setBounds(53, 170, 311, 27);
 		getContentPane().add(PlayerText);
 		
-		PlayerName = new JTextField();
-		PlayerName.setBounds(202, 176, 100, 20);
-		getContentPane().add(PlayerName);
+		PlayerName3 = new JTextField();
+		PlayerName3.setBounds(202, 176, 100, 20);
+		getContentPane().add(PlayerName3);
 		
 		PlayerText = new JLabel("Player 4 Name: ");
 		PlayerText.setBounds(53, 200, 311, 27);
 		getContentPane().add(PlayerText);
 		
-		PlayerName = new JTextField();
-		PlayerName.setBounds(202, 206, 100, 20);
-		getContentPane().add(PlayerName);
+		PlayerName4 = new JTextField();
+		PlayerName4.setBounds(202, 206, 100, 20);
+		getContentPane().add(PlayerName4);
 		
 		PlayerText = new JLabel("Player 5 Name: ");
 		PlayerText.setBounds(53, 230, 311, 27);
 		getContentPane().add(PlayerText);
 		
-		PlayerName = new JTextField();
-		PlayerName.setBounds(202, 236, 100, 20);
-		getContentPane().add(PlayerName);
+		PlayerName5 = new JTextField();
+		PlayerName5.setBounds(202, 236, 100, 20);
+		getContentPane().add(PlayerName5);
 
 		labelMapFile = new JLabel("Please Select Map File");
 		labelMapFile.setBounds(53, 280, 157, 27);

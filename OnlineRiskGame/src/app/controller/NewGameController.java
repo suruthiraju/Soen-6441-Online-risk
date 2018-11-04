@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JFileChooser;
@@ -34,6 +35,8 @@ public class NewGameController implements ActionListener {
 	private GameMapModel gameMapModel = new GameMapModel();
 	private GamePlayModel gamePlayModel = new GamePlayModel();
 	private int noOfPlayers;
+	private String PlayerName = "";
+	private List<CountryModel> listOfCountry = null;
     
     /**
      * Constructor initializes values and sets the screen too visible
@@ -65,8 +68,7 @@ public class NewGameController implements ActionListener {
 			}
 		}else if(actionEvent.getSource().equals(theView.nextButton)) {
 			noOfPlayers = (int) theView.numOfPlayers.getSelectedItem();
-			playerValidation();			
-						
+			playerValidation();								
 		}else if(actionEvent.getSource().equals(theView.cancelButton)) {
 			new WelcomeScreenController();
 			 this.theView.dispose();
@@ -80,12 +82,23 @@ public class NewGameController implements ActionListener {
 	public void playerValidation() {
 		if ( gameMapModel.getCountries().size() > noOfPlayers) {
 			System.out.println("no of players");
-			String PlayerName = "";
-			List<CountryModel> listOfCountry = null;
 			for (int i=0; i<noOfPlayers; i++) {
-				PlayerName = "Player"+ (i+1);
+				if (i == 0) {
+					PlayerName = theView.PlayerName1.getSelectedText();
+				}else if(i == 1) {
+					PlayerName = theView.PlayerName2.getSelectedText();
+				}else if(i == 2) {
+					PlayerName = theView.PlayerName3.getSelectedText();
+				}else if(i == 3) {
+					PlayerName = theView.PlayerName4.getSelectedText();
+				}else if(i == 4){
+					PlayerName = theView.PlayerName5.getSelectedText();
+				}
+				if (PlayerName ==  null) {
+					PlayerName = "PlayerName"+(i+1);
+				}
 				PlayerModel pm = new PlayerModel(PlayerName, 0, Color.WHITE,0,listOfCountry);
-				listOfPlayers.add(pm);				
+				listOfPlayers.add(pm);		
 			}
 			gamePlayModel.setGameMap(gameMapModel);
 			gamePlayModel.setPlayers(listOfPlayers);

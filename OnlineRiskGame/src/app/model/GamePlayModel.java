@@ -12,7 +12,7 @@ import java.util.Observable;
  */
 public class GamePlayModel extends Observable  {
 
-	private GameMapModel gameMap;
+	private GameMapModel gameMapModel;
 	private ArrayList<PlayerModel> players;
 	/**
 	 * Constructor
@@ -21,7 +21,7 @@ public class GamePlayModel extends Observable  {
 	 * @param players
 	 */
 	public GamePlayModel(GameMapModel gameMap, ArrayList<PlayerModel> players) {
-		this.gameMap = gameMap;
+		this.gameMapModel = gameMap;
 		this.players = players;
 	}
 
@@ -33,7 +33,7 @@ public class GamePlayModel extends Observable  {
 	 * @return the gameMap.
 	 */
 	public GameMapModel getGameMap() {
-		return gameMap;
+		return gameMapModel;
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class GamePlayModel extends Observable  {
 	 * @param gameMap
 	 */
 	public void setGameMap(GameMapModel gameMap) {
-		this.gameMap = gameMap;
+		this.gameMapModel = gameMap;
 	}
 
 	/**
@@ -82,15 +82,14 @@ public class GamePlayModel extends Observable  {
 		
 	}
 	public void setSelectedArmiesToCountries(int selectedArmies, CountryModel countryName) {
-		for (int i = 0; i < this.gameMap.getCountries().size(); i++) {
-			if (this.gameMap.getCountries().get(i).equals(countryName)) {
-				this.gameMap.getCountries().get(i).setArmies(this.gameMap.getCountries().get(i).getArmies() + selectedArmies);
+		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
+			if (this.gameMapModel.getCountries().get(i).equals(countryName)) {
+				this.gameMapModel.getCountries().get(i).setArmies(this.gameMapModel.getCountries().get(i).getArmies() + selectedArmies);
 				for (int j=0; j<this.getPlayers().size();j++) {
-					if(this.getPlayers().get(j).getNamePlayer().equals(this.gameMap.getCountries().get(i).getRulerName())) {
+					if(this.getPlayers().get(j).getNamePlayer().equals(this.gameMapModel.getCountries().get(i).getRulerName())) {
 						this.getPlayers().get(j).setmyTroop(this.getPlayers().get(j).getmyTroop() - selectedArmies);
 					}
 				}
-				//this.gameMap.getPlayerTurn().setmyTroop(this.gameMap.getPlayerTurn().getmyTroop() - selectedArmies);
 			}
 		}
 		callObservers();
@@ -103,5 +102,15 @@ public class GamePlayModel extends Observable  {
 	public void callObservers() {
 		setChanged();
 		notifyObservers(this);
+	}
+	
+	public ArrayList<CountryModel> getDefendCountryList( CountryModel attackCountryName ) {
+		//ArrayList<CountryModel> defend
+		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
+			if (this.gameMapModel.getCountries().get(i).equals(attackCountryName)) {
+				
+			}
+		}
+		return null;
 	}
 }

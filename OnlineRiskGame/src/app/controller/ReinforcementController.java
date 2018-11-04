@@ -55,7 +55,7 @@ public class ReinforcementController implements ActionListener {
 		
 		for (int i = 0; i < this.gamePlayModel.getPlayers().size(); i++) {
 			
-			if (this.gamePlayModel.getPlayers().get(i).getNamePlayer().equals(this.gamePlayModel.getGameMap().getPlayerTurn())) {
+			if (this.gamePlayModel.getPlayers().get(i).getNamePlayer().equals(this.gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer())) {
 				numberOfCountries = this.gamePlayModel.getPlayers().get(i).getOwnedCountries().size();
 			}
 		}
@@ -85,8 +85,8 @@ public class ReinforcementController implements ActionListener {
 				System.out.println("countryName" +selectedArmies + countryName);
 				this.gamePlayModel.setSelectedArmiesToCountries(selectedArmies, countryName);
 			} else {
-
-				new FortificationController(this.gamePlayModel);
+				new AttackController(this.gamePlayModel);
+				//new FortificationController(this.gamePlayModel);
 				this.theReinforcementView.dispose();
 			}
 		}
