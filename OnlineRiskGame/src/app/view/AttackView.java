@@ -143,7 +143,7 @@ public class AttackView extends JFrame implements Observer {
 		
 		// defend country comboBox
 		ArrayList<CountryModel> defendListOfCountries = new ArrayList<CountryModel>();
-		defendListOfCountries = this.gamePlayModel.getDefendCountryList(countryName);
+		//defendListOfCountries = this.gamePlayModel.getDefendCountryList(countryName);
 
 		countriesViewRenderer = new CountryViewRenderer();
 		defendCountryListArray = defendListOfCountries.toArray();

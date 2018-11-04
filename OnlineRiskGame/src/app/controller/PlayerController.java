@@ -11,6 +11,7 @@ import app.model.CountryModel;
 import app.model.GamePlayModel;
 import app.model.PlayerModel;
 import app.utilities.Validation;
+import app.view.AttackView;
 import app.view.FortificationView;
 import app.view.ReinforcementView;
 
@@ -20,6 +21,7 @@ public class PlayerController implements ActionListener,ItemListener {
 	private GamePlayModel gamePlayModel;
 	private ReinforcementView theReinforcementView;
 	private FortificationView theFortificationView;
+	private AttackView theAttackView;
 	private ArrayList<PlayerModel> listOfPlayers = new ArrayList<PlayerModel>();
 	private int noOfPlayers;
 	
@@ -45,7 +47,7 @@ public class PlayerController implements ActionListener,ItemListener {
 	}
 	public void fortification()
 	{
-		this.theReinforcementView.dispose();
+		
 		theFortificationView = new FortificationView(this.gamePlayModel);
 		theFortificationView.setActionListener(this);
 		theFortificationView.setItemListener(this);
@@ -53,6 +55,12 @@ public class PlayerController implements ActionListener,ItemListener {
 		this.gamePlayModel.getGameMap().addObserver(this.theFortificationView);
 		
 		
+	}
+	public void attack()
+	{
+		theAttackView = new AttackView(this.gamePlayModel);
+		theAttackView.setActionListener(this);
+		theAttackView.setVisible(true);
 	}
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
@@ -64,10 +72,15 @@ public class PlayerController implements ActionListener,ItemListener {
 				System.out.println("countryName" +selectedArmies + countryName);
 				this.gamePlayModel.setSelectedArmiesToCountries(selectedArmies, countryName);
 			} else {
-
-				fortification();
+				this.theReinforcementView.dispose();
+				attack();
 				
 			}
+		}
+		if (actionEvent.getSource().equals(this.theAttackView.nextButton)) {
+			new FortificationController(this.gamePlayModel);
+			this.theAttackView.dispose();
+			fortification();
 		}
 		if (actionEvent.getSource().equals(this.theFortificationView.moveButton)) {
 
@@ -99,6 +112,7 @@ public class PlayerController implements ActionListener,ItemListener {
 			this.gamePlayModel.getGameMap()
 					.setSelectedComboBoxIndex(this.theFortificationView.fromCountryListComboBox.getSelectedIndex());
 		}
+	
 	}
 	/**
 	 * Item Listener
