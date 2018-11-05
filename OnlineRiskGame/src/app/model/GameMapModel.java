@@ -45,10 +45,6 @@ public class GameMapModel extends Observable {
 	 * to save list of player Model
 	 */
 	private ArrayList<PlayerModel> listOfPlayers;
-	/**
-	 * to save Selected ComboBox index
-	 */
-	private int selectedComboBoxIndex;
 
 	/**
 	 * Index to fetch the left model in list view
@@ -379,13 +375,4 @@ public class GameMapModel extends Observable {
 		this.listOfPlayers = listOfPlayers;
 	}
 
-	public void setSelectedComboBoxIndex(int selectedComboBoxIndex) {
-		this.selectedComboBoxIndex = selectedComboBoxIndex;
-		callObservers();
-
-	}
-
-	public int getSelectedComboBoxIndex() {
-		return this.selectedComboBoxIndex;
-	}
 }

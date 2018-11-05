@@ -40,7 +40,9 @@ public class FortificationController implements ActionListener, ItemListener {
 		theFortificationView.setActionListener(this);
 		theFortificationView.setItemListener(this);
 		theFortificationView.setVisible(true);
-		this.gamePlayModel.getGameMap().addObserver(this.theFortificationView);
+		
+		//this.gamePlayModel.getGameMap().addObserver(this.theFortificationView);
+		this.gamePlayModel.addObserver(this.theFortificationView);
 	}
 
 	/**
@@ -77,7 +79,7 @@ public class FortificationController implements ActionListener, ItemListener {
 			}
 
 		} else if (actionEvent.getSource().equals(this.theFortificationView.fromCountryListComboBox)) {
-			this.gameMapModel
+			this.gamePlayModel
 					.setSelectedComboBoxIndex(this.theFortificationView.fromCountryListComboBox.getSelectedIndex());
 		}
 
@@ -91,7 +93,8 @@ public class FortificationController implements ActionListener, ItemListener {
 	@Override
 	public void itemStateChanged(ItemEvent itemEvent) {
 		if (itemEvent.getSource().equals(this.theFortificationView.fromCountryListComboBox)) {
-			this.gameMapModel
+			System.out.println("this.theFortificationView.fromCountryListComboBox.getSelectedIndex()   " + this.theFortificationView.fromCountryListComboBox.getSelectedIndex());
+			this.gamePlayModel
 					.setSelectedComboBoxIndex(this.theFortificationView.fromCountryListComboBox.getSelectedIndex());
 		}
 

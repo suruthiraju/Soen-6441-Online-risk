@@ -15,6 +15,18 @@ public class GamePlayModel extends Observable  {
 	private GameMapModel gameMapModel;
 	private ArrayList<PlayerModel> players;
 	/**
+	 * to save Selected ComboBox index
+	 */
+	private int selectedComboBoxIndex;
+	/**
+	 * to save Selected ComboBox index
+	 */
+	private int selectedAttackComboBoxIndex;
+	/**
+	 * to save Selected ComboBox index
+	 */
+	private int selectedDefendComboBoxIndex;
+	/**
 	 * Constructor
 	 * 
 	 * @param gameMap
@@ -95,14 +107,7 @@ public class GamePlayModel extends Observable  {
 		callObservers();
 	}
 	
-	/**
-	 * Method used to notify state change whenever any change is reflected by
-	 * CreateContinentController via CreateContinentView
-	 */
-	public void callObservers() {
-		setChanged();
-		notifyObservers(this);
-	}
+	
 	
 	public int numberOfCountries(GamePlayModel gPP) {
 		int numberOfCountries = 0;
@@ -131,12 +136,63 @@ public class GamePlayModel extends Observable  {
 	}
 	
 	public ArrayList<CountryModel> getDefendCountryList( CountryModel attackCountryName ) {
-		//ArrayList<CountryModel> defend
+		ArrayList<CountryModel> linkedCountry;
+		ArrayList<CountryModel> defenderCountryList = new ArrayList<CountryModel>();
 		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
 			if (this.gameMapModel.getCountries().get(i).equals(attackCountryName)) {
-				
+				linkedCountry = (ArrayList<CountryModel>) this.gameMapModel.getCountries().get(i).getLinkedCountries();
+				for (int j=0; j<linkedCountry.size();j++) {
+					if (!attackCountryName.getRulerName().equals(linkedCountry.get(j).getRulerName())) {
+						defenderCountryList.add(linkedCountry.get(j));
+					}
+				}
 			}
 		}
-		return null;
+		return defenderCountryList;
+	}
+	
+	public void singleStrike(int attackDice, CountryModel attackCountry, int defendDice, CountryModel defendCountry) {
+		
+	}
+	
+	public void alloutStrike() {
+		
+	}
+	
+	public void setSelectedComboBoxIndex(int selectedComboBoxIndex) {
+		this.selectedComboBoxIndex = selectedComboBoxIndex;
+		callObservers();
+
+	}
+
+	public int getSelectedComboBoxIndex() {
+		return this.selectedComboBoxIndex;
+	}
+	public void setSelectedAttackComboBoxIndex(int selectedAttackComboBoxIndex) {
+		this.selectedAttackComboBoxIndex = selectedAttackComboBoxIndex;
+		callObservers();
+
+	}
+
+	public int getSelectedAttackComboBoxIndex() {
+		return this.selectedAttackComboBoxIndex;
+	}
+	public void setSelectedDefendComboBoxIndex(int selectedDefendComboBoxIndex) {
+		this.selectedDefendComboBoxIndex = selectedDefendComboBoxIndex;
+		callObservers();
+
+	}
+
+	public int getSelectedDefendComboBoxIndex() {
+		return this.selectedDefendComboBoxIndex;
+	}
+	
+	/**
+	 * Method used to notify state change whenever any change is reflected by
+	 * CreateContinentController via CreateContinentView
+	 */
+	public void callObservers() {
+		setChanged();
+		notifyObservers(this);
 	}
 }

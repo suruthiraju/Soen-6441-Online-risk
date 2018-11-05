@@ -131,7 +131,7 @@ public class FortificationView extends JFrame implements View {
 		fromCountryListArray = fromListOfCountries.toArray();
 
 		fromCountryListComboBox = new JComboBox(fromCountryListArray);
-		fromCountryListComboBox.setSelectedIndex(this.gameMapModel.getSelectedComboBoxIndex());
+		fromCountryListComboBox.setSelectedIndex(gamePlayModel.getSelectedComboBoxIndex());
 		welcomePanel.add(this.fromCountryListComboBox);
 
 		this.toCountryListLabel = new JLabel("To Country :");
@@ -162,6 +162,7 @@ public class FortificationView extends JFrame implements View {
 		welcomePanel.add(noOfTroopsLabel);
 
 		CountryModel countryName = (CountryModel) this.fromCountryListComboBox.getSelectedItem();
+		System.out.println("country name "  + countryName.getArmies());
 		Integer[] troops = new Integer[countryName.getArmies() - 1];
 		for (int i = 0; i < (countryName.getArmies() - 1); i++) {
 			troops[i] = i + 1;
@@ -269,15 +270,18 @@ public class FortificationView extends JFrame implements View {
 			return this;
 		}
 	}
-	// }
 
 	/**
 	 * 	
 	 */
 	@Override
 	public void update(Observable obs, Object arg) {
-		if (obs instanceof GameMapModel) {
+		if (obs instanceof GamePlayModel) {
+			this.gamePlayModel = (GamePlayModel) obs;
+		} else if (obs instanceof GamePlayModel) {
 			this.gameMapModel = (GameMapModel) obs;
+		} else if (obs instanceof GamePlayModel) {
+			this.playerModel = (PlayerModel) obs;
 		} 
 		this.updateWindow(this.gamePlayModel, this.playerModel);
 		this.revalidate();

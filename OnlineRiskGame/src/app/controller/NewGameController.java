@@ -81,21 +81,22 @@ public class NewGameController implements ActionListener {
 	 */
 	public void playerValidation() {
 		if ( gameMapModel.getCountries().size() > noOfPlayers) {
-			System.out.println("no of players");
+			System.out.println("no of players" + noOfPlayers);
 			for (int i=0; i<noOfPlayers; i++) {
 				if (i == 0) {
-					PlayerName = theView.PlayerName1.getSelectedText();
+					PlayerName = theView.PlayerName1.getText();
 				}else if(i == 1) {
-					PlayerName = theView.PlayerName2.getSelectedText();
+					PlayerName = theView.PlayerName2.getText();
 				}else if(i == 2) {
-					PlayerName = theView.PlayerName3.getSelectedText();
+					PlayerName = theView.PlayerName3.getText();
 				}else if(i == 3) {
-					PlayerName = theView.PlayerName4.getSelectedText();
+					PlayerName = theView.PlayerName4.getText();
 				}else if(i == 4){
-					PlayerName = theView.PlayerName5.getSelectedText();
+					PlayerName = theView.PlayerName5.getText();
 				}
-				if (PlayerName ==  null) {
-					PlayerName = "PlayerName"+(i+1);
+				System.out.println("PlayerName " + PlayerName);
+				if (PlayerName ==  null || "".equals(PlayerName.trim())) {
+					PlayerName = "Player "+(i+1);
 				}
 				PlayerModel pm = new PlayerModel(PlayerName, 0, Color.WHITE,0,listOfCountry);
 				listOfPlayers.add(pm);		

@@ -109,7 +109,7 @@ public class PlayerController implements ActionListener,ItemListener {
 			}
 
 		} else if (actionEvent.getSource().equals(this.theFortificationView.fromCountryListComboBox)) {
-			this.gamePlayModel.getGameMap()
+			this.gamePlayModel
 					.setSelectedComboBoxIndex(this.theFortificationView.fromCountryListComboBox.getSelectedIndex());
 		}
 	
@@ -121,7 +121,7 @@ public class PlayerController implements ActionListener,ItemListener {
 	 */
 	public void itemStateChanged(ItemEvent itemEvent) {
 		if (itemEvent.getSource().equals(this.theFortificationView.fromCountryListComboBox)) {
-			this.gamePlayModel.getGameMap()
+			this.gamePlayModel
 					.setSelectedComboBoxIndex(this.theFortificationView.fromCountryListComboBox.getSelectedIndex());
 		}
 
