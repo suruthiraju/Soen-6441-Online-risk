@@ -47,6 +47,9 @@ public class ReinforcementView extends JFrame implements Observer {
 
 	public JPanel welcomePanel;
 	public JPanel graphicPanel;
+	
+	public JPanel statsPanel;
+	public JLabel worldCoverageLabel;
 
 	public JLabel welcomeLabel;
 	public JLabel noOfTroopsLabel;
@@ -61,6 +64,8 @@ public class ReinforcementView extends JFrame implements Observer {
 	private CountryViewRenderer countriesViewRenderer;
 
 	public JButton[] button;
+	public ArrayList<Double> percentage;
+	public ArrayList<Color> colors;
 
 	public ReinforcementView(GamePlayModel gamePlayModel) {
 		this.gameMapModel = gamePlayModel.getGameMap();
@@ -73,9 +78,15 @@ public class ReinforcementView extends JFrame implements Observer {
 		this.addButton = new JButton("Add");
 		welcomePanel = new JPanel();
 		graphicPanel = new JPanel();
+		statsPanel = new JPanel();
 		this.add(graphicPanel);
-		graphicPanel.setSize(1200, 1000);
+		graphicPanel.setSize(1200, 650);		
 		graphicPanel.setBackground(Color.WHITE);
+		this.add(statsPanel);
+		statsPanel.setSize(1200,1000);
+		statsPanel.setBackground(Color.BLACK);
+		
+		
 
 		this.addButton = new JButton("Add");
 		this.add(welcomePanel);
@@ -85,6 +96,7 @@ public class ReinforcementView extends JFrame implements Observer {
 
 		welcomePanel.setLayout(null);
 		graphicPanel.setLayout(null);
+		statsPanel.setLayout(null);
 
 		updateWindow(gamePlayModel, playerModel);
 	}
@@ -112,6 +124,14 @@ public class ReinforcementView extends JFrame implements Observer {
 		this.noOfTroopsLabel = new JLabel("Number of Troops :");
 		noOfTroopsLabel.setBounds(1300, 140, 150, 25);
 		welcomePanel.add(noOfTroopsLabel);
+		
+		this.worldCoverageLabel=new JLabel("The world coverage per player :");
+		worldCoverageLabel.setBounds(10, 750, 150, 25);
+		worldCoverageLabel.setFont(mediumFont);
+		worldCoverageLabel.setForeground(Color.WHITE);
+		statsPanel.add(worldCoverageLabel);
+		
+		
 
 		Integer[] troops = new Integer[this.gameMapModel.getPlayerTurn().getmyTroop()];
 		for (int i = 0; i < this.gameMapModel.getPlayerTurn().getmyTroop(); i++) {
@@ -237,7 +257,7 @@ public class ReinforcementView extends JFrame implements Observer {
 	 */
 	@Override
 	public void update(Observable obs, Object arg) {
-
+		statsPanel.removeAll();
 		welcomePanel.removeAll();
 		graphicPanel.removeAll();
 		if (obs instanceof GameMapModel) {
