@@ -32,8 +32,8 @@ import app.model.GamePlayModel;
 import app.model.PlayerModel;
 
 /**
- * This View provides the attackView of the Game Play. It also provides
- * the observer pattern when the data is modified
+ * This View provides the attackView of the Game Play. It also provides the
+ * observer pattern when the data is modified
  * 
  * @author Suruthi Raju
  * @version 1.0.0
@@ -122,9 +122,8 @@ public class AttackView extends JFrame implements View {
 		// attack country comboBox
 		ArrayList<CountryModel> attackListOfCountries = new ArrayList<CountryModel>();
 		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
-			if (playerModel.getNamePlayer()
-					.equals(this.gameMapModel.getCountries().get(i).getRulerName())) {
-				if(this.gameMapModel.getCountries().get(i).getArmies() > 1) {
+			if (playerModel.getNamePlayer().equals(this.gameMapModel.getCountries().get(i).getRulerName())) {
+				if (this.gameMapModel.getCountries().get(i).getArmies() > 1) {
 					attackListOfCountries.add(this.gameMapModel.getCountries().get(i));
 				}
 			}
@@ -140,80 +139,82 @@ public class AttackView extends JFrame implements View {
 			attackCountryListComboBox.setRenderer(countriesViewRenderer);
 		}
 		attackCountryListComboBox.setBounds(1300, 180, 150, 25);
-		
+
 		this.noOfDiceAttackLabel = new JLabel("Number of Dice to Roll(for attack) :");
 		noOfDiceAttackLabel.setBounds(1300, 215, 150, 35);
 		welcomePanel.add(noOfDiceAttackLabel);
 
 		CountryModel attackCountry = (CountryModel) this.attackCountryListComboBox.getSelectedItem();
-		System.out.print("country name " + attackCountry.getCountryName() );
+		System.out.print("country name " + attackCountry.getCountryName());
 		Integer[] attackTroops = new Integer[3];
 		if (attackCountry.getArmies() > 3) {
 			for (int i = 0; i < 3; i++) {
 				attackTroops[i] = i + 1;
 				System.out.println("i " + i);
 			}
-		}else {		
+		} else {
 			for (int i = 0; i < (attackCountry.getArmies() - 1); i++) {
 				attackTroops[i] = i + 1;
 				System.out.println("i " + i);
 			}
 		}
-		
+
 		numOfDiceAttackComboBox = new JComboBox(attackTroops);
 		numOfDiceAttackComboBox.setBounds(1300, 250, 150, 25);
 		welcomePanel.add(numOfDiceAttackComboBox);
-		
 
 		this.defendCountryListLabel = new JLabel("Select defend Country :");
 		defendCountryListLabel.setBounds(1300, 280, 150, 25);
 		welcomePanel.add(this.defendCountryListLabel);
-		
-		
+
 		// defend country comboBox
 		ArrayList<CountryModel> defendListOfCountries = new ArrayList<CountryModel>();
-		defendListOfCountries = gamePlayModel.getDefendCountryList(attackCountry );
+		defendListOfCountries = gamePlayModel.getDefendCountryList(attackCountry);
 
 		countriesViewRenderer = new CountryViewRenderer();
 		defendCountryListArray = defendListOfCountries.toArray();
 		defendCountryListComboBox = new JComboBox(defendCountryListArray);
-		defendCountryListComboBox.setSelectedIndex(gamePlayModel.getSelectedDefendComboBoxIndex());
+		if (defendListOfCountries != null) {
+			defendCountryListComboBox.setSelectedIndex(gamePlayModel.getSelectedDefendComboBoxIndex());
+		}
 		welcomePanel.add(this.defendCountryListComboBox);
 
 		if (defendCountryListArray.length > 0) {
 			defendCountryListComboBox.setRenderer(countriesViewRenderer);
 		}
 		defendCountryListComboBox.setBounds(1300, 310, 150, 25);
-		
+
 		this.noOfDiceDefendLabel = new JLabel("Number of Dice to Roll(for defend) :");
 		noOfDiceDefendLabel.setBounds(1300, 350, 150, 45);
 		welcomePanel.add(noOfDiceDefendLabel);
 
-		CountryModel defendCountry = (CountryModel) this.defendCountryListComboBox.getSelectedItem();
 		Integer[] defendTroops = new Integer[2];
-		if (defendCountry.getArmies() > 2) {
-			for (int i = 0; i < 2; i++) {
-				defendTroops[i] = i + 1;
-				System.out.println("i " + i);
-			}
-		}else {		
-			for (int i = 0; i < defendCountry.getArmies(); i++) {
-				defendTroops[i] = i + 1;
-				System.out.println("i " + i);
+
+		if (defendListOfCountries != null) {
+			CountryModel defendCountry = (CountryModel) this.defendCountryListComboBox.getSelectedItem();
+			if (defendCountry.getArmies() > 2) {
+				for (int i = 0; i < 2; i++) {
+					defendTroops[i] = i + 1;
+					System.out.println("i " + i);
+				}
+			} else {
+				for (int i = 0; i < defendCountry.getArmies(); i++) {
+					defendTroops[i] = i + 1;
+					System.out.println("i " + i);
+				}
 			}
 		}
-		
+
 		numOfDiceDefendComboBox = new JComboBox(defendTroops);
 		numOfDiceDefendComboBox.setBounds(1300, 380, 150, 25);
 		welcomePanel.add(numOfDiceDefendComboBox);
-		
-		
+
 		this.SingleButton.setBounds(1210, 450, 150, 25);
 		welcomePanel.add(this.SingleButton);
-		
+
 		this.alloutButton.setBounds(1375, 450, 150, 25);
 		welcomePanel.add(this.alloutButton);
-		
+
 		this.nextButton.setBounds(1300, 600, 150, 25);
 		welcomePanel.add(this.nextButton);
 
@@ -357,6 +358,7 @@ public class AttackView extends JFrame implements View {
 			}
 		}
 	}
+
 	public void setItemListener(ItemListener itemListener) {
 		this.attackCountryListComboBox.addItemListener(itemListener);
 		this.defendCountryListComboBox.addItemListener(itemListener);
