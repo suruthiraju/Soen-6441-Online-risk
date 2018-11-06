@@ -131,4 +131,17 @@ public class PlayerModel extends Observable {
 	public void setOwnedCountries(List<CountryModel> ownedCountries) {
 		this.ownedCountries = ownedCountries;
 	}
+
+	public boolean attacked(CountryModel countryForAddition) {
+		this.ownedCountries.add(countryForAddition);		
+		return true;
+	}
+	public boolean defend(CountryModel countryForDeduction) {
+		for(int i=0; i< this.ownedCountries.size(); i++) {
+			if (this.ownedCountries.get(i).getCountryName().equals(countryForDeduction.getCountryName())) {
+				this.ownedCountries.remove(i);
+			}
+		}
+		return true;
+	}
 }

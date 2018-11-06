@@ -1,6 +1,8 @@
 package app.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 
@@ -26,6 +28,8 @@ public class GamePlayModel extends Observable  {
 	 * to save Selected ComboBox index
 	 */
 	private int selectedDefendComboBoxIndex;
+	private boolean countryOwned = false;
+	private boolean armyToMoveFlag;
 	/**
 	 * Constructor
 	 * 
@@ -152,11 +156,85 @@ public class GamePlayModel extends Observable  {
 	}
 	
 	public void singleStrike(int attackDice, CountryModel attackCountry, int defendDice, CountryModel defendCountry) {
-		
+		Integer[] attackDiceRoll = new Integer[attackDice];
+		Integer[] defendDiceRoll = new Integer[defendDice];
+		for (int i=0; i<attackDice;i++) {
+			attackDiceRoll[i] = getRandomBetweenRange(1, 6);
+		}
+		for (int i=0; i<defendDice;i++) {
+			defendDiceRoll[i] = getRandomBetweenRange(1, 6);
+		}
+		Arrays.sort(attackDiceRoll, Collections.reverseOrder()); 
+		Arrays.sort(defendDiceRoll, Collections.reverseOrder()); 
+		System.out.println(Arrays.toString(attackDiceRoll));
+		System.out.println(Arrays.toString(defendDiceRoll));
+		for(int i=0; i<defendDice;i++) {
+			if(attackDiceRoll[i] > defendDiceRoll[i]) {
+				armiesDeduction(defendCountry, 1);
+			}else {
+				armiesDeduction(attackCountry, 1);
+			}
+		}
+		if(countryOwned == true) {
+			for(int i = 0; i< this.getPlayers().size(); i++) {
+				if (this.getPlayers().get(i).getNamePlayer().equals(defendCountry.getRulerName())) {
+					this.getPlayers().get(i).defend(defendCountry);
+				}
+				if (this.getPlayers().get(i).getNamePlayer().equals(attackCountry.getRulerName())) {
+					this.getPlayers().get(i).attacked(defendCountry);
+				}
+			}
+			for(int i = 0; i< this.gameMapModel.getCountries().size(); i++) {
+				if (this.gameMapModel.getCountries().get(i).getCountryName().equals(defendCountry.getCountryName())) {
+					this.gameMapModel.getCountries().get(i).setRulerName(attackCountry.getRulerName());
+				}
+			}
+			
+			this.setArmyToMoveText(true);
+		}
+		callObservers();
 	}
 	
-	public void alloutStrike() {
+	public CountryModel armiesDeduction(CountryModel countryForDeduction, int armiesToDeduct) {
 		
+		for(int i = 0; i< this.gameMapModel.getCountries().size(); i++) {
+			if (this.gameMapModel.getCountries().get(i).getCountryName().equals(countryForDeduction.getCountryName())) {
+				if (this.gameMapModel.getCountries().get(i).getArmies() == 1) {
+					countryOwned = true;
+					this.gameMapModel.getCountries().get(i).setArmies(this.gameMapModel.getCountries().get(i).getArmies()-armiesToDeduct);
+				}else {
+					this.gameMapModel.getCountries().get(i).setArmies(this.gameMapModel.getCountries().get(i).getArmies()-armiesToDeduct);
+				}
+			}
+		}
+		for(int i = 0; i< this.getPlayers().size(); i++) {
+			if (this.getPlayers().get(i).getNamePlayer().equals(countryForDeduction.getRulerName())) {
+					this.getPlayers().get(i).setmyTroop(this.getPlayers().get(i).getmyTroop() - armiesToDeduct);
+			}
+		}
+		return countryForDeduction;
+	}
+	
+	
+	
+	public void alloutStrike(CountryModel attackCountry, CountryModel defendCountry) {
+		int attackTotalArmies = attackCountry.getArmies();
+		int defendTotalArmies = defendCountry.getArmies();
+		this.setArmyToMoveText(true);
+		callObservers();
+	}
+	
+	public void moveArmies(CountryModel attackCountry, CountryModel defendCountry, int noOfArmiesToBeMoved){
+		for(int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
+			if (this.gameMapModel.getCountries().get(i).getCountryName().equals(attackCountry.getCountryName())) {
+				this.gameMapModel.getCountries().get(i).setArmies(this.gameMapModel.getCountries().get(i).getArmies() - noOfArmiesToBeMoved );
+			}
+			if (this.gameMapModel.getCountries().get(i).getCountryName().equals(defendCountry.getCountryName())) {
+				this.gameMapModel.getCountries().get(i).setArmies(this.gameMapModel.getCountries().get(i).getArmies() + noOfArmiesToBeMoved );
+			}
+		}
+		this.setArmyToMoveText(false);
+		callObservers();
 	}
 	
 	public void setSelectedComboBoxIndex(int selectedComboBoxIndex) {
@@ -186,7 +264,27 @@ public class GamePlayModel extends Observable  {
 	public int getSelectedDefendComboBoxIndex() {
 		return this.selectedDefendComboBoxIndex;
 	}
-	
+	public void setArmyToMoveText(boolean armyToMoveFlag) {
+		this.armyToMoveFlag = armyToMoveFlag;
+		if (armyToMoveFlag ==  true) {
+		callObservers();
+		}
+	}
+
+	public boolean getArmyToMoveText() {
+		return this.armyToMoveFlag;
+	}
+	/**
+	 * This method gives the Random generation of numbers within two values
+	 * 
+	 * @param min
+	 * @param max
+	 * @return
+	 */
+	public int getRandomBetweenRange(double min, double max) {
+		int x = (int) ((Math.random() * ((max - min) + 1)) + min);
+		return x;
+	}
 	/**
 	 * Method used to notify state change whenever any change is reflected by
 	 * CreateContinentController via CreateContinentView

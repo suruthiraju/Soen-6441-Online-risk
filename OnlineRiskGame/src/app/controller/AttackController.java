@@ -2,13 +2,9 @@ package app.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
 
 import app.model.CountryModel;
 import app.model.GamePlayModel;
-import app.model.PlayerModel;
 import app.view.AttackView;
 
 /**
@@ -18,10 +14,11 @@ import app.view.AttackView;
  * @author Suruthi Raju
  *
  */
-public class AttackController implements ActionListener, ItemListener {
+public class AttackController implements ActionListener {
 
 	private AttackView theAttackView;
 	private GamePlayModel gamePlayModel;
+	private CountryModel defeatedCountry;
 
 	/**
 	 * Constructor initializes values and sets the screen too visible
@@ -31,9 +28,10 @@ public class AttackController implements ActionListener, ItemListener {
 	public AttackController(GamePlayModel gamePlayModel) {
 		this.gamePlayModel = gamePlayModel;
 		theAttackView = new AttackView(this.gamePlayModel);
+		this.gamePlayModel.setArmyToMoveText(false);
 		theAttackView.setActionListener(this);
-		theAttackView.setItemListener(this);
 		theAttackView.setVisible(true);
+		this.gamePlayModel.deleteObservers();
 		this.gamePlayModel.addObserver(this.theAttackView);
 	}
 
@@ -58,26 +56,20 @@ public class AttackController implements ActionListener, ItemListener {
 			int defendDice = (int) theAttackView.numOfDiceDefendComboBox.getSelectedItem();
 			CountryModel attackCountry = (CountryModel) theAttackView.attackCountryListComboBox.getSelectedItem();
 			CountryModel defendCountry = (CountryModel) theAttackView.defendCountryListComboBox.getSelectedItem();
+			defeatedCountry = defendCountry;
 			this.gamePlayModel.singleStrike(attackDice, attackCountry, defendDice, defendCountry);
 		}else if (actionEvent.getSource().equals(this.theAttackView.alloutButton)) {
-			this.gamePlayModel.alloutStrike();
+			CountryModel attackCountry = (CountryModel) theAttackView.attackCountryListComboBox.getSelectedItem();
+			CountryModel defendCountry = (CountryModel) theAttackView.defendCountryListComboBox.getSelectedItem();
+			defeatedCountry = defendCountry;
+			this.gamePlayModel.alloutStrike(attackCountry, defendCountry);
+		}
+		else if (actionEvent.getSource().equals(this.theAttackView.moveButton)) {
+			CountryModel attackCountry = (CountryModel) theAttackView.attackCountryListComboBox.getSelectedItem();
+			int noOfArmiesToBeMoved = (int) theAttackView.numOfArmiesToBeMovedComboBox.getSelectedItem();
+			CountryModel defendCountry = defeatedCountry ;
+			this.gamePlayModel.moveArmies(attackCountry, defendCountry, noOfArmiesToBeMoved );
 		}
 	}
 	
-	/**
-	 * Item Listener
-	 * 
-	 * @see java.awt.event.ItemListener#itemStateChanged(java.awt.event.ItemEvent)
-	 */
-	@Override
-	public void itemStateChanged(ItemEvent itemEvent) {
-		if (itemEvent.getSource().equals(this.theAttackView.attackCountryListComboBox)) {
-			this.gamePlayModel
-					.setSelectedAttackComboBoxIndex(this.theAttackView.attackCountryListComboBox.getSelectedIndex());
-		}else if (itemEvent.getSource().equals(this.theAttackView.defendCountryListComboBox)) {
-			this.gamePlayModel
-			.setSelectedDefendComboBoxIndex(this.theAttackView.defendCountryListComboBox.getSelectedIndex());
-		}
-
-	}
 }

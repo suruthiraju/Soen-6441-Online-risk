@@ -266,6 +266,7 @@ public class ReinforcementView extends JFrame implements Observer {
 			this.playerModel = (PlayerModel) obs;
 		} else if (obs instanceof GamePlayModel) {
 			this.gamePlayModel = (GamePlayModel) obs;
+			this.gameMapModel =this.gamePlayModel.getGameMap();
 		}
 		this.updateWindow(this.gamePlayModel, this.playerModel);
 		this.revalidate();

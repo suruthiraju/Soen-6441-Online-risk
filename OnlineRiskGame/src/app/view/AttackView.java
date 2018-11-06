@@ -7,11 +7,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -22,7 +22,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import app.helper.View;
@@ -40,7 +39,7 @@ import app.model.PlayerModel;
  *
  */
 
-public class AttackView extends JFrame implements View {
+public class AttackView extends JFrame implements View, ItemListener {
 
 	public GameMapModel gameMapModel;
 	public PlayerModel playerModel;
@@ -55,7 +54,9 @@ public class AttackView extends JFrame implements View {
 	public JLabel noOfTroopsLabel;
 	public JLabel noOfDiceAttackLabel;
 	public JLabel noOfDiceDefendLabel;
+	public JLabel defectedCountryLabel;
 	public JButton nextButton;
+	public JButton moveButton;
 	public JButton SingleButton;
 	public JButton alloutButton;
 	public JComboBox<Object> attackCountryListComboBox;
@@ -66,6 +67,7 @@ public class AttackView extends JFrame implements View {
 	public JButton[] button;
 	public JComboBox<Integer> numOfDiceAttackComboBox;
 	public JComboBox<Integer> numOfDiceDefendComboBox;
+	public JComboBox<Integer> numOfArmiesToBeMovedComboBox;
 
 	public AttackView(GamePlayModel gamePlayModel) {
 		this.gameMapModel = gamePlayModel.getGameMap();
@@ -82,6 +84,7 @@ public class AttackView extends JFrame implements View {
 		graphicPanel.setBackground(Color.WHITE);
 
 		this.nextButton = new JButton("Next");
+		this.moveButton = new JButton("Move");
 		this.SingleButton = new JButton("Single attack");
 		this.alloutButton = new JButton("All Out");
 		this.add(welcomePanel);
@@ -108,6 +111,7 @@ public class AttackView extends JFrame implements View {
 		Font mediumFont = new Font("Serif", Font.BOLD, 14);
 		Font smallFont = new Font("Serif", Font.BOLD, 12);
 
+		this.gamePlayModel = gamePlayModel;
 		this.gameMapModel = gamePlayModel.getGameMap();
 		this.playerModel = this.gameMapModel.getPlayerTurn();
 
@@ -131,8 +135,16 @@ public class AttackView extends JFrame implements View {
 
 		countriesViewRenderer = new CountryViewRenderer();
 		attackCountryListArray = attackListOfCountries.toArray();
-		attackCountryListComboBox = new JComboBox(attackCountryListArray);
-		attackCountryListComboBox.setSelectedIndex(gamePlayModel.getSelectedAttackComboBoxIndex());
+
+		if (attackListOfCountries != null && !(attackListOfCountries.isEmpty())) {
+			attackCountryListComboBox = new JComboBox(attackCountryListArray);
+			if (attackListOfCountries.size() >= gamePlayModel.getSelectedAttackComboBoxIndex() ) {
+				attackCountryListComboBox.setSelectedIndex(gamePlayModel.getSelectedAttackComboBoxIndex());
+			}else {
+				attackCountryListComboBox.setSelectedIndex(0);
+			}			
+		}
+
 		welcomePanel.add(this.attackCountryListComboBox);
 
 		if (attackCountryListArray.length > 0) {
@@ -141,21 +153,23 @@ public class AttackView extends JFrame implements View {
 		attackCountryListComboBox.setBounds(1300, 180, 150, 25);
 
 		this.noOfDiceAttackLabel = new JLabel("Number of Dice to Roll(for attack) :");
-		noOfDiceAttackLabel.setBounds(1300, 215, 150, 35);
+		noOfDiceAttackLabel.setBounds(1300, 215, 200, 35);
 		welcomePanel.add(noOfDiceAttackLabel);
 
 		CountryModel attackCountry = (CountryModel) this.attackCountryListComboBox.getSelectedItem();
 		System.out.print("country name " + attackCountry.getCountryName());
 		Integer[] attackTroops = new Integer[3];
-		if (attackCountry.getArmies() > 3) {
-			for (int i = 0; i < 3; i++) {
-				attackTroops[i] = i + 1;
-				System.out.println("i " + i);
-			}
-		} else {
-			for (int i = 0; i < (attackCountry.getArmies() - 1); i++) {
-				attackTroops[i] = i + 1;
-				System.out.println("i " + i);
+		if (attackListOfCountries != null && !(attackListOfCountries.isEmpty())) {
+			if (attackCountry.getArmies() > 3) {
+				for (int i = 0; i < 3; i++) {
+					attackTroops[i] = i + 1;
+					System.out.println("i " + i);
+				}
+			} else {
+				for (int i = 0; i < (attackCountry.getArmies() - 1); i++) {
+					attackTroops[i] = i + 1;
+					System.out.println("i " + i);
+				}
 			}
 		}
 
@@ -173,10 +187,13 @@ public class AttackView extends JFrame implements View {
 
 		countriesViewRenderer = new CountryViewRenderer();
 		defendCountryListArray = defendListOfCountries.toArray();
+
 		defendCountryListComboBox = new JComboBox(defendCountryListArray);
-		if (defendListOfCountries != null) {
+		System.out.println("defendListOfCountries " + defendListOfCountries.size());
+		if (defendListOfCountries != null && !(defendListOfCountries.isEmpty())) {
 			defendCountryListComboBox.setSelectedIndex(gamePlayModel.getSelectedDefendComboBoxIndex());
 		}
+
 		welcomePanel.add(this.defendCountryListComboBox);
 
 		if (defendCountryListArray.length > 0) {
@@ -185,12 +202,12 @@ public class AttackView extends JFrame implements View {
 		defendCountryListComboBox.setBounds(1300, 310, 150, 25);
 
 		this.noOfDiceDefendLabel = new JLabel("Number of Dice to Roll(for defend) :");
-		noOfDiceDefendLabel.setBounds(1300, 350, 150, 45);
+		noOfDiceDefendLabel.setBounds(1300, 350, 200, 45);
 		welcomePanel.add(noOfDiceDefendLabel);
 
 		Integer[] defendTroops = new Integer[2];
 
-		if (defendListOfCountries != null) {
+		if (defendListOfCountries != null && !(defendListOfCountries.isEmpty())) {
 			CountryModel defendCountry = (CountryModel) this.defendCountryListComboBox.getSelectedItem();
 			if (defendCountry.getArmies() > 2) {
 				for (int i = 0; i < 2; i++) {
@@ -214,6 +231,34 @@ public class AttackView extends JFrame implements View {
 
 		this.alloutButton.setBounds(1375, 450, 150, 25);
 		welcomePanel.add(this.alloutButton);
+
+		if (gamePlayModel.getArmyToMoveText() == false) {
+			this.SingleButton.setEnabled(true);
+			this.alloutButton.setEnabled(true);
+			this.attackCountryListComboBox.setEnabled(true);
+		}
+
+		// move troop after conquer
+		if (gamePlayModel.getArmyToMoveText() == true) {
+			this.attackCountryListComboBox.setEnabled(false);
+			this.SingleButton.setEnabled(false);
+			this.alloutButton.setEnabled(false);
+			this.defectedCountryLabel = new JLabel("Move troops to defeated country :");
+			defectedCountryLabel.setBounds(1300, 480, 200, 45);
+			welcomePanel.add(defectedCountryLabel);
+
+			Integer[] moveTroops = new Integer[attackCountry.getArmies()];
+			for (int i = 0; i < (attackCountry.getArmies() - 1); i++) {
+				moveTroops[i] = i + 1;
+			}
+
+			numOfArmiesToBeMovedComboBox = new JComboBox(moveTroops);
+			numOfArmiesToBeMovedComboBox.setBounds(1300, 510, 150, 25);
+			welcomePanel.add(numOfArmiesToBeMovedComboBox);
+
+			this.moveButton.setBounds(1300, 540, 150, 25);
+			welcomePanel.add(this.moveButton);
+		}
 
 		this.nextButton.setBounds(1300, 600, 150, 25);
 		welcomePanel.add(this.nextButton);
@@ -242,6 +287,7 @@ public class AttackView extends JFrame implements View {
 			graphicPanel.add(button[i]);
 		}
 
+		this.setItemListener(this);
 	}
 
 	/**
@@ -316,6 +362,7 @@ public class AttackView extends JFrame implements View {
 			this.playerModel = (PlayerModel) obs;
 		} else if (obs instanceof GamePlayModel) {
 			this.gamePlayModel = (GamePlayModel) obs;
+			this.gameMapModel = this.gamePlayModel.getGameMap();
 		}
 		this.updateWindow(this.gamePlayModel, this.playerModel);
 		this.revalidate();
@@ -334,6 +381,7 @@ public class AttackView extends JFrame implements View {
 		this.alloutButton.addActionListener(actionListener);
 		this.defendCountryListComboBox.addActionListener(actionListener);
 		this.attackCountryListComboBox.addActionListener(actionListener);
+		this.moveButton.addActionListener(actionListener);
 	}
 
 	/**
@@ -362,6 +410,21 @@ public class AttackView extends JFrame implements View {
 	public void setItemListener(ItemListener itemListener) {
 		this.attackCountryListComboBox.addItemListener(itemListener);
 		this.defendCountryListComboBox.addItemListener(itemListener);
+
+	}
+
+	/**
+	 * Item Listener
+	 * 
+	 * @see java.awt.event.ItemListener#itemStateChanged(java.awt.event.ItemEvent)
+	 */
+	@Override
+	public void itemStateChanged(ItemEvent itemEvent) {
+		if (itemEvent.getSource().equals(this.attackCountryListComboBox)) {
+			this.gamePlayModel.setSelectedAttackComboBoxIndex(this.attackCountryListComboBox.getSelectedIndex());
+		} else if (itemEvent.getSource().equals(this.defendCountryListComboBox)) {
+			this.gamePlayModel.setSelectedDefendComboBoxIndex(this.defendCountryListComboBox.getSelectedIndex());
+		}
 
 	}
 
