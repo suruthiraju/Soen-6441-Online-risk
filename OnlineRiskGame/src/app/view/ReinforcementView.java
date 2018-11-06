@@ -19,12 +19,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
-import app.helper.View;
 import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.model.GamePlayModel;
@@ -50,6 +53,9 @@ public class ReinforcementView extends JFrame implements Observer {
 	
 	public JPanel statsPanel;
 	public JLabel worldCoverageLabel;
+	
+	JScrollPane scrollableTextArea;
+	JTextArea text;
 
 	public JLabel welcomeLabel;
 	public JLabel noOfTroopsLabel;
@@ -82,12 +88,25 @@ public class ReinforcementView extends JFrame implements Observer {
 		this.add(graphicPanel);
 		graphicPanel.setSize(1200, 650);		
 		graphicPanel.setBackground(Color.WHITE);
-		this.add(statsPanel);
+		
 		statsPanel.setSize(1200,1000);
 		statsPanel.setBackground(Color.BLACK);
+		statsPanel.setBorder(new TitledBorder(new EtchedBorder(), "Display Area"));
 		
-		
+		text = new JTextArea(16, 58);
+		text.setEditable(false);
+		text.setText("Hamid is useful!");
+		scrollableTextArea = new JScrollPane(text);
+		scrollableTextArea.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
+		//scrollableTextArea.setSize(1000, 300);
+		//scrollableTextArea.setBackground(Color.BLACK);
+		
+		//scrollableTextArea.add(text);
+		statsPanel.add(scrollableTextArea);
+
+		this.add(statsPanel);
+		
 		this.addButton = new JButton("Add");
 		this.add(welcomePanel);
 
@@ -125,11 +144,11 @@ public class ReinforcementView extends JFrame implements Observer {
 		noOfTroopsLabel.setBounds(1300, 140, 150, 25);
 		welcomePanel.add(noOfTroopsLabel);
 		
-		this.worldCoverageLabel=new JLabel("The world coverage per player :");
-		worldCoverageLabel.setBounds(10, 750, 150, 25);
-		worldCoverageLabel.setFont(mediumFont);
-		worldCoverageLabel.setForeground(Color.WHITE);
-		statsPanel.add(worldCoverageLabel);
+//		this.worldCoverageLabel=new JLabel("The world coverage per player :");
+//		worldCoverageLabel.setBounds(10, 750, 150, 25);
+//		worldCoverageLabel.setFont(mediumFont);
+//		worldCoverageLabel.setForeground(Color.WHITE);
+//		statsPanel.add(worldCoverageLabel);
 		
 		
 
