@@ -138,7 +138,7 @@ public class AttackView extends JFrame implements View, ItemListener {
 
 		if (attackListOfCountries != null && !(attackListOfCountries.isEmpty())) {
 			attackCountryListComboBox = new JComboBox(attackCountryListArray);
-			if (attackListOfCountries.size() >= gamePlayModel.getSelectedAttackComboBoxIndex() ) {
+			if (attackListOfCountries.size() > gamePlayModel.getSelectedAttackComboBoxIndex() ) {
 				attackCountryListComboBox.setSelectedIndex(gamePlayModel.getSelectedAttackComboBoxIndex());
 			}else {
 				attackCountryListComboBox.setSelectedIndex(0);

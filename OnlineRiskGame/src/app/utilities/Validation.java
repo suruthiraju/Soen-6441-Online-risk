@@ -10,6 +10,7 @@ import java.util.Map;
 import app.model.ContinentsModel;
 import app.model.CountryModel;
 import app.model.GameMapModel;
+import app.model.GamePlayModel;
 
 /**
  * This class is to valdiate map for its correctness
@@ -220,6 +221,11 @@ public class Validation {
 
 		// If BFS is complete without visited d
 		return false;
+	}
+	
+	public boolean endOfGame(GamePlayModel gamePlayModel) {
+		return false;
+		
 	}
 
 }
