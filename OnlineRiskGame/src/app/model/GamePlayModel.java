@@ -40,6 +40,7 @@ public class GamePlayModel extends Observable {
 	private boolean countryOwned = false;
 	private boolean armyToMoveFlag;
 	private StringBuilder consoleText;
+	private CountryModel defeatedCountry;
 
 	/**
 	 * Constructor
@@ -89,6 +90,16 @@ public class GamePlayModel extends Observable {
 	 */
 	public void setPlayers(ArrayList<PlayerModel> players) {
 		this.players = players;
+	}
+	
+	public void setDefeatedCountry(CountryModel defeatedCountry)
+	{
+		this.defeatedCountry =  defeatedCountry;
+	}
+	
+	public CountryModel getDefeatedCountry()
+	{
+		return this.defeatedCountry;
 	}
 	
 	/**
