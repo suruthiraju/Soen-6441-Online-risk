@@ -79,6 +79,7 @@ public class PlayerController implements ActionListener, ItemListener {
 	public void attack() {
 		theAttackView = new AttackView(this.gamePlayModel);
 		this.gamePlayModel.setArmyToMoveText(false);
+		this.gamePlayModel.setCardToBeAssigned(false);
 		theAttackView.setActionListener(this);
 		theAttackView.setVisible(true);
 		this.gamePlayModel.deleteObservers();
@@ -148,7 +149,12 @@ public class PlayerController implements ActionListener, ItemListener {
 						(CountryModel) this.theFortificationView.fromCountryListComboBox.getSelectedItem(),
 						(CountryModel) this.theFortificationView.toCountryListComboBox.getSelectedItem());
 			}
-
+			
+			if(this.gamePlayModel.getCardToBeAssigned() == true) {
+				
+				this.gamePlayModel.setCardToBeAssigned(false);
+			}
+			
 			int index = this.gamePlayModel.getGameMap().getPlayerIndex();
 			index++;
 			if (this.gamePlayModel.getPlayers().size() > index) {

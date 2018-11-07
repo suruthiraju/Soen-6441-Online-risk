@@ -40,6 +40,7 @@ public class GamePlayModel extends Observable {
 	private int selectedDefendComboBoxIndex;
 	private boolean countryOwned = false;
 	private boolean armyToMoveFlag;
+	private boolean cardToBeAssigned;
 	private StringBuilder consoleText;
 	private CountryModel defeatedCountry;
 
@@ -48,12 +49,11 @@ public class GamePlayModel extends Observable {
 	 * 
 	 * @param gameMap
 	 * @param players
-	 * @throws org.json.simple.parser.ParseException 
 	 */
-	public GamePlayModel(GameMapModel gameMap, ArrayList<PlayerModel> players) throws org.json.simple.parser.ParseException {
+	public GamePlayModel(GameMapModel gameMap, ArrayList<PlayerModel> players, ArrayList<CardModel> deck ) {
 		this.gameMapModel = gameMap;
 		this.players = players;
-		this.deck = this.getCards();
+		this.deck = deck;
 		this.consoleText = new StringBuilder("Hello to the Risk Game ! ");
 	}
 
@@ -264,6 +264,7 @@ public class GamePlayModel extends Observable {
 			}
 
 			this.setArmyToMoveText(true);
+			this.setCardToBeAssigned(true);
 		}
 		callObservers();
 	}
@@ -344,6 +345,7 @@ public class GamePlayModel extends Observable {
 			}
 
 			this.setArmyToMoveText(true);
+			this.setCardToBeAssigned(true);
 		}
 		callObservers();
 	}
@@ -402,6 +404,14 @@ public class GamePlayModel extends Observable {
 
 	public boolean getArmyToMoveText() {
 		return this.armyToMoveFlag;
+	}
+	
+	public void setCardToBeAssigned(boolean cardToBeAssigned) {
+		this.cardToBeAssigned = cardToBeAssigned;
+	}
+
+	public boolean getCardToBeAssigned() {
+		return this.cardToBeAssigned;
 	}
 
 	/**
