@@ -415,14 +415,25 @@ public class GamePlayModel extends Observable {
 		int x = (int) ((Math.random() * ((max - min) + 1)) + min);
 		return x;
 	}
-
+;
 	/**
 	 * Method used to notify state change whenever any change is reflected by
 	 * CreateContinentController via CreateContinentView
 	 */
 	public void callObservers() {
 		this.consoleText.append("\n Observer called!");
+		for(int i=0; i<this.getPlayers().size(); i++)
+		{
+			this.coveragePercentage(this.getPlayers().get(i));
+		}
 		setChanged();
 		notifyObservers(this);
+	}
+	public void coveragePercentage(PlayerModel parmPlayer)
+	{
+		double percentage =  (parmPlayer.getOwnedCountries().size()*100)/this.gameMapModel.getCountries().size();
+		this.getConsoleText().append("Map coverage for " + parmPlayer.getNamePlayer() + " is " + percentage +"% "+ "\n");
+	
+		
 	}
 }

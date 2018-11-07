@@ -39,6 +39,7 @@ public class PlayerController implements ActionListener, ItemListener {
 	 */
 	public PlayerController(GamePlayModel gamePlayModel) {
 		this.gamePlayModel = gamePlayModel;
+		this.gamePlayModel.getConsoleText().append("Initiating reinforcement for " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
 		reinforcement();
 	}
 
@@ -98,11 +99,13 @@ public class PlayerController implements ActionListener, ItemListener {
 				this.gamePlayModel.setSelectedArmiesToCountries(selectedArmies, countryName);
 			} else {
 				this.theReinforcementView.dispose();
+				this.gamePlayModel.getConsoleText().append("Initiating " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer()+"'s attack");
 				attack();
 
 			}
 		} else if (actionEvent.getSource().equals(this.theAttackView.nextButton)) {
 			this.theAttackView.dispose();
+			this.gamePlayModel.getConsoleText().append("Initiating Fortification for " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
 			fortification();
 		} else if (actionEvent.getSource().equals(this.theAttackView.attackCountryListComboBox)) {
 			this.gamePlayModel
