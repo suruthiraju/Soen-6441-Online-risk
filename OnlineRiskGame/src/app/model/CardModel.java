@@ -4,7 +4,7 @@ package app.model;
  * "CardModel" is a class for continents of the map. "cardId" and
  * "cardValue" are attributes of an object
  * 
- * @author user
+ * @author Team 35
  *
  */
 public class CardModel {
