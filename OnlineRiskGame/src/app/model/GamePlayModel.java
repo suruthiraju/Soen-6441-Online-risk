@@ -1,5 +1,6 @@
 package app.model;
 
+import java.awt.List;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,8 +24,8 @@ import java.util.Observable;
 public class GamePlayModel extends Observable {
 
 	private GameMapModel gameMapModel;
-	private ArrayList<PlayerModel> players;
-	private ArrayList<CardModel> deck;
+	private ArrayList<PlayerModel> players = new ArrayList<PlayerModel>();
+	private ArrayList<CardModel> deck = new ArrayList<CardModel>();
 	/**
 	 * to save Selected ComboBox index
 	 */
@@ -47,16 +48,16 @@ public class GamePlayModel extends Observable {
 	 * 
 	 * @param gameMap
 	 * @param players
+	 * @throws org.json.simple.parser.ParseException 
 	 */
-	public GamePlayModel(GameMapModel gameMap, ArrayList<PlayerModel> players, ArrayList<CardModel> deck) {
+	public GamePlayModel(GameMapModel gameMap, ArrayList<PlayerModel> players) throws org.json.simple.parser.ParseException {
 		this.gameMapModel = gameMap;
 		this.players = players;
-		this.deck = deck;
+		this.deck = this.getCards();
 		this.consoleText = new StringBuilder("Hello to the Risk Game ! ");
 	}
 
 	public GamePlayModel() {
-		// TODO Auto-generated constructor stub
 		this.consoleText = new StringBuilder("Hello to the Risk Game ! ");
 	}
 
@@ -91,7 +92,7 @@ public class GamePlayModel extends Observable {
 	public void setPlayers(ArrayList<PlayerModel> players) {
 		this.players = players;
 	}
-	
+
 	public void setDefeatedCountry(CountryModel defeatedCountry)
 	{
 		this.defeatedCountry =  defeatedCountry;
@@ -104,35 +105,37 @@ public class GamePlayModel extends Observable {
 	
 	/**
 	 * @return the list of card.
-	 * @throws org.json.simple.parser.ParseException 
+	 * @throws org.json.simple.parser.ParseException
 	 */
 	public ArrayList<CardModel> getCards() throws org.json.simple.parser.ParseException {
-		 JSONParser parser = new JSONParser();
-		 JSONArray cards = null;
-		try {     
-            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "/src/" + "/app/" + "/helper/" + "ConstantCard.json"));
-            int i=0;
-           	cards = (JSONArray) obj;
-          
-           	for(Object o: cards) 
-            { 
-            	JSONObject card = (JSONObject) o;
-            	this.deck.get(i).setCardId((int) card.get("cardID"));
-            	System.out.println("The card ID is::::::");
-            	System.out.println(this.deck.get(i).getCardId());
-            	System.out.println("The card value is::::::");
-            	this.deck.get(i).setCardValue((int) card.get("cardValue"));
-            	System.out.println(this.deck.get(i).getCardValue());
-            	i++;
-            }
-            
+		try {
+			JSONParser parser = new JSONParser();
+			Object cards =  parser
+					.parse(new FileReader(System.getProperty("user.dir") + "/OnlineRiskGame/src/app/helper/ConstantCard.json"));
+			JSONObject jsonObject = (JSONObject) cards;
+			System.out.println("jsonObject " + jsonObject.get("cards") );
+			JSONArray cardsJSON = (JSONArray) jsonObject.get("cards");
+			
+			int i = 0;
+			CardModel cardModel = new  CardModel();
+			for (Object o : cardsJSON) {
+				JSONObject card = (JSONObject) o;
+				
+				int cardId = Integer.parseInt((String) card.get("cardId"));
+				System.out.println("cardId " + cardId);
+				cardModel.setCardId(cardId);
+
+				int cardValue = Integer.parseInt( (String) card.get("cardValue"));
+				System.out.println("cardValue " + cardValue);
+				cardModel.setCardValue(cardValue);
+				this.deck.add(cardModel);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } 
-		
+
 		return this.deck;
 	}
 
@@ -152,7 +155,7 @@ public class GamePlayModel extends Observable {
 	public void setConsoleText(StringBuilder consoleText) {
 		this.consoleText = consoleText;
 	}
-	
+
 	public PlayerModel getPlayer(CountryModel parmCountry) {
 		int i, j;
 		for (i = 0; i < players.size(); i++) {
@@ -290,7 +293,7 @@ public class GamePlayModel extends Observable {
 	public void alloutStrike(CountryModel attackCountry, CountryModel defendCountry) {
 		int attackTotalArmies = attackCountry.getArmies() - 1;
 		int defendTotalArmies = defendCountry.getArmies();
-		int attackDice, defendDice; 
+		int attackDice, defendDice;
 
 		while (attackTotalArmies > 0 && defendTotalArmies > 0) {
 			if (attackTotalArmies > 3) {

@@ -33,13 +33,7 @@ public class GamePlayController implements ActionListener {
 	 * @param gamePlayModel
 	 */
 	public GamePlayController(GamePlayModel gamePlayModel) {
-		this.gamePlayModel = gamePlayModel;
-		try {
-			xyz=this.gamePlayModel.getCards();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.gamePlayModel = gamePlayModel;		
 		gamePlay();
 	}
 
