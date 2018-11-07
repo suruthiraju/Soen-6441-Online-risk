@@ -15,7 +15,14 @@ import app.view.AttackView;
 import app.view.FortificationView;
 import app.view.ReinforcementView;
 
-
+/**
+ * In PlayerController, the data flow into model object and updates the view
+ * whenever data changes.
+ * 
+ * @author Hamid
+ * @version 1.0.0
+ *
+ */
 public class PlayerController implements ActionListener,ItemListener {
 	
 	private GamePlayModel gamePlayModel;
@@ -25,6 +32,11 @@ public class PlayerController implements ActionListener,ItemListener {
 	private ArrayList<PlayerModel> listOfPlayers = new ArrayList<PlayerModel>();
 	private int noOfPlayers;
 	
+	/**
+	 * Constructor initializes values and sets the screen too visible
+	 * 
+	 * @param gamePlayModel
+	 */
 	public PlayerController(GamePlayModel gamePlayModel) {
 		this.gamePlayModel = gamePlayModel;
 		reinforcement();
@@ -32,6 +44,11 @@ public class PlayerController implements ActionListener,ItemListener {
 		//attackView();
 		//fortificationview();
 	}
+	
+	/**
+	 * This method is called in reinforcement phase. 
+	 * 
+	 */
 	public void reinforcement(){
 		this.gamePlayModel.getGameMap().getPlayerTurn().setmyTroop(this.gamePlayModel.numberOfCountries(this.gamePlayModel));
 		theReinforcementView = new ReinforcementView(this.gamePlayModel);
@@ -45,23 +62,32 @@ public class PlayerController implements ActionListener,ItemListener {
 		}
 		
 	}
+	
+	/**
+	 * This method is called in fortification phase. 
+	 */
 	public void fortification()
 	{
-		
 		theFortificationView = new FortificationView(this.gamePlayModel);
 		theFortificationView.setActionListener(this);
 		theFortificationView.setItemListener(this);
 		theFortificationView.setVisible(true);
 		this.gamePlayModel.getGameMap().addObserver(this.theFortificationView);
-		
-		
 	}
+	
+	/**
+	 * This method is called in attack phase.
+	 */
 	public void attack()
 	{
 		theAttackView = new AttackView(this.gamePlayModel);
 		theAttackView.setActionListener(this);
 		theAttackView.setVisible(true);
 	}
+	
+	/**
+	 * This method performs action, by Listening the action event set in view.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		if (actionEvent.getSource().equals(this.theReinforcementView.addButton)) {
