@@ -3,7 +3,6 @@ package app.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.Observable;
 
 /**
@@ -31,6 +30,7 @@ public class GamePlayModel extends Observable {
 	private int selectedDefendComboBoxIndex;
 	private boolean countryOwned = false;
 	private boolean armyToMoveFlag;
+	private StringBuilder consoleText;
 
 	/**
 	 * Constructor
@@ -42,10 +42,12 @@ public class GamePlayModel extends Observable {
 		this.gameMapModel = gameMap;
 		this.players = players;
 		this.deck = deck;
+		this.consoleText = new StringBuilder("Hello to the Risk Game ! ");
 	}
 
 	public GamePlayModel() {
 		// TODO Auto-generated constructor stub
+		this.consoleText = new StringBuilder("Hello to the Risk Game ! ");
 	}
 
 	/**
@@ -96,6 +98,14 @@ public class GamePlayModel extends Observable {
 		this.deck = deck;
 	}
 
+	public StringBuilder getConsoleText() {
+		return consoleText;
+	}
+
+	public void setConsoleText(StringBuilder consoleText) {
+		this.consoleText = consoleText;
+	}
+	
 	public PlayerModel getPlayer(CountryModel parmCountry) {
 		int i, j;
 		for (i = 0; i < players.size(); i++) {
@@ -361,6 +371,7 @@ public class GamePlayModel extends Observable {
 	 * CreateContinentController via CreateContinentView
 	 */
 	public void callObservers() {
+		this.consoleText.append("\n Observer called!");
 		setChanged();
 		notifyObservers(this);
 	}

@@ -1,7 +1,9 @@
 package app.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -23,10 +25,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
+import javax.swing.text.DefaultCaret;
 
 import app.model.CountryModel;
 import app.model.GameMapModel;
@@ -50,13 +54,12 @@ public class ReinforcementView extends JFrame implements Observer {
 
 	public JPanel welcomePanel;
 	public JPanel graphicPanel;
-	
-	public JPanel statsPanel;
-	public JLabel worldCoverageLabel;
-	
-	JScrollPane scrollableTextArea;
-	JTextArea text;
 
+	public JPanel consoleMainPanel;
+	public JScrollPane consolePanel;
+	public JTextArea consoleTextArea;
+	
+	
 	public JLabel welcomeLabel;
 	public JLabel noOfTroopsLabel;
 
@@ -78,44 +81,43 @@ public class ReinforcementView extends JFrame implements Observer {
 		this.setTitle("Reinforcement Phase");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(300, 200);
-		this.setSize(1600, 1000);
+		this.setSize(1600, 840);
 		this.setResizable(false);
 		this.setVisible(false);
 		this.addButton = new JButton("Add");
 		welcomePanel = new JPanel();
 		graphicPanel = new JPanel();
-		statsPanel = new JPanel();
 		this.add(graphicPanel);
 		graphicPanel.setSize(1200, 650);		
 		graphicPanel.setBackground(Color.WHITE);
 		
-		statsPanel.setSize(1200,1000);
-		statsPanel.setBackground(Color.BLACK);
-		statsPanel.setBorder(new TitledBorder(new EtchedBorder(), "Display Area"));
-		
-		text = new JTextArea(16, 58);
-		text.setEditable(false);
-		text.setText("Hamid is useful!");
-		scrollableTextArea = new JScrollPane(text);
-		scrollableTextArea.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		this.consoleMainPanel = new JPanel();
+		this.consoleMainPanel.setBorder(new BevelBorder(1));
 
-		//scrollableTextArea.setSize(1000, 300);
-		//scrollableTextArea.setBackground(Color.BLACK);
-		
-		//scrollableTextArea.add(text);
-		statsPanel.add(scrollableTextArea);
+		this.consoleTextArea = new JTextArea("Life is a risk, instead play risk !!!\n", 10, 500);
+		this.consoleTextArea.setEditable(false);
+		this.consoleTextArea.setFocusable(false);
+		this.consoleTextArea.setVisible(true);
+		this.consoleTextArea.setForeground(Color.WHITE);
+		this.consoleTextArea.setBackground(Color.BLACK);
+		DefaultCaret caret = (DefaultCaret) this.consoleTextArea.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.OUT_BOTTOM);
 
-		this.add(statsPanel);
+		this.consolePanel = new JScrollPane(this.consoleTextArea);
+		this.consolePanel.setPreferredSize(new Dimension(1580, 130));
+
+		this.consoleMainPanel.add(this.consolePanel,BorderLayout.WEST);
+		
+		this.getContentPane().add(this.consoleMainPanel,BorderLayout.SOUTH);		
 		
 		this.addButton = new JButton("Add");
 		this.add(welcomePanel);
 
 		this.playerModel = this.gameMapModel.getPlayerTurn();
 		this.welcomeLabel = new JLabel("It's " + playerModel.getNamePlayer() + "'s turn");
-
+		
 		welcomePanel.setLayout(null);
 		graphicPanel.setLayout(null);
-		statsPanel.setLayout(null);
 
 		updateWindow(gamePlayModel, playerModel);
 	}
@@ -133,25 +135,22 @@ public class ReinforcementView extends JFrame implements Observer {
 		Font mediumFont = new Font("Serif", Font.BOLD, 14);
 		Font smallFont = new Font("Serif", Font.BOLD, 12);
 
+		this.gamePlayModel = gamePlayModel;
 		this.gameMapModel = gamePlayModel.getGameMap();
 		this.playerModel = this.gameMapModel.getPlayerTurn();
 
 		welcomeLabel.setBounds(1300, 80, 300, 25);
 		welcomeLabel.setFont(largeFont);
 		welcomePanel.add(welcomeLabel);
+		
+		if(this.gamePlayModel.getConsoleText()!=null) {
+			this.consoleTextArea.setText(this.gamePlayModel.getConsoleText().toString());			
+		}
 
 		this.noOfTroopsLabel = new JLabel("Number of Troops :");
 		noOfTroopsLabel.setBounds(1300, 140, 150, 25);
 		welcomePanel.add(noOfTroopsLabel);
 		
-//		this.worldCoverageLabel=new JLabel("The world coverage per player :");
-//		worldCoverageLabel.setBounds(10, 750, 150, 25);
-//		worldCoverageLabel.setFont(mediumFont);
-//		worldCoverageLabel.setForeground(Color.WHITE);
-//		statsPanel.add(worldCoverageLabel);
-		
-		
-
 		Integer[] troops = new Integer[this.gameMapModel.getPlayerTurn().getmyTroop()];
 		for (int i = 0; i < this.gameMapModel.getPlayerTurn().getmyTroop(); i++) {
 			troops[i] = i + 1;
@@ -276,7 +275,7 @@ public class ReinforcementView extends JFrame implements Observer {
 	 */
 	@Override
 	public void update(Observable obs, Object arg) {
-		statsPanel.removeAll();
+		//statsPanel.removeAll();
 		welcomePanel.removeAll();
 		graphicPanel.removeAll();
 		if (obs instanceof GameMapModel) {
