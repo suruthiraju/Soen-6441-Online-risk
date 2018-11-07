@@ -12,6 +12,8 @@ import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+import org.json.simple.parser.ParseException;
+
 import app.model.CardModel;
 import app.model.ContinentsModel;
 import app.model.CountryModel;
@@ -39,7 +41,6 @@ public class NewGameController implements ActionListener {
 	private String PlayerName = "";
 	private List<CountryModel> listOfCountry = null;
 	private List<CardModel> listOfCards = null;
-	private List<CardModel> constantCards = null;
     
     /**
      * Constructor initializes values and sets the screen too visible
@@ -71,7 +72,11 @@ public class NewGameController implements ActionListener {
 			}
 		}else if(actionEvent.getSource().equals(theView.nextButton)) {
 			noOfPlayers = (int) theView.numOfPlayers.getSelectedItem();
-			playerValidation();								
+			try {
+				playerValidation();
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}								
 		}else if(actionEvent.getSource().equals(theView.cancelButton)) {
 			new WelcomeScreenController();
 			 this.theView.dispose();
@@ -81,8 +86,9 @@ public class NewGameController implements ActionListener {
     
 	/**
 	 *  Check for the player validation
+	 * @throws ParseException 
 	 */
-	public void playerValidation() {
+	public void playerValidation() throws ParseException {
 		if ( gameMapModel.getCountries().size() > noOfPlayers) {
 			System.out.println("no of players" + noOfPlayers);
 			for (int i=0; i<noOfPlayers; i++) {
@@ -107,7 +113,7 @@ public class NewGameController implements ActionListener {
 			}
 			gamePlayModel.setGameMap(gameMapModel);
 			gamePlayModel.setPlayers(listOfPlayers);
-			//gamePlayModel.setCards(constantCards);
+			gamePlayModel.setCards(gamePlayModel.getCards());
 			new StartUpController(gamePlayModel);
 			this.theView.dispose();
 		} else {

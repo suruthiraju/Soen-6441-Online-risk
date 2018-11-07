@@ -23,6 +23,9 @@ public class CardModel {
 		this.cardValue = cardValue;
 	}
 
+	public CardModel() {
+	}
+
 	/**
 	 * Returns the CardId
 	 * 
