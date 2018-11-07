@@ -1,6 +1,15 @@
 package app.model;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Observable;
@@ -84,9 +93,36 @@ public class GamePlayModel extends Observable {
 	
 	/**
 	 * @return the list of card.
+	 * @throws org.json.simple.parser.ParseException 
 	 */
-	public ArrayList<CardModel> getCards() {
-		return deck;
+	public ArrayList<CardModel> getCards() throws org.json.simple.parser.ParseException {
+		 JSONParser parser = new JSONParser();
+		 JSONArray cards = null;
+		try {     
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "/src/" + "/app/" + "/helper/" + "ConstantCard.json"));
+            int i=0;
+           	cards = (JSONArray) obj;
+          
+           	for(Object o: cards) 
+            { 
+            	JSONObject card = (JSONObject) o;
+            	this.deck.get(i).setCardId((int) card.get("cardID"));
+            	System.out.println("The card ID is::::::");
+            	System.out.println(this.deck.get(i).getCardId());
+            	System.out.println("The card value is::::::");
+            	this.deck.get(i).setCardValue((int) card.get("cardValue"));
+            	System.out.println(this.deck.get(i).getCardValue());
+            	i++;
+            }
+            
+		}
+		catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } 
+		
+		return this.deck;
 	}
 
 	/**
