@@ -1,4 +1,4 @@
-/*package app.junit;
+package app.junit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -49,7 +49,7 @@ public class CheckSingleStrike {
 
 		countryList.get(0).setArmies(2);
 		
-		PlayerModel pm = new PlayerModel("X", 0, Color.WHITE, 0, countryList);
+		PlayerModel pm = new PlayerModel("X", 0, Color.WHITE, 0, countryList, null);
 		ArrayList<PlayerModel> pmList = new ArrayList<PlayerModel>();
 		
 		
@@ -66,4 +66,3 @@ public class CheckSingleStrike {
 	}
 
 }
-*/

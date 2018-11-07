@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -19,10 +21,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
+import javax.swing.border.BevelBorder;
+import javax.swing.text.DefaultCaret;
 
 import app.helper.View;
 import app.model.CountryModel;
@@ -44,6 +50,10 @@ public class FortificationView extends JFrame implements View {
 
 	public JPanel welcomePanel;
 	public JPanel graphicPanel;
+	
+	public JPanel consoleMainPanel;
+	public JScrollPane consolePanel;
+	public JTextArea consoleTextArea;
 
 	public JLabel welcomeLabel;
 	public JLabel noOfTroopsLabel;
@@ -74,16 +84,31 @@ public class FortificationView extends JFrame implements View {
 		this.setTitle("Fortification Phase");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(300, 200);
-		this.setSize(1600, 1000);
+		this.setSize(1600, 840);
 		this.setResizable(false);
 		this.setVisible(false);
 
 		welcomePanel = new JPanel();
 		graphicPanel = new JPanel();
 		this.add(graphicPanel);
-		graphicPanel.setSize(1200, 1000);
+		graphicPanel.setSize(1200, 650);
 		graphicPanel.setBackground(Color.WHITE);
 		graphicPanel.setLayout(null);
+		
+		this.consoleMainPanel = new JPanel();
+		this.consoleMainPanel.setBorder(new BevelBorder(1));
+ 		this.consoleTextArea = new JTextArea("Life is a risk, instead play risk !!!\n", 10, 500);
+		this.consoleTextArea.setEditable(false);
+		this.consoleTextArea.setFocusable(false);
+		this.consoleTextArea.setVisible(true);
+		this.consoleTextArea.setForeground(Color.WHITE);
+		this.consoleTextArea.setBackground(Color.BLACK);
+		DefaultCaret caret = (DefaultCaret) this.consoleTextArea.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.OUT_BOTTOM);
+ 		this.consolePanel = new JScrollPane(this.consoleTextArea);
+		this.consolePanel.setPreferredSize(new Dimension(1580, 130));
+ 		this.consoleMainPanel.add(this.consolePanel,BorderLayout.WEST);
+ 		this.getContentPane().add(this.consoleMainPanel,BorderLayout.SOUTH);	
 
 		this.add(welcomePanel);
 		this.playerModel = this.gameMapModel.getPlayerTurn();
@@ -106,7 +131,8 @@ public class FortificationView extends JFrame implements View {
 		Font largeFont = new Font("Serif", Font.BOLD, 18);
 		Font mediumFont = new Font("Serif", Font.BOLD, 14);
 		Font smallFont = new Font("Serif", Font.BOLD, 12);
-
+		
+		this.gamePlayModel = gamePlayModel;
 		this.gameMapModel = gamePlayModel.getGameMap();
 		this.playerModel = playerModel;
 
@@ -114,6 +140,10 @@ public class FortificationView extends JFrame implements View {
 		welcomeLabel.setBounds(1300, 80, 300, 25);
 		welcomeLabel.setFont(largeFont);
 		welcomePanel.add(welcomeLabel);
+		
+		if(this.gamePlayModel.getConsoleText()!=null) {
+			this.consoleTextArea.setText(this.gamePlayModel.getConsoleText().toString());			
+		}
 
 		this.fromCountryListLabel = new JLabel("From Country :");
 		fromCountryListLabel.setBounds(1300, 120, 150, 25);

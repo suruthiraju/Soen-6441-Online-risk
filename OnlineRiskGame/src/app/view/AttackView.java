@@ -9,6 +9,8 @@ import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -20,9 +22,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
+import javax.swing.border.BevelBorder;
+import javax.swing.text.DefaultCaret;
 
 import app.helper.View;
 import app.model.CountryModel;
@@ -47,6 +53,10 @@ public class AttackView extends JFrame implements View, ItemListener {
 
 	public JPanel welcomePanel;
 	public JPanel graphicPanel;
+	
+	public JPanel consoleMainPanel;
+	public JScrollPane consolePanel;
+	public JTextArea consoleTextArea;
 
 	public JLabel welcomeLabel;
 	public JLabel attackCountryListLabel;
@@ -74,14 +84,30 @@ public class AttackView extends JFrame implements View, ItemListener {
 		this.setTitle("Attack Phase");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(300, 200);
-		this.setSize(1600, 1000);
+		this.setSize(1600, 840);
 		this.setResizable(false);
 		this.setVisible(false);
 		welcomePanel = new JPanel();
 		graphicPanel = new JPanel();
 		this.add(graphicPanel);
-		graphicPanel.setSize(1200, 1000);
+		graphicPanel.setSize(1200, 650);
 		graphicPanel.setBackground(Color.WHITE);
+		
+		this.consoleMainPanel = new JPanel();
+		this.consoleMainPanel.setBorder(new BevelBorder(1));
+ 		this.consoleTextArea = new JTextArea("Life is a risk, instead play risk !!!\n", 10, 500);
+		this.consoleTextArea.setEditable(false);
+		this.consoleTextArea.setFocusable(false);
+		this.consoleTextArea.setVisible(true);
+		this.consoleTextArea.setForeground(Color.WHITE);
+		this.consoleTextArea.setBackground(Color.BLACK);
+		DefaultCaret caret = (DefaultCaret) this.consoleTextArea.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.OUT_BOTTOM);
+ 		this.consolePanel = new JScrollPane(this.consoleTextArea);
+		this.consolePanel.setPreferredSize(new Dimension(1580, 130));
+ 		this.consoleMainPanel.add(this.consolePanel,BorderLayout.WEST);
+ 		this.getContentPane().add(this.consoleMainPanel,BorderLayout.SOUTH);
+ 		
 
 		this.nextButton = new JButton("Next");
 		this.moveButton = new JButton("Move");
@@ -118,6 +144,10 @@ public class AttackView extends JFrame implements View, ItemListener {
 		welcomeLabel.setBounds(1300, 80, 300, 25);
 		welcomeLabel.setFont(largeFont);
 		welcomePanel.add(welcomeLabel);
+		
+		if(this.gamePlayModel.getConsoleText()!=null) {
+			this.consoleTextArea.setText(this.gamePlayModel.getConsoleText().toString());			
+		}
 
 		this.attackCountryListLabel = new JLabel("Select attack country:");
 		attackCountryListLabel.setBounds(1300, 140, 150, 25);
@@ -191,7 +221,11 @@ public class AttackView extends JFrame implements View, ItemListener {
 		defendCountryListComboBox = new JComboBox(defendCountryListArray);
 		System.out.println("defendListOfCountries " + defendListOfCountries.size());
 		if (defendListOfCountries != null && !(defendListOfCountries.isEmpty())) {
-			defendCountryListComboBox.setSelectedIndex(gamePlayModel.getSelectedDefendComboBoxIndex());
+			if (defendListOfCountries.size() > gamePlayModel.getSelectedDefendComboBoxIndex() ) {
+				defendCountryListComboBox.setSelectedIndex(gamePlayModel.getSelectedDefendComboBoxIndex());
+			}else {
+				defendCountryListComboBox.setSelectedIndex(0);
+			}
 		}
 
 		welcomePanel.add(this.defendCountryListComboBox);
