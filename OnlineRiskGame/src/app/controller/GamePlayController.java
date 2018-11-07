@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import org.json.simple.parser.ParseException;
+
+import app.model.CardModel;
 import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.model.GamePlayModel;
@@ -22,6 +25,7 @@ public class GamePlayController implements ActionListener {
 	
 	//use the model gameplay instead of member variables
 	public GamePlayModel gamePlayModel = null;
+	ArrayList<CardModel> xyz;
 
 	/**
 	 * Constructor initializes values and sets the screen too visible
@@ -30,6 +34,12 @@ public class GamePlayController implements ActionListener {
 	 */
 	public GamePlayController(GamePlayModel gamePlayModel) {
 		this.gamePlayModel = gamePlayModel;
+		try {
+			xyz=this.gamePlayModel.getCards();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		gamePlay();
 	}
 
