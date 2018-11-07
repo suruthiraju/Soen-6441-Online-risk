@@ -187,13 +187,13 @@ public class GamePlayModel extends Observable {
 		callObservers();
 	}
 
-	public int numberOfCountries(GamePlayModel gPP) {
+	public int numberOfCountries() {
 		int numberOfCountries = 0;
 
-		for (int i = 0; i < gPP.getPlayers().size(); i++) {
+		for (int i = 0; i < this.getPlayers().size(); i++) {
 
-			if (gPP.getPlayers().get(i).getNamePlayer().equals(gPP.getGameMap().getPlayerTurn().getNamePlayer())) {
-				numberOfCountries = gPP.getPlayers().get(i).getOwnedCountries().size();
+			if (this.getPlayers().get(i).getNamePlayer().equals(this.getGameMap().getPlayerTurn().getNamePlayer())) {
+				numberOfCountries = this.getPlayers().get(i).getOwnedCountries().size();
 			}
 		}
 		return reinforcementArmies(numberOfCountries);
