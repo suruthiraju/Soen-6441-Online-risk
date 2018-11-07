@@ -130,6 +130,7 @@ public class GamePlayModel extends Observable {
 				cardModel.setCardValue(cardValue);
 				this.deck.add(cardModel);
 			}
+			Collections.shuffle(this.deck);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

@@ -25,7 +25,6 @@ public class GamePlayController implements ActionListener {
 	
 	//use the model gameplay instead of member variables
 	public GamePlayModel gamePlayModel = null;
-	ArrayList<CardModel> xyz;
 
 	/**
 	 * Constructor initializes values and sets the screen too visible
