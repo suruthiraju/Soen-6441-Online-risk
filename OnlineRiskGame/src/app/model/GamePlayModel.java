@@ -16,6 +16,7 @@ public class GamePlayModel extends Observable {
 
 	private GameMapModel gameMapModel;
 	private ArrayList<PlayerModel> players;
+	private ArrayList<CardModel> deck;
 	/**
 	 * to save Selected ComboBox index
 	 */
@@ -37,9 +38,10 @@ public class GamePlayModel extends Observable {
 	 * @param gameMap
 	 * @param players
 	 */
-	public GamePlayModel(GameMapModel gameMap, ArrayList<PlayerModel> players) {
+	public GamePlayModel(GameMapModel gameMap, ArrayList<PlayerModel> players, ArrayList<CardModel> deck) {
 		this.gameMapModel = gameMap;
 		this.players = players;
+		this.deck = deck;
 	}
 
 	public GamePlayModel() {
@@ -76,6 +78,22 @@ public class GamePlayModel extends Observable {
 	 */
 	public void setPlayers(ArrayList<PlayerModel> players) {
 		this.players = players;
+	}
+	
+	/**
+	 * @return the list of card.
+	 */
+	public ArrayList<CardModel> getCards() {
+		return deck;
+	}
+
+	/**
+	 * Sets the list of card.
+	 * 
+	 * @param deck
+	 */
+	public void setCards(ArrayList<CardModel> deck) {
+		this.deck = deck;
 	}
 
 	public PlayerModel getPlayer(CountryModel parmCountry) {

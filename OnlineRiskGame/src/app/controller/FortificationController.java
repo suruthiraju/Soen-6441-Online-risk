@@ -69,10 +69,17 @@ public class FortificationController implements ActionListener, ItemListener {
 			index++;
 			if (this.gamePlayModel.getPlayers().size() > index) {
 				this.gameMapModel.setPlayerIndex(index);
-				this.gamePlayModel.getPlayers().get(index).callObservers();
+				this.gamePlayModel.getPlayers().get(index).callObservers();				
+			} 
+			else {
+			    index = 0;
+			    this.gameMapModel.setPlayerIndex(index);
+				this.gamePlayModel.getPlayers().get(index).callObservers();					
+			}
+			if(val.endOfGame(this.gamePlayModel) == false) {
 				new GamePlayController(this.gamePlayModel);
 				this.theFortificationView.dispose();
-			} else {
+			}else {
 				JOptionPane.showOptionDialog(null, "Bravo! Game is over! No one won!", "Valid",
 						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
 				this.theFortificationView.dispose();

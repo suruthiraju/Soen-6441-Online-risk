@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+import app.model.CardModel;
 import app.model.ContinentsModel;
 import app.model.CountryModel;
 import app.model.GameMapModel;
@@ -37,6 +38,8 @@ public class NewGameController implements ActionListener {
 	private int noOfPlayers;
 	private String PlayerName = "";
 	private List<CountryModel> listOfCountry = null;
+	private List<CardModel> listOfCards = null;
+	private List<CardModel> constantCards = null;
     
     /**
      * Constructor initializes values and sets the screen too visible
@@ -98,11 +101,13 @@ public class NewGameController implements ActionListener {
 				if (PlayerName ==  null || "".equals(PlayerName.trim())) {
 					PlayerName = "Player "+(i+1);
 				}
-				PlayerModel pm = new PlayerModel(PlayerName, 0, Color.WHITE,0,listOfCountry);
+				
+				PlayerModel pm = new PlayerModel(PlayerName, 0, Color.WHITE,0,listOfCountry, listOfCards);
 				listOfPlayers.add(pm);		
 			}
 			gamePlayModel.setGameMap(gameMapModel);
 			gamePlayModel.setPlayers(listOfPlayers);
+			//gamePlayModel.setCards(constantCards);
 			new StartUpController(gamePlayModel);
 			this.theView.dispose();
 		} else {

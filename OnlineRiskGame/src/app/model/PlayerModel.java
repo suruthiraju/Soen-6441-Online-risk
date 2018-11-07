@@ -21,6 +21,7 @@ public class PlayerModel extends Observable {
 	private Color color;
 	private int remainTroop;
 	private List<CountryModel> ownedCountries;
+	private List<CardModel> ownedCards;
 
 	/**
 	 * Constructor of PlayerModel
@@ -29,12 +30,13 @@ public class PlayerModel extends Observable {
 	 * @param myTroop
 	 * @param color
 	 */
-	public PlayerModel(String namePlayer, int myTroop, Color color, int remainTroop, List ownedCountries) {
+	public PlayerModel(String namePlayer, int myTroop, Color color, int remainTroop, List ownedCountries, List ownedCards) {
 		this.namePlayer = namePlayer;
 		this.myTroop = myTroop;
 		this.color = color;
 		this.remainTroop = remainTroop;
 		this.ownedCountries = ownedCountries;
+		this.ownedCards = ownedCards;
 	}
 
 	/**
@@ -131,7 +133,22 @@ public class PlayerModel extends Observable {
 	public void setOwnedCountries(List<CountryModel> ownedCountries) {
 		this.ownedCountries = ownedCountries;
 	}
+	/**
+	 * @return the list of array.
+	 */
+	public List<CardModel> getOwnedCards() {
+		return ownedCards;
+	}
 
+	/**
+	 * Sets the list of array.
+	 * 
+	 * @param ownedCountries
+	 */
+	public void setOwnedCards(List<CardModel> ownedCards) {
+		this.ownedCards = ownedCards;
+	}
+	
 	public boolean attacked(CountryModel countryForAddition) {
 		this.ownedCountries.add(countryForAddition);		
 		return true;

@@ -224,8 +224,12 @@ public class Validation {
 	}
 	
 	public boolean endOfGame(GamePlayModel gamePlayModel) {
-		return false;
-		
+		for (int i=0; i<gamePlayModel.getPlayers().size(); i++) {
+			if(gamePlayModel.getPlayers().get(i).getOwnedCountries().size() == gamePlayModel.getGameMap().getCountries().size()) {
+				return true;
+			}
+		}
+		return false;		
 	}
 
 }
