@@ -156,8 +156,8 @@ public class ReinforcementView extends JFrame implements Observer {
 		noOfTroopsLabel.setBounds(1300, 140, 150, 25);
 		welcomePanel.add(noOfTroopsLabel);
 		
-		Integer[] troops = new Integer[this.gameMapModel.getPlayerTurn().getmyTroop()];
-		for (int i = 0; i < this.gameMapModel.getPlayerTurn().getmyTroop(); i++) {
+		Integer[] troops = new Integer[this.gameMapModel.getPlayerTurn().getremainTroop()];
+		for (int i = 0; i < this.gameMapModel.getPlayerTurn().getremainTroop(); i++) {
 			troops[i] = i + 1;
 		}
 

@@ -109,7 +109,7 @@ public class GamePlayModel extends Observable {
 		try {
 			JSONParser parser = new JSONParser();
 			Object cards = parser.parse(new FileReader(
-					System.getProperty("user.dir") + "/src/app/helper/ConstantCard.json"));
+					System.getProperty("user.dir") + "/OnlineRiskGame/src/app/helper/ConstantCard.json"));
 			JSONObject jsonObject = (JSONObject) cards;
 			System.out.println("jsonObject " + jsonObject.get("cards"));
 			JSONArray cardsJSON = (JSONArray) jsonObject.get("cards");
@@ -182,7 +182,7 @@ public class GamePlayModel extends Observable {
 				for (int j = 0; j < this.getPlayers().size(); j++) {
 					if (this.getPlayers().get(j).getNamePlayer()
 							.equals(this.gameMapModel.getCountries().get(i).getRulerName())) {
-						this.getPlayers().get(j).setmyTroop(this.getPlayers().get(j).getmyTroop() - selectedArmies);
+						this.getPlayers().get(j).setremainTroop(this.getPlayers().get(j).getremainTroop() - selectedArmies);
 						this.consoleText.append("\n"+this.getPlayers().get(j).getNamePlayer()+" added "+ selectedArmies+ " armies to " + countryName.getCountryName());
 					}
 				}
@@ -472,7 +472,7 @@ public class GamePlayModel extends Observable {
 			percentage = (countryCount*100) / parmContinent.getCoveredCountries().size();
 			this.getConsoleText().append(this.players.get(j).getNamePlayer() + " has covered " + percentage
 					+ "% of the continent " + parmContinent.getContinentName() + "\n");
-
+			countryCount = 0;
 		}
 
 	}
