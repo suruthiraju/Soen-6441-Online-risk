@@ -162,6 +162,13 @@ public class ReadFile {
 		return FILE;
 	}
 	
+	/**
+	 * Validate read continent.
+	 *
+	 * @param list the list
+	 * @param arrayList the array list
+	 * @return true, if successful
+	 */
 	public boolean validateReadContinent(List<ContinentsModel> list, List<ContinentsModel> arrayList) {
 		int counter = 0;
 		for (int i = 0; i < list.size(); i++) {
@@ -179,6 +186,13 @@ public class ReadFile {
 		return true;
 	}
 
+	/**
+	 * Validate read country.
+	 *
+	 * @param list the list
+	 * @param arrayList the array list
+	 * @return true, if successful
+	 */
 	public boolean validateReadCountry(List<CountryModel> list, List<CountryModel> arrayList) {
 		int counter = 0;
 		for (int i = 0; i < list.size(); i++) {

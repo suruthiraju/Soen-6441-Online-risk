@@ -176,6 +176,15 @@ public class Validation {
 		return false;
 	}
 
+	/**
+	 * Checks if is reachable.
+	 *
+	 * @param s the s
+	 * @param d the d
+	 * @param gameMapModel the game map model
+	 * @param mapOfCountries the map of countries
+	 * @return the boolean
+	 */
 	// prints BFS traversal from a given source s
 	Boolean isReachable(int s, int d, GameMapModel gameMapModel, HashMap<CountryModel, Integer> mapOfCountries) {
 		LinkedList<Integer> temp;
@@ -224,6 +233,12 @@ public class Validation {
 		return false;
 	}
 
+	/**
+	 * End of game.
+	 *
+	 * @param gamePlayModel the game play model
+	 * @return true, if successful
+	 */
 	public boolean endOfGame(GamePlayModel gamePlayModel) {
 		for (int i = 0; i < gamePlayModel.getPlayers().size(); i++) {
 			if (gamePlayModel.getPlayers().get(i).getOwnedCountries().size() == gamePlayModel.getGameMap()
