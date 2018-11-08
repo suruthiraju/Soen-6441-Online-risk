@@ -48,6 +48,10 @@ public class PlayerController implements ActionListener, ItemListener {
 	 * 
 	 */
 	public void reinforcement() {
+		this.gamePlayModel.getConsoleText().setLength(0);
+		this.gamePlayModel.callObservers();
+		this.gamePlayModel.getConsoleText().append("Initiating Reinforcement for " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
+
 		this.gamePlayModel.getGameMap().getPlayerTurn()
 				.setmyTroop(this.gamePlayModel.numberOfCountries());
 		theReinforcementView = new ReinforcementView(this.gamePlayModel);
@@ -66,6 +70,9 @@ public class PlayerController implements ActionListener, ItemListener {
 	 * This method is called in fortification phase.
 	 */
 	public void fortification() {
+		this.gamePlayModel.getConsoleText().setLength(0);
+		this.gamePlayModel.getConsoleText().append("Initiating Fortification for " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
+
 		theFortificationView = new FortificationView(this.gamePlayModel);
 		theFortificationView.setActionListener(this);
 		theFortificationView.setItemListener(this);
@@ -77,6 +84,9 @@ public class PlayerController implements ActionListener, ItemListener {
 	 * This method is called in attack phase.
 	 */
 	public void attack() {
+		this.gamePlayModel.getConsoleText().setLength(0);
+		this.gamePlayModel.getConsoleText().append("Initiating " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer()+"'s attack");
+
 		theAttackView = new AttackView(this.gamePlayModel);
 		this.gamePlayModel.setArmyToMoveText(false);
 		this.gamePlayModel.setCardToBeAssigned(false);
@@ -100,13 +110,11 @@ public class PlayerController implements ActionListener, ItemListener {
 				this.gamePlayModel.setSelectedArmiesToCountries(selectedArmies, countryName);
 			} else {
 				this.theReinforcementView.dispose();
-				this.gamePlayModel.getConsoleText().append("Initiating " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer()+"'s attack");
 				attack();
 
 			}
 		} else if (actionEvent.getSource().equals(this.theAttackView.nextButton)) {
 			this.theAttackView.dispose();
-			this.gamePlayModel.getConsoleText().append("Initiating Fortification for " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
 			fortification();
 		} else if (actionEvent.getSource().equals(this.theAttackView.attackCountryListComboBox)) {
 			this.gamePlayModel

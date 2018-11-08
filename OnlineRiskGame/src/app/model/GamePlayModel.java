@@ -183,10 +183,12 @@ public class GamePlayModel extends Observable {
 					if (this.getPlayers().get(j).getNamePlayer()
 							.equals(this.gameMapModel.getCountries().get(i).getRulerName())) {
 						this.getPlayers().get(j).setmyTroop(this.getPlayers().get(j).getmyTroop() - selectedArmies);
+						this.consoleText.append("\n"+this.getPlayers().get(j).getNamePlayer()+" added "+ selectedArmies+ " armies to " + countryName.getCountryName());
 					}
 				}
 			}
 		}
+		
 		callObservers();
 	}
 
@@ -434,9 +436,9 @@ public class GamePlayModel extends Observable {
 	 * CreateContinentController via CreateContinentView
 	 */
 	public void callObservers() {
-		this.consoleText.append("\n Observer called!");
-		for (int i = 0; i < this.getPlayers().size(); i++) {
+			for (int i = 0; i < this.getPlayers().size(); i++) {
 			this.worldCoverage(this.getPlayers().get(i));
+			this.consoleText.append(this.getPlayers().get(i).getNamePlayer()+" has "+this.getPlayers().get(i).getmyTroop()+" troops \n");
 		}
 		this.getConsoleText().append("\n");
 		for (int i = 0; i < this.gameMapModel.getContinents().size(); i++) {
