@@ -50,7 +50,7 @@ public class GamePlayModel extends Observable {
 	 * @param gameMap
 	 * @param players
 	 */
-	public GamePlayModel(GameMapModel gameMap, ArrayList<PlayerModel> players, ArrayList<CardModel> deck ) {
+	public GamePlayModel(GameMapModel gameMap, ArrayList<PlayerModel> players, ArrayList<CardModel> deck) {
 		this.gameMapModel = gameMap;
 		this.players = players;
 		this.deck = deck;
@@ -93,16 +93,14 @@ public class GamePlayModel extends Observable {
 		this.players = players;
 	}
 
-	public void setDefeatedCountry(CountryModel defeatedCountry)
-	{
-		this.defeatedCountry =  defeatedCountry;
+	public void setDefeatedCountry(CountryModel defeatedCountry) {
+		this.defeatedCountry = defeatedCountry;
 	}
-	
-	public CountryModel getDefeatedCountry()
-	{
+
+	public CountryModel getDefeatedCountry() {
 		return this.defeatedCountry;
 	}
-	
+
 	/**
 	 * @return the list of card.
 	 * @throws org.json.simple.parser.ParseException
@@ -110,22 +108,22 @@ public class GamePlayModel extends Observable {
 	public ArrayList<CardModel> getCardFromJSON() throws org.json.simple.parser.ParseException {
 		try {
 			JSONParser parser = new JSONParser();
-			Object cards =  parser
-					.parse(new FileReader(System.getProperty("user.dir") + "/OnlineRiskGame/src/app/helper/ConstantCard.json"));
+			Object cards = parser.parse(new FileReader(
+					System.getProperty("user.dir") + "/src/app/helper/ConstantCard.json"));
 			JSONObject jsonObject = (JSONObject) cards;
-			System.out.println("jsonObject " + jsonObject.get("cards") );
+			System.out.println("jsonObject " + jsonObject.get("cards"));
 			JSONArray cardsJSON = (JSONArray) jsonObject.get("cards");
-			
+
 			int i = 0;
-			CardModel cardModel = new  CardModel();
+			CardModel cardModel = new CardModel();
 			for (Object o : cardsJSON) {
 				JSONObject card = (JSONObject) o;
-				
+
 				int cardId = Integer.parseInt((String) card.get("cardId"));
 				System.out.println("cardId " + cardId);
 				cardModel.setCardId(cardId);
 
-				int cardValue = Integer.parseInt( (String) card.get("cardValue"));
+				int cardValue = Integer.parseInt((String) card.get("cardValue"));
 				System.out.println("cardValue " + cardValue);
 				cardModel.setCardValue(cardValue);
 				this.deck.add(cardModel);
@@ -146,8 +144,9 @@ public class GamePlayModel extends Observable {
 	 * @param deck
 	 */
 	public ArrayList<CardModel> getCards() {
-		return this.deck ;
+		return this.deck;
 	}
+
 	public void setCards(ArrayList<CardModel> deck) {
 		this.deck = deck;
 	}
@@ -409,7 +408,7 @@ public class GamePlayModel extends Observable {
 	public boolean getArmyToMoveText() {
 		return this.armyToMoveFlag;
 	}
-	
+
 	public void setCardToBeAssigned(boolean cardToBeAssigned) {
 		this.cardToBeAssigned = cardToBeAssigned;
 	}
@@ -428,8 +427,8 @@ public class GamePlayModel extends Observable {
 	public int getRandomBetweenRange(double min, double max) {
 		int x = (int) ((Math.random() * ((max - min) + 1)) + min);
 		return x;
-	}
-;
+	};
+
 	/**
 	 * Method used to notify state change whenever any change is reflected by
 	 * CreateContinentController via CreateContinentView
@@ -456,16 +455,23 @@ public class GamePlayModel extends Observable {
 	}
 
 	public void continentCoverage(ContinentsModel parmContinent) {
-		this.getConsoleText().append("Continent "+parmContinent.getContinentName()+"'s coverage distribution:");
-		for(int i=0; i<this.players.size(); i++);
-		
-		for(int i=0; i< this.gameMapModel.getContinents().size(); i++)
-		{
-			for(int j=0; j<this.gameMapModel.getContinents().get(i).getCoveredCountries().size(); j++) {
-				System.out.println(this.gameMapModel.getContinents().get(i).getCoveredCountries().get(j).getCountryName());
+		this.getConsoleText().append("Continent " + parmContinent.getContinentName() + "'s coverage distribution:");
+		int countryCount = 0;
+		double percentage;
+
+		for (int j = 0; j < this.players.size(); j++) {
+			for (int k = 0; k < this.players.get(j).getOwnedCountries().size(); k++) {
+				if (this.players.get(j).getOwnedCountries().get(k).getcontinentName()
+						.equals(parmContinent.getContinentName())) {
+					countryCount = countryCount + 1;
+				}
+
 			}
+			percentage = countryCount / parmContinent.getCoveredCountries().size();
+			this.getConsoleText().append(this.players.get(j).getNamePlayer() + " has covered " + percentage
+					+ "% of the continent " + parmContinent.getContinentName());
+
 		}
-			
 
 	}
 }
