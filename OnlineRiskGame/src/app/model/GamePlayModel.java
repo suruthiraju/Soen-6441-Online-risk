@@ -467,7 +467,7 @@ public class GamePlayModel extends Observable {
 				}
 
 			}
-			percentage = countryCount / parmContinent.getCoveredCountries().size();
+			percentage = (countryCount*100) / parmContinent.getCoveredCountries().size();
 			this.getConsoleText().append(this.players.get(j).getNamePlayer() + " has covered " + percentage
 					+ "% of the continent " + parmContinent.getContinentName() + "\n");
 
