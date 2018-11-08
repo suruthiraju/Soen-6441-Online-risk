@@ -149,7 +149,7 @@ public class AttackView extends JFrame implements View, ItemListener {
 			this.consoleTextArea.setText(this.gamePlayModel.getConsoleText().toString());			
 		}
 
-		this.attackCountryListLabel = new JLabel("Select attack country:");
+		this.attackCountryListLabel = new JLabel("Select attacker country:");
 		attackCountryListLabel.setBounds(1300, 140, 150, 25);
 		welcomePanel.add(attackCountryListLabel);
 

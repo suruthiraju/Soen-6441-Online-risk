@@ -31,6 +31,7 @@ public class PlayerController implements ActionListener, ItemListener {
 	private AttackView theAttackView;
 	private ArrayList<PlayerModel> listOfPlayers = new ArrayList<PlayerModel>();
 	private int noOfPlayers;
+	private Validation val = new Validation();
 
 	/**
 	 * Constructor initializes values and sets the screen too visible
@@ -38,6 +39,7 @@ public class PlayerController implements ActionListener, ItemListener {
 	 * @param gamePlayModel
 	 */
 	public PlayerController(GamePlayModel gamePlayModel) {
+		
 		this.gamePlayModel = gamePlayModel;
 		this.gamePlayModel.getConsoleText().append("Initiating reinforcement for " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
 		reinforcement();
@@ -129,6 +131,11 @@ public class PlayerController implements ActionListener, ItemListener {
 			CountryModel defendCountry = (CountryModel) theAttackView.defendCountryListComboBox.getSelectedItem();
 			this.gamePlayModel.setDefeatedCountry(defendCountry);
 			this.gamePlayModel.singleStrike(attackDice, attackCountry, defendDice, defendCountry);
+			if (val.endOfGame(this.gamePlayModel) == true) {
+				JOptionPane.showOptionDialog(null, "Bravo! You have won! Game is over!", "Valid",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
+				this.theAttackView.dispose();
+			}
 			
 		} else if (actionEvent.getSource().equals(this.theAttackView.alloutButton)) {
 			
@@ -136,6 +143,11 @@ public class PlayerController implements ActionListener, ItemListener {
 			CountryModel defendCountry = (CountryModel) theAttackView.defendCountryListComboBox.getSelectedItem();
 			this.gamePlayModel.setDefeatedCountry(defendCountry);
 			this.gamePlayModel.alloutStrike(attackCountry, defendCountry);
+			if (val.endOfGame(this.gamePlayModel) == true) {
+				JOptionPane.showOptionDialog(null, "Bravo! You have won! Game is over!", "Valid",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
+				this.theAttackView.dispose();
+			}
 			
 		} else if (actionEvent.getSource().equals(this.theAttackView.moveButton)) {
 			
@@ -146,7 +158,7 @@ public class PlayerController implements ActionListener, ItemListener {
 			
 		} else if (actionEvent.getSource().equals(this.theFortificationView.moveButton)) {
 			// BFS
-						Validation val = new Validation();
+						
 						if (val.checkIfValidMove(this.gamePlayModel.getGameMap(),
 								(CountryModel) this.theFortificationView.fromCountryListComboBox.getSelectedItem(),
 								(CountryModel) this.theFortificationView.toCountryListComboBox.getSelectedItem())) {
@@ -180,7 +192,7 @@ public class PlayerController implements ActionListener, ItemListener {
 							new GamePlayController(this.gamePlayModel);
 							this.theFortificationView.dispose();
 						} else {
-							JOptionPane.showOptionDialog(null, "Bravo! Game is over! No one won!", "Valid",
+							JOptionPane.showOptionDialog(null, "Bravo! You have won! Game is over!", "Valid",
 									JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
 							this.theFortificationView.dispose();
 						}
