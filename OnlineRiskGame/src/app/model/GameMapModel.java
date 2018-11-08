@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import javax.swing.JOptionPane;
+
 import app.utilities.ReadFile;
 
 /**
@@ -150,10 +152,21 @@ public class GameMapModel extends Observable {
 		{
 			for(int j=0; j< this.countryList.size(); j++)
 			{
-				if(this.countryList.get(j).getcontinentName().equals(this.continentList.get(i).getContinentName()))
-				{
-					this.continentList.get(i).setCoveredCountries(this.countryList.get(j));
+				try {
+					
+					if(this.countryList.get(j).getcontinentName().equals(this.continentList.get(i).getContinentName()))
+					{
+						this.continentList.get(i).setCoveredCountries(this.countryList.get(j));
+					}
 				}
+				catch (Exception e)
+				{
+					JOptionPane.showOptionDialog(null, "Map parsing failed game crashed", "Invalid",
+							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
+
+					System.exit(0);
+				}
+				
 			}
 		}
 	}

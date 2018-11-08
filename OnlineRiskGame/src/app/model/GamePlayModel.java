@@ -107,7 +107,7 @@ public class GamePlayModel extends Observable {
 		try {
 			JSONParser parser = new JSONParser();
 			Object cards = parser.parse(new FileReader(
-					System.getProperty("user.dir") + "/OnlineRiskGame/src/app/helper/ConstantCard.json"));
+					System.getProperty("user.dir") + "src/app/helper/ConstantCard.json"));
 			JSONObject jsonObject = (JSONObject) cards;
 			System.out.println("jsonObject " + jsonObject.get("cards"));
 			JSONArray cardsJSON = (JSONArray) jsonObject.get("cards");
