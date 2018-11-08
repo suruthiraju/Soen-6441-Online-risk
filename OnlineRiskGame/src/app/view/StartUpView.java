@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -19,9 +21,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
+import javax.swing.border.BevelBorder;
+import javax.swing.text.DefaultCaret;
 
 import app.helper.View;
 import app.model.CountryModel;
@@ -45,6 +51,10 @@ public class StartUpView extends JFrame implements View {
 
 	public JPanel welcomePanel;
 	public JPanel graphicPanel;
+	
+	public JPanel consoleMainPanel;
+	public JScrollPane consolePanel;
+	public JTextArea consoleTextArea;
 
 	public JLabel welcomeLabel;
 	public JLabel welcomeLabel1;
@@ -75,7 +85,7 @@ public class StartUpView extends JFrame implements View {
 		this.setTitle("Startup Phase");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(300, 200);
-		this.setSize(1600, 1000);
+		this.setSize(1600, 840);
 		this.setResizable(false);
 		this.setVisible(false);
 		this.addButton = new JButton("Add");
@@ -83,9 +93,24 @@ public class StartUpView extends JFrame implements View {
 		welcomePanel = new JPanel();
 		graphicPanel = new JPanel();
 		this.add(graphicPanel);
-		graphicPanel.setSize(1200, 1000);
+		graphicPanel.setSize(1200, 650);
 		graphicPanel.setBackground(Color.WHITE);
 		graphicPanel.setLayout(null);
+		
+		this.consoleMainPanel = new JPanel();
+		this.consoleMainPanel.setBorder(new BevelBorder(1));
+ 		this.consoleTextArea = new JTextArea("Start up Phase !!!\n", 10, 500);
+		this.consoleTextArea.setEditable(false);
+		this.consoleTextArea.setFocusable(false);
+		this.consoleTextArea.setVisible(true);
+		this.consoleTextArea.setForeground(Color.WHITE);
+		this.consoleTextArea.setBackground(Color.BLACK);
+		DefaultCaret caret = (DefaultCaret) this.consoleTextArea.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.OUT_BOTTOM);
+ 		this.consolePanel = new JScrollPane(this.consoleTextArea);
+		this.consolePanel.setPreferredSize(new Dimension(1580, 130));
+ 		this.consoleMainPanel.add(this.consolePanel,BorderLayout.WEST);
+ 		this.getContentPane().add(this.consoleMainPanel,BorderLayout.SOUTH);	
 		this.addButton = new JButton("Add");
 		this.add(welcomePanel);
 		this.playerModel = playerModel;
@@ -119,6 +144,10 @@ public class StartUpView extends JFrame implements View {
 		welcomeLabel.setBounds(1300, 80, 300, 25);
 		welcomeLabel.setFont(largeFont);
 		welcomePanel.add(welcomeLabel);
+		
+		if(this.gamePlayModel.getConsoleText()!=null) {
+			this.consoleTextArea.setText(this.gamePlayModel.getConsoleText().toString());			
+		}
 
 		this.noOfTroopsLabel = new JLabel("Number of Troops :");
 		noOfTroopsLabel.setBounds(1300, 140, 150, 25);

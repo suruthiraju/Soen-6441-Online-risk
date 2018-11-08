@@ -246,6 +246,8 @@ public class GamePlayModel extends Observable {
 		Arrays.sort(defendDiceRoll, Collections.reverseOrder());
 		System.out.println(Arrays.toString(attackDiceRoll));
 		System.out.println(Arrays.toString(defendDiceRoll));
+		this.consoleText.append("\n Attack country dice " + Arrays.toString(attackDiceRoll)+" \n");
+		this.consoleText.append("Defender country dice " + Arrays.toString(defendDiceRoll) +" \n");
 		for (int i = 0; i < defendDice; i++) {
 			if (attackDiceRoll[i] > defendDiceRoll[i]) {
 				armiesDeduction(defendCountry, 1);
@@ -254,11 +256,12 @@ public class GamePlayModel extends Observable {
 			}
 		}
 		if (countryOwned == true) {
+			this.consoleText.append("Attacker " + attackCountry.getRulerName() + " defeated Country "+ defendCountry.getCountryName() +" \n");
 			for (int i = 0; i < this.getPlayers().size(); i++) {
 				if (this.getPlayers().get(i).getNamePlayer().equals(defendCountry.getRulerName())) {
 					this.getPlayers().get(i).defend(defendCountry);
 				}
-				if (this.getPlayers().get(i).getNamePlayer().equals(attackCountry.getRulerName())) {
+				if (this.getPlayers().get(i).getNamePlayer().equals(attackCountry.getRulerName())) {					
 					this.getPlayers().get(i).attacked(defendCountry);
 				}
 			}
@@ -324,6 +327,8 @@ public class GamePlayModel extends Observable {
 			Arrays.sort(defendDiceRoll, Collections.reverseOrder());
 			System.out.println(Arrays.toString(attackDiceRoll));
 			System.out.println(Arrays.toString(defendDiceRoll));
+			this.consoleText.append("Attack country dice " + Arrays.toString(attackDiceRoll)+" \n");
+			this.consoleText.append("Defender country dice " + Arrays.toString(defendDiceRoll) +" \n");
 			for (int i = 0; i < defendDice; i++) {
 				if (attackDiceRoll[i] > defendDiceRoll[i]) {
 					armiesDeduction(defendCountry, 1);
@@ -335,6 +340,7 @@ public class GamePlayModel extends Observable {
 			}
 		}
 		if (countryOwned == true) {
+			this.consoleText.append("Attacker " + attackCountry.getRulerName() + "defeated Country "+ defendCountry.getCountryName() +" \n");
 			for (int i = 0; i < this.getPlayers().size(); i++) {
 				if (this.getPlayers().get(i).getNamePlayer().equals(defendCountry.getRulerName())) {
 					this.getPlayers().get(i).defend(defendCountry);
@@ -356,6 +362,7 @@ public class GamePlayModel extends Observable {
 	}
 
 	public void moveArmies(CountryModel attackCountry, CountryModel defendCountry, int noOfArmiesToBeMoved) {
+		this.consoleText.append(attackCountry.getRulerName()+ " Armies "+ noOfArmiesToBeMoved + " moved from" + attackCountry.getCountryName() + " to "+ defendCountry.getCountryName()  +" \n");
 		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
 			if (this.gameMapModel.getCountries().get(i).getCountryName().equals(attackCountry.getCountryName())) {
 				this.gameMapModel.getCountries().get(i)
@@ -438,7 +445,7 @@ public class GamePlayModel extends Observable {
 	public void callObservers() {
 			for (int i = 0; i < this.getPlayers().size(); i++) {
 			this.worldCoverage(this.getPlayers().get(i));
-			this.consoleText.append(this.getPlayers().get(i).getNamePlayer()+" has "+this.getPlayers().get(i).getmyTroop()+" troops \n");
+			this.consoleText.append("						"+this.getPlayers().get(i).getNamePlayer()+" has "+this.getPlayers().get(i).getmyTroop()+" troops \n");
 		}
 		this.getConsoleText().append("\n");
 		for (int i = 0; i < this.gameMapModel.getContinents().size(); i++) {
@@ -452,12 +459,12 @@ public class GamePlayModel extends Observable {
 	public void worldCoverage(PlayerModel parmPlayer) {
 		double percentage = (parmPlayer.getOwnedCountries().size() * 100) / this.gameMapModel.getCountries().size();
 		this.getConsoleText()
-				.append("Map coverage for " + parmPlayer.getNamePlayer() + " is " + percentage + "% " + "\n");
+				.append("						"+" Map coverage for " + parmPlayer.getNamePlayer() + " is " + percentage + "% " + "\n");
 
 	}
 
 	public void continentCoverage(ContinentsModel parmContinent) {
-		this.getConsoleText().append("Continent " + parmContinent.getContinentName() + "'s coverage distribution: \n");
+		this.getConsoleText().append("						"+"Continent " + parmContinent.getContinentName() + "'s coverage distribution: \n");
 		int countryCount = 0;
 		double percentage;
 
@@ -470,7 +477,7 @@ public class GamePlayModel extends Observable {
 
 			}
 			percentage = (countryCount*100) / parmContinent.getCoveredCountries().size();
-			this.getConsoleText().append(this.players.get(j).getNamePlayer() + " has covered " + percentage
+			this.getConsoleText().append("						"+this.players.get(j).getNamePlayer() + " has covered " + percentage
 					+ "% of the continent " + parmContinent.getContinentName() + "\n");
 			countryCount = 0;
 		}

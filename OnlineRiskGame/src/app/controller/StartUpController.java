@@ -56,7 +56,7 @@ public class StartUpController implements ActionListener {
 	 * @param gamePlayModel
 	 */
 	public StartUpController(GamePlayModel gamePlayModel) {
-
+		
 		this.gamePlayModel = gamePlayModel;
 		noOfPlayers = this.gamePlayModel.getPlayers().size();
 
@@ -73,6 +73,7 @@ public class StartUpController implements ActionListener {
 				}
 			}
 			this.theStartUpView = new StartUpView(this.gamePlayModel, this.gamePlayModel.getPlayers().get(loopValue));
+			this.gamePlayModel.getConsoleText().append(" \n Initiating Startup for " + this.gamePlayModel.getPlayers().get(loopValue).getNamePlayer() + "\n");
 			this.theStartUpView.setActionListener(this);
 			for (int i = 0; i < noOfPlayers; i++) {
 				this.gamePlayModel.getPlayers().get(i).addObserver(this.theStartUpView);
@@ -135,7 +136,7 @@ public class StartUpController implements ActionListener {
 			System.out.println("player " + noOfCountryForRuler[0] + " " + noOfCountryForRuler[1] + " "
 					+ noOfCountryForRuler[2] + " " + noOfCountryForRuler[3]);
 		}
-
+		this.gamePlayModel.getConsoleText().append(" Countries has been allocated to players randomly" +"\n");
 		for (int i = 0; i < noOfPlayers; i++) {
 			if (noOfCountryForRuler[i] >= 3) {
 				int tempPlayerTrop = (noOfCountryForRuler[i] / 3);
@@ -209,6 +210,7 @@ public class StartUpController implements ActionListener {
 
 				this.gamePlayModel.getGameMap().robinTroopAssignButton(loopValue, this.gamePlayModel.getPlayers().get(loopValue).getNamePlayer(),
 						countryName, selectedArmies, this.gamePlayModel.getPlayers());
+				this.gamePlayModel.getConsoleText().append(this.gamePlayModel.getPlayers().get(loopValue).getNamePlayer() +"'s Armies " + selectedArmies + " has been added to "+ countryName.getCountryName() +" \n");
 			}
 			loopValue++;
 
@@ -219,7 +221,6 @@ public class StartUpController implements ActionListener {
 				this.gamePlayModel.getPlayers().get(loopValue).callObservers();
 
 			} else {
-				System.out.println("here");
 				armiesNull = false;
 				checkForOverallArmies();
 				if (armiesNull == false) {
