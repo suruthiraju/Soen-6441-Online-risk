@@ -36,8 +36,9 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 	private String filename = null;
 	private WriteMap tempWrite;
 
-	
-	/**Constructor initializes values and sets the screen too visible
+	/**
+	 * Constructor initializes values and sets the screen too visible
+	 * 
 	 * @param mapModel
 	 */
 	public ConnectCountryController(GameMapModel mapModel) {

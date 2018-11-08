@@ -2,15 +2,8 @@ package app.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
-import org.json.simple.parser.ParseException;
-
-import app.model.CardModel;
-import app.model.CountryModel;
-import app.model.GameMapModel;
 import app.model.GamePlayModel;
-import app.model.PlayerModel;
 
 /**
  * In GamePlayController, the data flow into model object and updates the view
@@ -22,8 +15,8 @@ import app.model.PlayerModel;
  */
 
 public class GamePlayController implements ActionListener {
-	
-	//use the model gameplay instead of member variables
+
+	// use the model gameplay instead of member variables
 	public GamePlayModel gamePlayModel = null;
 
 	/**
@@ -32,15 +25,17 @@ public class GamePlayController implements ActionListener {
 	 * @param gamePlayModel
 	 */
 	public GamePlayController(GamePlayModel gamePlayModel) {
-		this.gamePlayModel = gamePlayModel;		
+		this.gamePlayModel = gamePlayModel;
 		gamePlay();
 	}
 
 	public void gamePlay() {
-		
-		this.gamePlayModel.getGameMap().setPlayerTurn(this.gamePlayModel.getPlayers().get(this.gamePlayModel.getGameMap().getPlayerIndex()));		
+
+		this.gamePlayModel.getGameMap()
+				.setPlayerTurn(this.gamePlayModel.getPlayers().get(this.gamePlayModel.getGameMap().getPlayerIndex()));
 		new PlayerController(this.gamePlayModel);
 	}
+
 	/**
 	 * This method performs action, by Listening the action event set in view.
 	 * 

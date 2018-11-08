@@ -1,12 +1,10 @@
 package app.controller;
 
-
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JFileChooser;
@@ -15,13 +13,11 @@ import javax.swing.JOptionPane;
 import org.json.simple.parser.ParseException;
 
 import app.model.CardModel;
-import app.model.ContinentsModel;
 import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.model.GamePlayModel;
 import app.model.PlayerModel;
 import app.utilities.Validation;
-import app.utilities.WriteMap;
 import app.view.NewGameView;
 
 /**
@@ -43,27 +39,27 @@ public class NewGameController implements ActionListener {
 	private String PlayerName = "";
 	private List<CountryModel> listOfCountry;
 	private List<CardModel> listOfCards;
-    
-    /**
-     * Constructor initializes values and sets the screen too visible
-     */
-    public NewGameController() {
-    	this.theView = new NewGameView();
-    	this.theView.setActionListener(this);
-    	this.theView.setVisible(true);
-        
-    }
-    
-    /**
+
+	/**
+	 * Constructor initializes values and sets the screen too visible
+	 */
+	public NewGameController() {
+		this.theView = new NewGameView();
+		this.theView.setActionListener(this);
+		this.theView.setVisible(true);
+
+	}
+
+	/**
 	 * This method performs action, by Listening the action event set in view.
 	 * 
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		if (actionEvent.getSource().equals(theView.browseMapButton)) {		
-			int value = theView.chooseMap.showOpenDialog(theView);			
-			if(value == JFileChooser.APPROVE_OPTION){				
+		if (actionEvent.getSource().equals(theView.browseMapButton)) {
+			int value = theView.chooseMap.showOpenDialog(theView);
+			if (value == JFileChooser.APPROVE_OPTION) {
 				try {
 					File mapFile = theView.chooseMap.getSelectedFile();
 					gameMapModel = new GameMapModel(mapFile);
@@ -81,7 +77,9 @@ public class NewGameController implements ActionListener {
 
 									System.out.println(" All the map validations are correct");
 									try {
-										JOptionPane.showMessageDialog(theView, "File Loaded Successfully! Click Next to Play!","Map Loaded",JOptionPane.INFORMATION_MESSAGE);
+										JOptionPane.showMessageDialog(theView,
+												"File Loaded Successfully! Click Next to Play!", "Map Loaded",
+												JOptionPane.INFORMATION_MESSAGE);
 
 									} catch (Exception e) {
 										e.printStackTrace();
@@ -89,73 +87,76 @@ public class NewGameController implements ActionListener {
 								} else {
 									System.out.println("All continents are not linked");
 									JOptionPane.showOptionDialog(null, "All continents are not linked", "Invalid",
-											JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {},
-											null);
+											JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
+											new Object[] {}, null);
 
 								}
 
 							} else {
 								System.out.println("Empty link country validation failed");
 								JOptionPane.showOptionDialog(null, "Empty continent validation failed", "Invalid",
-										JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {},
-										null);
+										JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
+										new Object[] {}, null);
 							}
 						} else {
 							System.out.println("ECheck interlinked Continent validation failed");
 							JOptionPane.showOptionDialog(null, "Check interlinedContinent validation failed", "Invalid",
-									JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
+									JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {},
+									null);
 
 						}
 					} else {
 						System.out.println("Empty continent validation failed");
 						JOptionPane.showOptionDialog(null, "Empty link country validation failed", "Invalid",
-								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
+								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {},
+								null);
 					}
 
-				
-									} catch (Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace();
-				}				
+				}
 			}
-		}else if(actionEvent.getSource().equals(theView.nextButton)) {
+		} else if (actionEvent.getSource().equals(theView.nextButton)) {
 			noOfPlayers = (int) theView.numOfPlayers.getSelectedItem();
 			try {
 				playerValidation();
 			} catch (ParseException e) {
 				e.printStackTrace();
-			}								
-		}else if(actionEvent.getSource().equals(theView.cancelButton)) {
+			}
+		} else if (actionEvent.getSource().equals(theView.cancelButton)) {
 			new WelcomeScreenController();
-			 this.theView.dispose();
+			this.theView.dispose();
 		}
-		
+
 	}
-    
+
 	/**
-	 *  Check for the player validation
-	 * @throws ParseException 
+	 * Check for the player validation
+	 * 
+	 * @throws ParseException
 	 */
 	public void playerValidation() throws ParseException {
-		if ( gameMapModel.getCountries().size() > noOfPlayers) {
+		if (gameMapModel.getCountries().size() > noOfPlayers) {
 			System.out.println("no of players" + noOfPlayers);
-			for (int i=0; i<noOfPlayers; i++) {
+			for (int i = 0; i < noOfPlayers; i++) {
 				if (i == 0) {
 					PlayerName = theView.PlayerName1.getText();
-				}else if(i == 1) {
+				} else if (i == 1) {
 					PlayerName = theView.PlayerName2.getText();
-				}else if(i == 2) {
+				} else if (i == 2) {
 					PlayerName = theView.PlayerName3.getText();
-				}else if(i == 3) {
+				} else if (i == 3) {
 					PlayerName = theView.PlayerName4.getText();
-				}else if(i == 4){
+				} else if (i == 4) {
 					PlayerName = theView.PlayerName5.getText();
 				}
 				System.out.println("PlayerName " + PlayerName);
-				if (PlayerName ==  null || "".equals(PlayerName.trim())) {
-					PlayerName = "Player "+(i+1);
+				if (PlayerName == null || "".equals(PlayerName.trim())) {
+					PlayerName = "Player " + (i + 1);
 				}
-				PlayerModel pm = new PlayerModel(PlayerName, 0, Color.WHITE,0,  new ArrayList<CountryModel>(), new ArrayList<CardModel>());
-				listOfPlayers.add(pm);		
+				PlayerModel pm = new PlayerModel(PlayerName, 0, Color.WHITE, 0, new ArrayList<CountryModel>(),
+						new ArrayList<CardModel>());
+				listOfPlayers.add(pm);
 			}
 			gamePlayModel.setGameMap(gameMapModel);
 			gamePlayModel.setPlayers(listOfPlayers);
@@ -167,7 +168,6 @@ public class NewGameController implements ActionListener {
 					"Number of cuntry in the Map is less than Number of Players. Select map or player Again!",
 					"Map Loaded", JOptionPane.INFORMATION_MESSAGE);
 		}
-	}   
-	
-    
+	}
+
 }
