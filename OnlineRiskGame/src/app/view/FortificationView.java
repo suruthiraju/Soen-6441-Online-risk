@@ -97,7 +97,7 @@ public class FortificationView extends JFrame implements View {
 		
 		this.consoleMainPanel = new JPanel();
 		this.consoleMainPanel.setBorder(new BevelBorder(1));
- 		this.consoleTextArea = new JTextArea("Life is a risk, instead play risk !!!\n", 10, 500);
+ 		this.consoleTextArea = new JTextArea("Fortification Phase!!!\n", 10, 500);
 		this.consoleTextArea.setEditable(false);
 		this.consoleTextArea.setFocusable(false);
 		this.consoleTextArea.setVisible(true);

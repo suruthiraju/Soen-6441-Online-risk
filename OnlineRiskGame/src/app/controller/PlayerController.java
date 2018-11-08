@@ -150,12 +150,17 @@ public class PlayerController implements ActionListener, ItemListener {
 						(CountryModel) this.theFortificationView.toCountryListComboBox.getSelectedItem());
 			}
 			
-			if(this.gamePlayModel.getCardToBeAssigned() == true) {
-				
-				this.gamePlayModel.setCardToBeAssigned(false);
-			}
-			
 			int index = this.gamePlayModel.getGameMap().getPlayerIndex();
+			
+			if(this.gamePlayModel.getCardToBeAssigned() == true) {
+				boolean cardAdded = false;
+				int deckSize = this.gamePlayModel.getCards().size();
+				cardAdded = this.gamePlayModel.getPlayers().get(index).addCard(this.gamePlayModel.getCards().get(deckSize-1));
+				this.gamePlayModel.getCards().remove(deckSize-1);
+				//cardRemoved = this.gamePlayModel.getPlayers().get(index).removeCard(this.gamePlayModel.getCards().get(deckSize-1));
+				this.gamePlayModel.setCardToBeAssigned(false);
+			}			
+			
 			index++;
 			if (this.gamePlayModel.getPlayers().size() > index) {
 				this.gamePlayModel.getGameMap().setPlayerIndex(index);

@@ -107,7 +107,7 @@ public class GamePlayModel extends Observable {
 	 * @return the list of card.
 	 * @throws org.json.simple.parser.ParseException
 	 */
-	public ArrayList<CardModel> getCards() throws org.json.simple.parser.ParseException {
+	public ArrayList<CardModel> getCardFromJSON() throws org.json.simple.parser.ParseException {
 		try {
 			JSONParser parser = new JSONParser();
 			Object cards =  parser
@@ -139,7 +139,10 @@ public class GamePlayModel extends Observable {
 
 		return this.deck;
 	}
-
+	
+	public ArrayList<CardModel> getCards() {
+		return this.deck ;
+	}
 	/**
 	 * Sets the list of card.
 	 * 
