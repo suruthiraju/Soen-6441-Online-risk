@@ -39,8 +39,8 @@ public class NewGameController implements ActionListener {
 	private GamePlayModel gamePlayModel = new GamePlayModel();
 	private int noOfPlayers;
 	private String PlayerName = "";
-	private List<CountryModel> listOfCountry = null;
-	private List<CardModel> listOfCards = null;
+	private List<CountryModel> listOfCountry = new ArrayList<CountryModel>();
+	private List<CardModel> listOfCards = new ArrayList<CardModel>();
     
     /**
      * Constructor initializes values and sets the screen too visible
@@ -113,7 +113,7 @@ public class NewGameController implements ActionListener {
 			}
 			gamePlayModel.setGameMap(gameMapModel);
 			gamePlayModel.setPlayers(listOfPlayers);
-			gamePlayModel.setCards(gamePlayModel.getCards());
+			gamePlayModel.setCards(gamePlayModel.getCardFromJSON());
 			new StartUpController(gamePlayModel);
 			this.theView.dispose();
 		} else {

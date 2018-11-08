@@ -1,6 +1,7 @@
 package app.model;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
@@ -20,8 +21,8 @@ public class PlayerModel extends Observable {
 	private int myTroop;
 	private Color color;
 	private int remainTroop;
-	private List<CountryModel> ownedCountries;
-	private List<CardModel> ownedCards;
+	private List<CountryModel> ownedCountries  = new ArrayList<CountryModel>();
+	private List<CardModel> ownedCards = new ArrayList<CardModel>();
 
 	/**
 	 * Constructor of PlayerModel
@@ -157,6 +158,18 @@ public class PlayerModel extends Observable {
 		for(int i=0; i< this.ownedCountries.size(); i++) {
 			if (this.ownedCountries.get(i).getCountryName().equals(countryForDeduction.getCountryName())) {
 				this.ownedCountries.remove(i);
+			}
+		}
+		return true;
+	}
+	public boolean addCard(CardModel toAddCard) {
+		this.ownedCards.add(toAddCard);		
+		return true;
+	}
+	public boolean removeCard(CardModel toRemoveCard) {
+		for(int i=0; i< this.ownedCards.size(); i++) {
+			if (this.ownedCards.get(i).getCardId() == toRemoveCard.getCardId()) {
+				this.ownedCards.remove(i);
 			}
 		}
 		return true;
