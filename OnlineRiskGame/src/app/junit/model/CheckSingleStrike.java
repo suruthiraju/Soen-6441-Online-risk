@@ -1,6 +1,7 @@
 package app.junit.model;
 
 import static org.junit.Assert.assertEquals;
+
 import static org.junit.Assert.fail;
 
 import java.awt.Color;
@@ -18,6 +19,13 @@ import app.utilities.Constant;
 import app.utilities.ReadFile;
 import app.utilities.Validation;
 
+/**
+ * Class for check single strike
+ * 
+ * @author suruthi
+ *
+ */
+
 public class CheckSingleStrike {
 
 	GameMapModel gameMapModel;
@@ -28,7 +36,9 @@ public class CheckSingleStrike {
 	ArrayList<CountryModel> countryList = new ArrayList<CountryModel>();
 
 	private static boolean setUpIsDone = false;
-
+	/**
+	 * Set up file
+	 */
 	@Before
 	public void setUp() throws Exception {
 		if (setUpIsDone) {
@@ -58,7 +68,9 @@ public class CheckSingleStrike {
 		gamePlayModel.setPlayers(pmList);
 		setUpIsDone = true;
 	}
-
+	/**
+	 * Test single strike
+	 */
 	@Test
 	public void test() {
 		CountryModel countryModel = gamePlayModel.armiesDeduction(countryList.get(0),1);
