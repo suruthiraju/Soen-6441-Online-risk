@@ -95,6 +95,7 @@ public class GameMapModel extends Observable {
 			readfile.setFile(file);
 			this.continentList = readfile.getMapContinentDetails();
 			this.countryList = readfile.getMapCountryDetails();
+			this.countriesInContinent();
 		} catch (Exception e) {
 			// handle properly
 			e.printStackTrace();
@@ -107,6 +108,7 @@ public class GameMapModel extends Observable {
 	public GameMapModel() {
 		this.continentList = new ArrayList<ContinentsModel>();
 		this.countryList = new ArrayList<CountryModel>();
+		
 	}
 
 	/**
@@ -142,7 +144,19 @@ public class GameMapModel extends Observable {
 		this.countryList = Countries;
 		callObservers();
 	}
-
+	
+	public void countriesInContinent() {
+		for(int i=0; i<this.continentList.size(); i++)
+		{
+			for(int j=0; j< this.countryList.size(); j++)
+			{
+				if(this.countryList.get(j).getcontinentName().equals(this.continentList.get(i).getContinentName()))
+				{
+					this.continentList.get(i).setCoveredCountries(this.countryList.get(j));
+				}
+			}
+		}
+	}
 	/**
 	 * Method used to notify state change whenever any change is reflected by
 	 * CreateContinentController via CreateContinentView
