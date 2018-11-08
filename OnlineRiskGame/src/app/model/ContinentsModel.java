@@ -1,5 +1,7 @@
 package app.model;
 
+import java.util.ArrayList;
+
 /**
  * "ContinentsModel" is a class for continents of the map. "continentName" and
  * "valueControl" are attributes of an object
@@ -11,6 +13,7 @@ public class ContinentsModel {
 
 	private String continentName;
 	private int valueControl;
+	private ArrayList<CountryModel> listOfCountries = new ArrayList<CountryModel>() ;
 
 	/**
 	 * Constructor of ContinentsModel
@@ -57,5 +60,14 @@ public class ContinentsModel {
 	 */
 	public void setValueControl(int valueControl) {
 		this.valueControl = valueControl;
+	}
+	
+	public void setCoveredCountries(CountryModel parmCountry)
+	{
+		this.listOfCountries.add(parmCountry);
+	}
+	public ArrayList<CountryModel> getCoveredCountries()
+	{
+		return listOfCountries;
 	}
 }
