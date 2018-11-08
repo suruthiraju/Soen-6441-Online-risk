@@ -1,10 +1,9 @@
-package app.junit;
+package app.junit.utilities;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,13 +11,12 @@ import app.model.GameMapModel;
 import app.utilities.Constant;
 import app.utilities.ReadFile;
 import app.utilities.Validation;
-
 /**
- * ReadFileCountry
+ * CheckValidMove
  * @author team 35
  *
  */
-public class ReadFileCountry {
+public class CheckValidMove {
 
 	private static final boolean False = false;
 	GameMapModel gameMapModel;
@@ -27,7 +25,7 @@ public class ReadFileCountry {
 	File file;
 
 	private static boolean setUpIsDone = false;
-	
+
 	/**
 	 * Set up variables
 	 */
@@ -36,20 +34,18 @@ public class ReadFileCountry {
 		if (setUpIsDone) {
 			return;
 		}
-		this.readFile = new ReadFile();
+		// do the setup
+		readFile = new ReadFile();
 		file = new File(Constant.FILE_LOCATION);
-		this.readFile.setFile(file);
+		readFile.setFile(file);
 		val = new Validation();
 		gameMapModel = new GameMapModel(file);
 		setUpIsDone = true;
 	}
-	
-	/**
-	 * Test read file get country
-	 */
-	@Test
-	public void testReadFileGetCountry() {
-		Assert.assertEquals(true,readFile.validateReadCountry(gameMapModel.getCountries(), readFile.getMapCountryDetails()));
-	}
 
+	@Test
+	public void testUnlinkedContinentVAlidation() {
+		assertTrue(val.checkIfValidMove(gameMapModel, gameMapModel.getCountries().get(0),
+				gameMapModel.getCountries().get(1)));
+	}
 }

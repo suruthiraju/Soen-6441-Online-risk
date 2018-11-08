@@ -1,4 +1,4 @@
- package app.junit;
+ package app.junit.utilities;
 import org.junit.Test;
 
 import app.model.ContinentsModel;
@@ -22,11 +22,11 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 
 /**
- * UnlinkedContinentValidationTest
+ * EmptyContinentValidationTest
  * @author team 35
  *
  */
-public class UnlinkedContinentValidationTest {
+public class EmptyContinentValidationTest {
 	
 	private static final boolean False = false;
 	GameMapModel gameMapModel;
@@ -53,13 +53,10 @@ public class UnlinkedContinentValidationTest {
 	    gameMapModel = new GameMapModel(file);
 	    setUpIsDone = true;
 	}
-	/**
-	 * Test unlink continent validation
-	 */
 	@Test 
 	public void testUnlinkedContinentVAlidation() 
 	{
-		assertFalse(val.unlinkedContinentValidation(gameMapModel));
+		assertFalse(val.emptyContinentValidation(gameMapModel));
 	}
 	
 }

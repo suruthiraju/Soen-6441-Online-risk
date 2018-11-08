@@ -1,4 +1,4 @@
-package app.junit;
+package app.junit.model;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;

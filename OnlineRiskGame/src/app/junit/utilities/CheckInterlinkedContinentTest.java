@@ -1,4 +1,4 @@
-package app.junit;
+package app.junit.utilities;
 
 import static org.junit.Assert.assertFalse;
 

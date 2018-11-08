@@ -1,4 +1,4 @@
- package app.junit;
+ package app.junit.utilities;
 import org.junit.Test;
 
 import app.model.ContinentsModel;
