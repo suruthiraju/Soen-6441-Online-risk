@@ -153,7 +153,7 @@ public class ReinforcementView extends JFrame implements Observer {
 			this.consoleTextArea.setText(this.gamePlayModel.getConsoleText().toString());
 		}
 
-		if (this.playerModel.getOwnedCards().size() > 0) {			
+		if (this.playerModel.getOwnedCards().size() > 0 && this.playerModel.getShowReinforcementCard() == true) {
 			this.reinnforcementCardLabel = new JLabel("Enter the id of the card :");
 			reinnforcementCardLabel.setBounds(1300, 120, 150, 25);
 			welcomePanel.add(reinnforcementCardLabel);

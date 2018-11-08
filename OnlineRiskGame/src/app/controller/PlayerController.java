@@ -141,7 +141,7 @@ public class PlayerController implements ActionListener, ItemListener {
 			card.setCardId(cardID);
 			card.setCardValue(cardValue);
 			this.gamePlayModel.getGameMap().getPlayerTurn()
-					.setremainTroop(this.gamePlayModel.getGameMap().getPlayerTurn().getmyTroop() + cardValue);
+					.setremainTroop(this.gamePlayModel.getGameMap().getPlayerTurn().getremainTroop() + cardValue);
 			for (int i = 0; i < this.gamePlayModel.getPlayers().size(); i++) {
 				if (gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer()
 						.equals(gamePlayModel.getPlayers().get(i).getNamePlayer())) {
@@ -154,7 +154,7 @@ public class PlayerController implements ActionListener, ItemListener {
 			for (int i = 0; i < this.gamePlayModel.getPlayers().size(); i++) {
 				if (gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer()
 						.equals(gamePlayModel.getPlayers().get(i).getNamePlayer())) {
-					if (gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().size() > 5) {
+					if (gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().size() >= 5) {
 						this.gamePlayModel.getGameMap().getPlayerTurn().setShowReinforcementCard(true);
 						gamePlayModel.getPlayers().get(i).setShowReinforcementCard(true);
 						JOptionPane.showOptionDialog(null, "Maximum 5 card is allowed. Please select card id to reimburse",
