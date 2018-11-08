@@ -28,7 +28,6 @@ public class WelcomeScreenController implements ActionListener {
 		this.theView.setActionListener(this);
 		this.theView.setVisible(true);
 
-
 	}
 
 	/**
@@ -69,7 +68,7 @@ public class WelcomeScreenController implements ActionListener {
 	}
 
 	/**
-	 *  show edit game window
+	 * show edit game window
 	 */
 	private void showEditGameWindow() {
 		new EditContinentController();
