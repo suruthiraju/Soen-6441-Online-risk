@@ -183,7 +183,7 @@ public class GamePlayModel extends Observable {
 					if (this.getPlayers().get(j).getNamePlayer()
 							.equals(this.gameMapModel.getCountries().get(i).getRulerName())) {
 						this.getPlayers().get(j).setremainTroop(this.getPlayers().get(j).getremainTroop() - selectedArmies);
-						this.consoleText.append("\n"+this.getPlayers().get(j).getNamePlayer()+" added "+ selectedArmies+ " armies to " + countryName.getCountryName());
+						this.consoleText.append("\n"+this.getPlayers().get(j).getNamePlayer()+" added "+ selectedArmies+ " armies to " + countryName.getCountryName()+"\n");
 					}
 				}
 			}
