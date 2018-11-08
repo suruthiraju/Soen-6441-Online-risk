@@ -27,6 +27,7 @@ import app.helper.View;
 import app.model.CountryModel;
 import app.model.GameMapModel;
 
+
 /**
  * "ConnectCountryView" Class displays a view to enable the players to connect a
  * country to any other one during map creation. It contains buttons, labels,
@@ -37,27 +38,56 @@ import app.model.GameMapModel;
  */
 public class ConnectCountryView extends JFrame implements View, Observer {
 
+	/** The welcome panel. */
 	public JPanel welcomePanel;
+	
+	/** The graphic panel. */
 	public JPanel graphicPanel;
+	
+	/** The save button. */
 	public JButton saveButton;
+	
+	/** The add button. */
 	public JButton addButton;
+	
+	/** The remove button. */
 	public JButton removeButton;
+	
+	/** The welcome label. */
 	public JLabel welcomeLabel;
+	
+	/** The country list label left. */
 	public JLabel countryListLabelLeft;
+	
+	/** The country list label right. */
 	public JLabel countryListLabelRight;
+	
+	/** The country parent list right. */
 	public JList countryParentListRight;
+	
+	/** The country parent list left. */
 	public JList countryParentListLeft;
+	
+	/** The list selection model left. */
 	public ListSelectionModel listSelectionModelLeft;
+	
+	/** The list selection model right. */
 	public ListSelectionModel listSelectionModelRight;
+	
+	/** The left country list. */
 	public List<CountryModel> leftCountryList;
+	
+	/** The right country list. */
 	public List<CountryModel> rightCountryList;
+	
+	/** The game map model. */
 	public GameMapModel gameMapModel;
 
 
 	/**
-	 * Constructor method of ConnectCountryView
-	 * 
-	 * @param gameMapModel
+	 * Constructor method of ConnectCountryView.
+	 *
+	 * @param gameMapModel the game map model
 	 */
 	public ConnectCountryView(GameMapModel gameMapModel) {
 		this.gameMapModel = gameMapModel;
@@ -88,8 +118,8 @@ public class ConnectCountryView extends JFrame implements View, Observer {
 	}
 
 	/**
-	 * The method "updateWindow" updates the panel view after any change
-	 * 
+	 * The method "updateWindow" updates the panel view after any change.
+	 *
 	 * @param gmm which is a GameMapModel object
 	 */
 	private void updateWindow(GameMapModel gmm) {
@@ -191,8 +221,8 @@ public class ConnectCountryView extends JFrame implements View, Observer {
 
 	}
 
-	/**
-	 * 
+	/* (non-Javadoc)
+	 * @see java.awt.Window#paint(java.awt.Graphics)
 	 */
 	public void paint(final Graphics g) {
 
@@ -225,9 +255,10 @@ public class ConnectCountryView extends JFrame implements View, Observer {
 	}
 
 	/**
-	 * Method "update" updates the gameMapModel associated with
-	 * 
-	 * @param gameMapModel
+	 * Method "update" updates the gameMapModel associated with.
+	 *
+	 * @param gameMapModel the game map model
+	 * @param arg1 the arg 1
 	 */
 	@Override
 	public void update(Observable gameMapModel, Object arg1) {
@@ -240,7 +271,9 @@ public class ConnectCountryView extends JFrame implements View, Observer {
 
 	/**
 	 * Does the actions regarding each button pushed saveButton, addButton, and
-	 * removeButton
+	 * removeButton.
+	 *
+	 * @param actionListener the new action listener
 	 */
 	@Override
 	public void setActionListener(ActionListener actionListener) {
@@ -250,9 +283,9 @@ public class ConnectCountryView extends JFrame implements View, Observer {
 	}
 
 	/**
-	 * Sets lists of selections
-	 * 
-	 * @param listSelectionListener
+	 * Sets lists of selections.
+	 *
+	 * @param listSelectionListener the new list selection listener
 	 */
 	public void setListSelectionListener(ListSelectionListener listSelectionListener) {
 		this.listSelectionModelLeft.addListSelectionListener(listSelectionListener);
@@ -264,15 +297,25 @@ public class ConnectCountryView extends JFrame implements View, Observer {
 	 */
 	class CountryModelRenderer extends JLabel implements ListCellRenderer<CountryModel> {
 
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/**
+		 * Instantiates a new country model renderer.
+		 */
 		public CountryModelRenderer() {
 			setOpaque(true);
 		}
 
 		/**
-		 * Get List of Cell Renderer Component
-		 * 
+		 * Get List of Cell Renderer Component.
+		 *
+		 * @param arg0 the arg 0
+		 * @param arg1 the arg 1
+		 * @param arg2 the arg 2
+		 * @param arg3 the arg 3
+		 * @param arg4 the arg 4
+		 * @return the list cell renderer component
 		 * @see javax.swing.ListCellRenderer#getListCellRendererComponent(javax.swing.JList,
 		 *      java.lang.Object, int, boolean, boolean)
 		 */

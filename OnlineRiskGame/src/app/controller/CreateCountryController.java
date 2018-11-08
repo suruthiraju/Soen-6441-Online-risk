@@ -15,6 +15,7 @@ import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.view.CreateCountryView;
 
+
 /**
  * In CreateCountryController, the data flow into model object and updates the
  * view whenever data changes.
@@ -25,21 +26,35 @@ import app.view.CreateCountryView;
  */
 
 public class CreateCountryController implements ActionListener {
+	
+	/** The game map model. */
 	private GameMapModel gameMapModel;
+	
+	/** The create country view. */
 	private CreateCountryView createCountryView;
+	
+	/** The new continent model. */
 	private ContinentsModel newContinentModel;
+	
+	/** The count. */
 	static int count = 0;
+	
+	/** The map point list. */
 	private HashMap<String, ArrayList<Point>> mapPointList;
+	
+	/** The color map list. */
 	private HashMap<String, Color> colorMapList;
+	
+	/** The index map. */
 	private HashMap<String, Integer> indexMap;
 
 	/**
-	 * Constructor initializes values and sets the screen too visible
-	 * 
-	 * @param gameMapModel
-	 * @param mapPointList
-	 * @param colorMapList
-	 * @param indexMap
+	 * Constructor initializes values and sets the screen too visible.
+	 *
+	 * @param gameMapModel the game map model
+	 * @param mapPointList the map point list
+	 * @param colorMapList the color map list
+	 * @param indexMap the index map
 	 */
 	public CreateCountryController(GameMapModel gameMapModel, HashMap<String, ArrayList<Point>> mapPointList,
 			HashMap<String, Color> colorMapList, HashMap<String, Integer> indexMap) {
@@ -55,7 +70,8 @@ public class CreateCountryController implements ActionListener {
 
 	/**
 	 * This method performs action, by Listening the action event set in view.
-	 * 
+	 *
+	 * @param actionEvent the action event
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
@@ -125,8 +141,8 @@ public class CreateCountryController implements ActionListener {
 	}
 
 	/**
-	 * Check for same country validation
-	 * 
+	 * Check for same country validation.
+	 *
 	 * @return boolean
 	 */
 	private boolean sameCountryValidation() {
@@ -140,8 +156,8 @@ public class CreateCountryController implements ActionListener {
 	}
 
 	/**
-	 * Check for empty continent Value
-	 * 
+	 * Check for empty continent Value.
+	 *
 	 * @return boolean
 	 */
 	public boolean emptyContinentValidation() {

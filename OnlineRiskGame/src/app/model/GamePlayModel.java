@@ -13,6 +13,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+
 /**
  * "GamePlayerModel" class represents an object containing current map and
  * players.
@@ -21,32 +22,45 @@ import org.json.simple.parser.JSONParser;
  */
 public class GamePlayModel extends Observable {
 
+	/** The game map model. */
 	private GameMapModel gameMapModel;
+	
+	/** The players. */
 	private ArrayList<PlayerModel> players = new ArrayList<PlayerModel>();
+	
+	/** The deck. */
 	private ArrayList<CardModel> deck = new ArrayList<CardModel>();
-	/**
-	 * to save Selected ComboBox index
-	 */
+	
+	/** to save Selected ComboBox index. */
 	private int selectedComboBoxIndex;
-	/**
-	 * to save Selected ComboBox index
-	 */
+	
+	/** to save Selected ComboBox index. */
 	private int selectedAttackComboBoxIndex;
-	/**
-	 * to save Selected ComboBox index
-	 */
+	
+	/** to save Selected ComboBox index. */
 	private int selectedDefendComboBoxIndex;
+	
+	/** The country owned. */
 	private boolean countryOwned = false;
+	
+	/** The army to move flag. */
 	private boolean armyToMoveFlag;
+	
+	/** The card to be assigned. */
 	private boolean cardToBeAssigned;
+	
+	/** The console text. */
 	private StringBuilder consoleText;
+	
+	/** The defeated country. */
 	private CountryModel defeatedCountry;
 
 	/**
-	 * Constructor
-	 * 
-	 * @param gameMap
-	 * @param players
+	 * Constructor.
+	 *
+	 * @param gameMap the game map
+	 * @param players the players
+	 * @param deck the deck
 	 */
 	public GamePlayModel(GameMapModel gameMap, ArrayList<PlayerModel> players, ArrayList<CardModel> deck) {
 		this.gameMapModel = gameMap;
@@ -54,16 +68,17 @@ public class GamePlayModel extends Observable {
 		this.deck = deck;
 		this.consoleText = new StringBuilder("Hello to the Risk Game ! ");
 	}
+	
 	/**
-	 * Default Constructor
-	 * 
-	 *
+	 * Default Constructor.
 	 */
 	public GamePlayModel() {
 		this.consoleText = new StringBuilder("Hello to the Risk Game ! ");
 	}
 
 	/**
+	 * Gets the game map.
+	 *
 	 * @return the gameMap.
 	 */
 	public GameMapModel getGameMap() {
@@ -72,14 +87,16 @@ public class GamePlayModel extends Observable {
 
 	/**
 	 * Sets the gameMap Model.
-	 * 
-	 * @param gameMap
+	 *
+	 * @param gameMap the new game map
 	 */
 	public void setGameMap(GameMapModel gameMap) {
 		this.gameMapModel = gameMap;
 	}
 
 	/**
+	 * Gets the players.
+	 *
 	 * @return the list of players.
 	 */
 	public ArrayList<PlayerModel> getPlayers() {
@@ -88,8 +105,8 @@ public class GamePlayModel extends Observable {
 
 	/**
 	 * Sets the list of players.
-	 * 
-	 * @param players
+	 *
+	 * @param players the new players
 	 */
 	public void setPlayers(ArrayList<PlayerModel> players) {
 		this.players = players;
@@ -114,8 +131,10 @@ public class GamePlayModel extends Observable {
 	}
 
 	/**
+	 * Gets the card from JSON.
+	 *
 	 * @return the list of card.
-	 * @throws org.json.simple.parser.ParseException
+	 * @throws ParseException the parse exception
 	 */
 	public ArrayList<CardModel> getCardFromJSON() throws org.json.simple.parser.ParseException {
 		try {
@@ -152,8 +171,8 @@ public class GamePlayModel extends Observable {
 
 	/**
 	 * Sets the list of card.
-	 * 
-	 * @param deck
+	 *
+	 * @return the cards
 	 */
 	public ArrayList<CardModel> getCards() {
 		return this.deck;
@@ -161,8 +180,8 @@ public class GamePlayModel extends Observable {
 
 	/**
 	 * Sets the list of card.
-	 * 
-	 * @param deck
+	 *
+	 * @return the card
 	 */
 	public CardModel getCard() {
 		CardModel temp = this.deck.get(this.deck.size() - 1);
@@ -577,11 +596,11 @@ public class GamePlayModel extends Observable {
 	}
 
 	/**
-	 * This method gives the Random generation of numbers within two values
-	 * 
-	 * @param min
-	 * @param max
-	 * @return
+	 * This method gives the Random generation of numbers within two values.
+	 *
+	 * @param min the min
+	 * @param max the max
+	 * @return the random between range
 	 */
 	public int getRandomBetweenRange(double min, double max) {
 		int x = (int) ((Math.random() * ((max - min) + 1)) + min);
@@ -590,7 +609,7 @@ public class GamePlayModel extends Observable {
 
 	/**
 	 * Method used to notify state change whenever any change is reflected by
-	 * CreateContinentController via CreateContinentView
+	 * CreateContinentController via CreateContinentView.
 	 */
 	public void callObservers() {
 		for (int i = 0; i < this.getPlayers().size(); i++) {

@@ -20,6 +20,7 @@ import app.model.PlayerModel;
 import app.utilities.Validation;
 import app.view.NewGameView;
 
+
 /**
  * In NewGameController, the data flow into model object and updates the view
  * whenever data changes.
@@ -31,17 +32,32 @@ import app.view.NewGameView;
 
 public class NewGameController implements ActionListener {
 
+	/** The view. */
 	private NewGameView theView;
+	
+	/** The list of players. */
 	private ArrayList<PlayerModel> listOfPlayers = new ArrayList<PlayerModel>();
+	
+	/** The game map model. */
 	private GameMapModel gameMapModel = new GameMapModel();
+	
+	/** The game play model. */
 	private GamePlayModel gamePlayModel = new GamePlayModel();
+	
+	/** The no of players. */
 	private int noOfPlayers;
+	
+	/** The Player name. */
 	private String PlayerName = "";
+	
+	/** The list of country. */
 	private List<CountryModel> listOfCountry;
+	
+	/** The list of cards. */
 	private List<CardModel> listOfCards;
 
 	/**
-	 * Constructor initializes values and sets the screen too visible
+	 * Constructor initializes values and sets the screen too visible.
 	 */
 	public NewGameController() {
 		this.theView = new NewGameView();
@@ -52,7 +68,8 @@ public class NewGameController implements ActionListener {
 
 	/**
 	 * This method performs action, by Listening the action event set in view.
-	 * 
+	 *
+	 * @param actionEvent the action event
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
@@ -131,9 +148,9 @@ public class NewGameController implements ActionListener {
 	}
 
 	/**
-	 * Check for the player validation
-	 * 
-	 * @throws ParseException
+	 * Check for the player validation.
+	 *
+	 * @throws ParseException the parse exception
 	 */
 	public void playerValidation() throws ParseException {
 		if (gameMapModel.getCountries().size() > noOfPlayers) {

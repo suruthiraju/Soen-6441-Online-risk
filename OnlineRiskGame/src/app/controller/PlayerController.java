@@ -18,6 +18,7 @@ import app.view.AttackView;
 import app.view.FortificationView;
 import app.view.ReinforcementView;
 
+
 /**
  * In PlayerController, the data flow into model object and updates the view
  * whenever data changes.
@@ -28,18 +29,31 @@ import app.view.ReinforcementView;
  */
 public class PlayerController implements ActionListener, ItemListener {
 
+	/** The game play model. */
 	private GamePlayModel gamePlayModel;
+	
+	/** The reinforcement view. */
 	private ReinforcementView theReinforcementView;
+	
+	/** The fortification view. */
 	private FortificationView theFortificationView;
+	
+	/** The attack view. */
 	private AttackView theAttackView;
+	
+	/** The list of players. */
 	private ArrayList<PlayerModel> listOfPlayers = new ArrayList<PlayerModel>();
+	
+	/** The no of players. */
 	private int noOfPlayers;
+	
+	/** The val. */
 	private Validation val = new Validation();
 
 	/**
-	 * Constructor initializes values and sets the screen too visible
-	 * 
-	 * @param gamePlayModel
+	 * Constructor initializes values and sets the screen too visible.
+	 *
+	 * @param gamePlayModel the game play model
 	 */
 	public PlayerController(GamePlayModel gamePlayModel) {
 
@@ -114,6 +128,8 @@ public class PlayerController implements ActionListener, ItemListener {
 
 	/**
 	 * This method performs action, by Listening the action event set in view.
+	 *
+	 * @param actionEvent the action event
 	 */
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
@@ -250,8 +266,9 @@ public class PlayerController implements ActionListener, ItemListener {
 	}
 
 	/**
-	 * Item Listener
-	 * 
+	 * Item Listener.
+	 *
+	 * @param itemEvent the item event
 	 * @see java.awt.event.ItemListener#itemStateChanged(java.awt.event.ItemEvent)
 	 */
 	public void itemStateChanged(ItemEvent itemEvent) {

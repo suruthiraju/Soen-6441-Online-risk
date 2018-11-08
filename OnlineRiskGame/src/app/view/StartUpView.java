@@ -44,6 +44,7 @@ import app.model.PlayerModel;
 
 public class StartUpView extends JFrame implements View {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	public GameMapModel gameMapModel;
 	public PlayerModel playerModel;
@@ -67,6 +68,8 @@ public class StartUpView extends JFrame implements View {
 	public JLabel countryListLabel;
 	public JComboBox<Object> countryListComboBox;
 	public Object[] countryListArray;
+	
+	/** The countries view renderer. */
 	private CountryViewRenderer countriesViewRenderer;
 
 	public JButton[] button;

@@ -69,9 +69,13 @@ public class FortificationView extends JFrame implements View {
 	public Object[] fromCountryListArray;
 	private CountryViewRenderer fromCountriesViewRenderer;
 	public Object[] toCountryListArray;
+	
+	/** The to countries view renderer. */
 	private CountryViewRenderer toCountriesViewRenderer;
 
 	public JButton[] button;
+	
+	/** The action listener. */
 	private ActionListener actionListener;
 
 	/**

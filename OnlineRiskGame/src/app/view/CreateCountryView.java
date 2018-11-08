@@ -24,37 +24,69 @@ import app.model.ContinentsModel;
 import app.model.CountryModel;
 import app.model.GameMapModel;
 
+
 /**
  * "CreateCountryView" class represents a view object for creating a country
  * view Properties are containing labels, text fields, buttons, combo-boxes, a
- * pane, and a panel
- * 
+ * pane, and a panel.
+ *
  * @author Jatan Gohel
  */
 
 public class CreateCountryView extends JFrame implements View {
 
+	/** The welcome label. */
 	public JLabel welcomeLabel;
+	
+	/** The country value. */
 	public JTextField countryValue;
+	
+	/** The continent list combobox. */
 	public JComboBox continentListCombobox;
+	
+	/** The continent list array. */
 	public Object[] continentListArray;
+	
+	/** The continent view renderer. */
 	private CountryViewRenderer continentViewRenderer;
+	
+	/** The country list text. */
 	public JLabel countryListText;
+	
+	/** The continent name label. */
 	public JLabel continentNameLabel;
+	
+	/** The observer list. */
 	public JTextArea observerList;
+	
+	/** The next button. */
 	public JButton nextButton;
+	
+	/** The add button. */
 	public JButton addButton;
+	
+	/** The save button. */
 	public JButton saveButton;
+	
+	/** The console text area. */
 	public JTextArea consoleTextArea;
+	
+	/** The console main panel. */
 	public JTextArea consoleMainPanel;
+	
+	/** The console panel. */
 	public JScrollPane consolePanel;
+	
+	/** The main panel. */
 	public JPanel mainPanel;
+	
+	/** The text area. */
 	JTextArea textArea;
 
 	/**
-	 * Construction of "CreateCountryView"
-	 * 
-	 * @param listOfContinents
+	 * Construction of "CreateCountryView".
+	 *
+	 * @param listOfContinents the list of continents
 	 */
 	public CreateCountryView(List<ContinentsModel> listOfContinents) {
 		this.setTitle("Create Country");
@@ -100,10 +132,10 @@ public class CreateCountryView extends JFrame implements View {
 	}
 
 	/**
-	 * Updates the screen after creating a country
-	 * 
-	 * @param listOfContinentModel
-	 * @param listOfCountryModel
+	 * Updates the screen after creating a country.
+	 *
+	 * @param listOfContinentModel the list of continent model
+	 * @param listOfCountryModel the list of country model
 	 */
 	public void updateScreen(List<ContinentsModel> listOfContinentModel, List<CountryModel> listOfCountryModel) {
 		mainPanel.removeAll();
@@ -154,8 +186,9 @@ public class CreateCountryView extends JFrame implements View {
 	}
 
 	/**
-	 * Sets actions to "addButton" and "nextButton"
-	 * 
+	 * Sets actions to "addButton" and "nextButton".
+	 *
+	 * @param actionListener the new action listener
 	 * @see app.helper.View#setActionListener(java.awt.event.ActionListener)
 	 */
 	@Override
@@ -165,8 +198,10 @@ public class CreateCountryView extends JFrame implements View {
 	}
 
 	/**
-	 * Update the view based on observer
-	 * 
+	 * Update the view based on observer.
+	 *
+	 * @param obs the obs
+	 * @param arg the arg
 	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
 	 */
 	@Override
@@ -180,9 +215,13 @@ public class CreateCountryView extends JFrame implements View {
 
 	/**
 	 * Inside, getter method that provides us a map model corresponding to a map
-	 * name
+	 * name.
 	 */
 	public class CountryViewRenderer extends BasicComboBoxRenderer {
+		
+		/* (non-Javadoc)
+		 * @see javax.swing.plaf.basic.BasicComboBoxRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
+		 */
 		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
 				boolean cellHasFocus) {
 			super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);

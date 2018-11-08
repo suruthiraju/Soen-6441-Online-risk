@@ -15,6 +15,7 @@ import app.model.ContinentsModel;
 import app.model.GameMapModel;
 import app.view.CreateContinentView;
 
+
 /**
  * In CreateContinentController, the data flow into model object and updates the
  * view whenever data changes.
@@ -26,13 +27,17 @@ import app.view.CreateContinentView;
 
 public class CreateContinentController implements ActionListener {
 
+	/** The game map model. */
 	private GameMapModel gameMapModel;
+	
+	/** The create continent view. */
 	private CreateContinentView createContinentView;
+	
+	/** The continent model list. */
 	private List<ContinentsModel> continentModelList;
 
 	/**
-	 * Constructor initializes values and sets the screen too visible
-	 * 
+	 * Constructor initializes values and sets the screen too visible.
 	 */
 	public CreateContinentController() {
 		this.gameMapModel = new GameMapModel();
@@ -45,7 +50,8 @@ public class CreateContinentController implements ActionListener {
 
 	/**
 	 * This method performs action, by Listening the action event set in view.
-	 * 
+	 *
+	 * @param actionEvent the action event
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override

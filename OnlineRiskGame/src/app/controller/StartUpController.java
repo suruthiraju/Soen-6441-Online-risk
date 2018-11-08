@@ -10,6 +10,7 @@ import app.model.CountryModel;
 import app.model.GamePlayModel;
 import app.view.StartUpView;
 
+
 /**
  * In StartUpController, the data flow into model object and updates the view
  * whenever data changes.
@@ -21,37 +22,61 @@ import app.view.StartUpView;
 
 public class StartUpController implements ActionListener {
 
+	/** The start up view. */
 	private StartUpView theStartUpView;
+	
+	/** The game play model. */
 	private GamePlayModel gamePlayModel;
+	
+	/** The no of players. */
 	private int noOfPlayers;
+	
+	/** The no of country for ruler. */
 	private int[] noOfCountryForRuler = new int[5];
+	
+	/** The color for ruler. */
 	private Color[] colorForRuler = new Color[5];
+	
+	/** The total armies player. */
 	private int[] totalArmiesPlayer = new int[5];
+	
+	/** The remain armies. */
 	private int[] remainArmies = new int[5];
+	
+	/** The loop value. */
 	private int loopValue = 0;
+	
+	/** The armies null. */
 	private boolean armiesNull = false;
+	
+	/** The initial. */
 	private int initial = 0;
-	// private ArrayList<CountryModel>[] ownedCountry =
-	// (ArrayList<CountryModel>[])new ArrayList[5];
-	// private ArrayList<List<CountryModel>>[] ownedCountry = new
-	// ArrayList<List<CountryModel>>[5];
 
+	/** The owned country 0. */
 	private List<CountryModel> ownedCountry0 = new ArrayList<>();
+	
+	/** The owned country 1. */
 	private List<CountryModel> ownedCountry1 = new ArrayList<>();
+	
+	/** The owned country 2. */
 	private List<CountryModel> ownedCountry2 = new ArrayList<>();
+	
+	/** The owned country 3. */
 	private List<CountryModel> ownedCountry3 = new ArrayList<>();
+	
+	/** The owned country 4. */
 	private List<CountryModel> ownedCountry4 = new ArrayList<>();
 
 	/**
-	 * Initialization of controller
+	 * Initialization of controller.
 	 */
 	public StartUpController() {
 	}
 
 	/**
-	 * Constructor initializes values and sets the screen too visible
-	 * 
-	 * @param gamePlayModel
+	 * Constructor initializes values and sets the screen too visible.
+	 *
+	 * @param gamePlayModel the game play model
 	 */
 	public StartUpController(GamePlayModel gamePlayModel) {
 
@@ -83,7 +108,7 @@ public class StartUpController implements ActionListener {
 	}
 
 	/**
-	 * This method allocates Player and Armies to the country to start the game play
+	 * This method allocates Player and Armies to the country to start the game play.
 	 */
 	public void allocateArmies() {
 
@@ -153,7 +178,7 @@ public class StartUpController implements ActionListener {
 	}
 
 	/**
-	 * This method assign Player to PlayerModel
+	 * This method assign Player to PlayerModel.
 	 */
 	public void assignPlayerModel() {
 		for (int i = 0; i < noOfPlayers; i++) {
@@ -180,11 +205,11 @@ public class StartUpController implements ActionListener {
 	}
 
 	/**
-	 * This method gives the Random generation of numbers within two values
-	 * 
-	 * @param min
-	 * @param max
-	 * @return
+	 * This method gives the Random generation of numbers within two values.
+	 *
+	 * @param min the min
+	 * @param max the max
+	 * @return the random between range
 	 */
 	public int getRandomBetweenRange(double min, double max) {
 		int x = (int) ((Math.random() * ((max - min) + 1)) + min);
@@ -193,7 +218,8 @@ public class StartUpController implements ActionListener {
 
 	/**
 	 * This method performs action, by Listening the action event set in view.
-	 * 
+	 *
+	 * @param actionEvent the action event
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override

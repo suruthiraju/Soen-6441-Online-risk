@@ -1,5 +1,6 @@
 package app.utilities;
 
+
 /**
  * This class prints the given message on console.
  * 
@@ -7,18 +8,21 @@ package app.utilities;
  */
 public class MessageUtil {
 
+	/** The message. */
 	private String message;
 
 	/**
-	 * @param message
+	 * Instantiates a new message util.
+	 *
+	 * @param message the message
 	 */
 	public MessageUtil(String message) {
 		this.message = message;
 	}
 
 	/**
-	 * prints Message
-	 * 
+	 * prints Message.
+	 *
 	 * @return String
 	 */
 	public String printMessage() {
@@ -27,8 +31,8 @@ public class MessageUtil {
 	}
 
 	/**
-	 * Salutation Message
-	 * 
+	 * Salutation Message.
+	 *
 	 * @return String
 	 */
 	public String salutationMessage() {

@@ -2,6 +2,7 @@ package app.model;
 
 import java.util.ArrayList;
 
+
 /**
  * "ContinentsModel" is a class for continents of the map. "continentName" and
  * "valueControl" are attributes of an object
@@ -11,15 +12,20 @@ import java.util.ArrayList;
  */
 public class ContinentsModel {
 
+	/** The continent name. */
 	private String continentName;
+	
+	/** The value control. */
 	private int valueControl;
+	
+	/** The list of countries. */
 	private ArrayList<CountryModel> listOfCountries = new ArrayList<CountryModel>() ;
 
 	/**
-	 * Constructor of ContinentsModel
-	 * 
-	 * @param continentName
-	 * @param valueControl
+	 * Constructor of ContinentsModel.
+	 *
+	 * @param continentName the continent name
+	 * @param valueControl the value control
 	 */
 	public ContinentsModel(String continentName, int valueControl) {
 		this.continentName = continentName;
@@ -27,8 +33,8 @@ public class ContinentsModel {
 	}
 
 	/**
-	 * Returns the continent name
-	 * 
+	 * Returns the continent name.
+	 *
 	 * @return the continent name.
 	 */
 	public String getContinentName() {
@@ -37,16 +43,16 @@ public class ContinentsModel {
 
 	/**
 	 * Sets the continent name.
-	 * 
-	 * @param continentName
+	 *
+	 * @param continentName the new continent name
 	 */
 	public void setContinentName(String continentName) {
 		this.continentName = continentName;
 	}
 
 	/**
-	 * Returns the continent value control
-	 * 
+	 * Returns the continent value control.
+	 *
 	 * @return the value Control.
 	 */
 	public int getValueControl() {
@@ -55,8 +61,8 @@ public class ContinentsModel {
 
 	/**
 	 * Sets the continent value Control.
-	 * 
-	 * @param valueControl
+	 *
+	 * @param valueControl the new value control
 	 */
 	public void setValueControl(int valueControl) {
 		this.valueControl = valueControl;

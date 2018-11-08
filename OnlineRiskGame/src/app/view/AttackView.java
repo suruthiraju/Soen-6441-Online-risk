@@ -36,6 +36,7 @@ import app.model.GameMapModel;
 import app.model.GamePlayModel;
 import app.model.PlayerModel;
 
+
 /**
  * This View provides the attackView of the Game Play. It also provides the
  * observer pattern when the data is modified
@@ -47,38 +48,95 @@ import app.model.PlayerModel;
 
 public class AttackView extends JFrame implements View, ItemListener {
 
+	/** The game map model. */
 	public GameMapModel gameMapModel;
+	
+	/** The player model. */
 	public PlayerModel playerModel;
+	
+	/** The game play model. */
 	public GamePlayModel gamePlayModel;
 
+	/** The welcome panel. */
 	public JPanel welcomePanel;
+	
+	/** The graphic panel. */
 	public JPanel graphicPanel;
 	
+	/** The console main panel. */
 	public JPanel consoleMainPanel;
+	
+	/** The console panel. */
 	public JScrollPane consolePanel;
+	
+	/** The console text area. */
 	public JTextArea consoleTextArea;
 
+	/** The welcome label. */
 	public JLabel welcomeLabel;
+	
+	/** The attack country list label. */
 	public JLabel attackCountryListLabel;
+	
+	/** The defend country list label. */
 	public JLabel defendCountryListLabel;
+	
+	/** The no of troops label. */
 	public JLabel noOfTroopsLabel;
+	
+	/** The no of dice attack label. */
 	public JLabel noOfDiceAttackLabel;
+	
+	/** The no of dice defend label. */
 	public JLabel noOfDiceDefendLabel;
+	
+	/** The defected country label. */
 	public JLabel defectedCountryLabel;
+	
+	/** The next button. */
 	public JButton nextButton;
+	
+	/** The move button. */
 	public JButton moveButton;
+	
+	/** The Single button. */
 	public JButton SingleButton;
+	
+	/** The allout button. */
 	public JButton alloutButton;
+	
+	/** The attack country list combo box. */
 	public JComboBox<Object> attackCountryListComboBox;
+	
+	/** The defend country list combo box. */
 	public JComboBox<Object> defendCountryListComboBox;
+	
+	/** The attack country list array. */
 	public Object[] attackCountryListArray;
+	
+	/** The defend country list array. */
 	public Object[] defendCountryListArray;
+	
+	/** The countries view renderer. */
 	private CountryViewRenderer countriesViewRenderer;
+	
+	/** The button. */
 	public JButton[] button;
+	
+	/** The num of dice attack combo box. */
 	public JComboBox<Integer> numOfDiceAttackComboBox;
+	
+	/** The num of dice defend combo box. */
 	public JComboBox<Integer> numOfDiceDefendComboBox;
+	
+	/** The num of armies to be moved combo box. */
 	public JComboBox<Integer> numOfArmiesToBeMovedComboBox;
 
+	/**
+	 * Instantiates a new attack view.
+	 *
+	 * @param gamePlayModel the game play model
+	 */
 	public AttackView(GamePlayModel gamePlayModel) {
 		this.gameMapModel = gamePlayModel.getGameMap();
 		this.setTitle("Attack Phase");
@@ -127,9 +185,9 @@ public class AttackView extends JFrame implements View, ItemListener {
 	/**
 	 * This updateWindow method is called whenever the model is updated. It updates
 	 * the Screen for attack Phase
-	 * 
-	 * @param gamePlayModel
-	 * @param playerModel
+	 *
+	 * @param gamePlayModel the game play model
+	 * @param playerModel the player model
 	 */
 	public void updateWindow(GamePlayModel gamePlayModel, PlayerModel playerModel) {
 
@@ -326,7 +384,8 @@ public class AttackView extends JFrame implements View, ItemListener {
 
 	/**
 	 * Countries are rendered as button and linked with Swing using Graphics.
-	 * 
+	 *
+	 * @param g the g
 	 * @see java.awt.Window#paint(java.awt.Graphics)
 	 */
 	public void paint(final Graphics g) {
@@ -360,12 +419,14 @@ public class AttackView extends JFrame implements View, ItemListener {
 	}
 
 	/**
-	 * Getter method that provides us a map model corresponding to a map name
-	 * 
+	 * Getter method that provides us a map model corresponding to a map name.
 	 */
 
 	public class CountryViewRenderer extends BasicComboBoxRenderer {
 
+		/* (non-Javadoc)
+		 * @see javax.swing.plaf.basic.BasicComboBoxRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
+		 */
 		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
 				boolean cellHasFocus) {
 			super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
@@ -382,7 +443,9 @@ public class AttackView extends JFrame implements View, ItemListener {
 	 * Update method is to Update the start up Phase. This is declared as
 	 * observable. so when the values are changed the view is updated automatically
 	 * by notifying the observer.
-	 * 
+	 *
+	 * @param obs the obs
+	 * @param arg the arg
 	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
 	 */
 	@Override
@@ -405,8 +468,9 @@ public class AttackView extends JFrame implements View, ItemListener {
 	}
 
 	/**
-	 * This is actionListener method to listen the action events in the screen
-	 * 
+	 * This is actionListener method to listen the action events in the screen.
+	 *
+	 * @param actionListener the new action listener
 	 * @see app.helper.View#setActionListener(java.awt.event.ActionListener)
 	 */
 	public void setActionListener(ActionListener actionListener) {
@@ -419,10 +483,10 @@ public class AttackView extends JFrame implements View, ItemListener {
 	}
 
 	/**
-	 * This method convert string to color
-	 * 
-	 * @param value
-	 * @return
+	 * This method convert string to color.
+	 *
+	 * @param value the value
+	 * @return the color
 	 */
 	public static Color stringToColor(final String value) {
 		if (value == null) {
@@ -441,6 +505,11 @@ public class AttackView extends JFrame implements View, ItemListener {
 		}
 	}
 
+	/**
+	 * Sets the item listener.
+	 *
+	 * @param itemListener the new item listener
+	 */
 	public void setItemListener(ItemListener itemListener) {
 		this.attackCountryListComboBox.addItemListener(itemListener);
 		this.defendCountryListComboBox.addItemListener(itemListener);
@@ -448,8 +517,9 @@ public class AttackView extends JFrame implements View, ItemListener {
 	}
 
 	/**
-	 * Item Listener
-	 * 
+	 * Item Listener.
+	 *
+	 * @param itemEvent the item event
 	 * @see java.awt.event.ItemListener#itemStateChanged(java.awt.event.ItemEvent)
 	 */
 	@Override

@@ -7,6 +7,7 @@ import java.util.Observable;
 
 import app.view.ReinforcementView;
 
+
 /**
  * "PlayerModel" class represents an object of a player. The properties are:
  * Player name, player's troop number, the color in view screen (displaying)
@@ -17,20 +18,36 @@ import app.view.ReinforcementView;
  */
 public class PlayerModel extends Observable {
 
+	/** The name player. */
 	private String namePlayer;
+	
+	/** The my troop. */
 	private int myTroop;
+	
+	/** The color. */
 	private Color color;
+	
+	/** The remain troop. */
 	private int remainTroop;
+	
+	/** The owned countries. */
 	private List<CountryModel> ownedCountries  = new ArrayList<CountryModel>();
+	
+	/** The owned cards. */
 	private List<CardModel> ownedCards;
+	
+	/** The show reinforcement card. */
 	private boolean showReinforcementCard;
 
 	/**
-	 * Constructor of PlayerModel
-	 * 
-	 * @param namePlayer
-	 * @param myTroop
-	 * @param color
+	 * Constructor of PlayerModel.
+	 *
+	 * @param namePlayer the name player
+	 * @param myTroop the my troop
+	 * @param color the color
+	 * @param remainTroop the remain troop
+	 * @param ownedCountries the owned countries
+	 * @param ownedCards the owned cards
 	 */
 	public PlayerModel(String namePlayer, int myTroop, Color color, int remainTroop, List ownedCountries, List ownedCards) {
 		this.namePlayer = namePlayer;
@@ -42,13 +59,15 @@ public class PlayerModel extends Observable {
 	}
 
 	/**
-	 * Default constructor
+	 * Default constructor.
 	 */
 	public PlayerModel() {
 		// TODO Auto-generated constructor stub
 	}
 
 	/**
+	 * Gets the my troop.
+	 *
 	 * @return the value Control.
 	 */
 	public int getmyTroop() {
@@ -57,14 +76,16 @@ public class PlayerModel extends Observable {
 
 	/**
 	 * Sets the value Control.
-	 * 
-	 * @param myTroop
+	 *
+	 * @param myTroop the new my troop
 	 */
 	public void setmyTroop(int myTroop) {
 		this.myTroop = myTroop;
 	}
 
 	/**
+	 * Gets the name player.
+	 *
 	 * @return the continent name.
 	 */
 	public String getNamePlayer() {
@@ -73,14 +94,16 @@ public class PlayerModel extends Observable {
 
 	/**
 	 * Sets the continent name.
-	 * 
-	 * @param namePlayer
+	 *
+	 * @param namePlayer the new name player
 	 */
 	public void setNamePlayer(String namePlayer) {
 		this.namePlayer = namePlayer;
 	}
 
 	/**
+	 * Gets the color.
+	 *
 	 * @return the continent name.
 	 */
 	public Color getColor() {
@@ -89,14 +112,16 @@ public class PlayerModel extends Observable {
 
 	/**
 	 * Sets the continent name.
-	 * 
-	 * @param color
+	 *
+	 * @param color the new color
 	 */
 	public void setColor(Color color) {
 		this.color = color;
 	}
 
 	/**
+	 * Gets the remain troop.
+	 *
 	 * @return the .
 	 */
 	public int getremainTroop() {
@@ -105,22 +130,25 @@ public class PlayerModel extends Observable {
 
 	/**
 	 * Sets the value Control.
-	 * 
-	 * @param remainTroop
+	 *
+	 * @param remainTroop the new remain troop
 	 */
 	public void setremainTroop(int remainTroop) {
 		this.remainTroop = remainTroop;
 	}
 
 	/**
-	 * Calling Observer
+	 * Calling Observer.
 	 */
 	public void callObservers() {
 		setChanged();
 		notifyObservers(this);
 
 	}
+	
 	/**
+	 * Gets the owned countries.
+	 *
 	 * @return the list of array.
 	 */
 	public List<CountryModel> getOwnedCountries() {
@@ -129,13 +157,16 @@ public class PlayerModel extends Observable {
 
 	/**
 	 * Sets the list of array.
-	 * 
-	 * @param ownedCountries
+	 *
+	 * @param ownedCountries the new owned countries
 	 */
 	public void setOwnedCountries(List<CountryModel> ownedCountries) {
 		this.ownedCountries = ownedCountries;
 	}
+	
 	/**
+	 * Gets the owned cards.
+	 *
 	 * @return the list of array.
 	 */
 	public List<CardModel> getOwnedCards() {
@@ -144,8 +175,8 @@ public class PlayerModel extends Observable {
 
 	/**
 	 * Sets the list of array.
-	 * 
-	 * @param ownedCountries
+	 *
+	 * @param ownedCards the new owned cards
 	 */
 	public void setOwnedCards(List<CardModel> ownedCards) {
 		this.ownedCards = ownedCards;

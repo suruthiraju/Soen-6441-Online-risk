@@ -17,6 +17,7 @@ import app.utilities.Validation;
 import app.utilities.WriteMap;
 import app.view.ConnectCountryView;
 
+
 /**
  * In ConnectCountryController, the data flow into model object and updates the
  * view whenever data changes.
@@ -28,18 +29,31 @@ import app.view.ConnectCountryView;
 
 public class ConnectCountryController implements ActionListener, ListSelectionListener {
 
+	/** The game map model. */
 	private GameMapModel gameMapModel;
+	
+	/** The connect country view. */
 	private ConnectCountryView connectCountryView;
+	
+	/** The country list. */
 	private List<CountryModel> countryList;
+	
+	/** The country list links. */
 	private List<CountryModel> countryListLinks;
+	
+	/** The new country model. */
 	private CountryModel newCountryModel;
+	
+	/** The filename. */
 	private String filename = null;
+	
+	/** The temp write. */
 	private WriteMap tempWrite;
 
 	/**
-	 * Constructor initializes values and sets the screen too visible
-	 * 
-	 * @param mapModel
+	 * Constructor initializes values and sets the screen too visible.
+	 *
+	 * @param mapModel the map model
 	 */
 	public ConnectCountryController(GameMapModel mapModel) {
 
@@ -56,7 +70,8 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 
 	/**
 	 * This method performs action, by Listening the action event set in view.
-	 * 
+	 *
+	 * @param actionEvent the action event
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
@@ -135,8 +150,9 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 	}
 
 	/**
-	 * Check for the List is changed
-	 * 
+	 * Check for the List is changed.
+	 *
+	 * @param e the e
 	 * @see javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event.ListSelectionEvent)
 	 */
 	@Override

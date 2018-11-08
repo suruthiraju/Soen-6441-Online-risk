@@ -16,6 +16,7 @@ import app.model.GameMapModel;
 import app.utilities.ReadFile;
 import app.view.EditContinentView;
 
+
 /**
  * In EditContinentController, the data flow into model object and updates the
  * view whenever data changes.
@@ -27,16 +28,29 @@ import app.view.EditContinentView;
 
 public class EditContinentController implements ActionListener {
 
+	/** The edit continent view. */
 	private EditContinentView editContinentView;
+	
+	/** The map model. */
 	private GameMapModel mapModel;
+	
+	/** The continent list. */
 	private List<ContinentsModel> continentList;
+	
+	/** The temp read. */
 	private ReadFile tempRead = new ReadFile();
+	
+	/** The file. */
 	private File file;
+	
+	/** The new continent model. */
 	private ContinentsModel newContinentModel;
+	
+	/** The new continent list. */
 	private List<ContinentsModel> newContinentList;
 
 	/**
-	 * Constructor initializes values and sets the screen too visible
+	 * Constructor initializes values and sets the screen too visible.
 	 */
 	public EditContinentController() {
 
@@ -56,8 +70,8 @@ public class EditContinentController implements ActionListener {
 	}
 
 	/**
-	 * Browsing a file
-	 * 
+	 * Browsing a file.
+	 *
 	 * @return File
 	 */
 	public File selectFile() {
@@ -77,7 +91,8 @@ public class EditContinentController implements ActionListener {
 
 	/**
 	 * This method performs action, by Listening the action event set in view.
-	 * 
+	 *
+	 * @param actionEvent the action event
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override

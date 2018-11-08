@@ -74,6 +74,8 @@ public class ReinforcementView extends JFrame implements Observer {
 	public JLabel countryListLabel;
 	public JComboBox<Object> countryListComboBox;
 	public Object[] countryListArray;
+	
+	/** The countries view renderer. */
 	private CountryViewRenderer countriesViewRenderer;
 
 	public JButton[] button;
