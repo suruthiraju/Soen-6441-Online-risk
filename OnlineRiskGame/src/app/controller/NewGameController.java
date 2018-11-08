@@ -20,6 +20,8 @@ import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.model.GamePlayModel;
 import app.model.PlayerModel;
+import app.utilities.Validation;
+import app.utilities.WriteMap;
 import app.view.NewGameView;
 
 /**
@@ -65,8 +67,53 @@ public class NewGameController implements ActionListener {
 				try {
 					File mapFile = theView.chooseMap.getSelectedFile();
 					gameMapModel = new GameMapModel(mapFile);
-					JOptionPane.showMessageDialog(theView, "File Loaded Successfully! Click Next to Play!","Map Loaded",JOptionPane.INFORMATION_MESSAGE);
-				} catch (Exception e) {
+
+					Validation MapValidation = new Validation();
+					boolean flag1 = MapValidation.emptyLinkCountryValidation(this.gameMapModel);
+
+					boolean flag3 = MapValidation.emptyContinentValidation(this.gameMapModel);
+					boolean flag2 = MapValidation.checkInterlinkedContinent(this.gameMapModel);
+					System.out.println(flag1 + " " + flag2 + " " + flag3);
+					if (!(MapValidation.emptyLinkCountryValidation(this.gameMapModel))) {
+						if ((!MapValidation.checkInterlinkedContinent(this.gameMapModel))) {
+							if (!(MapValidation.emptyContinentValidation(this.gameMapModel))) {
+								if (!(MapValidation.unlinkedContinentValidation(this.gameMapModel))) {
+
+									System.out.println(" All the map validations are correct");
+									try {
+										JOptionPane.showMessageDialog(theView, "File Loaded Successfully! Click Next to Play!","Map Loaded",JOptionPane.INFORMATION_MESSAGE);
+
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								} else {
+									System.out.println("All continents are not linked");
+									JOptionPane.showOptionDialog(null, "All continents are not linked", "Invalid",
+											JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {},
+											null);
+
+								}
+
+							} else {
+								System.out.println("Empty link country validation failed");
+								JOptionPane.showOptionDialog(null, "Empty continent validation failed", "Invalid",
+										JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {},
+										null);
+							}
+						} else {
+							System.out.println("ECheck interlinked Continent validation failed");
+							JOptionPane.showOptionDialog(null, "Check interlinedContinent validation failed", "Invalid",
+									JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
+
+						}
+					} else {
+						System.out.println("Empty continent validation failed");
+						JOptionPane.showOptionDialog(null, "Empty link country validation failed", "Invalid",
+								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
+					}
+
+				
+									} catch (Exception e) {
 					e.printStackTrace();
 				}				
 			}
