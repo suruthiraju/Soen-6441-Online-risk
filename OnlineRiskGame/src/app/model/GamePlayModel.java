@@ -139,15 +139,15 @@ public class GamePlayModel extends Observable {
 
 		return this.deck;
 	}
-	
-	public ArrayList<CardModel> getCards() {
-		return this.deck ;
-	}
+
 	/**
 	 * Sets the list of card.
 	 * 
 	 * @param deck
 	 */
+	public ArrayList<CardModel> getCards() {
+		return this.deck ;
+	}
 	public void setCards(ArrayList<CardModel> deck) {
 		this.deck = deck;
 	}
@@ -436,18 +436,36 @@ public class GamePlayModel extends Observable {
 	 */
 	public void callObservers() {
 		this.consoleText.append("\n Observer called!");
-		for(int i=0; i<this.getPlayers().size(); i++)
-		{
-			this.coveragePercentage(this.getPlayers().get(i));
+		for (int i = 0; i < this.getPlayers().size(); i++) {
+			this.worldCoverage(this.getPlayers().get(i));
 		}
+		this.getConsoleText().append("\n");
+		for (int i = 0; i < this.gameMapModel.getContinents().size(); i++) {
+			continentCoverage(this.gameMapModel.getContinents().get(i));
+		}
+
 		setChanged();
 		notifyObservers(this);
 	}
-	public void coveragePercentage(PlayerModel parmPlayer)
-	{
-		double percentage =  (parmPlayer.getOwnedCountries().size()*100)/this.gameMapModel.getCountries().size();
-		this.getConsoleText().append("Map coverage for " + parmPlayer.getNamePlayer() + " is " + percentage +"% "+ "\n");
-	
+
+	public void worldCoverage(PlayerModel parmPlayer) {
+		double percentage = (parmPlayer.getOwnedCountries().size() * 100) / this.gameMapModel.getCountries().size();
+		this.getConsoleText()
+				.append("Map coverage for " + parmPlayer.getNamePlayer() + " is " + percentage + "% " + "\n");
+
+	}
+
+	public void continentCoverage(ContinentsModel parmContinent) {
+		this.getConsoleText().append("Continent "+parmContinent.getContinentName()+"'s coverage distribution:");
+		for(int i=0; i<this.players.size(); i++);
 		
+		for(int i=0; i< this.gameMapModel.getContinents().size(); i++)
+		{
+			for(int j=0; j<this.gameMapModel.getContinents().get(i).getCoveredCountries().size(); j++) {
+				System.out.println(this.gameMapModel.getContinents().get(i).getCoveredCountries().get(j).getCountryName());
+			}
+		}
+			
+
 	}
 }

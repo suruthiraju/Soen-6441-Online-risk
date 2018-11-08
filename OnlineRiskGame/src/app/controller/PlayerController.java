@@ -138,47 +138,45 @@ public class PlayerController implements ActionListener, ItemListener {
 			this.gamePlayModel.moveArmies(attackCountry, defendCountry, noOfArmiesToBeMoved);
 			
 		} else if (actionEvent.getSource().equals(this.theFortificationView.moveButton)) {
-
 			// BFS
-			Validation val = new Validation();
-			if (val.checkIfValidMove(this.gamePlayModel.getGameMap(),
-					(CountryModel) this.theFortificationView.fromCountryListComboBox.getSelectedItem(),
-					(CountryModel) this.theFortificationView.toCountryListComboBox.getSelectedItem())) {
-				this.gamePlayModel.getGameMap().setMovingArmies(
-						(Integer) this.theFortificationView.numOfTroopsComboBox.getSelectedItem(),
-						(CountryModel) this.theFortificationView.fromCountryListComboBox.getSelectedItem(),
-						(CountryModel) this.theFortificationView.toCountryListComboBox.getSelectedItem());
-			}
-			
-			int index = this.gamePlayModel.getGameMap().getPlayerIndex();
-			
-			if(this.gamePlayModel.getCardToBeAssigned() == true) {
-				boolean cardAdded = false;
-				int deckSize = this.gamePlayModel.getCards().size();
-				cardAdded = this.gamePlayModel.getPlayers().get(index).addCard(this.gamePlayModel.getCards().get(deckSize-1));
-				this.gamePlayModel.getCards().remove(deckSize-1);
-				//cardRemoved = this.gamePlayModel.getPlayers().get(index).removeCard(this.gamePlayModel.getCards().get(deckSize-1));
-				this.gamePlayModel.setCardToBeAssigned(false);
-			}			
-			
-			index++;
-			if (this.gamePlayModel.getPlayers().size() > index) {
-				this.gamePlayModel.getGameMap().setPlayerIndex(index);
-				this.gamePlayModel.getPlayers().get(index).callObservers();
-			} else {
-				index = 0;
-				this.gamePlayModel.getGameMap().setPlayerIndex(index);
-				this.gamePlayModel.getPlayers().get(index).callObservers();
-			}
-			if (val.endOfGame(this.gamePlayModel) == false) {
-				new GamePlayController(this.gamePlayModel);
-				this.theFortificationView.dispose();
-			} else {
-				JOptionPane.showOptionDialog(null, "Bravo! Game is over! No one won!", "Valid",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
-				this.theFortificationView.dispose();
-			}
-
+						Validation val = new Validation();
+						if (val.checkIfValidMove(this.gamePlayModel.getGameMap(),
+								(CountryModel) this.theFortificationView.fromCountryListComboBox.getSelectedItem(),
+								(CountryModel) this.theFortificationView.toCountryListComboBox.getSelectedItem())) {
+							this.gamePlayModel.getGameMap().setMovingArmies(
+									(Integer) this.theFortificationView.numOfTroopsComboBox.getSelectedItem(),
+									(CountryModel) this.theFortificationView.fromCountryListComboBox.getSelectedItem(),
+									(CountryModel) this.theFortificationView.toCountryListComboBox.getSelectedItem());
+						}
+						
+						int index = this.gamePlayModel.getGameMap().getPlayerIndex();
+						
+						if(this.gamePlayModel.getCardToBeAssigned() == true) {
+							boolean cardAdded = false;
+							int deckSize = this.gamePlayModel.getCards().size();
+							cardAdded = this.gamePlayModel.getPlayers().get(index).addCard(this.gamePlayModel.getCards().get(deckSize-1));
+							this.gamePlayModel.getCards().remove(deckSize-1);
+							//cardRemoved = this.gamePlayModel.getPlayers().get(index).removeCard(this.gamePlayModel.getCards().get(deckSize-1));
+							this.gamePlayModel.setCardToBeAssigned(false);
+						}			
+						
+						index++;
+						if (this.gamePlayModel.getPlayers().size() > index) {
+							this.gamePlayModel.getGameMap().setPlayerIndex(index);
+							this.gamePlayModel.getPlayers().get(index).callObservers();
+						} else {
+							index = 0;
+							this.gamePlayModel.getGameMap().setPlayerIndex(index);
+							this.gamePlayModel.getPlayers().get(index).callObservers();
+						}
+						if (val.endOfGame(this.gamePlayModel) == false) {
+							new GamePlayController(this.gamePlayModel);
+							this.theFortificationView.dispose();
+						} else {
+							JOptionPane.showOptionDialog(null, "Bravo! Game is over! No one won!", "Valid",
+									JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
+							this.theFortificationView.dispose();
+						}
 		} else if (actionEvent.getSource().equals(this.theFortificationView.fromCountryListComboBox)) {
 			this.gamePlayModel
 					.setSelectedComboBoxIndex(this.theFortificationView.fromCountryListComboBox.getSelectedIndex());
