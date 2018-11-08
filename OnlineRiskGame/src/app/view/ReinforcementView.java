@@ -23,6 +23,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.BevelBorder;
@@ -58,14 +59,17 @@ public class ReinforcementView extends JFrame implements Observer {
 	public JPanel consoleMainPanel;
 	public JScrollPane consolePanel;
 	public JTextArea consoleTextArea;
-	
-	
+
 	public JLabel welcomeLabel;
 	public JLabel noOfTroopsLabel;
 
 	public JComboBox<Integer> numOfTroopsComboBox;
 	public JButton addButton;
+	public JButton addMoreButton;
+	public JButton exitCardButton;
 	public JLabel listOfCountriesLabel;
+	public JLabel reinnforcementCardLabel;
+	public JTextField cardIdField;
 
 	public JLabel countryListLabel;
 	public JComboBox<Object> countryListComboBox;
@@ -85,12 +89,14 @@ public class ReinforcementView extends JFrame implements Observer {
 		this.setResizable(false);
 		this.setVisible(false);
 		this.addButton = new JButton("Add");
+		this.addMoreButton = new JButton("Add More Card");
+		this.exitCardButton = new JButton("Exit Card Addition");
 		welcomePanel = new JPanel();
 		graphicPanel = new JPanel();
 		this.add(graphicPanel);
-		graphicPanel.setSize(1200, 650);		
+		graphicPanel.setSize(1200, 650);
 		graphicPanel.setBackground(Color.WHITE);
-		
+
 		this.consoleMainPanel = new JPanel();
 		this.consoleMainPanel.setBorder(new BevelBorder(1));
 
@@ -106,16 +112,16 @@ public class ReinforcementView extends JFrame implements Observer {
 		this.consolePanel = new JScrollPane(this.consoleTextArea);
 		this.consolePanel.setPreferredSize(new Dimension(1580, 130));
 
-		this.consoleMainPanel.add(this.consolePanel,BorderLayout.WEST);
-		
-		this.getContentPane().add(this.consoleMainPanel,BorderLayout.SOUTH);		
-		
+		this.consoleMainPanel.add(this.consolePanel, BorderLayout.WEST);
+
+		this.getContentPane().add(this.consoleMainPanel, BorderLayout.SOUTH);
+
 		this.addButton = new JButton("Add");
 		this.add(welcomePanel);
 
 		this.playerModel = this.gameMapModel.getPlayerTurn();
 		this.welcomeLabel = new JLabel("It's " + playerModel.getNamePlayer() + "'s turn");
-		
+
 		welcomePanel.setLayout(null);
 		graphicPanel.setLayout(null);
 
@@ -142,53 +148,64 @@ public class ReinforcementView extends JFrame implements Observer {
 		welcomeLabel.setBounds(1300, 80, 300, 25);
 		welcomeLabel.setFont(largeFont);
 		welcomePanel.add(welcomeLabel);
-		
-		if(this.gamePlayModel.getConsoleText()!=null) {
-			this.consoleTextArea.setText(this.gamePlayModel.getConsoleText().toString());			
-		}
-		
-//		if(this.playerModel.) {
-//			
-//		}
-		
-		
-		this.noOfTroopsLabel = new JLabel("Number of Troops :");
-		noOfTroopsLabel.setBounds(1300, 140, 150, 25);
-		welcomePanel.add(noOfTroopsLabel);
-		
-		Integer[] troops = new Integer[this.gameMapModel.getPlayerTurn().getremainTroop()];
-		for (int i = 0; i < this.gameMapModel.getPlayerTurn().getremainTroop(); i++) {
-			troops[i] = i + 1;
+
+		if (this.gamePlayModel.getConsoleText() != null) {
+			this.consoleTextArea.setText(this.gamePlayModel.getConsoleText().toString());
 		}
 
-		numOfTroopsComboBox = new JComboBox(troops);
-		numOfTroopsComboBox.setBounds(1300, 170, 150, 25);
-		welcomePanel.add(numOfTroopsComboBox);
+		if (this.playerModel.getOwnedCards().size() > 0) {			
+			this.reinnforcementCardLabel = new JLabel("Enter the id of the card :");
+			reinnforcementCardLabel.setBounds(1300, 120, 150, 25);
+			welcomePanel.add(reinnforcementCardLabel);
 
-		this.countryListLabel = new JLabel("Select Country :");
-		countryListLabel.setBounds(1300, 230, 150, 25);
-		welcomePanel.add(this.countryListLabel);
+			cardIdField = new JTextField();
+			cardIdField.setBounds(1300, 150, 150, 25);
+			welcomePanel.add(cardIdField);
 
-		ArrayList<CountryModel> listOfCountries = new ArrayList<CountryModel>();
-		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
-			if (playerModel.getNamePlayer()
-					.equals(this.gameMapModel.getCountries().get(i).getRulerName())) {
-				listOfCountries.add(this.gameMapModel.getCountries().get(i));
+			this.addMoreButton.setBounds(1300, 190, 150, 35);
+			welcomePanel.add(this.addMoreButton);
+
+			this.exitCardButton.setBounds(1300, 230, 150, 35);
+			welcomePanel.add(this.exitCardButton);
+		}
+		if (this.playerModel.getOwnedCards().size() == 0 || this.playerModel.getShowReinforcementCard() == false) {
+			this.noOfTroopsLabel = new JLabel("Number of Troops :");
+			noOfTroopsLabel.setBounds(1300, 120, 150, 25);
+			welcomePanel.add(noOfTroopsLabel);
+
+			Integer[] troops = new Integer[this.gameMapModel.getPlayerTurn().getremainTroop()];
+			for (int i = 0; i < this.gameMapModel.getPlayerTurn().getremainTroop(); i++) {
+				troops[i] = i + 1;
 			}
+
+			numOfTroopsComboBox = new JComboBox(troops);
+			numOfTroopsComboBox.setBounds(1300, 150, 150, 25);
+			welcomePanel.add(numOfTroopsComboBox);
+
+			this.countryListLabel = new JLabel("Select Country :");
+			countryListLabel.setBounds(1300, 180, 150, 25);
+			welcomePanel.add(this.countryListLabel);
+
+			ArrayList<CountryModel> listOfCountries = new ArrayList<CountryModel>();
+			for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
+				if (playerModel.getNamePlayer().equals(this.gameMapModel.getCountries().get(i).getRulerName())) {
+					listOfCountries.add(this.gameMapModel.getCountries().get(i));
+				}
+			}
+
+			countriesViewRenderer = new CountryViewRenderer();
+			countryListArray = listOfCountries.toArray();
+			countryListComboBox = new JComboBox(countryListArray);
+			welcomePanel.add(this.countryListComboBox);
+
+			if (countryListArray.length > 0) {
+				countryListComboBox.setRenderer(countriesViewRenderer);
+			}
+			countryListComboBox.setBounds(1300, 220, 150, 25);
+
+			this.addButton.setBounds(1300, 260, 150, 25);
+			welcomePanel.add(this.addButton);
 		}
-
-		countriesViewRenderer = new CountryViewRenderer();
-		countryListArray = listOfCountries.toArray();
-		countryListComboBox = new JComboBox(countryListArray);
-		welcomePanel.add(this.countryListComboBox);
-
-		if (countryListArray.length > 0) {
-			countryListComboBox.setRenderer(countriesViewRenderer);
-		}
-		countryListComboBox.setBounds(1300, 260, 150, 25);
-
-		this.addButton.setBounds(1300, 300, 150, 25);
-		welcomePanel.add(this.addButton);
 
 		int n = this.gameMapModel.getCountries().size();
 		button = new JButton[n];
@@ -280,7 +297,7 @@ public class ReinforcementView extends JFrame implements Observer {
 	 */
 	@Override
 	public void update(Observable obs, Object arg) {
-		//statsPanel.removeAll();
+		// statsPanel.removeAll();
 		welcomePanel.removeAll();
 		graphicPanel.removeAll();
 		if (obs instanceof GameMapModel) {
@@ -289,7 +306,7 @@ public class ReinforcementView extends JFrame implements Observer {
 			this.playerModel = (PlayerModel) obs;
 		} else if (obs instanceof GamePlayModel) {
 			this.gamePlayModel = (GamePlayModel) obs;
-			this.gameMapModel =this.gamePlayModel.getGameMap();
+			this.gameMapModel = this.gamePlayModel.getGameMap();
 		}
 		this.updateWindow(this.gamePlayModel, this.playerModel);
 		this.revalidate();
@@ -304,6 +321,8 @@ public class ReinforcementView extends JFrame implements Observer {
 	 */
 	public void setActionListener(ActionListener actionListener) {
 		this.addButton.addActionListener(actionListener);
+		this.addMoreButton.addActionListener(actionListener);
+		this.exitCardButton.addActionListener(actionListener);
 	}
 
 	/**

@@ -38,10 +38,10 @@ public class GamePlayController implements ActionListener {
 
 	public void gamePlay() {
 		
-		this.gamePlayModel.getGameMap().setPlayerTurn(this.gamePlayModel.getPlayers().get(this.gamePlayModel.getGameMap().getPlayerIndex()));
+		this.gamePlayModel.getGameMap().setPlayerTurn(this.gamePlayModel.getPlayers().get(this.gamePlayModel.getGameMap().getPlayerIndex()));		
 		new PlayerController(this.gamePlayModel);
 	}
-		/**
+	/**
 	 * This method performs action, by Listening the action event set in view.
 	 * 
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)

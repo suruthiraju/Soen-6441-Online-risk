@@ -150,7 +150,6 @@ public class Validation {
 		return false;
 	}
 
-
 	/**
 	 * Check on valid move for fortification
 	 * 
@@ -197,11 +196,13 @@ public class Validation {
 
 			List<Integer> m = new ArrayList<Integer>();
 			for (int l = 0; l < gameMapModel.getCountries().get(s).getLinkedCountries().size(); l++) {
-				m.add(mapOfCountries.get(gameMapModel.getCountries().get(s).getLinkedCountries().get(l)));
+					if (gameMapModel.getCountries().get(s).getRulerName()
+							.equals(gameMapModel.getCountries().get(s).getLinkedCountries().get(l).getRulerName())) {
+						m.add(mapOfCountries.get(gameMapModel.getCountries().get(s).getLinkedCountries().get(l)));
+					}
 			}
 
 			i = m.listIterator();
-
 
 			while (i.hasNext()) {
 				n = i.next();
@@ -222,14 +223,15 @@ public class Validation {
 		// If BFS is complete without visited d
 		return false;
 	}
-	
+
 	public boolean endOfGame(GamePlayModel gamePlayModel) {
-		for (int i=0; i<gamePlayModel.getPlayers().size(); i++) {
-			if(gamePlayModel.getPlayers().get(i).getOwnedCountries().size() == gamePlayModel.getGameMap().getCountries().size()) {
+		for (int i = 0; i < gamePlayModel.getPlayers().size(); i++) {
+			if (gamePlayModel.getPlayers().get(i).getOwnedCountries().size() == gamePlayModel.getGameMap()
+					.getCountries().size()) {
 				return true;
 			}
 		}
-		return false;		
+		return false;
 	}
 
 }

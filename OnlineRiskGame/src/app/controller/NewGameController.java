@@ -39,8 +39,8 @@ public class NewGameController implements ActionListener {
 	private GamePlayModel gamePlayModel = new GamePlayModel();
 	private int noOfPlayers;
 	private String PlayerName = "";
-	private List<CountryModel> listOfCountry = new ArrayList<CountryModel>();
-	private List<CardModel> listOfCards = new ArrayList<CardModel>();
+	private List<CountryModel> listOfCountry;
+	private List<CardModel> listOfCards;
     
     /**
      * Constructor initializes values and sets the screen too visible
@@ -107,8 +107,7 @@ public class NewGameController implements ActionListener {
 				if (PlayerName ==  null || "".equals(PlayerName.trim())) {
 					PlayerName = "Player "+(i+1);
 				}
-				
-				PlayerModel pm = new PlayerModel(PlayerName, 0, Color.WHITE,0,listOfCountry, listOfCards);
+				PlayerModel pm = new PlayerModel(PlayerName, 0, Color.WHITE,0,  new ArrayList<CountryModel>(), new ArrayList<CardModel>());
 				listOfPlayers.add(pm);		
 			}
 			gamePlayModel.setGameMap(gameMapModel);

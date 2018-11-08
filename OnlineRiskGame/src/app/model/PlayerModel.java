@@ -22,7 +22,8 @@ public class PlayerModel extends Observable {
 	private Color color;
 	private int remainTroop;
 	private List<CountryModel> ownedCountries  = new ArrayList<CountryModel>();
-	private List<CardModel> ownedCards = new ArrayList<CardModel>();
+	private List<CardModel> ownedCards;
+	private boolean showReinforcementCard;
 
 	/**
 	 * Constructor of PlayerModel
@@ -173,5 +174,12 @@ public class PlayerModel extends Observable {
 			}
 		}
 		return true;
+	}
+	public void setShowReinforcementCard(boolean showReinforcementCard) {
+		this.showReinforcementCard = showReinforcementCard;
+	}
+
+	public boolean getShowReinforcementCard() {
+		return this.showReinforcementCard;
 	}
 }

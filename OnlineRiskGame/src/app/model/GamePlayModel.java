@@ -4,16 +4,14 @@ import java.awt.List;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Observable;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Observable;
 
 /**
  * "GamePlayerModel" class represents an object containing current map and
@@ -147,6 +145,17 @@ public class GamePlayModel extends Observable {
 		return this.deck;
 	}
 
+	/**
+	 * Sets the list of card.
+	 * 
+	 * @param deck
+	 */
+	public CardModel getCard() {
+		CardModel temp = this.deck.get(this.deck.size() - 1);
+		this.deck.remove(this.deck.size() - 1);
+		return temp;
+	}
+
 	public void setCards(ArrayList<CardModel> deck) {
 		this.deck = deck;
 	}
@@ -182,13 +191,15 @@ public class GamePlayModel extends Observable {
 				for (int j = 0; j < this.getPlayers().size(); j++) {
 					if (this.getPlayers().get(j).getNamePlayer()
 							.equals(this.gameMapModel.getCountries().get(i).getRulerName())) {
-						this.getPlayers().get(j).setremainTroop(this.getPlayers().get(j).getremainTroop() - selectedArmies);
-						this.consoleText.append("\n"+this.getPlayers().get(j).getNamePlayer()+" added "+ selectedArmies+ " armies to " + countryName.getCountryName()+"\n");
+						this.getPlayers().get(j)
+								.setremainTroop(this.getPlayers().get(j).getremainTroop() - selectedArmies);
+						this.consoleText.append("\n" + this.getPlayers().get(j).getNamePlayer() + " added "
+								+ selectedArmies + " armies to " + countryName.getCountryName() + "\n");
 					}
 				}
 			}
 		}
-		
+
 		callObservers();
 	}
 
@@ -246,8 +257,8 @@ public class GamePlayModel extends Observable {
 		Arrays.sort(defendDiceRoll, Collections.reverseOrder());
 		System.out.println(Arrays.toString(attackDiceRoll));
 		System.out.println(Arrays.toString(defendDiceRoll));
-		this.consoleText.append("\n Attack country dice " + Arrays.toString(attackDiceRoll)+" \n");
-		this.consoleText.append("Defender country dice " + Arrays.toString(defendDiceRoll) +" \n");
+		this.consoleText.append("\n Attack country dice " + Arrays.toString(attackDiceRoll) + " \n");
+		this.consoleText.append("Defender country dice " + Arrays.toString(defendDiceRoll) + " \n");
 		for (int i = 0; i < defendDice; i++) {
 			if (attackDiceRoll[i] > defendDiceRoll[i]) {
 				armiesDeduction(defendCountry, 1);
@@ -256,12 +267,13 @@ public class GamePlayModel extends Observable {
 			}
 		}
 		if (countryOwned == true) {
-			this.consoleText.append("Attacker " + attackCountry.getRulerName() + " defeated Country "+ defendCountry.getCountryName() +" \n");
+			this.consoleText.append("Attacker " + attackCountry.getRulerName() + " defeated Country "
+					+ defendCountry.getCountryName() + " \n");
 			for (int i = 0; i < this.getPlayers().size(); i++) {
 				if (this.getPlayers().get(i).getNamePlayer().equals(defendCountry.getRulerName())) {
 					this.getPlayers().get(i).defend(defendCountry);
 				}
-				if (this.getPlayers().get(i).getNamePlayer().equals(attackCountry.getRulerName())) {					
+				if (this.getPlayers().get(i).getNamePlayer().equals(attackCountry.getRulerName())) {
 					this.getPlayers().get(i).attacked(defendCountry);
 				}
 			}
@@ -327,8 +339,8 @@ public class GamePlayModel extends Observable {
 			Arrays.sort(defendDiceRoll, Collections.reverseOrder());
 			System.out.println(Arrays.toString(attackDiceRoll));
 			System.out.println(Arrays.toString(defendDiceRoll));
-			this.consoleText.append("Attack country dice " + Arrays.toString(attackDiceRoll)+" \n");
-			this.consoleText.append("Defender country dice " + Arrays.toString(defendDiceRoll) +" \n");
+			this.consoleText.append("Attack country dice " + Arrays.toString(attackDiceRoll) + " \n");
+			this.consoleText.append("Defender country dice " + Arrays.toString(defendDiceRoll) + " \n");
 			for (int i = 0; i < defendDice; i++) {
 				if (attackDiceRoll[i] > defendDiceRoll[i]) {
 					armiesDeduction(defendCountry, 1);
@@ -340,7 +352,8 @@ public class GamePlayModel extends Observable {
 			}
 		}
 		if (countryOwned == true) {
-			this.consoleText.append("Attacker " + attackCountry.getRulerName() + "defeated Country "+ defendCountry.getCountryName() +" \n");
+			this.consoleText.append("Attacker " + attackCountry.getRulerName() + "defeated Country "
+					+ defendCountry.getCountryName() + " \n");
 			for (int i = 0; i < this.getPlayers().size(); i++) {
 				if (this.getPlayers().get(i).getNamePlayer().equals(defendCountry.getRulerName())) {
 					this.getPlayers().get(i).defend(defendCountry);
@@ -362,7 +375,8 @@ public class GamePlayModel extends Observable {
 	}
 
 	public void moveArmies(CountryModel attackCountry, CountryModel defendCountry, int noOfArmiesToBeMoved) {
-		this.consoleText.append(attackCountry.getRulerName()+ " Armies "+ noOfArmiesToBeMoved + " moved from" + attackCountry.getCountryName() + " to "+ defendCountry.getCountryName()  +" \n");
+		this.consoleText.append(attackCountry.getRulerName() + " Armies " + noOfArmiesToBeMoved + " moved from"
+				+ attackCountry.getCountryName() + " to " + defendCountry.getCountryName() + " \n");
 		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
 			if (this.gameMapModel.getCountries().get(i).getCountryName().equals(attackCountry.getCountryName())) {
 				this.gameMapModel.getCountries().get(i)
@@ -443,9 +457,10 @@ public class GamePlayModel extends Observable {
 	 * CreateContinentController via CreateContinentView
 	 */
 	public void callObservers() {
-			for (int i = 0; i < this.getPlayers().size(); i++) {
+		for (int i = 0; i < this.getPlayers().size(); i++) {
 			this.worldCoverage(this.getPlayers().get(i));
-			this.consoleText.append("						"+this.getPlayers().get(i).getNamePlayer()+" has "+this.getPlayers().get(i).getmyTroop()+" troops \n");
+			this.consoleText.append("						" + this.getPlayers().get(i).getNamePlayer() + " has "
+					+ this.getPlayers().get(i).getmyTroop() + " troops \n");
 		}
 		this.getConsoleText().append("\n");
 		for (int i = 0; i < this.gameMapModel.getContinents().size(); i++) {
@@ -458,13 +473,14 @@ public class GamePlayModel extends Observable {
 
 	public void worldCoverage(PlayerModel parmPlayer) {
 		double percentage = (parmPlayer.getOwnedCountries().size() * 100) / this.gameMapModel.getCountries().size();
-		this.getConsoleText()
-				.append("						"+" Map coverage for " + parmPlayer.getNamePlayer() + " is " + percentage + "% " + "\n");
+		this.getConsoleText().append("						" + " Map coverage for " + parmPlayer.getNamePlayer()
+				+ " is " + percentage + "% " + "\n");
 
 	}
 
 	public void continentCoverage(ContinentsModel parmContinent) {
-		this.getConsoleText().append("						"+"Continent " + parmContinent.getContinentName() + "'s coverage distribution: \n");
+		this.getConsoleText().append("						" + "Continent " + parmContinent.getContinentName()
+				+ "'s coverage distribution: \n");
 		int countryCount = 0;
 		double percentage;
 
@@ -476,11 +492,56 @@ public class GamePlayModel extends Observable {
 				}
 
 			}
-			percentage = (countryCount*100) / parmContinent.getCoveredCountries().size();
-			this.getConsoleText().append("						"+this.players.get(j).getNamePlayer() + " has covered " + percentage
-					+ "% of the continent " + parmContinent.getContinentName() + "\n");
+			percentage = (countryCount * 100) / parmContinent.getCoveredCountries().size();
+			this.getConsoleText().append("						" + this.players.get(j).getNamePlayer()
+					+ " has covered " + percentage + "% of the continent " + parmContinent.getContinentName() + "\n");
 			countryCount = 0;
 		}
 
+	}
+
+	public int continentCovered(PlayerModel player) {
+		int countryCount = 0;
+		double percentage = 0.0;
+		int controlValue = 0;
+		for (int j = 0; j < this.players.size(); j++) {
+			if (this.players.get(j).getNamePlayer().equals(player.getNamePlayer())) {
+				for (int i = 0; i < this.getGameMap().getContinents().size(); i++) {
+					for (int k = 0; k < this.players.get(j).getOwnedCountries().size(); k++) {
+						if (this.players.get(j).getOwnedCountries().get(k).getcontinentName()
+								.equals(this.getGameMap().getContinents().get(i).getContinentName())) {
+							countryCount = countryCount + 1;
+						}
+					}
+					percentage = (countryCount * 100)
+							/ this.getGameMap().getContinents().get(i).getCoveredCountries().size();
+					if (percentage == 100.0) {
+						controlValue = controlValue + this.getGameMap().getContinents().get(i).getValueControl();
+					}
+					percentage = 0;
+					countryCount = 0;
+				}
+			}
+		}
+		return controlValue;
+	}
+
+	public void moveDeck() {
+		
+
+		if (this.getCardToBeAssigned() == true) {
+			CardModel card;
+
+			for (int i = 0; i < this.getPlayers().size(); i++) {
+				if (this.getPlayers().get(i).getNamePlayer()
+						.equals(this.getGameMap().getPlayerTurn().getNamePlayer())) {
+					card = this.getCard();
+					ArrayList<CardModel> tempList = (ArrayList<CardModel>) this.getPlayers().get(i).getOwnedCards();
+					tempList.add(card);
+					this.getPlayers().get(i).setOwnedCards(tempList);
+				}
+			}
+			this.setCardToBeAssigned(false);
+		}
 	}
 }
