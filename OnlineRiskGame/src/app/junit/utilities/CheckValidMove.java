@@ -43,6 +43,9 @@ public class CheckValidMove {
 		setUpIsDone = true;
 	}
 
+	/**
+	 * Test check valid move
+	 */
 	@Test
 	public void testUnlinkedContinentVAlidation() {
 		assertTrue(val.checkIfValidMove(gameMapModel, gameMapModel.getCountries().get(0),

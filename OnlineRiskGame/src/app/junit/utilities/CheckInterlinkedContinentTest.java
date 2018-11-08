@@ -46,7 +46,7 @@ public class CheckInterlinkedContinentTest {
 	}
 
 	/**
-	 * Test unlink continent validation
+	 * Test interlinked continent validation
 	 */
 	@Test
 	public void testUnlinkedContinentVAlidation() {

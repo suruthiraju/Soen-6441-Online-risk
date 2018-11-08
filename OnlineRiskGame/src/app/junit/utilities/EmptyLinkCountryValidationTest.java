@@ -53,6 +53,9 @@ public class EmptyLinkCountryValidationTest {
 	    gameMapModel = new GameMapModel(file);
 	    setUpIsDone = true;
 	}
+	/**
+	 * Test empty link country validation
+	 */
 	@Test 
 	public void testUnlinkedContinentValidation() 
 	{

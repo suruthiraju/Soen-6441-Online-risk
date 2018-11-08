@@ -54,7 +54,11 @@ public class GamePlayModel extends Observable {
 		this.deck = deck;
 		this.consoleText = new StringBuilder("Hello to the Risk Game ! ");
 	}
-
+	/**
+	 * Default Constructor
+	 * 
+	 *
+	 */
 	public GamePlayModel() {
 		this.consoleText = new StringBuilder("Hello to the Risk Game ! ");
 	}
@@ -91,10 +95,20 @@ public class GamePlayModel extends Observable {
 		this.players = players;
 	}
 
+	/**
+	 * Sets the defeated country.
+	 *
+	 * @param defeatedCountry the new defeated country
+	 */
 	public void setDefeatedCountry(CountryModel defeatedCountry) {
 		this.defeatedCountry = defeatedCountry;
 	}
 
+	/**
+	 * Gets the defeated country.
+	 *
+	 * @return the defeated country
+	 */
 	public CountryModel getDefeatedCountry() {
 		return this.defeatedCountry;
 	}
@@ -156,18 +170,39 @@ public class GamePlayModel extends Observable {
 		return temp;
 	}
 
+	/**
+	 * Sets the cards.
+	 *
+	 * @param deck the new cards
+	 */
 	public void setCards(ArrayList<CardModel> deck) {
 		this.deck = deck;
 	}
 
+	/**
+	 * Gets the console text.
+	 *
+	 * @return the console text
+	 */
 	public StringBuilder getConsoleText() {
 		return consoleText;
 	}
 
+	/**
+	 * Sets the console text.
+	 *
+	 * @param consoleText the new console text
+	 */
 	public void setConsoleText(StringBuilder consoleText) {
 		this.consoleText = consoleText;
 	}
 
+	/**
+	 * Gets the player.
+	 *
+	 * @param parmCountry the parm country
+	 * @return the player
+	 */
 	public PlayerModel getPlayer(CountryModel parmCountry) {
 		int i, j;
 		for (i = 0; i < players.size(); i++) {
@@ -183,6 +218,12 @@ public class GamePlayModel extends Observable {
 
 	}
 
+	/**
+	 * Sets the selected armies to countries.
+	 *
+	 * @param selectedArmies the selected armies
+	 * @param countryName the country name
+	 */
 	public void setSelectedArmiesToCountries(int selectedArmies, CountryModel countryName) {
 		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
 			if (this.gameMapModel.getCountries().get(i).equals(countryName)) {
@@ -203,6 +244,11 @@ public class GamePlayModel extends Observable {
 		callObservers();
 	}
 
+	/**
+	 * Number of countries.
+	 *
+	 * @return the int
+	 */
 	public int numberOfCountries() {
 		int numberOfCountries = 0;
 
@@ -215,6 +261,12 @@ public class GamePlayModel extends Observable {
 		return reinforcementArmies(numberOfCountries);
 	}
 
+	/**
+	 * Reinforcement armies.
+	 *
+	 * @param numberOfCountries the number of countries
+	 * @return the int
+	 */
 	public int reinforcementArmies(int numberOfCountries) {
 		int reinforceArmies = 0;
 		if (numberOfCountries > 3) {
@@ -228,6 +280,12 @@ public class GamePlayModel extends Observable {
 		return reinforceArmies;
 	}
 
+	/**
+	 * Gets the defend country list.
+	 *
+	 * @param attackCountryName the attack country name
+	 * @return the defend country list
+	 */
 	public ArrayList<CountryModel> getDefendCountryList(CountryModel attackCountryName) {
 		ArrayList<CountryModel> linkedCountry;
 		ArrayList<CountryModel> defenderCountryList = new ArrayList<CountryModel>();
@@ -244,6 +302,14 @@ public class GamePlayModel extends Observable {
 		return defenderCountryList;
 	}
 
+	/**
+	 * Single strike.
+	 *
+	 * @param attackDice the attack dice
+	 * @param attackCountry the attack country
+	 * @param defendDice the defend dice
+	 * @param defendCountry the defend country
+	 */
 	public void singleStrike(int attackDice, CountryModel attackCountry, int defendDice, CountryModel defendCountry) {
 		Integer[] attackDiceRoll = new Integer[attackDice];
 		Integer[] defendDiceRoll = new Integer[defendDice];
@@ -289,6 +355,13 @@ public class GamePlayModel extends Observable {
 		callObservers();
 	}
 
+	/**
+	 * Armies deduction.
+	 *
+	 * @param countryForDeduction the country for deduction
+	 * @param armiesToDeduct the armies to deduct
+	 * @return the country model
+	 */
 	public CountryModel armiesDeduction(CountryModel countryForDeduction, int armiesToDeduct) {
 
 		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
@@ -311,6 +384,12 @@ public class GamePlayModel extends Observable {
 		return countryForDeduction;
 	}
 
+	/**
+	 * Allout strike.
+	 *
+	 * @param attackCountry the attack country
+	 * @param defendCountry the defend country
+	 */
 	public void alloutStrike(CountryModel attackCountry, CountryModel defendCountry) {
 		int attackTotalArmies = attackCountry.getArmies() - 1;
 		int defendTotalArmies = defendCountry.getArmies();
@@ -374,6 +453,13 @@ public class GamePlayModel extends Observable {
 		callObservers();
 	}
 
+	/**
+	 * Move armies.
+	 *
+	 * @param attackCountry the attack country
+	 * @param defendCountry the defend country
+	 * @param noOfArmiesToBeMoved the no of armies to be moved
+	 */
 	public void moveArmies(CountryModel attackCountry, CountryModel defendCountry, int noOfArmiesToBeMoved) {
 		this.consoleText.append(attackCountry.getRulerName() + " Armies " + noOfArmiesToBeMoved + " moved from"
 				+ attackCountry.getCountryName() + " to " + defendCountry.getCountryName() + " \n");
@@ -391,36 +477,71 @@ public class GamePlayModel extends Observable {
 		callObservers();
 	}
 
+	/**
+	 * Sets the selected combo box index.
+	 *
+	 * @param selectedComboBoxIndex the new selected combo box index
+	 */
 	public void setSelectedComboBoxIndex(int selectedComboBoxIndex) {
 		this.selectedComboBoxIndex = selectedComboBoxIndex;
 		callObservers();
 
 	}
 
+	/**
+	 * Gets the selected combo box index.
+	 *
+	 * @return the selected combo box index
+	 */
 	public int getSelectedComboBoxIndex() {
 		return this.selectedComboBoxIndex;
 	}
 
+	/**
+	 * Sets the selected attack combo box index.
+	 *
+	 * @param selectedAttackComboBoxIndex the new selected attack combo box index
+	 */
 	public void setSelectedAttackComboBoxIndex(int selectedAttackComboBoxIndex) {
 		this.selectedAttackComboBoxIndex = selectedAttackComboBoxIndex;
 		callObservers();
 
 	}
 
+	/**
+	 * Gets the selected attack combo box index.
+	 *
+	 * @return the selected attack combo box index
+	 */
 	public int getSelectedAttackComboBoxIndex() {
 		return this.selectedAttackComboBoxIndex;
 	}
 
+	/**
+	 * Sets the selected defend combo box index.
+	 *
+	 * @param selectedDefendComboBoxIndex the new selected defend combo box index
+	 */
 	public void setSelectedDefendComboBoxIndex(int selectedDefendComboBoxIndex) {
 		this.selectedDefendComboBoxIndex = selectedDefendComboBoxIndex;
 		callObservers();
 
 	}
 
+	/**
+	 * Gets the selected defend combo box index.
+	 *
+	 * @return the selected defend combo box index
+	 */
 	public int getSelectedDefendComboBoxIndex() {
 		return this.selectedDefendComboBoxIndex;
 	}
 
+	/**
+	 * Sets the army to move text.
+	 *
+	 * @param armyToMoveFlag the new army to move text
+	 */
 	public void setArmyToMoveText(boolean armyToMoveFlag) {
 		this.armyToMoveFlag = armyToMoveFlag;
 		if (armyToMoveFlag == true) {
@@ -428,14 +549,29 @@ public class GamePlayModel extends Observable {
 		}
 	}
 
+	/**
+	 * Gets the army to move text.
+	 *
+	 * @return the army to move text
+	 */
 	public boolean getArmyToMoveText() {
 		return this.armyToMoveFlag;
 	}
 
+	/**
+	 * Sets the card to be assigned.
+	 *
+	 * @param cardToBeAssigned the new card to be assigned
+	 */
 	public void setCardToBeAssigned(boolean cardToBeAssigned) {
 		this.cardToBeAssigned = cardToBeAssigned;
 	}
 
+	/**
+	 * Gets the card to be assigned.
+	 *
+	 * @return the card to be assigned
+	 */
 	public boolean getCardToBeAssigned() {
 		return this.cardToBeAssigned;
 	}
@@ -471,6 +607,11 @@ public class GamePlayModel extends Observable {
 		notifyObservers(this);
 	}
 
+	/**
+	 * World coverage.
+	 *
+	 * @param parmPlayer the parm player
+	 */
 	public void worldCoverage(PlayerModel parmPlayer) {
 		double percentage = (parmPlayer.getOwnedCountries().size() * 100) / this.gameMapModel.getCountries().size();
 		this.getConsoleText().append("						" + " Map coverage for " + parmPlayer.getNamePlayer()
@@ -478,6 +619,11 @@ public class GamePlayModel extends Observable {
 
 	}
 
+	/**
+	 * Continent coverage.
+	 *
+	 * @param parmContinent the parm continent
+	 */
 	public void continentCoverage(ContinentsModel parmContinent) {
 		this.getConsoleText().append("						" + "Continent " + parmContinent.getContinentName()
 				+ "'s coverage distribution: \n");
@@ -500,6 +646,12 @@ public class GamePlayModel extends Observable {
 
 	}
 
+	/**
+	 * Continent covered.
+	 *
+	 * @param player the player
+	 * @return the int
+	 */
 	public int continentCovered(PlayerModel player) {
 		int countryCount = 0;
 		double percentage = 0.0;
@@ -526,6 +678,9 @@ public class GamePlayModel extends Observable {
 		return controlValue;
 	}
 
+	/**
+	 * Move deck.
+	 */
 	public void moveDeck() {
 		
 

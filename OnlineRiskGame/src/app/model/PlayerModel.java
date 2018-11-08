@@ -151,10 +151,23 @@ public class PlayerModel extends Observable {
 		this.ownedCards = ownedCards;
 	}
 	
+	/**
+	 * Attacked.
+	 *
+	 * @param countryForAddition the country for addition
+	 * @return true, if successful
+	 */
 	public boolean attacked(CountryModel countryForAddition) {
 		this.ownedCountries.add(countryForAddition);		
 		return true;
 	}
+	
+	/**
+	 * Defend.
+	 *
+	 * @param countryForDeduction the country for deduction
+	 * @return true, if successful
+	 */
 	public boolean defend(CountryModel countryForDeduction) {
 		for(int i=0; i< this.ownedCountries.size(); i++) {
 			if (this.ownedCountries.get(i).getCountryName().equals(countryForDeduction.getCountryName())) {
@@ -163,10 +176,24 @@ public class PlayerModel extends Observable {
 		}
 		return true;
 	}
+	
+	/**
+	 * Adds the card.
+	 *
+	 * @param toAddCard the to add card
+	 * @return true, if successful
+	 */
 	public boolean addCard(CardModel toAddCard) {
 		this.ownedCards.add(toAddCard);		
 		return true;
 	}
+	
+	/**
+	 * Removes the card.
+	 *
+	 * @param toRemoveCard the to remove card
+	 * @return true, if successful
+	 */
 	public boolean removeCard(CardModel toRemoveCard) {
 		for(int i=0; i< this.ownedCards.size(); i++) {
 			if (this.ownedCards.get(i).getCardId() == toRemoveCard.getCardId()) {
@@ -175,10 +202,21 @@ public class PlayerModel extends Observable {
 		}
 		return true;
 	}
+	
+	/**
+	 * Sets the show reinforcement card.
+	 *
+	 * @param showReinforcementCard the new show reinforcement card
+	 */
 	public void setShowReinforcementCard(boolean showReinforcementCard) {
 		this.showReinforcementCard = showReinforcementCard;
 	}
 
+	/**
+	 * Gets the show reinforcement card.
+	 *
+	 * @return the show reinforcement card
+	 */
 	public boolean getShowReinforcementCard() {
 		return this.showReinforcementCard;
 	}

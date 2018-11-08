@@ -62,10 +62,21 @@ public class ContinentsModel {
 		this.valueControl = valueControl;
 	}
 	
+	/**
+	 * Sets the covered countries.
+	 *
+	 * @param parmCountry the new covered countries
+	 */
 	public void setCoveredCountries(CountryModel parmCountry)
 	{
 		this.listOfCountries.add(parmCountry);
 	}
+	
+	/**
+	 * Gets the covered countries.
+	 *
+	 * @return the covered countries
+	 */
 	public ArrayList<CountryModel> getCoveredCountries()
 	{
 		return listOfCountries;

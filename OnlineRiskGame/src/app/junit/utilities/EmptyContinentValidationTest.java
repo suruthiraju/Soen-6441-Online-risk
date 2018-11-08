@@ -53,6 +53,9 @@ public class EmptyContinentValidationTest {
 	    gameMapModel = new GameMapModel(file);
 	    setUpIsDone = true;
 	}
+	/**
+	 * Test empty continent validation
+	 */
 	@Test 
 	public void testUnlinkedContinentVAlidation() 
 	{
