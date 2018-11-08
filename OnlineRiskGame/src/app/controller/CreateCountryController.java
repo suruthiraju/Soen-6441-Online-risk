@@ -15,7 +15,6 @@ import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.view.CreateCountryView;
 
-
 /**
  * In CreateCountryController, the data flow into model object and updates the
  * view whenever data changes.
@@ -26,25 +25,25 @@ import app.view.CreateCountryView;
  */
 
 public class CreateCountryController implements ActionListener {
-	
+
 	/** The game map model. */
 	private GameMapModel gameMapModel;
-	
+
 	/** The create country view. */
 	private CreateCountryView createCountryView;
-	
+
 	/** The new continent model. */
 	private ContinentsModel newContinentModel;
-	
+
 	/** The count. */
 	static int count = 0;
-	
+
 	/** The map point list. */
 	private HashMap<String, ArrayList<Point>> mapPointList;
-	
+
 	/** The color map list. */
 	private HashMap<String, Color> colorMapList;
-	
+
 	/** The index map. */
 	private HashMap<String, Integer> indexMap;
 
@@ -54,7 +53,7 @@ public class CreateCountryController implements ActionListener {
 	 * @param gameMapModel the game map model
 	 * @param mapPointList the map point list
 	 * @param colorMapList the color map list
-	 * @param indexMap the index map
+	 * @param indexMap     the index map
 	 */
 	public CreateCountryController(GameMapModel gameMapModel, HashMap<String, ArrayList<Point>> mapPointList,
 			HashMap<String, Color> colorMapList, HashMap<String, Integer> indexMap) {
@@ -129,8 +128,6 @@ public class CreateCountryController implements ActionListener {
 
 					this.indexMap.put(this.gameMapModel.getCountries().get(i).getcontinentName(),
 							this.indexMap.get(this.gameMapModel.getCountries().get(i).getcontinentName()) + 1);
-
-					// }
 
 				}
 

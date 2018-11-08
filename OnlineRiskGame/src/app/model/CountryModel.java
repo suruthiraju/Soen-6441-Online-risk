@@ -6,7 +6,6 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
-
 /**
  * "CountryModel" represents a country's properties such as name, position,
  * continent name that it belongs to, countries that it connected to, owner
@@ -19,43 +18,44 @@ public class CountryModel extends JButton {
 
 	/** The country name. */
 	private String countryName;
-	
+
 	/** The x position. */
 	private int xPosition;
-	
+
 	/** The y position. */
 	private int yPosition;
-	
+
 	/** The continent name. */
 	private String continentName;
-	
+
 	/** The linked countries. */
 	private List<CountryModel> linkedCountries;
-	
+
 	/** The armies. */
 	private int armies;
-	
+
 	/** The background color. */
 	private Color backgroundColor;
-	
+
 	/** The border color. */
 	private Color borderColor;
-	
+
 	/** The ruler name. */
 	private String rulerName;
 
 	/**
 	 * Constructor of CountryModel with parameters.
 	 *
-	 * @param countryName the country name
-	 * @param xPosition the x position
-	 * @param yPosition the y position
-	 * @param continentName the continent name
+	 * @param countryName     the country name
+	 * @param xPosition       the x position
+	 * @param yPosition       the y position
+	 * @param continentName   the continent name
 	 * @param linkedCountries the linked countries
-	 * @param armies the armies
-	 * @param rulerName the ruler name
+	 * @param armies          the armies
+	 * @param rulerName       the ruler name
 	 */
-	public CountryModel(String countryName, int xPosition, int yPosition, String continentName, List linkedCountries, int armies, String rulerName ) {
+	public CountryModel(String countryName, int xPosition, int yPosition, String continentName, List linkedCountries,
+			int armies, String rulerName) {
 		this.countryName = countryName;
 		this.xPosition = xPosition;
 		this.yPosition = yPosition;
@@ -219,7 +219,7 @@ public class CountryModel extends JButton {
 		this.setBorder(new LineBorder(borderColor));
 		this.borderColor = borderColor;
 	}
-	
+
 	/**
 	 * Gets the ruler name.
 	 *
@@ -237,6 +237,5 @@ public class CountryModel extends JButton {
 	public void setRulerName(String rulerName) {
 		this.rulerName = rulerName;
 	}
-
 
 }

@@ -16,7 +16,6 @@ import app.model.GamePlayModel;
 
 public class GamePlayController implements ActionListener {
 
-	// use the model gameplay instead of member variables
 	public GamePlayModel gamePlayModel = null;
 
 	/**
@@ -43,7 +42,6 @@ public class GamePlayController implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		// TODO Auto-generated method stub
 
 	}
 

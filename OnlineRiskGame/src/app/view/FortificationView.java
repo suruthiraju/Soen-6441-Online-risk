@@ -285,14 +285,6 @@ public class FortificationView extends JFrame implements View {
 	 * @author GROUPE-35
 	 */
 	public class CountryViewRenderer extends BasicComboBoxRenderer {
-
-		/*
-		 * Getter method that provides us a map model corresponding to a map name
-		 * 
-		 * @see javax.swing.plaf.basic.BasicComboBoxRenderer#
-		 * getListCellRendererComponent(javax.swing.JList, java.lang.Object, int,
-		 * boolean, boolean)
-		 */
 		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
 				boolean cellHasFocus) {
 			super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);

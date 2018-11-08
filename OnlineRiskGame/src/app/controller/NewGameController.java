@@ -20,7 +20,6 @@ import app.model.PlayerModel;
 import app.utilities.Validation;
 import app.view.NewGameView;
 
-
 /**
  * In NewGameController, the data flow into model object and updates the view
  * whenever data changes.
@@ -34,25 +33,25 @@ public class NewGameController implements ActionListener {
 
 	/** The view. */
 	private NewGameView theView;
-	
+
 	/** The list of players. */
 	private ArrayList<PlayerModel> listOfPlayers = new ArrayList<PlayerModel>();
-	
+
 	/** The game map model. */
 	private GameMapModel gameMapModel = new GameMapModel();
-	
+
 	/** The game play model. */
 	private GamePlayModel gamePlayModel = new GamePlayModel();
-	
+
 	/** The no of players. */
 	private int noOfPlayers;
-	
+
 	/** The Player name. */
 	private String PlayerName = "";
-	
+
 	/** The list of country. */
 	private List<CountryModel> listOfCountry;
-	
+
 	/** The list of cards. */
 	private List<CardModel> listOfCards;
 

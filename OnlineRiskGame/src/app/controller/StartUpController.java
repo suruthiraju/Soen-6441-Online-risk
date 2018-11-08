@@ -10,7 +10,6 @@ import app.model.CountryModel;
 import app.model.GamePlayModel;
 import app.view.StartUpView;
 
-
 /**
  * In StartUpController, the data flow into model object and updates the view
  * whenever data changes.
@@ -24,46 +23,46 @@ public class StartUpController implements ActionListener {
 
 	/** The start up view. */
 	private StartUpView theStartUpView;
-	
+
 	/** The game play model. */
 	private GamePlayModel gamePlayModel;
-	
+
 	/** The no of players. */
 	private int noOfPlayers;
-	
+
 	/** The no of country for ruler. */
 	private int[] noOfCountryForRuler = new int[5];
-	
+
 	/** The color for ruler. */
 	private Color[] colorForRuler = new Color[5];
-	
+
 	/** The total armies player. */
 	private int[] totalArmiesPlayer = new int[5];
-	
+
 	/** The remain armies. */
 	private int[] remainArmies = new int[5];
-	
+
 	/** The loop value. */
 	private int loopValue = 0;
-	
+
 	/** The armies null. */
 	private boolean armiesNull = false;
-	
+
 	/** The initial. */
 	private int initial = 0;
 
 	/** The owned country 0. */
 	private List<CountryModel> ownedCountry0 = new ArrayList<>();
-	
+
 	/** The owned country 1. */
 	private List<CountryModel> ownedCountry1 = new ArrayList<>();
-	
+
 	/** The owned country 2. */
 	private List<CountryModel> ownedCountry2 = new ArrayList<>();
-	
+
 	/** The owned country 3. */
 	private List<CountryModel> ownedCountry3 = new ArrayList<>();
-	
+
 	/** The owned country 4. */
 	private List<CountryModel> ownedCountry4 = new ArrayList<>();
 
@@ -108,7 +107,8 @@ public class StartUpController implements ActionListener {
 	}
 
 	/**
-	 * This method allocates Player and Armies to the country to start the game play.
+	 * This method allocates Player and Armies to the country to start the game
+	 * play.
 	 */
 	public void allocateArmies() {
 

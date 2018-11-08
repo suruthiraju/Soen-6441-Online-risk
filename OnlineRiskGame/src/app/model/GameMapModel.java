@@ -110,7 +110,7 @@ public class GameMapModel extends Observable {
 	public GameMapModel() {
 		this.continentList = new ArrayList<ContinentsModel>();
 		this.countryList = new ArrayList<CountryModel>();
-		
+
 	}
 
 	/**
@@ -146,30 +146,27 @@ public class GameMapModel extends Observable {
 		this.countryList = Countries;
 		callObservers();
 	}
-	
+
 	public void countriesInContinent() {
-		for(int i=0; i<this.continentList.size(); i++)
-		{
-			for(int j=0; j< this.countryList.size(); j++)
-			{
+		for (int i = 0; i < this.continentList.size(); i++) {
+			for (int j = 0; j < this.countryList.size(); j++) {
 				try {
-					
-					if(this.countryList.get(j).getcontinentName().equals(this.continentList.get(i).getContinentName()))
-					{
+
+					if (this.countryList.get(j).getcontinentName()
+							.equals(this.continentList.get(i).getContinentName())) {
 						this.continentList.get(i).setCoveredCountries(this.countryList.get(j));
 					}
-				}
-				catch (Exception e)
-				{
+				} catch (Exception e) {
 					JOptionPane.showOptionDialog(null, "Map parsing failed game crashed", "Invalid",
 							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
 
 					System.exit(0);
 				}
-				
+
 			}
 		}
 	}
+
 	/**
 	 * Method used to notify state change whenever any change is reflected by
 	 * CreateContinentController via CreateContinentView
@@ -374,6 +371,7 @@ public class GameMapModel extends Observable {
 	public PlayerModel getPlayerTurn() {
 		return this.playerTurn;
 	}
+
 	/**
 	 * @return the playerIndex
 	 */

@@ -82,6 +82,11 @@ public class ReinforcementView extends JFrame implements Observer {
 	public ArrayList<Double> percentage;
 	public ArrayList<Color> colors;
 
+	/**
+	 * Instantiates a new reinforcement view.
+	 *
+	 * @param gamePlayModel the game play model
+	 */
 	public ReinforcementView(GamePlayModel gamePlayModel) {
 		this.gameMapModel = gamePlayModel.getGameMap();
 		this.setTitle("Reinforcement Phase");
@@ -299,7 +304,6 @@ public class ReinforcementView extends JFrame implements Observer {
 	 */
 	@Override
 	public void update(Observable obs, Object arg) {
-		// statsPanel.removeAll();
 		welcomePanel.removeAll();
 		graphicPanel.removeAll();
 		if (obs instanceof GameMapModel) {

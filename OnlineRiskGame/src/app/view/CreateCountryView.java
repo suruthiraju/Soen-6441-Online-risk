@@ -218,10 +218,6 @@ public class CreateCountryView extends JFrame implements View {
 	 * name.
 	 */
 	public class CountryViewRenderer extends BasicComboBoxRenderer {
-		
-		/* (non-Javadoc)
-		 * @see javax.swing.plaf.basic.BasicComboBoxRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
-		 */
 		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
 				boolean cellHasFocus) {
 			super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);

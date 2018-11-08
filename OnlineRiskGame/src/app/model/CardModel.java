@@ -1,9 +1,8 @@
 package app.model;
 
-
 /**
- * "CardModel" is a class for continents of the map. "cardId" and
- * "cardValue" are attributes of an object
+ * "CardModel" is a class for continents of the map. "cardId" and "cardValue"
+ * are attributes of an object
  * 
  * @author Team 35
  *
@@ -12,14 +11,14 @@ public class CardModel {
 
 	/** The card id. */
 	private int cardId;
-	
+
 	/** The card value. */
 	private int cardValue;
 
 	/**
 	 * Constructor of CardModel.
 	 *
-	 * @param cardId the card id
+	 * @param cardId    the card id
 	 * @param cardValue the card value
 	 */
 	public CardModel(int cardId, int cardValue) {

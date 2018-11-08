@@ -15,7 +15,6 @@ import app.model.ContinentsModel;
 import app.model.GameMapModel;
 import app.view.CreateContinentView;
 
-
 /**
  * In CreateContinentController, the data flow into model object and updates the
  * view whenever data changes.
@@ -29,10 +28,10 @@ public class CreateContinentController implements ActionListener {
 
 	/** The game map model. */
 	private GameMapModel gameMapModel;
-	
+
 	/** The create continent view. */
 	private CreateContinentView createContinentView;
-	
+
 	/** The continent model list. */
 	private List<ContinentsModel> continentModelList;
 

@@ -16,7 +16,6 @@ import app.model.GameMapModel;
 import app.utilities.ReadFile;
 import app.view.EditContinentView;
 
-
 /**
  * In EditContinentController, the data flow into model object and updates the
  * view whenever data changes.
@@ -30,22 +29,22 @@ public class EditContinentController implements ActionListener {
 
 	/** The edit continent view. */
 	private EditContinentView editContinentView;
-	
+
 	/** The map model. */
 	private GameMapModel mapModel;
-	
+
 	/** The continent list. */
 	private List<ContinentsModel> continentList;
-	
+
 	/** The temp read. */
 	private ReadFile tempRead = new ReadFile();
-	
+
 	/** The file. */
 	private File file;
-	
+
 	/** The new continent model. */
 	private ContinentsModel newContinentModel;
-	
+
 	/** The new continent list. */
 	private List<ContinentsModel> newContinentList;
 

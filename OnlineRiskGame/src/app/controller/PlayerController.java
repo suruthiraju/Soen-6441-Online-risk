@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -17,7 +16,6 @@ import app.utilities.Validation;
 import app.view.AttackView;
 import app.view.FortificationView;
 import app.view.ReinforcementView;
-
 
 /**
  * In PlayerController, the data flow into model object and updates the view
@@ -31,22 +29,22 @@ public class PlayerController implements ActionListener, ItemListener {
 
 	/** The game play model. */
 	private GamePlayModel gamePlayModel;
-	
+
 	/** The reinforcement view. */
 	private ReinforcementView theReinforcementView;
-	
+
 	/** The fortification view. */
 	private FortificationView theFortificationView;
-	
+
 	/** The attack view. */
 	private AttackView theAttackView;
-	
+
 	/** The list of players. */
 	private ArrayList<PlayerModel> listOfPlayers = new ArrayList<PlayerModel>();
-	
+
 	/** The no of players. */
 	private int noOfPlayers;
-	
+
 	/** The val. */
 	private Validation val = new Validation();
 
@@ -75,11 +73,12 @@ public class PlayerController implements ActionListener, ItemListener {
 
 		this.gamePlayModel.getGameMap().getPlayerTurn().setremainTroop(this.gamePlayModel.numberOfCountries()
 				+ this.gamePlayModel.continentCovered(gamePlayModel.getGameMap().getPlayerTurn()));
-		if( gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().size() > 0) {
+		if (gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().size() > 0) {
 			this.gamePlayModel.getConsoleText().append("\n Reinforcement View - Please find the list of Cards: \n");
 			for (int i = 0; i < gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().size(); i++) {
-				this.gamePlayModel.getConsoleText().append(gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().get(i).getCardId() + "\n ");
-			}			
+				this.gamePlayModel.getConsoleText()
+						.append(gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().get(i).getCardId() + "\n ");
+			}
 			this.gamePlayModel.getGameMap().getPlayerTurn().setShowReinforcementCard(true);
 		}
 		theReinforcementView = new ReinforcementView(this.gamePlayModel);
@@ -163,7 +162,7 @@ public class PlayerController implements ActionListener, ItemListener {
 						.equals(gamePlayModel.getPlayers().get(i).getNamePlayer())) {
 					this.gamePlayModel.getPlayers().get(i).removeCard(card);
 				}
-			}	
+			}
 			this.gamePlayModel.getCards().add(card);
 			this.gamePlayModel.callObservers();
 		} else if (actionEvent.getSource().equals(this.theReinforcementView.exitCardButton)) {
@@ -173,9 +172,10 @@ public class PlayerController implements ActionListener, ItemListener {
 					if (gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().size() >= 5) {
 						this.gamePlayModel.getGameMap().getPlayerTurn().setShowReinforcementCard(true);
 						gamePlayModel.getPlayers().get(i).setShowReinforcementCard(true);
-						JOptionPane.showOptionDialog(null, "Maximum 5 card is allowed. Please select card id to reimburse",
-								"Reimburse card", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
-								new Object[] {}, null);
+						JOptionPane.showOptionDialog(null,
+								"Maximum 5 card is allowed. Please select card id to reimburse", "Reimburse card",
+								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {},
+								null);
 					} else {
 						this.gamePlayModel.getGameMap().getPlayerTurn().setShowReinforcementCard(false);
 						gamePlayModel.getPlayers().get(i).setShowReinforcementCard(false);
@@ -240,7 +240,7 @@ public class PlayerController implements ActionListener, ItemListener {
 			int index = this.gamePlayModel.getGameMap().getPlayerIndex();
 
 			this.gamePlayModel.moveDeck();
-			
+
 			index++;
 			if (this.gamePlayModel.getPlayers().size() > index) {
 				this.gamePlayModel.getGameMap().setPlayerIndex(index);
