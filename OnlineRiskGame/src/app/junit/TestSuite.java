@@ -9,6 +9,9 @@ import app.junit.model.AllOutTest;
 import app.junit.model.CheckSingleStrike;
 import app.junit.model.ContinentCoverageTest;
 import app.junit.model.GetArmiesTest;
+import app.junit.model.GetCardForPlayerTest;
+import app.junit.model.GetCards;
+import app.junit.model.GetPlayerForCountryTest;
 import app.junit.model.MoveDeckTest;
 import app.junit.model.MovingArmies;
 import app.junit.model.ReinforcementArmyNumberTest;
@@ -51,7 +54,10 @@ import app.utilities.*;
 				SetNeighbouringCountriesTest.class,
 				EndOfGameTest.class,
 				GetContinentWriteTest.class,
-				GetCountryWriteTest.class
+				GetCountryWriteTest.class,
+				GetCardForPlayerTest.class,
+				GetCards.class,
+				GetPlayerForCountryTest.class
 				})
 
 /**
