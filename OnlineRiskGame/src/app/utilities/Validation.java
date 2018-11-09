@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 import app.model.ContinentsModel;
 import app.model.CountryModel;
 import app.model.GameMapModel;
@@ -94,6 +96,8 @@ public class Validation {
 		;
 		int numb;
 		boolean emptyLinkContinent = false;
+		try
+        {
 		for (int j = 0; j < listOfContinents.size(); j++) {
 			continent = listOfContinents.get(j).getContinentName();
 			numb = 0;
@@ -119,6 +123,12 @@ public class Validation {
 				return emptyLinkContinent;
 			}
 		}
+        }catch(NullPointerException e)
+        {
+        	JOptionPane.showOptionDialog(null, "All continents are not linked", "Invalid",
+					JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {},
+					null);
+        }
 		return emptyLinkContinent;
 
 	}
