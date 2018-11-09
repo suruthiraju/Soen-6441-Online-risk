@@ -1,5 +1,6 @@
 package app.junit.utilities;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -48,7 +49,7 @@ public class CheckValidMove {
 	 */
 	@Test
 	public void testUnlinkedContinentVAlidation() {
-		assertTrue(val.checkIfValidMove(gameMapModel, gameMapModel.getCountries().get(0),
+		assertFalse(val.checkIfValidMove(gameMapModel, gameMapModel.getCountries().get(0),
 				gameMapModel.getCountries().get(1)));
 	}
 }

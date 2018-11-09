@@ -134,7 +134,6 @@ public class GamePlayModel extends Observable {
 	 * Gets the card from JSON.
 	 *
 	 * @return the list of card.
-	 * @throws ParseException the parse exception
 	 */
 	public ArrayList<CardModel> getCardFromJSON() throws org.json.simple.parser.ParseException {
 		try {
@@ -329,7 +328,8 @@ public class GamePlayModel extends Observable {
 	 * @param defendDice the defend dice
 	 * @param defendCountry the defend country
 	 */
-	public void singleStrike(int attackDice, CountryModel attackCountry, int defendDice, CountryModel defendCountry) {
+	public boolean singleStrike(int attackDice, CountryModel attackCountry, int defendDice, CountryModel defendCountry) {
+		boolean returnValue = false;
 		Integer[] attackDiceRoll = new Integer[attackDice];
 		Integer[] defendDiceRoll = new Integer[defendDice];
 		for (int i = 0; i < attackDice; i++) {
@@ -347,8 +347,10 @@ public class GamePlayModel extends Observable {
 		for (int i = 0; i < defendDice; i++) {
 			if (attackDiceRoll[i] > defendDiceRoll[i]) {
 				armiesDeduction(defendCountry, 1);
+				returnValue = true;
 			} else {
 				armiesDeduction(attackCountry, 1);
+				returnValue = true;
 			}
 		}
 		if (countryOwned == true) {
@@ -372,6 +374,7 @@ public class GamePlayModel extends Observable {
 			this.setCardToBeAssigned(true);
 		}
 		callObservers();
+		return returnValue;
 	}
 
 	/**
@@ -409,7 +412,8 @@ public class GamePlayModel extends Observable {
 	 * @param attackCountry the attack country
 	 * @param defendCountry the defend country
 	 */
-	public void alloutStrike(CountryModel attackCountry, CountryModel defendCountry) {
+	public boolean alloutStrike(CountryModel attackCountry, CountryModel defendCountry) {
+		boolean returnValue = false;
 		int attackTotalArmies = attackCountry.getArmies() - 1;
 		int defendTotalArmies = defendCountry.getArmies();
 		int attackDice, defendDice;
@@ -443,9 +447,11 @@ public class GamePlayModel extends Observable {
 				if (attackDiceRoll[i] > defendDiceRoll[i]) {
 					armiesDeduction(defendCountry, 1);
 					defendTotalArmies--;
+					returnValue = true;
 				} else {
 					armiesDeduction(attackCountry, 1);
 					attackTotalArmies--;
+					returnValue = true;
 				}
 			}
 		}
@@ -470,6 +476,7 @@ public class GamePlayModel extends Observable {
 			this.setCardToBeAssigned(true);
 		}
 		callObservers();
+		return returnValue;
 	}
 
 	/**
@@ -479,21 +486,25 @@ public class GamePlayModel extends Observable {
 	 * @param defendCountry the defend country
 	 * @param noOfArmiesToBeMoved the no of armies to be moved
 	 */
-	public void moveArmies(CountryModel attackCountry, CountryModel defendCountry, int noOfArmiesToBeMoved) {
+	public boolean moveArmies(CountryModel attackCountry, CountryModel defendCountry, int noOfArmiesToBeMoved) {
+		boolean returnvalue = false;
 		this.consoleText.append(attackCountry.getRulerName() + " Armies " + noOfArmiesToBeMoved + " moved from"
 				+ attackCountry.getCountryName() + " to " + defendCountry.getCountryName() + " \n");
 		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
 			if (this.gameMapModel.getCountries().get(i).getCountryName().equals(attackCountry.getCountryName())) {
 				this.gameMapModel.getCountries().get(i)
 						.setArmies(this.gameMapModel.getCountries().get(i).getArmies() - noOfArmiesToBeMoved);
+				returnvalue = true;
 			}
 			if (this.gameMapModel.getCountries().get(i).getCountryName().equals(defendCountry.getCountryName())) {
 				this.gameMapModel.getCountries().get(i)
 						.setArmies(this.gameMapModel.getCountries().get(i).getArmies() + noOfArmiesToBeMoved);
+				returnvalue = true;
 			}
 		}
 		this.setArmyToMoveText(false);
 		callObservers();
+		return returnvalue;
 	}
 
 	/**
@@ -631,11 +642,12 @@ public class GamePlayModel extends Observable {
 	 *
 	 * @param parmPlayer the parm player
 	 */
-	public void worldCoverage(PlayerModel parmPlayer) {
+	public boolean worldCoverage(PlayerModel parmPlayer) {
+		boolean returnvalue = true;
 		double percentage = (parmPlayer.getOwnedCountries().size() * 100) / this.gameMapModel.getCountries().size();
 		this.getConsoleText().append("						" + " Map coverage for " + parmPlayer.getNamePlayer()
 				+ " is " + percentage + "% " + "\n");
-
+		return returnvalue;
 	}
 
 	/**
@@ -643,7 +655,8 @@ public class GamePlayModel extends Observable {
 	 *
 	 * @param parmContinent the parm continent
 	 */
-	public void continentCoverage(ContinentsModel parmContinent) {
+	public boolean continentCoverage(ContinentsModel parmContinent) {
+		boolean returnvalue = false;
 		this.getConsoleText().append("						" + "Continent " + parmContinent.getContinentName()
 				+ "'s coverage distribution: \n");
 		int countryCount = 0;
@@ -657,12 +670,13 @@ public class GamePlayModel extends Observable {
 				}
 
 			}
+			returnvalue = true;
 			percentage = (countryCount * 100) / parmContinent.getCoveredCountries().size();
 			this.getConsoleText().append("						" + this.players.get(j).getNamePlayer()
 					+ " has covered " + percentage + "% of the continent " + parmContinent.getContinentName() + "\n");
 			countryCount = 0;
 		}
-
+		return returnvalue;
 	}
 
 	/**
@@ -700,9 +714,9 @@ public class GamePlayModel extends Observable {
 	/**
 	 * Move deck.
 	 */
-	public void moveDeck() {
+	public boolean moveDeck() {
 		
-
+		boolean returnValue = false;
 		if (this.getCardToBeAssigned() == true) {
 			CardModel card;
 
@@ -713,9 +727,11 @@ public class GamePlayModel extends Observable {
 					ArrayList<CardModel> tempList = (ArrayList<CardModel>) this.getPlayers().get(i).getOwnedCards();
 					tempList.add(card);
 					this.getPlayers().get(i).setOwnedCards(tempList);
+					returnValue = true;
 				}
 			}
 			this.setCardToBeAssigned(false);
 		}
+		return returnValue;
 	}
 }

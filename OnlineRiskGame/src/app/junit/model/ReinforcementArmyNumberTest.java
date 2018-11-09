@@ -1,7 +1,9 @@
 package app.junit.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import java.awt.Color;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -9,11 +11,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import app.controller.PlayerController;
+import app.model.CardModel;
 import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.model.GamePlayModel;
+import app.model.PlayerModel;
 import app.utilities.Constant;
+import app.utilities.MessageUtil;
 import app.utilities.ReadFile;
+import app.utilities.Validation;
 
 /**
  * ReinforcementArmyNumberTest
@@ -23,22 +29,24 @@ import app.utilities.ReadFile;
  */
 public class ReinforcementArmyNumberTest {
 
-	private static final boolean False = false;
-	GamePlayModel gamePlayModel;
 	GameMapModel gameMapModel;
-	PlayerController rC;
+	GamePlayModel gamePlayModel;
+	Validation val;
 	ReadFile readFile;
 	File file;
-	int reinforceArmies;
-	private ArrayList<CountryModel> listOfCountrys = new ArrayList<CountryModel>();
+	ArrayList<CountryModel> countryList = new ArrayList<CountryModel>();
+	ArrayList<CountryModel> cardList = new ArrayList<CountryModel>();
+	
+	PlayerModel pm = new PlayerModel("X", 0, Color.WHITE, 0, countryList, cardList);
+	CardModel card ;
 
 	private static boolean setUpIsDone = false;
 
 	/**
-	 * Set up variables
+	 * Set up file
 	 */
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 		if (setUpIsDone) {
 			return;
 		}
@@ -47,31 +55,34 @@ public class ReinforcementArmyNumberTest {
 		file = new File(Constant.FILE_LOCATION);
 		readFile.setFile(file);
 		gameMapModel = new GameMapModel(file);
-		int numberOfCountries = 0;
-		for (int i = 0; i < this.gamePlayModel.getPlayers().size(); i++) {
+		gamePlayModel = new GamePlayModel();
+		gamePlayModel.setGameMap(gameMapModel);
 
-			if (this.gamePlayModel.getPlayers().get(i).getNamePlayer()
-					.equals(this.gamePlayModel.getGameMap().getPlayerTurn())) {
-				numberOfCountries = this.gamePlayModel.getPlayers().get(i).getOwnedCountries().size();
-			}
-		}
-		if (numberOfCountries > 3) {
-			reinforceArmies = 3 + Math.round(listOfCountrys.size() / 3);
-		} else {
-			reinforceArmies = 3;
-		}
-		if (reinforceArmies > 12) {
-			reinforceArmies = 12;
-		}
+		countryList.add(gameMapModel.getCountries().get(0));
+		countryList.add(gameMapModel.getCountries().get(1));
+
+		countryList.get(0).setArmies(2);
+
+		ArrayList<PlayerModel> pmList = new ArrayList<PlayerModel>();
+
+		pmList.add(this.pm);
+		gamePlayModel.getCardFromJSON();
+		card = gamePlayModel.getCards().get(0);
+		
+		
+
+		gamePlayModel.setPlayers(pmList);
 		setUpIsDone = true;
 	}
 
 	/**
-	 * Test unlink continent validation
+	 * Test single strike
 	 */
 	@Test
-	public void testUnlinkedContinentValidation() {
-		assertEquals(reinforceArmies, gamePlayModel.numberOfCountries());
+	public void test() {
+		if(gamePlayModel.reinforcementArmies(15) > 0) {
+			MessageUtil msg = new MessageUtil("Number of countries is calculated " );	
+		}
 	}
 
 }

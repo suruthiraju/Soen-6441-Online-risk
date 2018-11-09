@@ -1,6 +1,8 @@
 app.controller
 app.helper
 app.junit
+app.junit.model
+app.junit.utilities
 app.model
 app.utilities
 app.view

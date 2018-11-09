@@ -1,7 +1,8 @@
 package app.junit.model;
 
 import static org.junit.Assert.assertEquals;
-
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.awt.Color;
@@ -73,8 +74,7 @@ public class CheckSingleStrike {
 	 */
 	@Test
 	public void test() {
-		CountryModel countryModel = gamePlayModel.armiesDeduction(countryList.get(0),1);
-		assertEquals(1,countryModel.getArmies());
+		assertTrue( gamePlayModel.singleStrike(2, countryList.get(0), 1, countryList.get(1)));
 	}
 
 }

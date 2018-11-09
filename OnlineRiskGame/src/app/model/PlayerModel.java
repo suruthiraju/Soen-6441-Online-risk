@@ -226,12 +226,14 @@ public class PlayerModel extends Observable {
 	 * @return true, if successful
 	 */
 	public boolean removeCard(CardModel toRemoveCard) {
+		boolean returnvalue = false;
 		for(int i=0; i< this.ownedCards.size(); i++) {
 			if (this.ownedCards.get(i).getCardId() == toRemoveCard.getCardId()) {
 				this.ownedCards.remove(i);
+				returnvalue = true;
 			}
 		}
-		return true;
+		return returnvalue;
 	}
 	
 	/**

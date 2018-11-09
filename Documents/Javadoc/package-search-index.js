@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"app.controller"},{"l":"app.helper"},{"l":"app.junit"},{"l":"app.model"},{"l":"app.utilities"},{"l":"app.view"}]
+packageSearchIndex = [{"l":"app.controller"},{"l":"app.helper"},{"l":"app.junit"},{"l":"app.junit.model"},{"l":"app.junit.utilities"},{"l":"app.model"},{"l":"app.utilities"},{"l":"app.view"}]

@@ -344,18 +344,22 @@ public class GameMapModel extends Observable {
 	 * @param fromCountryName
 	 * @param toCountryName
 	 */
-	public void setMovingArmies(int armies, CountryModel fromCountryName, CountryModel toCountryName) {
+	public boolean setMovingArmies(int armies, CountryModel fromCountryName, CountryModel toCountryName) {
+		boolean returnvalue = false;
 		int previousArmies = 0;
 		for (int i = 0; i < this.getCountries().size(); i++) {
 			if (fromCountryName.equals(this.getCountries().get(i))) {
 				previousArmies = this.getCountries().get(i).getArmies();
 				this.getCountries().get(i).setArmies(previousArmies - armies);
+				returnvalue = true;
 			}
 			if (toCountryName.equals(this.getCountries().get(i))) {
 				previousArmies = this.getCountries().get(i).getArmies();
 				this.getCountries().get(i).setArmies(previousArmies + armies);
+				returnvalue = true;
 			}
 		}
+		return returnvalue;
 	}
 
 	/**
