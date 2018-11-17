@@ -28,7 +28,9 @@ public class TournamentDetailController implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		if (actionEvent.getSource().equals(theTournamentDetailView.singleMode)) {
+		if (actionEvent.getSource().equals(theTournamentDetailView.saveAndPlayButton)) {
+			this.theTournamentDetailView.dispose();
+		}else if (actionEvent.getSource().equals(theTournamentDetailView.exitButton)) {
 			this.theTournamentDetailView.dispose();
 		}
 	}
