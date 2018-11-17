@@ -99,7 +99,7 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 			if (!(MapValidation.emptyLinkCountryValidation(this.gameMapModel))) {
 				if ((!MapValidation.checkInterlinkedContinent(this.gameMapModel))) {
 					if (!(MapValidation.emptyContinentValidation(this.gameMapModel))) {
-						if (!(MapValidation.unlinkedContinentValidation(this.gameMapModel))) {
+						if (!(MapValidation.nonContinentValidation(this.gameMapModel))) {
 
 							System.out.println(" All the map validations are correct");
 							filename = JOptionPane.showInputDialog("File Name");
@@ -115,7 +115,7 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 							}
 						} else {
 							System.out.println("All continents are not linked");
-							JOptionPane.showOptionDialog(null, "All continents are not linked", "Invalid",
+							JOptionPane.showOptionDialog(null, "One of the continent is invalid", "Invalid",
 									JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {},
 									null);
 

@@ -101,7 +101,7 @@ public class NewGameController implements ActionListener {
 										e.printStackTrace();
 									}
 								} else {
-									System.out.println("All continents are not linked");
+									System.out.println("One of the continent is invalid");
 									JOptionPane.showOptionDialog(null, "All continents are not linked", "Invalid",
 											JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
 											new Object[] {}, null);
