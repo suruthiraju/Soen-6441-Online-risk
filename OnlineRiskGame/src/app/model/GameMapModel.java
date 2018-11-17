@@ -147,7 +147,11 @@ public class GameMapModel extends Observable {
 		callObservers();
 	}
 
+	/**
+	 * Countries in continent.
+	 */
 	public void countriesInContinent() {
+		boolean firsttime = true;
 		for (int i = 0; i < this.continentList.size(); i++) {
 			for (int j = 0; j < this.countryList.size(); j++) {
 				try {
@@ -157,10 +161,14 @@ public class GameMapModel extends Observable {
 						this.continentList.get(i).setCoveredCountries(this.countryList.get(j));
 					}
 				} catch (Exception e) {
-					JOptionPane.showOptionDialog(null, "Map parsing failed game crashed", "Invalid",
-							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
+					if (firsttime) {
+						JOptionPane.showOptionDialog(null, "There are some possible errors in the map", "Invalid",
+								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {},
+								null);
+						firsttime = false;
+					}
 
-					System.exit(0);
+					// System.exit(0);
 				}
 
 			}

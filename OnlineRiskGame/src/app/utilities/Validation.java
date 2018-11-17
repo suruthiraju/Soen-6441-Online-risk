@@ -14,19 +14,54 @@ import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.model.GamePlayModel;
 
+// TODO: Auto-generated Javadoc
 /**
- * This class is to valdiate map for its correctness
- * 
- * @author Rohit
+ * This class is to valdiate map for its correctness.
  *
+ * @author Rohit
  */
 public class Validation {
 
 	/**
-	 * Check on un linked Continent Validation
-	 * 
-	 * @param mapModel
-	 * @return
+	 * Non continent validation.
+	 *
+	 * @param mapModel the map model
+	 * @return true, if successful
+	 */
+	public boolean nonContinentValidation(GameMapModel mapModel) {
+		int flagIntra = 0;
+		int flagInter = 0;
+
+		for (int i = 0; i < mapModel.getContinents().size(); i++) {
+			for (int j = 0; j < mapModel.getContinents().get(i).getCoveredCountries().size(); j++) {
+				for (int k = 0; k < mapModel.getContinents().get(i).getCoveredCountries().get(j).getLinkedCountries()
+						.size(); k++) {
+					if (mapModel.getContinents().get(i).getCoveredCountries().get(j).getLinkedCountries().get(k)
+							.getcontinentName()
+							.equals(mapModel.getContinents().get(i).getCoveredCountries().get(j).getcontinentName())) {
+						flagIntra++;
+					} else {
+						flagInter++;
+					}
+				}
+				if (flagIntra < 1) {
+					return true;
+				}
+				flagIntra = 0;
+			}
+			if (flagInter < 1) {
+				return true;
+			}
+			flagInter = 0;
+		}
+		return false;
+	}
+
+	/**
+	 * Check on unlinked Continent Validation.
+	 *
+	 * @param mapModel the map model
+	 * @return true, if successful
 	 */
 	public boolean unlinkedContinentValidation(GameMapModel mapModel) {
 		boolean flag = true;
@@ -64,9 +99,9 @@ public class Validation {
 	}
 
 	/**
-	 * Check on empty link Country Validation
-	 * 
-	 * @param mapModel
+	 * Check on empty link Country Validation.
+	 *
+	 * @param mapModel the map model
 	 * @return boolean
 	 */
 	public boolean emptyLinkCountryValidation(GameMapModel mapModel) {
@@ -82,9 +117,9 @@ public class Validation {
 	}
 
 	/**
-	 * Check on Inter Linked Contient
-	 * 
-	 * @param mapModel
+	 * Check on Inter Linked Contient.
+	 *
+	 * @param mapModel the map model
 	 * @return boolean
 	 */
 	public boolean checkInterlinkedContinent(GameMapModel mapModel) {
@@ -96,47 +131,44 @@ public class Validation {
 		;
 		int numb;
 		boolean emptyLinkContinent = false;
-		try
-        {
-		for (int j = 0; j < listOfContinents.size(); j++) {
-			continent = listOfContinents.get(j).getContinentName();
-			numb = 0;
-			for (int i = 0; i < listOfCountrys.size(); i++) {
-				if (continent.equals(listOfCountrys.get(i).getcontinentName())) {
-					Countryname.add(listOfCountrys.get(i).getCountryName());
+		try {
+			for (int j = 0; j < listOfContinents.size(); j++) {
+				continent = listOfContinents.get(j).getContinentName();
+				numb = 0;
+				for (int i = 0; i < listOfCountrys.size(); i++) {
+					if (continent.equals(listOfCountrys.get(i).getcontinentName())) {
+						Countryname.add(listOfCountrys.get(i).getCountryName());
+					}
 				}
-			}
-			for (int i = 0; i < Countryname.size(); i++) {
-				for (int k = 0; k < listOfCountrys.size(); k++) {
-					if (!continent.equals(listOfCountrys.get(k).getcontinentName())) {
-						for (int a = 0; a < listOfCountrys.get(k).getLinkedCountries().size(); a++) {
-							if (Countryname.get(i)
-									.equals(listOfCountrys.get(k).getLinkedCountries().get(a).getCountryName())) {
-								numb++;
+				for (int i = 0; i < Countryname.size(); i++) {
+					for (int k = 0; k < listOfCountrys.size(); k++) {
+						if (!continent.equals(listOfCountrys.get(k).getcontinentName())) {
+							for (int a = 0; a < listOfCountrys.get(k).getLinkedCountries().size(); a++) {
+								if (Countryname.get(i)
+										.equals(listOfCountrys.get(k).getLinkedCountries().get(a).getCountryName())) {
+									numb++;
+								}
 							}
 						}
 					}
 				}
+				if (numb == 0) {
+					emptyLinkContinent = true;
+					return emptyLinkContinent;
+				}
 			}
-			if (numb == 0) {
-				emptyLinkContinent = true;
-				return emptyLinkContinent;
-			}
+		} catch (NullPointerException e) {
+			JOptionPane.showOptionDialog(null, "All continents are not linked", "Invalid", JOptionPane.DEFAULT_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
 		}
-        }catch(NullPointerException e)
-        {
-        	JOptionPane.showOptionDialog(null, "All continents are not linked", "Invalid",
-					JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {},
-					null);
-        }
 		return emptyLinkContinent;
 
 	}
 
 	/**
-	 * Check on empty Continent Validation
-	 * 
-	 * @param mapModel
+	 * Check on empty Continent Validation.
+	 *
+	 * @param mapModel the map model
 	 * @return boolean
 	 */
 	public boolean emptyContinentValidation(GameMapModel mapModel) {
@@ -161,12 +193,12 @@ public class Validation {
 	}
 
 	/**
-	 * Check on valid move for fortification
-	 * 
-	 * @param gameMapModel
-	 * @param fromCountryModel
-	 * @param toCountryModel
-	 * @return
+	 * Check on valid move for fortification.
+	 *
+	 * @param gameMapModel the game map model
+	 * @param fromCountryModel the from country model
+	 * @param toCountryModel the to country model
+	 * @return true, if successful
 	 */
 	public boolean checkIfValidMove(GameMapModel gameMapModel, CountryModel fromCountryModel,
 			CountryModel toCountryModel) {
@@ -189,9 +221,9 @@ public class Validation {
 	/**
 	 * Checks if is reachable.
 	 *
-	 * @param s the s
-	 * @param d the d
-	 * @param gameMapModel the game map model
+	 * @param s              the s
+	 * @param d              the d
+	 * @param gameMapModel   the game map model
 	 * @param mapOfCountries the map of countries
 	 * @return the boolean
 	 */
@@ -215,10 +247,10 @@ public class Validation {
 
 			List<Integer> m = new ArrayList<Integer>();
 			for (int l = 0; l < gameMapModel.getCountries().get(s).getLinkedCountries().size(); l++) {
-					if (gameMapModel.getCountries().get(s).getRulerName()
-							.equals(gameMapModel.getCountries().get(s).getLinkedCountries().get(l).getRulerName())) {
-						m.add(mapOfCountries.get(gameMapModel.getCountries().get(s).getLinkedCountries().get(l)));
-					}
+				if (gameMapModel.getCountries().get(s).getRulerName()
+						.equals(gameMapModel.getCountries().get(s).getLinkedCountries().get(l).getRulerName())) {
+					m.add(mapOfCountries.get(gameMapModel.getCountries().get(s).getLinkedCountries().get(l)));
+				}
 			}
 
 			i = m.listIterator();
@@ -258,6 +290,5 @@ public class Validation {
 		}
 		return false;
 	}
-	
 
 }

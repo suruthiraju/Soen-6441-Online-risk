@@ -89,7 +89,7 @@ public class NewGameController implements ActionListener {
 					if (!(MapValidation.emptyLinkCountryValidation(this.gameMapModel))) {
 						if ((!MapValidation.checkInterlinkedContinent(this.gameMapModel))) {
 							if (!(MapValidation.emptyContinentValidation(this.gameMapModel))) {
-								if (!(MapValidation.unlinkedContinentValidation(this.gameMapModel))) {
+								if (!(MapValidation.nonContinentValidation(this.gameMapModel))) {
 
 									System.out.println(" All the map validations are correct");
 									try {

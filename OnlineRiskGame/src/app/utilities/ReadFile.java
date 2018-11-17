@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import app.model.ContinentsModel;
 import app.model.CountryModel;
 
@@ -94,28 +96,66 @@ public class ReadFile {
 					if (!"".equals(territories)) {
 
 						int indexOfCountryName = territories.indexOf(',');
+
 						String countryName = territories.substring(0, indexOfCountryName).trim();
 						CountryModel cm = listOfCountries.get(countryName);
-						if (cm == null) {
-							cm = new CountryModel();
-							cm.setCountryName(countryName);
-							listOfCountries.put(cm.getCountryName(), cm);
+						try {
+							if (cm == null) {
+								cm = new CountryModel();
+								cm.setCountryName(countryName);
+								listOfCountries.put(cm.getCountryName(), cm);
+							}
+						} catch (NullPointerException e) {
+							JOptionPane.showMessageDialog(null, "Map is missing one of the country name");
+
+						} catch (NumberFormatException n) {
+							JOptionPane.showMessageDialog(null, "Map is missing one of  the country name");
+
 						}
 
-						int indexOfXPos = territories.indexOf(',', (indexOfCountryName + 1));
-						String xPosition = territories.substring((indexOfCountryName + 1), indexOfXPos);
-						cm.setXPosition(Integer.parseInt(xPosition.trim()));
-						System.out.println("xposition: " + xPosition);
+						int indexOfXPos = 0;
+						try {
+							indexOfXPos = territories.indexOf(',', (indexOfCountryName + 1));
+							String xPosition = territories.substring((indexOfCountryName + 1), indexOfXPos);
+							cm.setXPosition(Integer.parseInt(xPosition.trim()));
+							System.out.println("xposition: " + xPosition);
+						} catch (NullPointerException e) {
+							JOptionPane.showMessageDialog(null,
+									"Map is missing the x position for " + cm.getCountryName());
+
+						} catch (NumberFormatException n) {
+							JOptionPane.showMessageDialog(null,
+									"Map is missing the x position for " + cm.getCountryName());
+
+						}
 
 						int indexOfYPos = territories.indexOf(',', (indexOfXPos + 1));
-						String yPosition = territories.substring((indexOfXPos + 1), indexOfYPos);
-						cm.setYPosition(Integer.parseInt(yPosition.trim()));
-						System.out.println("yPosition" + yPosition);
+						try {
+							String yPosition = territories.substring((indexOfXPos + 1), indexOfYPos);
+							cm.setYPosition(Integer.parseInt(yPosition.trim()));
+							System.out.println("yPosition" + yPosition);
+						} catch (NullPointerException e) {
+							JOptionPane.showMessageDialog(null,
+									"Map is missing the y position for " + cm.getCountryName());
+
+						} catch (NumberFormatException n) {
+							JOptionPane.showMessageDialog(null,
+									"Map is missing the y position for " + cm.getCountryName());
+
+						}
 
 						int indexOfContinent = territories.indexOf(',', (indexOfYPos + 1));
-						String continent = territories.substring((indexOfYPos + 1), indexOfContinent).trim();
-						cm.setContinentName(continent.trim());
-						System.out.println("Continent: " + continent);
+						try {
+							String continent = territories.substring((indexOfYPos + 1), indexOfContinent).trim();
+							cm.setContinentName(continent.trim());
+							System.out.println("Continent: " + continent);
+						} catch (NullPointerException e) {
+							JOptionPane.showMessageDialog(null, "Continent name is inappropriate");
+
+						} catch (NumberFormatException n) {
+							JOptionPane.showMessageDialog(null, "Continent name is inappropriate");
+
+						}
 
 						String neighbouringCountries = territories.substring((indexOfContinent + 1)).trim();
 						List<String> listOfNeighbouringCountries = Arrays
@@ -161,11 +201,11 @@ public class ReadFile {
 	public File getFile() {
 		return FILE;
 	}
-	
+
 	/**
 	 * Validate read continent.
 	 *
-	 * @param list the list
+	 * @param list      the list
 	 * @param arrayList the array list
 	 * @return true, if successful
 	 */
@@ -189,7 +229,7 @@ public class ReadFile {
 	/**
 	 * Validate read country.
 	 *
-	 * @param list the list
+	 * @param list      the list
 	 * @param arrayList the array list
 	 * @return true, if successful
 	 */
@@ -209,5 +249,5 @@ public class ReadFile {
 		}
 		return true;
 	}
-	
+
 }
