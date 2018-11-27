@@ -122,6 +122,24 @@ public class GamePlayModel extends Observable {
 	}
 
 	/**
+	 * Gets the countryOwned.
+	 *
+	 * @return the countryOwned
+	 */
+	public Boolean getCountryOwned() {
+		return this.countryOwned;
+	}
+	
+	/**
+	 * Gets the armyToMoveFlag.
+	 *
+	 * @return the defeated country
+	 */
+	public Boolean getArmyToMoveFlag() {
+		return this.armyToMoveFlag;
+	}
+	
+	/**
 	 * Gets the defeated country.
 	 *
 	 * @return the defeated country
