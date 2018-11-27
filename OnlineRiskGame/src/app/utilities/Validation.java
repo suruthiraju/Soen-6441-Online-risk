@@ -45,12 +45,19 @@ public class Validation {
 					}
 				}
 				if (flagIntra < 1) {
+					JOptionPane.showMessageDialog(null,
+							mapModel.getContinents().get(i).getCoveredCountries().get(j)+" does not have a link within its continent!", "Map Loaded",
+							JOptionPane.INFORMATION_MESSAGE);
 					return true;
 				}
 				flagIntra = 0;
 			}
 			if (flagInter < 1) {
+				JOptionPane.showMessageDialog(null,
+						mapModel.getContinents().get(i)+" does not have a link with any other continent!", "Map Loaded",
+						JOptionPane.INFORMATION_MESSAGE);
 				return true;
+
 			}
 			flagInter = 0;
 		}
