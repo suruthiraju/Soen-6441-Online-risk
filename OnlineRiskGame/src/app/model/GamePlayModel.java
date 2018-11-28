@@ -6,7 +6,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Observable;
 
 import org.json.simple.JSONArray;
@@ -800,5 +802,29 @@ public class GamePlayModel extends Observable {
 			this.setCardToBeAssigned(false);
 		}
 		return returnValue;
+	}
+	
+	public ArrayList<CountryModel> sortCountry(ArrayList<CountryModel> ownedCountries) {
+		Collections.sort(ownedCountries, new Comparator<CountryModel>(){
+            public int compare(CountryModel s1, CountryModel s2) {
+              return Integer.valueOf(s1.getArmies()).compareTo(s2.getArmies());
+           }
+       });
+		return ownedCountries;
+	}
+
+	public ArrayList<CountryModel> selectWeakestCountry(ArrayList<CountryModel> ownedCountries) {
+		Collections.sort(ownedCountries, new Comparator<CountryModel>(){
+            public int compare(CountryModel s1, CountryModel s2) {
+              return Integer.valueOf(s1.getArmies()).compareTo(s2.getArmies());
+           }
+       });
+		ArrayList<CountryModel> weakestCounty = new ArrayList<CountryModel>();
+		for (int i =0; i< ownedCountries.size(); i++) {
+			if(ownedCountries.get(0).getArmies() == ownedCountries.get(i).getArmies()) {
+				weakestCounty.add(ownedCountries.get(i));
+			}
+		}
+		return weakestCounty;
 	}
 }
