@@ -120,7 +120,17 @@ public class GamePlayModel extends Observable {
 	public void setDefeatedCountry(CountryModel defeatedCountry) {
 		this.defeatedCountry = defeatedCountry;
 	}
-
+	
+	/**
+	 * Sets the countryOwned.
+	 *
+	 * @param countryOwned
+	 * @return 
+	 */
+	public void setCountryOwned(Boolean countryOwned) {
+		this.countryOwned = countryOwned;
+	}
+	
 	/**
 	 * Gets the countryOwned.
 	 *
@@ -161,19 +171,19 @@ public class GamePlayModel extends Observable {
 			JSONObject jsonObject = (JSONObject) cards;
 			System.out.println("jsonObject " + jsonObject.get("cards"));
 			JSONArray cardsJSON = (JSONArray) jsonObject.get("cards");
-
-			int i = 0;
-			CardModel cardModel = new CardModel();
+			Long lvalue;
+			int value;
+			
 			for (Object o : cardsJSON) {
+				CardModel cardModel = new CardModel();
 				JSONObject card = (JSONObject) o;
-
-				int cardId = Integer.parseInt((String) card.get("cardId"));
-				System.out.println("cardId " + cardId);
-				cardModel.setCardId(cardId);
-
-				int cardValue = Integer.parseInt((String) card.get("cardValue"));
-				System.out.println("cardValue " + cardValue);
-				cardModel.setCardValue(cardValue);
+				lvalue = (Long) card.get("cardId");
+				value = lvalue.intValue();
+				cardModel.setCardId(value);
+				
+				lvalue = (Long) card.get("cardValue");
+				value = lvalue.intValue();
+				cardModel.setCardValue(value);				
 				this.deck.add(cardModel);
 			}
 			//Collections.shuffle(this.deck);
@@ -535,6 +545,16 @@ public class GamePlayModel extends Observable {
 		callObservers();
 
 	}
+	
+	/**
+	 * Sets the selected combo box index.
+	 *
+	 * @param selectedComboBoxIndex the new selected combo box index
+	 */
+	public void setSelectedComboBoxIndexRead(int selectedComboBoxIndex) {
+		this.selectedComboBoxIndex = selectedComboBoxIndex;
+
+	}
 
 	/**
 	 * Gets the selected combo box index.
@@ -553,6 +573,16 @@ public class GamePlayModel extends Observable {
 	public void setSelectedAttackComboBoxIndex(int selectedAttackComboBoxIndex) {
 		this.selectedAttackComboBoxIndex = selectedAttackComboBoxIndex;
 		callObservers();
+
+	}
+	
+	/**
+	 * Sets the selected attack combo box index.
+	 *
+	 * @param selectedAttackComboBoxIndex the new selected attack combo box index
+	 */
+	public void setSelectedAttackComboBoxIndexRead(int selectedAttackComboBoxIndex) {
+		this.selectedAttackComboBoxIndex = selectedAttackComboBoxIndex;
 
 	}
 
@@ -575,6 +605,16 @@ public class GamePlayModel extends Observable {
 		callObservers();
 
 	}
+	
+	/**
+	 * Sets the selected defend combo box index.
+	 *
+	 * @param selectedDefendComboBoxIndex the new selected defend combo box index
+	 */
+	public void setSelectedDefendComboBoxIndexRead(int selectedDefendComboBoxIndex) {
+		this.selectedDefendComboBoxIndex = selectedDefendComboBoxIndex;
+
+	}
 
 	/**
 	 * Gets the selected defend combo box index.
@@ -595,6 +635,15 @@ public class GamePlayModel extends Observable {
 		if (armyToMoveFlag == true) {
 			callObservers();
 		}
+	}
+	
+	/**
+	 * Sets the army to move text.
+	 *
+	 * @param armyToMoveFlag the new army to move text
+	 */
+	public void setArmyToMoveTextRead(boolean armyToMoveFlag) {
+		this.armyToMoveFlag = armyToMoveFlag;
 	}
 
 	/**
