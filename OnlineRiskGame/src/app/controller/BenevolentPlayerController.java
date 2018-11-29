@@ -39,6 +39,7 @@ public class BenevolentPlayerController implements Strategy {
 	 * 
 	 */
 	public void reinforcement() {
+		System.out.println("Benevolent - reinforcement");
 
 		this.gamePlayModel.getGameMap().getPlayerTurn().setremainTroop(this.gamePlayModel.numberOfCountries()
 				+ this.gamePlayModel.continentCovered(gamePlayModel.getGameMap().getPlayerTurn()));
@@ -68,6 +69,7 @@ public class BenevolentPlayerController implements Strategy {
 	 * This method is called in fortification phase.
 	 */
 	public void fortification() {
+		System.out.println("Benevolent - fortification");
 		ArrayList<CountryModel> listofcountry = this.gamePlayModel
 				.sortCountry((ArrayList<CountryModel>) gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries());
 
@@ -95,6 +97,7 @@ public class BenevolentPlayerController implements Strategy {
 	 * This method is called in attack phase.
 	 */
 	public void attack() {
+		System.out.println("Benevolent - attack");
 		fortification();
 	}
 

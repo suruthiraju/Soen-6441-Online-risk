@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import app.helper.Strategy;
 import app.view.ReinforcementView;
 
 
@@ -20,6 +21,9 @@ public class PlayerModel extends Observable {
 
 	/** The name player. */
 	private String namePlayer;
+	
+	/** The type player. */
+	private String typePlayer;
 	
 	/** The my troop. */
 	private int myTroop;
@@ -38,6 +42,8 @@ public class PlayerModel extends Observable {
 	
 	/** The show reinforcement card. */
 	private boolean showReinforcementCard;
+	
+	private Strategy strategy;
 
 	/**
 	 * Constructor of PlayerModel.
@@ -49,8 +55,9 @@ public class PlayerModel extends Observable {
 	 * @param ownedCountries the owned countries
 	 * @param ownedCards the owned cards
 	 */
-	public PlayerModel(String namePlayer, int myTroop, Color color, int remainTroop, List ownedCountries, List ownedCards) {
+	public PlayerModel(String namePlayer, String typePlayer, int myTroop, Color color, int remainTroop, List ownedCountries, List ownedCards) {
 		this.namePlayer = namePlayer;
+		this.typePlayer = typePlayer;
 		this.myTroop = myTroop;
 		this.color = color;
 		this.remainTroop = remainTroop;
@@ -99,6 +106,24 @@ public class PlayerModel extends Observable {
 	 */
 	public void setNamePlayer(String namePlayer) {
 		this.namePlayer = namePlayer;
+	}
+	
+	/**
+	 * Gets the type player.
+	 *
+	 * @return the player type.
+	 */
+	public String getTypePlayer() {
+		return typePlayer;
+	}
+
+	/**
+	 * Sets the Player type.
+	 *
+	 * @param namePlayer the new type player
+	 */
+	public void setTypePlayer(String typePlayer) {
+		this.typePlayer = typePlayer;
 	}
 
 	/**
@@ -253,4 +278,8 @@ public class PlayerModel extends Observable {
 	public boolean getShowReinforcementCard() {
 		return this.showReinforcementCard;
 	}
+	
+	public void setStrategy(Strategy strategy) {
+	    this.strategy = strategy;
+	  }
 }

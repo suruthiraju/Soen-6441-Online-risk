@@ -45,6 +45,8 @@ public class NewGameView extends JFrame implements View {
 
 	/** The final players. */
 	public JTextField PlayerName5, PlayerName1, PlayerName2, PlayerName3, PlayerName4;
+	
+	public JComboBox<String> playerType5, playerType1, playerType2, playerType3, playerType4;
 
 	/**
 	 * Create the application.
@@ -65,44 +67,71 @@ public class NewGameView extends JFrame implements View {
 		PlayerText2.setBounds(53, 83, 311, 27);
 		getContentPane().add(PlayerText2);
 		
+		String[] typePlayer = new String[5];
+		typePlayer[0] = "Human";
+		typePlayer[1] = "Aggressive";
+		typePlayer[2] = "Benevolent";
+		typePlayer[3] = "Random";
+		typePlayer[4] = "Cheater";
+		
 		PlayerText = new JLabel("Player 1 Name: ");
 		PlayerText.setBounds(53, 110, 311, 27);
 		getContentPane().add(PlayerText);
+		
+		playerType1 = new JComboBox(typePlayer);
+		playerType1.setBounds(202, 116, 150, 27);
+		getContentPane().add(playerType1);
 
 		PlayerName1 = new JTextField();
-		PlayerName1.setBounds(202, 116, 100, 20);
+		PlayerName1.setBounds(400, 116, 150, 27);
 		getContentPane().add(PlayerName1);
 		
 		PlayerText = new JLabel("Player 2 Name: ");
 		PlayerText.setBounds(53, 140, 311, 27);
 		getContentPane().add(PlayerText);
 		
+		playerType2 = new JComboBox(typePlayer);
+		playerType2.setBounds(202, 146, 150, 27);
+		getContentPane().add(playerType2);
+		
 		PlayerName2 = new JTextField();
-		PlayerName2.setBounds(202, 146, 100, 20);
+		PlayerName2.setBounds(400, 146, 150, 27);
 		getContentPane().add(PlayerName2);
 
 		PlayerText = new JLabel("Player 3 Name: ");
 		PlayerText.setBounds(53, 170, 311, 27);
 		getContentPane().add(PlayerText);
 		
+		playerType3 = new JComboBox(typePlayer);
+		playerType3.setBounds(202, 176, 150, 27);
+		getContentPane().add(playerType3);
+		
 		PlayerName3 = new JTextField();
-		PlayerName3.setBounds(202, 176, 100, 20);
+		PlayerName3.setBounds(400, 176, 150, 27);
 		getContentPane().add(PlayerName3);
 		
 		PlayerText = new JLabel("Player 4 Name: ");
 		PlayerText.setBounds(53, 200, 311, 27);
 		getContentPane().add(PlayerText);
 		
+		playerType4 = new JComboBox(typePlayer);
+		playerType4.setBounds(202, 206, 150, 27);
+		getContentPane().add(playerType4);
+		
 		PlayerName4 = new JTextField();
-		PlayerName4.setBounds(202, 206, 100, 20);
+		PlayerName4.setBounds(400, 206, 150, 27);
 		getContentPane().add(PlayerName4);
 		
 		PlayerText = new JLabel("Player 5 Name: ");
 		PlayerText.setBounds(53, 230, 311, 27);
 		getContentPane().add(PlayerText);
 		
+		playerType5 = new JComboBox(typePlayer);
+		playerType5.setBounds(202, 236, 150, 27);
+		getContentPane().add(playerType5);
+		
 		PlayerName5 = new JTextField();
-		PlayerName5.setBounds(202, 236, 100, 20);
+		PlayerName5.setBounds(400, 236, 150, 27);
 		getContentPane().add(PlayerName5);
 
 		labelMapFile = new JLabel("Please Select Map File");
@@ -131,7 +160,7 @@ public class NewGameView extends JFrame implements View {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		setBounds(100, 100, 500, 500);
+		setBounds(100, 100, 700, 700);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 

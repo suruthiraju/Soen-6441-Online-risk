@@ -2,6 +2,7 @@ package app.controller;
 
 import java.util.ArrayList;
 
+import app.helper.Strategy;
 import app.model.CardModel;
 import app.model.CountryModel;
 import app.model.GamePlayModel;
@@ -15,7 +16,7 @@ import app.utilities.Validation;
  * @version 1.0.0
  *
  */
-public class RandomPlayerController {
+public class RandomPlayerController implements Strategy {
 
 	/** The game play model. */
 	private GamePlayModel gamePlayModel;
@@ -41,6 +42,7 @@ public class RandomPlayerController {
 	 * 
 	 */
 	public void reinforcement() {
+		System.out.println("Random - reinforcement");
 
 		this.gamePlayModel.getGameMap().getPlayerTurn().setremainTroop(this.gamePlayModel.numberOfCountries()
 				+ this.gamePlayModel.continentCovered(gamePlayModel.getGameMap().getPlayerTurn()));
@@ -77,6 +79,7 @@ public class RandomPlayerController {
 	 * This method is called in fortification phase.
 	 */
 	public void fortification() {
+		System.out.println("Random - fortification");
 
 		index1 = getRandomBetweenRange(1, this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().size());
 		index1 = index1 - 1;
@@ -101,6 +104,7 @@ public class RandomPlayerController {
 	 * This method is called in attack phase.
 	 */
 	public void attack() {
+		System.out.println("Random - attack");
 		index1 = getRandomBetweenRange(1, this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().size());
 		index1 = index1 - 1;
 

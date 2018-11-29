@@ -48,6 +48,9 @@ public class NewGameController implements ActionListener {
 
 	/** The Player name. */
 	private String PlayerName = "";
+	
+	/** The Player type. */
+	private String PlayerType = "";
 
 	/** The list of country. */
 	private List<CountryModel> listOfCountry;
@@ -154,23 +157,64 @@ public class NewGameController implements ActionListener {
 	public void playerValidation() throws ParseException {
 		if (gameMapModel.getCountries().size() > noOfPlayers) {
 			System.out.println("no of players" + noOfPlayers);
+			int h=1,a=1,b=1,r=1,c = 1;
 			for (int i = 0; i < noOfPlayers; i++) {
 				if (i == 0) {
+					PlayerType = theView.playerType1.getSelectedItem().toString();
 					PlayerName = theView.PlayerName1.getText();
 				} else if (i == 1) {
+					PlayerType = theView.playerType2.getSelectedItem().toString();
 					PlayerName = theView.PlayerName2.getText();
 				} else if (i == 2) {
+					PlayerType = theView.playerType3.getSelectedItem().toString();
 					PlayerName = theView.PlayerName3.getText();
 				} else if (i == 3) {
+					PlayerType = theView.playerType4.getSelectedItem().toString();
 					PlayerName = theView.PlayerName4.getText();
 				} else if (i == 4) {
+					PlayerType = theView.playerType5.getSelectedItem().toString();
 					PlayerName = theView.PlayerName5.getText();
 				}
 				System.out.println("PlayerName " + PlayerName);
-				if (PlayerName == null || "".equals(PlayerName.trim())) {
-					PlayerName = "Player " + (i + 1);
+				if (PlayerType == null || "".equals(PlayerType.trim())) {
+					PlayerType = "Human";
+					if (PlayerName == null || "".equals(PlayerName.trim())) {
+						PlayerName = "Human " + h;
+						h++;
+					}
+				}else if("Human".equals(PlayerType)) {
+					PlayerType = "Human";
+					if (PlayerName == null || "".equals(PlayerName.trim())) {
+						PlayerName = "Human " + h;
+						h++;
+					}
+				} else if("Aggressive".equals(PlayerType)) {
+					PlayerType = "Aggressive";
+					if (PlayerName == null || "".equals(PlayerName.trim())) {
+						PlayerName = "Aggressive " + a;
+						a++;
+					}
+				}else if("Benevolent".equals(PlayerType)) {
+					PlayerType = "Benevolent";
+					if (PlayerName == null || "".equals(PlayerName.trim())) {
+						PlayerName = "Benevolent " + b;
+						b++;
+					}
+				}else if("Random".equals(PlayerType)) {
+					PlayerType = "Random";
+					if (PlayerName == null || "".equals(PlayerName.trim())) {
+						PlayerName = "Random " + r;
+						r++;
+					}
+				}else if("Cheater".equals(PlayerType)) {
+					PlayerType = "Cheater";
+					if (PlayerName == null || "".equals(PlayerName.trim())) {
+						PlayerName = "Cheater " + c;
+						c++;
+					}
 				}
-				PlayerModel pm = new PlayerModel(PlayerName, 0, Color.WHITE, 0, new ArrayList<CountryModel>(),
+				
+				PlayerModel pm = new PlayerModel(PlayerName, PlayerType,  0, Color.WHITE, 0, new ArrayList<CountryModel>(),
 						new ArrayList<CardModel>());
 				listOfPlayers.add(pm);
 			}

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import app.helper.Strategy;
 import app.model.CardModel;
 import app.model.CountryModel;
 import app.model.GamePlayModel;
@@ -25,7 +26,7 @@ import app.view.ReinforcementView;
  * @version 1.0.0
  *
  */
-public class HumanPlayerController implements ActionListener, ItemListener {
+public class HumanPlayerController implements ActionListener, ItemListener, Strategy {
 
 	/** The game play model. */
 	private GamePlayModel gamePlayModel;
@@ -66,6 +67,7 @@ public class HumanPlayerController implements ActionListener, ItemListener {
 	 * 
 	 */
 	public void reinforcement() {
+		System.out.println("Human - reinforcement");
 		this.gamePlayModel.getConsoleText().setLength(0);
 		this.gamePlayModel.callObservers();
 		this.gamePlayModel.getConsoleText()
@@ -97,6 +99,7 @@ public class HumanPlayerController implements ActionListener, ItemListener {
 	 * This method is called in fortification phase.
 	 */
 	public void fortification() {
+		System.out.println("Human - fortification");
 		this.gamePlayModel.getConsoleText().setLength(0);
 		this.gamePlayModel.getConsoleText()
 				.append("Initiating Fortification for " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
@@ -112,6 +115,7 @@ public class HumanPlayerController implements ActionListener, ItemListener {
 	 * This method is called in attack phase.
 	 */
 	public void attack() {
+		System.out.println("Human - attack");
 		this.gamePlayModel.getConsoleText().setLength(0);
 		this.gamePlayModel.getConsoleText()
 				.append("Initiating " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer() + "'s attack");
@@ -237,27 +241,10 @@ public class HumanPlayerController implements ActionListener, ItemListener {
 						(CountryModel) this.theFortificationView.toCountryListComboBox.getSelectedItem());
 			}
 
-			int index = this.gamePlayModel.getGameMap().getPlayerIndex();
 
 			this.gamePlayModel.moveDeck();
-
-			index++;
-			if (this.gamePlayModel.getPlayers().size() > index) {
-				this.gamePlayModel.getGameMap().setPlayerIndex(index);
-				this.gamePlayModel.getPlayers().get(index).callObservers();
-			} else {
-				index = 0;
-				this.gamePlayModel.getGameMap().setPlayerIndex(index);
-				this.gamePlayModel.getPlayers().get(index).callObservers();
-			}
-			if (val.endOfGame(this.gamePlayModel) == false) {
-				new GamePlayController(this.gamePlayModel);
-				this.theFortificationView.dispose();
-			} else {
-				JOptionPane.showOptionDialog(null, "Bravo! You have won! Game is over!", "Valid",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
-				this.theFortificationView.dispose();
-			}
+			this.theFortificationView.dispose();
+			
 		} else if (actionEvent.getSource().equals(this.theFortificationView.fromCountryListComboBox)) {
 			this.gamePlayModel
 					.setSelectedComboBoxIndex(this.theFortificationView.fromCountryListComboBox.getSelectedIndex());

@@ -60,7 +60,7 @@ public class CheckSingleStrike {
 
 		countryList.get(0).setArmies(2);
 		
-		PlayerModel pm = new PlayerModel("X", 0, Color.WHITE, 0, countryList, null);
+		PlayerModel pm = new PlayerModel("X", "Human", 0, Color.WHITE, 0, countryList, null);
 		ArrayList<PlayerModel> pmList = new ArrayList<PlayerModel>();
 		
 		

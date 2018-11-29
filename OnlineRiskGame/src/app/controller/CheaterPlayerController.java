@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.helper.Strategy;
 import app.model.CountryModel;
 import app.model.GamePlayModel;
 import app.utilities.Validation;
@@ -12,7 +13,7 @@ import app.utilities.Validation;
  * @version 1.0.0
  *
  */
-public class CheaterPlayerController {
+public class CheaterPlayerController implements Strategy {
 
 	/** The game play model. */
 	private GamePlayModel gamePlayModel;
@@ -38,6 +39,7 @@ public class CheaterPlayerController {
 	 * 
 	 */
 	public void reinforcement() {
+		System.out.println("Cheater - reinforcement");
 
 		for (int j = 0; j < this.gamePlayModel.getPlayers().size(); j++) {
 			if (this.gamePlayModel.getPlayers().get(j).getNamePlayer()
@@ -66,6 +68,8 @@ public class CheaterPlayerController {
 	 * This method is called in fortification phase.
 	 */
 	public void fortification() {
+		
+		System.out.println("Cheater - fortification");
 		index1 = getRandomBetweenRange(1, this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().size());
 		index1 = index1 - 1;
 
@@ -86,6 +90,7 @@ public class CheaterPlayerController {
 	 * This method is called in attack phase.
 	 */
 	public void attack() {
+		System.out.println("Cheater - attack");
 		index1 = getRandomBetweenRange(1, this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().size());
 		index1 = index1 - 1;
 
