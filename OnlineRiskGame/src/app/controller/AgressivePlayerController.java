@@ -12,7 +12,6 @@ import app.utilities.Validation;
 import app.view.AttackView;
 import app.view.FortificationView;
 import app.view.ReinforcementView;
-
 /**
  * In PlayerController, the data flow into model object and updates the view
  * whenever data changes.
@@ -41,8 +40,10 @@ public class AgressivePlayerController implements Strategy {
 	/** The no of players. */
 	private int noOfPlayers;
 
+	/** The attacker country. */
 	private CountryModel attackerCountry;
 
+	/** The defender country. */
 	private CountryModel defenderCountry;
 
 	/** The val. */
