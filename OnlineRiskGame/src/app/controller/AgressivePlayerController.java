@@ -1,13 +1,9 @@
 package app.controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.JOptionPane;
-
+import app.helper.Strategy;
 import app.model.CardModel;
 import app.model.CountryModel;
 import app.model.GamePlayModel;
@@ -16,7 +12,6 @@ import app.utilities.Validation;
 import app.view.AttackView;
 import app.view.FortificationView;
 import app.view.ReinforcementView;
-
 /**
  * In PlayerController, the data flow into model object and updates the view
  * whenever data changes.
@@ -25,7 +20,7 @@ import app.view.ReinforcementView;
  * @version 1.0.0
  *
  */
-public class AgressivePlayerController implements ActionListener, ItemListener {
+public class AgressivePlayerController implements Strategy {
 
 	/** The game play model. */
 	private GamePlayModel gamePlayModel;
@@ -44,6 +39,12 @@ public class AgressivePlayerController implements ActionListener, ItemListener {
 
 	/** The no of players. */
 	private int noOfPlayers;
+
+	/** The attacker country. */
+	private CountryModel attackerCountry;
+
+	/** The defender country. */
+	private CountryModel defenderCountry;
 
 	/** The val. */
 	private Validation val = new Validation();
@@ -66,11 +67,15 @@ public class AgressivePlayerController implements ActionListener, ItemListener {
 	 * 
 	 */
 	public void reinforcement() {
+		ArrayList<CardModel> deck = new ArrayList<CardModel>();
+		int troops = 0;
+		ArrayList<CountryModel> controlledCountries = new ArrayList<CountryModel>();
+		ArrayList<CountryModel> linkedCountries = new ArrayList<CountryModel>();
 		this.gamePlayModel.getConsoleText().setLength(0);
 		this.gamePlayModel.callObservers();
 		this.gamePlayModel.getConsoleText()
 				.append("Initiating Reinforcement for " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
-
+		CountryModel strongestCountry = new CountryModel();
 		this.gamePlayModel.getGameMap().getPlayerTurn().setremainTroop(this.gamePlayModel.numberOfCountries()
 				+ this.gamePlayModel.continentCovered(gamePlayModel.getGameMap().getPlayerTurn()));
 		if (gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().size() > 0) {
@@ -81,15 +86,47 @@ public class AgressivePlayerController implements ActionListener, ItemListener {
 			}
 			this.gamePlayModel.getGameMap().getPlayerTurn().setShowReinforcementCard(true);
 		}
-		theReinforcementView = new ReinforcementView(this.gamePlayModel);
-		theReinforcementView.setActionListener(this);
-		theReinforcementView.setVisible(true);
-
-		this.gamePlayModel.getGameMap().addObserver(theReinforcementView);
-		this.gamePlayModel.addObserver(theReinforcementView);
 		for (int i = 0; i < noOfPlayers; i++) {
 			this.listOfPlayers.get(i).addObserver(this.theReinforcementView);
 		}
+		for (int i = 0; i < gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().size(); i++) {
+			troops = troops + gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().get(i).getCardValue();
+			deck = this.gamePlayModel.getCards();
+			deck.add(gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().get(i));
+			gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().remove(i);
+
+		}
+
+		controlledCountries.addAll(gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries());
+		controlledCountries = gamePlayModel.sortCountry(controlledCountries);
+
+		for (int i = controlledCountries.size() - 1; i > 0; i--) {
+			strongestCountry = controlledCountries.get(i);
+			linkedCountries = gamePlayModel
+					.sortCountry((ArrayList<CountryModel>) strongestCountry.getLinkedCountries());
+
+			for (int j = linkedCountries.size() - 1; j > 0; j--) {
+				for (int k = 0; k < gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().size(); k++) {
+					if (gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(k).getCountryName()
+							.equals(linkedCountries.get(j).getCountryName())) {
+						continue;
+					} else {
+						attackerCountry = strongestCountry;
+						defenderCountry = linkedCountries.get(j);
+						break;
+					}
+				}
+
+			}
+
+		}
+		gamePlayModel.getGameMap().getPlayerTurn()
+				.setmyTroop(gamePlayModel.getGameMap().getPlayerTurn().getmyTroop() + troops);
+		attackerCountry
+				.setArmies(gamePlayModel.getGameMap().getPlayerTurn().getmyTroop() + attackerCountry.getArmies());
+		System.out.println(
+				"Attacking from " + attackerCountry.getCountryName() + " to " + defenderCountry.getCountryName());
+		this.attack();
 
 	}
 
@@ -97,15 +134,42 @@ public class AgressivePlayerController implements ActionListener, ItemListener {
 	 * This method is called in fortification phase.
 	 */
 	public void fortification() {
-		this.gamePlayModel.getConsoleText().setLength(0);
-		this.gamePlayModel.getConsoleText()
-				.append("Initiating Fortification for " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
+		int i = 0;
+		int j = 0;
+		boolean flag = false;
+		List<CountryModel> linkedCountries = new ArrayList<CountryModel>();
 
-		theFortificationView = new FortificationView(this.gamePlayModel);
-		theFortificationView.setActionListener(this);
-		theFortificationView.setItemListener(this);
-		theFortificationView.setVisible(true);
-		this.gamePlayModel.addObserver(this.theFortificationView);
+		ArrayList<CountryModel> controlledCountries = (ArrayList<CountryModel>) gamePlayModel.getGameMap()
+				.getPlayerTurn().getOwnedCountries();
+		controlledCountries = gamePlayModel.sortCountry(controlledCountries);
+		for (i = controlledCountries.size() - 1; i >= 0; i--) {
+			linkedCountries = controlledCountries.get(i).getLinkedCountries();
+			for (j = 0; j < linkedCountries.size(); j++) {
+				for (int k = 0; k < controlledCountries.size(); k++) {
+
+					if ((linkedCountries.get(j).getArmies() > 1) && (linkedCountries.get(j).getCountryName()
+							.equals(controlledCountries.get(k).getCountryName()))) {
+						controlledCountries.get(i).setArmies(
+								controlledCountries.get(i).getArmies() + linkedCountries.get(j).getArmies() - 1);
+						linkedCountries.get(j).setArmies(1);
+						flag = true;
+					}
+					if (flag == true)
+						break;
+
+				}
+				if (flag == true)
+					break;
+
+			}
+			if (flag == true)
+				break;
+		}
+		if (attackerCountry.getArmies() > 1) {
+			this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().add(this.gamePlayModel.getCard());
+		}
+		System.out.println("Fortifiction done");
+
 	}
 
 	/**
@@ -115,167 +179,20 @@ public class AgressivePlayerController implements ActionListener, ItemListener {
 		this.gamePlayModel.getConsoleText().setLength(0);
 		this.gamePlayModel.getConsoleText()
 				.append("Initiating " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer() + "'s attack");
-
-		theAttackView = new AttackView(this.gamePlayModel);
 		this.gamePlayModel.setArmyToMoveText(false);
 		this.gamePlayModel.setCardToBeAssigned(false);
-		theAttackView.setActionListener(this);
-		theAttackView.setVisible(true);
-		this.gamePlayModel.deleteObservers();
-		this.gamePlayModel.addObserver(this.theAttackView);
-	}
-
-	/**
-	 * This method performs action, by Listening the action event set in view.
-	 *
-	 * @param actionEvent the action event
-	 */
-	@Override
-	public void actionPerformed(ActionEvent actionEvent) {
-		if (actionEvent.getSource().equals(this.theReinforcementView.addButton)) {
-			int selectedArmies = 0;
-			if (theReinforcementView.numOfTroopsComboBox.getSelectedItem() != null) {
-				selectedArmies = (int) theReinforcementView.numOfTroopsComboBox.getSelectedItem();
-				CountryModel countryName = (CountryModel) theReinforcementView.countryListComboBox.getSelectedItem();
-				System.out.println("countryName" + selectedArmies + countryName);
-				this.gamePlayModel.setSelectedArmiesToCountries(selectedArmies, countryName);
-			} else {
-				this.theReinforcementView.dispose();
-				attack();
-
-			}
-		} else if (actionEvent.getSource().equals(this.theReinforcementView.addMoreButton)) {
-			int cardID = Integer.parseInt(this.theReinforcementView.cardIdField.getText());
-			int cardValue = 0;
-			CardModel card = new CardModel();
-			for (int i = 0; i < this.gamePlayModel.getCards().size(); i++) {
-				if (cardID == this.gamePlayModel.getCards().get(i).getCardId()) {
-					cardValue = this.gamePlayModel.getCards().get(i).getCardValue();
-				}
-			}
-			card.setCardId(cardID);
-			card.setCardValue(cardValue);
-			this.gamePlayModel.getGameMap().getPlayerTurn()
-					.setremainTroop(this.gamePlayModel.getGameMap().getPlayerTurn().getremainTroop() + cardValue);
-			for (int i = 0; i < this.gamePlayModel.getPlayers().size(); i++) {
-				if (gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer()
-						.equals(gamePlayModel.getPlayers().get(i).getNamePlayer())) {
-					this.gamePlayModel.getPlayers().get(i).removeCard(card);
-				}
-			}
-			this.gamePlayModel.getCards().add(card);
-			this.gamePlayModel.callObservers();
-		} else if (actionEvent.getSource().equals(this.theReinforcementView.exitCardButton)) {
-			for (int i = 0; i < this.gamePlayModel.getPlayers().size(); i++) {
-				if (gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer()
-						.equals(gamePlayModel.getPlayers().get(i).getNamePlayer())) {
-					if (gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().size() >= 5) {
-						this.gamePlayModel.getGameMap().getPlayerTurn().setShowReinforcementCard(true);
-						gamePlayModel.getPlayers().get(i).setShowReinforcementCard(true);
-						JOptionPane.showOptionDialog(null,
-								"Maximum 5 card is allowed. Please select card id to reimburse", "Reimburse card",
-								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {},
-								null);
-					} else {
-						this.gamePlayModel.getGameMap().getPlayerTurn().setShowReinforcementCard(false);
-						gamePlayModel.getPlayers().get(i).setShowReinforcementCard(false);
-						this.gamePlayModel.callObservers();
-					}
-				}
-			}
-		} else if (actionEvent.getSource().equals(this.theAttackView.nextButton)) {
-			this.theAttackView.dispose();
-			fortification();
-		} else if (actionEvent.getSource().equals(this.theAttackView.attackCountryListComboBox)) {
-			this.gamePlayModel
-					.setSelectedAttackComboBoxIndex(this.theAttackView.attackCountryListComboBox.getSelectedIndex());
-		} else if (actionEvent.getSource().equals(this.theAttackView.defendCountryListComboBox)) {
-			this.gamePlayModel
-					.setSelectedDefendComboBoxIndex(this.theAttackView.defendCountryListComboBox.getSelectedIndex());
-		} else if (actionEvent.getSource().equals(this.theAttackView.SingleButton)) {
-
-			int attackDice = (int) theAttackView.numOfDiceAttackComboBox.getSelectedItem();
-			int defendDice = (int) theAttackView.numOfDiceDefendComboBox.getSelectedItem();
-			CountryModel attackCountry = (CountryModel) theAttackView.attackCountryListComboBox.getSelectedItem();
-			CountryModel defendCountry = (CountryModel) theAttackView.defendCountryListComboBox.getSelectedItem();
-			this.gamePlayModel.setDefeatedCountry(defendCountry);
-			this.gamePlayModel.singleStrike(attackDice, attackCountry, defendDice, defendCountry);
-			if (val.endOfGame(this.gamePlayModel) == true) {
-				JOptionPane.showOptionDialog(null, "Bravo! You have won! Game is over!", "Valid",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
-				this.theAttackView.dispose();
-			}
-
-		} else if (actionEvent.getSource().equals(this.theAttackView.alloutButton)) {
-
-			CountryModel attackCountry = (CountryModel) theAttackView.attackCountryListComboBox.getSelectedItem();
-			CountryModel defendCountry = (CountryModel) theAttackView.defendCountryListComboBox.getSelectedItem();
-			this.gamePlayModel.setDefeatedCountry(defendCountry);
-			this.gamePlayModel.alloutStrike(attackCountry, defendCountry);
-			if (val.endOfGame(this.gamePlayModel) == true) {
-				JOptionPane.showOptionDialog(null, "Bravo! You have won! Game is over!", "Valid",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
-				this.theAttackView.dispose();
-			}
-
-		} else if (actionEvent.getSource().equals(this.theAttackView.moveButton)) {
-
-			CountryModel attackCountry = (CountryModel) theAttackView.attackCountryListComboBox.getSelectedItem();
-			int noOfArmiesToBeMoved = (int) theAttackView.numOfArmiesToBeMovedComboBox.getSelectedItem();
-			CountryModel defendCountry = this.gamePlayModel.getDefeatedCountry();
-			this.gamePlayModel.moveArmies(attackCountry, defendCountry, noOfArmiesToBeMoved);
-
-		} else if (actionEvent.getSource().equals(this.theFortificationView.moveButton)) {
-			// BFS
-
-			if (val.checkIfValidMove(this.gamePlayModel.getGameMap(),
-					(CountryModel) this.theFortificationView.fromCountryListComboBox.getSelectedItem(),
-					(CountryModel) this.theFortificationView.toCountryListComboBox.getSelectedItem())) {
-				this.gamePlayModel.getGameMap().setMovingArmies(
-						(Integer) this.theFortificationView.numOfTroopsComboBox.getSelectedItem(),
-						(CountryModel) this.theFortificationView.fromCountryListComboBox.getSelectedItem(),
-						(CountryModel) this.theFortificationView.toCountryListComboBox.getSelectedItem());
-			}
-
-			int index = this.gamePlayModel.getGameMap().getPlayerIndex();
-
-			this.gamePlayModel.moveDeck();
-
-			index++;
-			if (this.gamePlayModel.getPlayers().size() > index) {
-				this.gamePlayModel.getGameMap().setPlayerIndex(index);
-				this.gamePlayModel.getPlayers().get(index).callObservers();
-			} else {
-				index = 0;
-				this.gamePlayModel.getGameMap().setPlayerIndex(index);
-				this.gamePlayModel.getPlayers().get(index).callObservers();
-			}
-			if (val.endOfGame(this.gamePlayModel) == false) {
-				new GamePlayController(this.gamePlayModel);
-				this.theFortificationView.dispose();
-			} else {
-				JOptionPane.showOptionDialog(null, "Bravo! You have won! Game is over!", "Valid",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
-				this.theFortificationView.dispose();
-			}
-		} else if (actionEvent.getSource().equals(this.theFortificationView.fromCountryListComboBox)) {
-			this.gamePlayModel
-					.setSelectedComboBoxIndex(this.theFortificationView.fromCountryListComboBox.getSelectedIndex());
+		gamePlayModel.alloutStrike(attackerCountry, defenderCountry);
+		System.out.println("Before moving the attacker has " + attackerCountry.getArmies());
+		System.out.println("Before moving The defender has " + defenderCountry.getArmies());
+		if (attackerCountry.getArmies() > 1) {
+			int low = 1;
+			int high = attackerCountry.getArmies() - 1;
+			int movingArmies = this.gamePlayModel.getRandomBetweenRange(low, high);
+			gamePlayModel.moveArmies(attackerCountry, defenderCountry, movingArmies);
 		}
-
-	}
-
-	/**
-	 * Item Listener.
-	 *
-	 * @param itemEvent the item event
-	 * @see java.awt.event.ItemListener#itemStateChanged(java.awt.event.ItemEvent)
-	 */
-	public void itemStateChanged(ItemEvent itemEvent) {
-		if (itemEvent.getSource().equals(this.theFortificationView.fromCountryListComboBox)) {
-			this.gamePlayModel
-					.setSelectedComboBoxIndex(this.theFortificationView.fromCountryListComboBox.getSelectedIndex());
-		}
+		System.out.println("the attacker has " + attackerCountry.getArmies());
+		System.out.println("The defender has " + defenderCountry.getArmies());
+		fortification();
 
 	}
 }
