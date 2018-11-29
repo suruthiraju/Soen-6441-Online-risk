@@ -43,11 +43,6 @@ public class BenevolentPlayerController implements Strategy {
 		this.gamePlayModel.getGameMap().getPlayerTurn().setremainTroop(this.gamePlayModel.numberOfCountries()
 				+ this.gamePlayModel.continentCovered(gamePlayModel.getGameMap().getPlayerTurn()));
 
-		if (gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().size() == 5) {
-			this.gamePlayModel.getGameMap().getPlayerTurn()
-					.setremainTroop(5 + this.gamePlayModel.getGameMap().getPlayerTurn().getremainTroop());
-		}
-
 		// select Weakest Country
 		ArrayList<CountryModel> listofcountry = this.gamePlayModel.selectWeakestCountry(
 				(ArrayList<CountryModel>) gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries());
