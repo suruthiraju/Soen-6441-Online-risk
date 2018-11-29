@@ -282,4 +282,13 @@ public class PlayerModel extends Observable {
 	public void setStrategy(Strategy strategy) {
 	    this.strategy = strategy;
 	  }
+	public void executeReinforcement() {
+		this.strategy.reinforcement();
+	}
+	public void executeAttack() {
+		this.strategy.attack();
+	}
+	public void executeFortification() {
+		this.strategy.fortification();
+	}
 }

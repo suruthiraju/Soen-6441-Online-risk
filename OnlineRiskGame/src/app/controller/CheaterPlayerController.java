@@ -31,7 +31,6 @@ public class CheaterPlayerController implements Strategy {
 	public CheaterPlayerController(GamePlayModel gamePlayModel) {
 
 		this.gamePlayModel = gamePlayModel;
-		reinforcement();
 	}
 
 	/**
@@ -61,7 +60,6 @@ public class CheaterPlayerController implements Strategy {
 				}
 			}
 		}
-		attack();
 	}
 
 	/**
@@ -124,7 +122,6 @@ public class CheaterPlayerController implements Strategy {
 			}
 		}
 
-		fortification();
 	}
 	
 	public int indexRandomvalues() {

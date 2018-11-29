@@ -34,7 +34,6 @@ public class RandomPlayerController implements Strategy {
 	public RandomPlayerController(GamePlayModel gamePlayModel) {
 
 		this.gamePlayModel = gamePlayModel;
-		reinforcement();
 	}
 
 	/**
@@ -72,7 +71,6 @@ public class RandomPlayerController implements Strategy {
 		this.gamePlayModel.setSelectedArmiesToCountries(selectedArmies,
 				this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index - 1));
 
-		attack();
 	}
 
 	/**
@@ -139,7 +137,6 @@ public class RandomPlayerController implements Strategy {
 		if (this.gamePlayModel.getArmyToMoveText()) {
 			this.gamePlayModel.moveArmies(attackCountry, defendCountry, noOfArmiesToBeMoved);
 		}
-		fortification();
 	}
 
 	public int indexRandomvalues() {

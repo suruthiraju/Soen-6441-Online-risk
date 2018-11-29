@@ -31,7 +31,6 @@ public class BenevolentPlayerController implements Strategy {
 	public BenevolentPlayerController(GamePlayModel gamePlayModel) {
 
 		this.gamePlayModel = gamePlayModel;
-		reinforcement();
 	}
 
 	/**
@@ -62,7 +61,6 @@ public class BenevolentPlayerController implements Strategy {
 				this.gamePlayModel.setSelectedArmiesToCountries(selectedArmies, listofcountry.get(i));
 			}
 		}
-		attack();
 	}
 
 	/**
@@ -98,7 +96,6 @@ public class BenevolentPlayerController implements Strategy {
 	 */
 	public void attack() {
 		System.out.println("Benevolent - attack");
-		fortification();
 	}
 
 	/**
