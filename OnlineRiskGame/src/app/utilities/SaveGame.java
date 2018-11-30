@@ -161,6 +161,32 @@ public class SaveGame {
 						jsonObj.put("borderColor", null);
 					}
 					jsonObj.put("rulerName", gamePlayModel.getGameMap().getCountries().get(i).getRulerName());
+					JSONArray countryLinked = new JSONArray();
+					for (int j = 0; j < gamePlayModel.getGameMap().getCountries().get(i).getLinkedCountries().size(); j++) {
+						JSONObject jsonObj1 = new JSONObject();
+						jsonObj1.put("countryName", gamePlayModel.getGameMap().getCountries().get(i).getLinkedCountries().get(j).getCountryName());
+						jsonObj1.put("xPosition", gamePlayModel.getGameMap().getCountries().get(i).getLinkedCountries().get(j).getXPosition());
+						jsonObj1.put("yPosition", gamePlayModel.getGameMap().getCountries().get(i).getLinkedCountries().get(j).getYPosition());
+						jsonObj1.put("continentName", gamePlayModel.getGameMap().getCountries().get(i).getLinkedCountries().get(j).getcontinentName());
+						jsonObj1.put("armies", gamePlayModel.getGameMap().getCountries().get(i).getLinkedCountries().get(j).getArmies());
+						if (gamePlayModel.getGameMap().getCountries().get(i).getLinkedCountries().get(j).getBackgroundColor() != null) {
+							String colorS = Integer.toString(
+									gamePlayModel.getGameMap().getCountries().get(i).getLinkedCountries().get(j).getBackgroundColor().getRGB());
+							jsonObj1.put("backgroundColor", colorS.toString());
+						} else {
+							jsonObj1.put("backgroundColor", null);
+						}
+						if (gamePlayModel.getGameMap().getCountries().get(i).getLinkedCountries().get(j).getBorderColor() != null) {
+							String colorS = Integer
+									.toString(gamePlayModel.getGameMap().getCountries().get(i).getLinkedCountries().get(j).getBorderColor().getRGB());
+							jsonObj1.put("borderColor", colorS.toString());
+						} else {
+							jsonObj1.put("borderColor", null);
+						}
+						jsonObj1.put("rulerName", gamePlayModel.getGameMap().getCountries().get(i).getLinkedCountries().get(j).getRulerName());
+						countryLinked.add(jsonObj1);
+					}
+					jsonObj.put("linkedCountries", countryLinked);
 					countryParam.add(jsonObj);
 				}
 			}
@@ -812,6 +838,57 @@ public class SaveGame {
 					countryModel.setRulerName(content);
 				} else {
 					countryModel.setRulerName("");
+				}
+				JSONArray links = (JSONArray) country.get("linkedCountries");
+				for (Object j : links) {
+					CountryModel countries = new CountryModel();
+					JSONObject countryListed = (JSONObject) j;
+
+					if (countryListed.get("countryName") != null) {
+						content = (String) countryListed.get("countryName");
+						countries.setCountryName(content);
+					} else {
+						countries.setCountryName("");
+					}
+
+					lvalue = (Long) countryListed.get("xPosition");
+					value = lvalue.intValue();
+					countries.setXPosition(value);
+
+					lvalue = (Long) countryListed.get("yPosition");
+					value = lvalue.intValue();
+					countries.setYPosition(value);
+
+					if (countryListed.get("continentName") != null) {
+						content = (String) countryListed.get("continentName");
+						countries.setContinentName(content);
+					} else {
+						countries.setContinentName("");
+					}
+
+					lvalue = (Long) countryListed.get("armies");
+					value = lvalue.intValue();
+					countries.setArmies(value);
+
+					content = (String) countryListed.get("backgroundColor");
+					if (content != null ) {
+						color = new Color(Integer.parseInt(content));
+						countries.setBackgroundColor(color);
+					}
+
+					content = (String) countryListed.get("borderColor");
+					if (content != null ) {
+						color = new Color(Integer.parseInt(content));
+						countries.setBorderColor(color);
+					}
+
+					if (countryListed.get("rulerName") != null) {
+						content = (String) countryListed.get("rulerName");
+						countries.setRulerName(content);
+					} else {
+						countries.setRulerName("");
+					}
+					countryModel.getLinkedCountries().add(countries);
 				}
 				gamePlayModel.getGameMap().getCountries().add(countryModel);
 			}
