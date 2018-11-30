@@ -27,7 +27,7 @@ import app.view.PlayConsoleView;
 public class GamePlayModel extends Observable {
 
 	/** The game map model. */
-	private GameMapModel gameMapModel;
+	private GameMapModel gameMapModel =  new GameMapModel() ;
 	
 	/** The players. */
 	private ArrayList<PlayerModel> players = new ArrayList<PlayerModel>();
@@ -57,7 +57,7 @@ public class GamePlayModel extends Observable {
 	private StringBuilder consoleText;
 	
 	/** The defeated country. */
-	private CountryModel defeatedCountry;
+	private CountryModel defeatedCountry = new CountryModel();
 	
 	private PlayConsoleView console;
 	
