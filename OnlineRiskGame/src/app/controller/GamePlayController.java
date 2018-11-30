@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import app.model.GamePlayModel;
+import app.view.PlayConsoleView;
 
 /**
  * In GamePlayController, the data flow into model object and updates the view
@@ -17,7 +18,7 @@ import app.model.GamePlayModel;
 public class GamePlayController implements ActionListener {
 
 	public GamePlayModel gamePlayModel = null;
-
+	
 	/**
 	 * Constructor initializes values and sets the screen too visible
 	 * 
@@ -29,9 +30,9 @@ public class GamePlayController implements ActionListener {
 	}
 
 	public void gamePlay() {
-
-		this.gamePlayModel.getGameMap()
+				this.gamePlayModel.getGameMap()
 				.setPlayerTurn(this.gamePlayModel.getPlayers().get(this.gamePlayModel.getGameMap().getPlayerIndex()));
+				this.gamePlayModel.getConsole().append("This is "+this.gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer()+"'s turn");
 		new PlayerController(this.gamePlayModel);
 	}
 

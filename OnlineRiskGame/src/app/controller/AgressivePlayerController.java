@@ -70,8 +70,7 @@ public class AgressivePlayerController implements Strategy {
 		}
 		for (int i = 0; i < gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().size(); i++) {
 			troops = troops + gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().get(i).getCardValue();
-			deck = this.gamePlayModel.getCards();
-			deck.add(gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().get(i));
+			gamePlayModel.getCards().add(gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().get(i));
 			gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().remove(i);
 
 		}
@@ -144,7 +143,7 @@ public class AgressivePlayerController implements Strategy {
 			if (flag == true)
 				break;
 		}
-		this.gamePlayModel.moveDeck();
+		gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().add(gamePlayModel.getCard());
 
 		System.out.println("Fortifiction done");
 

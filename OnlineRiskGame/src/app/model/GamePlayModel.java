@@ -15,6 +15,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import app.view.PlayConsoleView;
+
 
 /**
  * "GamePlayerModel" class represents an object containing current map and
@@ -57,7 +59,10 @@ public class GamePlayModel extends Observable {
 	/** The defeated country. */
 	private CountryModel defeatedCountry;
 	
+	private PlayConsoleView console;
+	
 	private String gamePhase;
+
 
 	/**
 	 * Constructor.
@@ -71,6 +76,8 @@ public class GamePlayModel extends Observable {
 		this.players = players;
 		this.deck = deck;
 		this.consoleText = new StringBuilder("Hello to the Risk Game ! ");
+		this.console = new PlayConsoleView(this.console);
+		this.console.setVisible(true);
 	}
 	
 	/**
@@ -79,6 +86,9 @@ public class GamePlayModel extends Observable {
 	public GamePlayModel() {
 		this.gameMapModel = gameMapModel;
 		this.consoleText = new StringBuilder("Hello to the Risk Game ! ");
+		this.console = new PlayConsoleView(this.console);
+		this.console.setVisible(true);
+		this.console.append("I am alive");
 	}
 
 	/**
@@ -107,7 +117,11 @@ public class GamePlayModel extends Observable {
 	public GameMapModel getGameMap() {
 		return gameMapModel;
 	}
-
+	
+	public PlayConsoleView getConsole() {
+		return this.console;
+	}
+	
 	/**
 	 * Sets the gameMap Model.
 	 *

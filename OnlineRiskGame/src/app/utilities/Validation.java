@@ -36,12 +36,22 @@ public class Validation {
 			for (int j = 0; j < mapModel.getContinents().get(i).getCoveredCountries().size(); j++) {
 				for (int k = 0; k < mapModel.getContinents().get(i).getCoveredCountries().get(j).getLinkedCountries()
 						.size(); k++) {
+					try
+					{
 					if (mapModel.getContinents().get(i).getCoveredCountries().get(j).getLinkedCountries().get(k)
 							.getcontinentName()
 							.equals(mapModel.getContinents().get(i).getCoveredCountries().get(j).getcontinentName())) {
 						flagIntra++;
 					} else {
 						flagInter++;
+					}
+					}
+					catch(Exception E)
+					{
+						JOptionPane.showMessageDialog(null,
+								mapModel.getContinents().get(i).getCoveredCountries().get(j).getLinkedCountries().get(k).getCountryName()+" cannot be linked properly with " + mapModel.getContinents().get(i).getCoveredCountries().get(j).getCountryName(), "Map Loaded",
+								JOptionPane.INFORMATION_MESSAGE);
+						return true;
 					}
 				}
 				if (flagIntra < 1) {
