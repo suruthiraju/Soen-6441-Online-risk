@@ -144,9 +144,8 @@ public class AgressivePlayerController implements Strategy {
 			if (flag == true)
 				break;
 		}
-		if (attackerCountry.getArmies() > 1) {
-			this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().add(this.gamePlayModel.getCard());
-		}
+		this.gamePlayModel.moveDeck();
+
 		System.out.println("Fortifiction done");
 
 	}
