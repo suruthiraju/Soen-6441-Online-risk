@@ -38,7 +38,7 @@ public class PlayerModel extends Observable {
 	private List<CountryModel> ownedCountries  = new ArrayList<CountryModel>();
 	
 	/** The owned cards. */
-	private List<CardModel> ownedCards;
+	private List<CardModel> ownedCards  = new ArrayList<CardModel>();
 	
 	/** The show reinforcement card. */
 	private boolean showReinforcementCard;

@@ -59,11 +59,15 @@ public class SaveGame {
 		card = gamePlayModel.getCards().get(0);
 
 		gamePlayModel.setPlayers(pmList);
+		Color myColor = Color.GRAY;
+		String colorS = Integer.toString(myColor.getRGB());
+		Color c = new Color(Integer.parseInt(colorS));
 
 		// writeTOJSONFile(gamePlayModel, "file");
 
-		//File readFile1 = new File(System.getProperty("user.dir") + "\\mapfiles\\file.json");
-		//readFROMJSONFile(readFile1);
+		// File readFile1 = new File(System.getProperty("user.dir") +
+		// "\\mapfiles\\file.json");
+		// readFROMJSONFile(readFile1);
 	}
 
 	public void writeTOJSONFile(GamePlayModel gamePlayModel, String fileName) throws IOException {
@@ -109,17 +113,19 @@ public class SaveGame {
 								.get(j).getArmies());
 						if (gamePlayModel.getGameMap().getContinents().get(i).getCoveredCountries().get(j)
 								.getBackgroundColor() != null) {
-							jsonObj1.put("backgroundColor", gamePlayModel.getGameMap().getContinents().get(i)
-									.getCoveredCountries().get(j).getBackgroundColor().toString());
+							String colorS = Integer.toString(gamePlayModel.getGameMap().getContinents().get(i)
+									.getCoveredCountries().get(j).getBackgroundColor().getRGB());
+							jsonObj1.put("backgroundColor", colorS.toString());
 						} else {
-							jsonObj1.put("backgroundColor", "");
+							jsonObj1.put("backgroundColor", null);
 						}
 						if (gamePlayModel.getGameMap().getContinents().get(i).getCoveredCountries().get(j)
 								.getBorderColor() != null) {
-							jsonObj1.put("borderColor", gamePlayModel.getGameMap().getContinents().get(i)
-									.getCoveredCountries().get(j).getBorderColor().toString());
+							String colorS = Integer.toString(gamePlayModel.getGameMap().getContinents().get(i)
+									.getCoveredCountries().get(j).getBorderColor().getRGB());
+							jsonObj1.put("borderColor", colorS.toString());
 						} else {
-							jsonObj1.put("borderColor", "");
+							jsonObj1.put("borderColor", null);
 						}
 						jsonObj1.put("rulerName", gamePlayModel.getGameMap().getContinents().get(i)
 								.getCoveredCountries().get(j).getRulerName());
@@ -141,16 +147,18 @@ public class SaveGame {
 					jsonObj.put("continentName", gamePlayModel.getGameMap().getCountries().get(i).getcontinentName());
 					jsonObj.put("armies", gamePlayModel.getGameMap().getCountries().get(i).getArmies());
 					if (gamePlayModel.getGameMap().getCountries().get(i).getBackgroundColor() != null) {
-						jsonObj.put("backgroundColor",
-								gamePlayModel.getGameMap().getCountries().get(i).getBackgroundColor().toString());
+						String colorS = Integer.toString(
+								gamePlayModel.getGameMap().getCountries().get(i).getBackgroundColor().getRGB());
+						jsonObj.put("backgroundColor", colorS.toString());
 					} else {
-						jsonObj.put("backgroundColor", "");
+						jsonObj.put("backgroundColor", null);
 					}
 					if (gamePlayModel.getGameMap().getCountries().get(i).getBorderColor() != null) {
-						jsonObj.put("borderColor",
-								gamePlayModel.getGameMap().getCountries().get(i).getBorderColor().toString());
+						String colorS = Integer
+								.toString(gamePlayModel.getGameMap().getCountries().get(i).getBorderColor().getRGB());
+						jsonObj.put("borderColor", colorS.toString());
 					} else {
-						jsonObj.put("borderColor", "");
+						jsonObj.put("borderColor", null);
 					}
 					jsonObj.put("rulerName", gamePlayModel.getGameMap().getCountries().get(i).getRulerName());
 					countryParam.add(jsonObj);
@@ -167,10 +175,11 @@ public class SaveGame {
 					jsonObj.put("typePlayer", gamePlayModel.getGameMap().getListOfPlayers().get(i).getTypePlayer());
 					jsonObj.put("myTroop", gamePlayModel.getGameMap().getListOfPlayers().get(i).getmyTroop());
 					if (gamePlayModel.getGameMap().getListOfPlayers().get(i).getColor() != null) {
-						jsonObj.put("color",
-								gamePlayModel.getGameMap().getListOfPlayers().get(i).getColor().toString());
+						String colorS = Integer
+								.toString(gamePlayModel.getGameMap().getListOfPlayers().get(i).getColor().getRGB());
+						jsonObj.put("color", colorS.toString());
 					} else {
-						jsonObj.put("color", "");
+						jsonObj.put("color", null);
 					}
 					jsonObj.put("remainTroop", gamePlayModel.getGameMap().getListOfPlayers().get(i).getremainTroop());
 					jsonObj.put("showReinforcementCard",
@@ -194,17 +203,19 @@ public class SaveGame {
 									.getOwnedCountries().get(j).getArmies());
 							if (gamePlayModel.getGameMap().getListOfPlayers().get(i).getOwnedCountries().get(j)
 									.getBackgroundColor() != null) {
-								jsonObj1.put("backgroundColor", gamePlayModel.getGameMap().getListOfPlayers().get(i)
-										.getOwnedCountries().get(j).getBackgroundColor().toString());
+								String colorS = Integer.toString(gamePlayModel.getGameMap().getListOfPlayers().get(i)
+										.getOwnedCountries().get(j).getBackgroundColor().getRGB());
+								jsonObj1.put("backgroundColor", colorS.toString());
 							} else {
-								jsonObj1.put("backgroundColor", "");
+								jsonObj1.put("backgroundColor", null);
 							}
 							if (gamePlayModel.getGameMap().getListOfPlayers().get(i).getOwnedCountries().get(j)
 									.getBorderColor() != null) {
-								jsonObj1.put("borderColor", gamePlayModel.getGameMap().getListOfPlayers().get(i)
-										.getOwnedCountries().get(j).getBorderColor().toString());
+								String colorS = Integer.toString(gamePlayModel.getGameMap().getListOfPlayers().get(i)
+										.getOwnedCountries().get(j).getBorderColor().getRGB());
+								jsonObj1.put("borderColor", colorS.toString());
 							} else {
-								jsonObj1.put("borderColor", "");
+								jsonObj1.put("borderColor", null);
 							}
 							jsonObj1.put("rulerName", gamePlayModel.getGameMap().getListOfPlayers().get(i)
 									.getOwnedCountries().get(j).getRulerName());
@@ -241,9 +252,10 @@ public class SaveGame {
 				jsonObj.put("typePlayer", gamePlayModel.getGameMap().getPlayerTurn().getTypePlayer());
 				jsonObj.put("myTroop", gamePlayModel.getGameMap().getPlayerTurn().getmyTroop());
 				if (gamePlayModel.getGameMap().getPlayerTurn().getColor() != null) {
-					jsonObj.put("color", gamePlayModel.getGameMap().getPlayerTurn().getColor().toString());
+					String colorS = Integer.toString(gamePlayModel.getGameMap().getPlayerTurn().getColor().getRGB());
+					jsonObj.put("color", colorS.toString());
 				} else {
-					jsonObj.put("color", "");
+					jsonObj.put("color", null);
 				}
 				jsonObj.put("remainTroop", gamePlayModel.getGameMap().getPlayerTurn().getremainTroop());
 				jsonObj.put("showReinforcementCard",
@@ -266,17 +278,19 @@ public class SaveGame {
 								gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(j).getArmies());
 						if (gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(j)
 								.getBackgroundColor() != null) {
-							jsonObj1.put("backgroundColor", gamePlayModel.getGameMap().getPlayerTurn()
-									.getOwnedCountries().get(j).getBackgroundColor().toString());
+							String colorS = Integer.toString(gamePlayModel.getGameMap().getPlayerTurn()
+									.getOwnedCountries().get(j).getBackgroundColor().getRGB());
+							jsonObj1.put("backgroundColor", colorS.toString());
 						} else {
-							jsonObj1.put("backgroundColor", "");
+							jsonObj1.put("backgroundColor", null);
 						}
 						if (gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(j)
 								.getBorderColor() != null) {
-							jsonObj1.put("borderColor", gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries()
-									.get(j).getBorderColor().toString());
+							String colorS = Integer.toString(gamePlayModel.getGameMap().getPlayerTurn()
+									.getOwnedCountries().get(j).getBorderColor().getRGB());
+							jsonObj1.put("borderColor", colorS.toString());
 						} else {
-							jsonObj1.put("borderColor", "");
+							jsonObj1.put("borderColor", null);
 						}
 						jsonObj1.put("rulerName",
 								gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(j).getRulerName());
@@ -328,9 +342,10 @@ public class SaveGame {
 					jsonObj.put("typePlayer", gamePlayModel.getPlayers().get(i).getTypePlayer());
 					jsonObj.put("myTroop", gamePlayModel.getPlayers().get(i).getmyTroop());
 					if (gamePlayModel.getPlayers().get(i).getColor() != null) {
-						jsonObj.put("color", gamePlayModel.getPlayers().get(i).getColor().toString());
+						String colorS = Integer.toString(gamePlayModel.getPlayers().get(i).getColor().getRGB());
+						jsonObj.put("color", colorS.toString());
 					} else {
-						jsonObj.put("color", "");
+						jsonObj.put("color", null);
 					}
 					jsonObj.put("remainTroop", gamePlayModel.getPlayers().get(i).getremainTroop());
 					jsonObj.put("showReinforcementCard", gamePlayModel.getPlayers().get(i).getShowReinforcementCard());
@@ -352,16 +367,18 @@ public class SaveGame {
 									gamePlayModel.getPlayers().get(i).getOwnedCountries().get(j).getArmies());
 							if (gamePlayModel.getPlayers().get(i).getOwnedCountries().get(j)
 									.getBackgroundColor() != null) {
-								jsonObj1.put("backgroundColor", gamePlayModel.getPlayers().get(i).getOwnedCountries()
-										.get(j).getBackgroundColor().toString());
+								String colorS = Integer.toString(gamePlayModel.getPlayers().get(i).getOwnedCountries()
+										.get(j).getBackgroundColor().getRGB());
+								jsonObj1.put("backgroundColor", colorS.toString());
 							} else {
-								jsonObj1.put("backgroundColor", "");
+								jsonObj1.put("backgroundColor", null);
 							}
 							if (gamePlayModel.getPlayers().get(i).getOwnedCountries().get(j).getBorderColor() != null) {
-								jsonObj1.put("borderColor", gamePlayModel.getPlayers().get(i).getOwnedCountries().get(j)
-										.getBorderColor().toString());
+								String colorS = Integer.toString(gamePlayModel.getPlayers().get(i).getOwnedCountries()
+										.get(j).getBorderColor().getRGB());
+								jsonObj1.put("borderColor", colorS.toString());
 							} else {
-								jsonObj1.put("borderColor", "");
+								jsonObj1.put("borderColor", null);
 							}
 							jsonObj1.put("rulerName",
 									gamePlayModel.getPlayers().get(i).getOwnedCountries().get(j).getRulerName());
@@ -404,14 +421,16 @@ public class SaveGame {
 				jsonObj.put("continentName", gamePlayModel.getDefeatedCountry().getcontinentName());
 				jsonObj.put("armies", gamePlayModel.getDefeatedCountry().getArmies());
 				if (gamePlayModel.getDefeatedCountry().getBackgroundColor() != null) {
-					jsonObj.put("backgroundColor", gamePlayModel.getDefeatedCountry().getBackgroundColor().toString());
+					String colorS = Integer.toString(gamePlayModel.getDefeatedCountry().getBackgroundColor().getRGB());
+					jsonObj.put("backgroundColor", colorS.toString());
 				} else {
-					jsonObj.put("backgroundColor", "");
+					jsonObj.put("backgroundColor", null);
 				}
 				if (gamePlayModel.getDefeatedCountry().getBorderColor() != null) {
-					jsonObj.put("borderColor", gamePlayModel.getDefeatedCountry().getBorderColor().toString());
+					String colorS = Integer.toString(gamePlayModel.getDefeatedCountry().getBorderColor().getRGB());
+					jsonObj.put("borderColor", colorS.toString());
 				} else {
-					jsonObj.put("borderColor", "");
+					jsonObj.put("borderColor", null);
 				}
 				jsonObj.put("rulerName", gamePlayModel.getDefeatedCountry().getRulerName());
 
@@ -476,8 +495,10 @@ public class SaveGame {
 				playerModel.setmyTroop(value);
 
 				content = (String) player.get("color");
-				color = stringToColor(content);
-				playerModel.setColor(color);
+				if (content != null ) {
+					color = new Color(Integer.parseInt(content));
+					playerModel.setColor(color);
+				}
 
 				lvalue = (Long) player.get("remainTroop");
 				value = lvalue.intValue();
@@ -519,12 +540,16 @@ public class SaveGame {
 					countryModel.setArmies(value);
 
 					content = (String) country.get("backgroundColor");
-					color = stringToColor(content);
-					countryModel.setBackgroundColor(color);
+					if (content != null ) {
+						color = new Color(Integer.parseInt(content));
+						countryModel.setBackgroundColor(color);
+					}
 
 					content = (String) country.get("borderColor");
-					color = stringToColor(content);
-					countryModel.setBorderColor(color);
+					if (content != null ) {
+						color = new Color(Integer.parseInt(content));
+						countryModel.setBorderColor(color);
+					}
 
 					if (country.get("rulerName") != null) {
 						content = (String) country.get("rulerName");
@@ -574,8 +599,10 @@ public class SaveGame {
 			playerModel1.setmyTroop(value);
 
 			content = (String) playerTurn.get("color");
-			color = stringToColor(content);
-			playerModel1.setColor(color);
+			if (content != null ) {
+				color = new Color(Integer.parseInt(content));
+				playerModel1.setColor(color);
+			}
 
 			lvalue = (Long) playerTurn.get("remainTroop");
 			value = lvalue.intValue();
@@ -617,12 +644,16 @@ public class SaveGame {
 				countryModel.setArmies(value);
 
 				content = (String) country.get("backgroundColor");
-				color = stringToColor(content);
-				countryModel.setBackgroundColor(color);
+				if (content != null ) {
+					color = new Color(Integer.parseInt(content));
+					countryModel.setBackgroundColor(color);
+				}
 
 				content = (String) country.get("borderColor");
-				color = stringToColor(content);
-				countryModel.setBorderColor(color);
+				if (content != null ) {
+					color = new Color(Integer.parseInt(content));
+					countryModel.setBorderColor(color);
+				}
 
 				if (country.get("rulerName") != null) {
 					content = (String) country.get("rulerName");
@@ -711,12 +742,16 @@ public class SaveGame {
 					countryModel1.setArmies(value);
 
 					content = (String) country.get("backgroundColor");
-					color = stringToColor(content);
-					countryModel1.setBackgroundColor(color);
+					if (content != null) {
+						color = new Color(Integer.parseInt(content));
+						countryModel1.setBackgroundColor(color);
+					}
 
 					content = (String) country.get("borderColor");
-					color = stringToColor(content);
-					countryModel1.setBorderColor(color);
+					if (content != null ) {
+						color = new Color(Integer.parseInt(content));
+						countryModel1.setBorderColor(color);
+					}
 
 					if (country.get("rulerName") != null) {
 						content = (String) country.get("rulerName");
@@ -761,12 +796,16 @@ public class SaveGame {
 				countryModel.setArmies(value);
 
 				content = (String) country.get("backgroundColor");
-				color = stringToColor(content);
-				countryModel.setBackgroundColor(color);
+				if (content != null ) {
+					color = new Color(Integer.parseInt(content));
+					countryModel.setBackgroundColor(color);
+				}
 
 				content = (String) country.get("borderColor");
-				color = stringToColor(content);
-				countryModel.setBorderColor(color);
+				if (content != null ) {
+					color = new Color(Integer.parseInt(content));
+					countryModel.setBorderColor(color);
+				}
 
 				if (country.get("rulerName") != null) {
 					content = (String) country.get("rulerName");
@@ -801,8 +840,10 @@ public class SaveGame {
 				playerModel2.setmyTroop(value);
 
 				content = (String) player.get("color");
-				color = stringToColor(content);
-				playerModel2.setColor(color);
+				if (content != null ) {
+					color = new Color(Integer.parseInt(content));
+					playerModel2.setColor(color);
+				}
 
 				lvalue = (Long) player.get("remainTroop");
 				value = lvalue.intValue();
@@ -844,12 +885,16 @@ public class SaveGame {
 					countryModel2.setArmies(value);
 
 					content = (String) country.get("backgroundColor");
-					color = stringToColor(content);
-					countryModel2.setBackgroundColor(color);
+					if (content != null ) {
+						color = new Color(Integer.parseInt(content));
+						countryModel2.setBackgroundColor(color);
+					}
 
 					content = (String) country.get("borderColor");
-					color = stringToColor(content);
-					countryModel2.setBorderColor(color);
+					if (content != null ) {
+						color = new Color(Integer.parseInt(content));
+						countryModel2.setBorderColor(color);
+					}
 
 					if (country.get("rulerName") != null) {
 						content = (String) country.get("rulerName");
@@ -959,12 +1004,16 @@ public class SaveGame {
 				gamePlayModel.getDefeatedCountry().setArmies(value);
 
 				content = (String) jsonObj.get("backgroundColor");
-				color = stringToColor(content);
-				gamePlayModel.getDefeatedCountry().setBackgroundColor(color);
+				if (content != null ) {
+					color = new Color(Integer.parseInt(content));
+					gamePlayModel.getDefeatedCountry().setBackgroundColor(color);
+				}
 
 				content = (String) jsonObj.get("borderColor");
-				color = stringToColor(content);
-				gamePlayModel.getDefeatedCountry().setBorderColor(color);
+				if (content != null ) {
+					color = new Color(Integer.parseInt(content));
+					gamePlayModel.getDefeatedCountry().setBorderColor(color);
+				}
 
 				if (jsonObj.get("rulerName") != null) {
 					content = (String) jsonObj.get("rulerName");

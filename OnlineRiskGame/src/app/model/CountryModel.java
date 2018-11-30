@@ -1,6 +1,7 @@
 package app.model;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -29,7 +30,7 @@ public class CountryModel extends JButton {
 	private String continentName;
 
 	/** The linked countries. */
-	private List<CountryModel> linkedCountries;
+	private List<CountryModel> linkedCountries = new ArrayList<CountryModel>();
 
 	/** The armies. */
 	private int armies;
