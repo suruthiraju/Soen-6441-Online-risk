@@ -96,6 +96,7 @@ public class BenevolentPlayerController implements Strategy {
 	 */
 	public void attack() {
 		System.out.println("Benevolent - attack");
+		System.out.println("Benevolent passes his attack");
 	}
 
 	/**

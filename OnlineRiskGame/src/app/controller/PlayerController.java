@@ -16,6 +16,7 @@ import app.utilities.Validation;
 import app.utilities.WriteMap;
 import app.view.AttackView;
 import app.view.FortificationView;
+import app.view.PlayConsoleView;
 import app.view.ReinforcementView;
 
 /**

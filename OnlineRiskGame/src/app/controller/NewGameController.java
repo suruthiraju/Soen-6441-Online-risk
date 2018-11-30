@@ -48,7 +48,7 @@ public class NewGameController implements ActionListener {
 
 	/** The Player name. */
 	private String PlayerName = "";
-	
+
 	/** The Player type. */
 	private String PlayerType = "";
 
@@ -89,26 +89,18 @@ public class NewGameController implements ActionListener {
 					boolean flag3 = MapValidation.emptyContinentValidation(this.gameMapModel);
 					boolean flag2 = MapValidation.checkInterlinkedContinent(this.gameMapModel);
 					System.out.println(flag1 + " " + flag2 + " " + flag3);
-					if (!(MapValidation.emptyLinkCountryValidation(this.gameMapModel))) {
-						if ((!MapValidation.checkInterlinkedContinent(this.gameMapModel))) {
+					if (!(MapValidation.nonContinentValidation(this.gameMapModel))) {
+						if (!(MapValidation.emptyLinkCountryValidation(this.gameMapModel))) {
 							if (!(MapValidation.emptyContinentValidation(this.gameMapModel))) {
-								if (!(MapValidation.nonContinentValidation(this.gameMapModel))) {
 
-									System.out.println(" All the map validations are correct");
-									try {
-										JOptionPane.showMessageDialog(theView,
-												"File Loaded Successfully! Click Next to Play!", "Map Loaded",
-												JOptionPane.INFORMATION_MESSAGE);
+								System.out.println(" All the map validations are correct");
+								try {
+									JOptionPane.showMessageDialog(theView,
+											"File Loaded Successfully! Click Next to Play!", "Map Loaded",
+											JOptionPane.INFORMATION_MESSAGE);
 
-									} catch (Exception e) {
-										e.printStackTrace();
-									}
-								} else {
-									System.out.println("One of the continent is invalid");
-									JOptionPane.showOptionDialog(null, "All continents are not linked", "Invalid",
-											JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
-											new Object[] {}, null);
-
+								} catch (Exception e) {
+									e.printStackTrace();
 								}
 
 							} else {
@@ -118,17 +110,17 @@ public class NewGameController implements ActionListener {
 										new Object[] {}, null);
 							}
 						} else {
-							System.out.println("ECheck interlinked Continent validation failed");
-							JOptionPane.showOptionDialog(null, "Check interlinedContinent validation failed", "Invalid",
+							System.out.println("Empty continent validation failed");
+							JOptionPane.showOptionDialog(null, "Empty link country validation failed", "Invalid",
 									JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {},
 									null);
-
 						}
 					} else {
-						System.out.println("Empty continent validation failed");
-						JOptionPane.showOptionDialog(null, "Empty link country validation failed", "Invalid",
+						System.out.println("One of the continent is invalid");
+						JOptionPane.showOptionDialog(null, "Map is not linked properly", "Invalid",
 								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {},
 								null);
+
 					}
 
 				} catch (Exception e) {
@@ -157,7 +149,7 @@ public class NewGameController implements ActionListener {
 	public void playerValidation() throws ParseException {
 		if (gameMapModel.getCountries().size() > noOfPlayers) {
 			System.out.println("no of players" + noOfPlayers);
-			int h=1,a=1,b=1,r=1,c = 1;
+			int h = 1, a = 1, b = 1, r = 1, c = 1;
 			for (int i = 0; i < noOfPlayers; i++) {
 				if (i == 0) {
 					PlayerType = theView.playerType1.getSelectedItem().toString();
@@ -182,40 +174,40 @@ public class NewGameController implements ActionListener {
 						PlayerName = "Human " + h;
 						h++;
 					}
-				}else if("Human".equals(PlayerType)) {
+				} else if ("Human".equals(PlayerType)) {
 					PlayerType = "Human";
 					if (PlayerName == null || "".equals(PlayerName.trim())) {
 						PlayerName = "Human " + h;
 						h++;
 					}
-				} else if("Aggressive".equals(PlayerType)) {
+				} else if ("Aggressive".equals(PlayerType)) {
 					PlayerType = "Aggressive";
 					if (PlayerName == null || "".equals(PlayerName.trim())) {
 						PlayerName = "Aggressive " + a;
 						a++;
 					}
-				}else if("Benevolent".equals(PlayerType)) {
+				} else if ("Benevolent".equals(PlayerType)) {
 					PlayerType = "Benevolent";
 					if (PlayerName == null || "".equals(PlayerName.trim())) {
 						PlayerName = "Benevolent " + b;
 						b++;
 					}
-				}else if("Random".equals(PlayerType)) {
+				} else if ("Random".equals(PlayerType)) {
 					PlayerType = "Random";
 					if (PlayerName == null || "".equals(PlayerName.trim())) {
 						PlayerName = "Random " + r;
 						r++;
 					}
-				}else if("Cheater".equals(PlayerType)) {
+				} else if ("Cheater".equals(PlayerType)) {
 					PlayerType = "Cheater";
 					if (PlayerName == null || "".equals(PlayerName.trim())) {
 						PlayerName = "Cheater " + c;
 						c++;
 					}
 				}
-				
-				PlayerModel pm = new PlayerModel(PlayerName, PlayerType,  0, Color.WHITE, 0, new ArrayList<CountryModel>(),
-						new ArrayList<CardModel>());
+
+				PlayerModel pm = new PlayerModel(PlayerName, PlayerType, 0, Color.WHITE, 0,
+						new ArrayList<CountryModel>(), new ArrayList<CardModel>());
 				listOfPlayers.add(pm);
 			}
 			gamePlayModel.setGameMap(gameMapModel);
