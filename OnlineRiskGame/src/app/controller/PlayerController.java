@@ -4,15 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.ArrayList;
+import java.io.File;
 
 import javax.swing.JOptionPane;
 
 import app.model.CardModel;
 import app.model.CountryModel;
 import app.model.GamePlayModel;
-import app.model.PlayerModel;
+import app.utilities.SaveGame;
 import app.utilities.Validation;
+import app.utilities.WriteMap;
 import app.view.AttackView;
 import app.view.FortificationView;
 import app.view.ReinforcementView;
@@ -41,6 +42,9 @@ public class PlayerController implements ActionListener, ItemListener {
 
 	/** The attack view. */
 	private AttackView theAttackView;
+
+	/** The filename. */
+	private String filename = null;
 
 	/**
 	 * Constructor initializes values and sets the screen too visible.
@@ -169,6 +173,23 @@ public class PlayerController implements ActionListener, ItemListener {
 					}
 				}
 			}
+		} else if (actionEvent.getSource().equals(this.theReinforcementView.saveButton)) {
+			this.gamePlayModel.setGamePhase("Reinforcement");
+			filename = JOptionPane.showInputDialog("File Name");
+			try {
+				System.out.println(filename);
+				SaveGame save = new SaveGame();
+				if (filename == null || filename == "") {
+					save.writeTOJSONFile(this.gamePlayModel, "file");
+				} else {
+					save.writeTOJSONFile(this.gamePlayModel, filename);
+				}
+				JOptionPane.showMessageDialog(null, "Play has been saved");
+				new WelcomeScreenController();
+				this.theReinforcementView.dispose();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if (actionEvent.getSource().equals(this.theAttackView.nextButton)) {
 			this.theAttackView.dispose();
 			theFortificationView = new FortificationView(this.gamePlayModel);
@@ -216,6 +237,23 @@ public class PlayerController implements ActionListener, ItemListener {
 			CountryModel defendCountry = this.gamePlayModel.getDefeatedCountry();
 			this.gamePlayModel.moveArmies(attackCountry, defendCountry, noOfArmiesToBeMoved);
 
+		} else if (actionEvent.getSource().equals(this.theAttackView.saveButton)) {
+			this.gamePlayModel.setGamePhase("Attack");
+			filename = JOptionPane.showInputDialog("File Name");
+			try {
+				System.out.println(filename);
+				SaveGame save = new SaveGame();
+				if (filename == null || filename == "") {
+					save.writeTOJSONFile(this.gamePlayModel, "file");
+				} else {
+					save.writeTOJSONFile(this.gamePlayModel, filename);
+				}
+				JOptionPane.showMessageDialog(null, "Play has been saved");
+				new WelcomeScreenController();
+				this.theAttackView.dispose();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if (actionEvent.getSource().equals(this.theFortificationView.moveButton)) {
 			// BFS
 			this.gamePlayModel.getGameMap().getPlayerTurn().executeFortification();
@@ -247,6 +285,23 @@ public class PlayerController implements ActionListener, ItemListener {
 		} else if (actionEvent.getSource().equals(this.theFortificationView.fromCountryListComboBox)) {
 			this.gamePlayModel
 					.setSelectedComboBoxIndex(this.theFortificationView.fromCountryListComboBox.getSelectedIndex());
+		} else if (actionEvent.getSource().equals(this.theFortificationView.saveButton)) {
+			this.gamePlayModel.setGamePhase("Fortification");
+			filename = JOptionPane.showInputDialog("File Name");
+			try {
+				System.out.println(filename);
+				SaveGame save = new SaveGame();
+				if (filename == null || filename == "") {
+					save.writeTOJSONFile(this.gamePlayModel, "file");
+				} else {
+					save.writeTOJSONFile(this.gamePlayModel, filename);
+				}
+				JOptionPane.showMessageDialog(null, "Play has been saved");
+				new WelcomeScreenController();
+				this.theFortificationView.dispose();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 	}

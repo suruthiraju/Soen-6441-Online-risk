@@ -96,6 +96,9 @@ public class AttackView extends JFrame implements View, ItemListener {
 	/** The next button. */
 	public JButton nextButton;
 	
+	/** The save button. */
+	public JButton saveButton;
+	
 	/** The move button. */
 	public JButton moveButton;
 	
@@ -168,6 +171,7 @@ public class AttackView extends JFrame implements View, ItemListener {
  		
 
 		this.nextButton = new JButton("Next");
+		this.saveButton = new JButton("Save Game");
 		this.moveButton = new JButton("Move");
 		this.SingleButton = new JButton("Single attack");
 		this.alloutButton = new JButton("All Out");
@@ -351,8 +355,11 @@ public class AttackView extends JFrame implements View, ItemListener {
 			this.moveButton.setBounds(1300, 540, 150, 25);
 			welcomePanel.add(this.moveButton);
 		}
-
-		this.nextButton.setBounds(1300, 600, 150, 25);
+		
+		this.saveButton.setBounds(1300, 575, 150, 25);
+		welcomePanel.add(this.saveButton);
+		
+		this.nextButton.setBounds(1300, 610, 150, 25);
 		welcomePanel.add(this.nextButton);
 
 		int n = this.gameMapModel.getCountries().size();
@@ -475,6 +482,7 @@ public class AttackView extends JFrame implements View, ItemListener {
 	 */
 	public void setActionListener(ActionListener actionListener) {
 		this.nextButton.addActionListener(actionListener);
+		this.saveButton.addActionListener(actionListener);
 		this.SingleButton.addActionListener(actionListener);
 		this.alloutButton.addActionListener(actionListener);
 		this.defendCountryListComboBox.addActionListener(actionListener);

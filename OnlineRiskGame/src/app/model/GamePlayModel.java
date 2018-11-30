@@ -56,6 +56,8 @@ public class GamePlayModel extends Observable {
 	
 	/** The defeated country. */
 	private CountryModel defeatedCountry;
+	
+	private String gamePhase;
 
 	/**
 	 * Constructor.
@@ -75,9 +77,28 @@ public class GamePlayModel extends Observable {
 	 * Default Constructor.
 	 */
 	public GamePlayModel() {
+		this.gameMapModel = gameMapModel;
 		this.consoleText = new StringBuilder("Hello to the Risk Game ! ");
 	}
 
+	/**
+	 * Gets the gamePhase.
+	 *
+	 * @return the gamePhase.
+	 */
+	public String getGamePhase() {
+		return gamePhase;
+	}
+
+	/**
+	 * Sets the gamePhase.
+	 *
+	 * @param gamePhase 
+	 */
+	public void setGamePhase(String gamePhase) {
+		this.gamePhase = gamePhase;
+	}
+	
 	/**
 	 * Gets the game map.
 	 *

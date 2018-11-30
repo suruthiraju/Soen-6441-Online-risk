@@ -67,6 +67,7 @@ public class ReinforcementView extends JFrame implements Observer {
 	public JButton addButton;
 	public JButton addMoreButton;
 	public JButton exitCardButton;
+	public JButton saveButton;
 	public JLabel listOfCountriesLabel;
 	public JLabel reinnforcementCardLabel;
 	public JTextField cardIdField;
@@ -98,6 +99,7 @@ public class ReinforcementView extends JFrame implements Observer {
 		this.addButton = new JButton("Add");
 		this.addMoreButton = new JButton("Add More Card");
 		this.exitCardButton = new JButton("Exit Card Addition");
+		this.saveButton = new JButton("Save Game");
 		welcomePanel = new JPanel();
 		graphicPanel = new JPanel();
 		this.add(graphicPanel);
@@ -212,6 +214,9 @@ public class ReinforcementView extends JFrame implements Observer {
 
 			this.addButton.setBounds(1300, 260, 150, 25);
 			welcomePanel.add(this.addButton);
+			
+			this.saveButton.setBounds(1300, 500, 150, 25);
+			welcomePanel.add(this.saveButton);
 		}
 
 		int n = this.gameMapModel.getCountries().size();
@@ -327,6 +332,7 @@ public class ReinforcementView extends JFrame implements Observer {
 	 */
 	public void setActionListener(ActionListener actionListener) {
 		this.addButton.addActionListener(actionListener);
+		this.saveButton.addActionListener(actionListener);
 		this.addMoreButton.addActionListener(actionListener);
 		this.exitCardButton.addActionListener(actionListener);
 	}

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -29,6 +30,11 @@ public class GameModeView extends JFrame implements View {
 	
 	/** The tournament mode. */
 	public JButton tournamentMode;
+	
+	/** The Load game . */
+	public JButton loadGame;
+	
+	public JFileChooser chooseGame;
 
 	/**
 	 * Create the application.
@@ -53,6 +59,12 @@ public class GameModeView extends JFrame implements View {
 		tournamentMode = new JButton("Tournament Mode");
 		tournamentMode.setBounds(350, 300, 150, 40);
 		getContentPane().add(tournamentMode);
+		
+		loadGame = new JButton("Load Previous Game");
+		loadGame.setBounds(225, 375, 175, 40);
+		getContentPane().add(loadGame);
+		
+		chooseGame = new JFileChooser();
 
 		initialize();
 
@@ -74,6 +86,7 @@ public class GameModeView extends JFrame implements View {
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		singleMode.addActionListener(actionListener);
+		loadGame.addActionListener(actionListener);
 		tournamentMode.addActionListener(actionListener);
 
 	}

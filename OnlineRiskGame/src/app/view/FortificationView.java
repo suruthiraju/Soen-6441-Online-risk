@@ -60,6 +60,8 @@ public class FortificationView extends JFrame implements View {
 
 	public JComboBox<Integer> numOfTroopsComboBox;
 	public JButton moveButton;
+	public JButton saveButton;
+	
 	public JLabel listOfCountriesLabel;
 
 	public JLabel fromCountryListLabel;
@@ -117,6 +119,7 @@ public class FortificationView extends JFrame implements View {
 		this.add(welcomePanel);
 		this.playerModel = this.gameMapModel.getPlayerTurn();
 		this.moveButton = new JButton("Move");
+		this.saveButton = new JButton("Save Game");
 		updateWindow(gamePlayModel, this.playerModel);
 		welcomePanel.setLayout(null);
 		graphicPanel.setLayout(null);
@@ -214,6 +217,9 @@ public class FortificationView extends JFrame implements View {
 
 		this.moveButton.setBounds(1300, 330, 150, 25);
 		welcomePanel.add(this.moveButton);
+		
+		this.saveButton.setBounds(1300, 500, 150, 25);
+		welcomePanel.add(this.saveButton);
 
 		int n = this.gameMapModel.getCountries().size();
 		button = new JButton[n];
@@ -322,6 +328,7 @@ public class FortificationView extends JFrame implements View {
 	public void setActionListener(ActionListener actionListener) {
 		this.actionListener = actionListener;
 		this.moveButton.addActionListener(actionListener);
+		this.saveButton.addActionListener(actionListener);
 		this.fromCountryListComboBox.addActionListener(actionListener);
 	}
 

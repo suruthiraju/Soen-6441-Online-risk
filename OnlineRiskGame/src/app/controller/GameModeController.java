@@ -2,7 +2,13 @@ package app.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
+import app.model.GamePlayModel;
+import app.utilities.SaveGame;
 import app.view.GameModeView;
 
 public class GameModeController implements ActionListener {
@@ -33,6 +39,23 @@ public class GameModeController implements ActionListener {
 			this.theGameModeView.dispose();
 		} else if (actionEvent.getSource().equals(theGameModeView.tournamentMode)) {
 			new TournamentDetailController();
+			this.theGameModeView.dispose();
+		} else if (actionEvent.getSource().equals(theGameModeView.loadGame)) {
+			int value = theGameModeView.chooseGame.showOpenDialog(theGameModeView);
+			if (value == JFileChooser.APPROVE_OPTION) {
+				try {
+					File GameFile = theGameModeView.chooseGame.getSelectedFile();
+					SaveGame readGame = new SaveGame();
+					GamePlayModel gamePlayModel = readGame.readFROMJSONFile(GameFile);
+						JOptionPane.showMessageDialog(theGameModeView,
+								"Gane Loaded Successfully!", "Game Loaded",
+								JOptionPane.INFORMATION_MESSAGE);
+					new GamePlayController(gamePlayModel);
+					this.theGameModeView.dispose();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 			this.theGameModeView.dispose();
 		}
 	}
