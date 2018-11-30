@@ -61,7 +61,7 @@ public class GamePlayModel extends Observable {
 	
 	private PlayConsoleView console;
 	
-	private String gamePhase;
+	private String gamePhase = null;
 
 
 	/**

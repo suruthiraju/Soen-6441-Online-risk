@@ -1048,7 +1048,7 @@ public class SaveGame {
 				content = (String) playModel.get("gamePhase");
 				gamePlayModel.setGamePhase(content);
 			} else {
-				gamePlayModel.setGamePhase("");
+				gamePlayModel.setGamePhase(null);
 			}
 
 			if (playModel.get("defeatedCountry") != null) {
