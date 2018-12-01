@@ -214,10 +214,19 @@ public class StartUpView extends JFrame implements View {
 					.createLineBorder(pm.getColor(), 3);
 
 			country.setBorder(border);
-
+			
 			country.setOpaque(true);
-			country.setBounds(this.gameMapModel.getCountries().get(i).getXPosition() * 2,
-					this.gameMapModel.getCountries().get(i).getYPosition() * 2, 50, 50);
+			
+			if(this.gameMapModel.getContinents().get(0).getContinentName().equals("clifftop"))
+			{
+			country.setBounds(this.gameMapModel.getCountries().get(i).getXPosition() ,
+					this.gameMapModel.getCountries().get(i).getYPosition(), 50, 50);
+			}
+			else
+			{
+				country.setBounds(this.gameMapModel.getCountries().get(i).getXPosition() * 2 ,
+						this.gameMapModel.getCountries().get(i).getYPosition() * 2, 50, 50);
+			}
 
 			country.setMargin(new Insets(0, 0, 0, 0));
 
