@@ -1,16 +1,7 @@
 package app.controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
-
-import javax.swing.JOptionPane;
-
 import app.helper.Strategy;
-import app.model.CardModel;
-import app.model.CountryModel;
 import app.model.GamePlayModel;
 import app.model.PlayerModel;
 import app.utilities.Validation;
@@ -18,9 +9,10 @@ import app.view.AttackView;
 import app.view.FortificationView;
 import app.view.ReinforcementView;
 
+// TODO: Auto-generated Javadoc
 /**
- * In PlayerController, the data flow into model object and updates the view
- * whenever data changes.
+ * In HumanPlayerController, the data flow into model object and updates the
+ * view whenever data changes.
  * 
  * @author Hamid
  * @version 1.0.0
@@ -52,7 +44,8 @@ public class HumanPlayerController implements Strategy {
 	/**
 	 * Constructor initializes values and sets the screen too visible.
 	 *
-	 * @param gamePlayModel the game play model
+	 * @param gamePlayModel
+	 *            the game play model
 	 */
 	public HumanPlayerController(GamePlayModel gamePlayModel) {
 
@@ -72,7 +65,7 @@ public class HumanPlayerController implements Strategy {
 		this.gamePlayModel.getConsoleText()
 				.append("Initiating Reinforcement for " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
 		this.gamePlayModel.getConsole()
-		.append("Initiating Reinforcement for " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
+				.append("Initiating Reinforcement for " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
 		this.gamePlayModel.getGameMap().getPlayerTurn().setremainTroop(this.gamePlayModel.numberOfCountries()
 				+ this.gamePlayModel.continentCovered(gamePlayModel.getGameMap().getPlayerTurn()));
 		if (gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().size() > 0) {
@@ -82,7 +75,7 @@ public class HumanPlayerController implements Strategy {
 						.append(gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().get(i).getCardId() + "\n ");
 			}
 			this.gamePlayModel.getGameMap().getPlayerTurn().setShowReinforcementCard(true);
-		}		
+		}
 	}
 
 	/**
@@ -91,12 +84,12 @@ public class HumanPlayerController implements Strategy {
 	public void fortification() {
 		System.out.println("Human - fortification");
 		this.gamePlayModel.getConsole()
-		.append("Initiating fortification " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
+				.append("Initiating fortification " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
 
 		this.gamePlayModel.getConsoleText().setLength(0);
 		this.gamePlayModel.getConsoleText()
 				.append("Initiating Fortification for " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
-		
+
 	}
 
 	/**
@@ -105,10 +98,10 @@ public class HumanPlayerController implements Strategy {
 	public void attack() {
 		System.out.println("Human - attack");
 		this.gamePlayModel.getConsole()
-		.append("Initiating attack " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
+				.append("Initiating attack " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
 
 		this.gamePlayModel.getConsoleText().setLength(0);
 		this.gamePlayModel.getConsoleText()
-				.append("Initiating " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer() + "'s attack");			
+				.append("Initiating " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer() + "'s attack");
 	}
 }

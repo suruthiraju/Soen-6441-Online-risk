@@ -47,7 +47,8 @@ public class PlayerController implements ActionListener, ItemListener {
 	/**
 	 * Constructor initializes values and sets the screen too visible.
 	 *
-	 * @param gamePlayModel the game play model
+	 * @param gamePlayModel
+	 *            the game play model
 	 */
 	public PlayerController(GamePlayModel gamePlayModel) {
 
@@ -145,7 +146,8 @@ public class PlayerController implements ActionListener, ItemListener {
 	/**
 	 * This method performs action, by Listening the action event set in view.
 	 *
-	 * @param actionEvent the action event
+	 * @param actionEvent
+	 *            the action event
 	 */
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
@@ -387,7 +389,8 @@ public class PlayerController implements ActionListener, ItemListener {
 	/**
 	 * Item Listener.
 	 *
-	 * @param itemEvent the item event
+	 * @param itemEvent
+	 *            the item event
 	 * @see java.awt.event.ItemListener#itemStateChanged(java.awt.event.ItemEvent)
 	 */
 	public void itemStateChanged(ItemEvent itemEvent) {

@@ -7,14 +7,11 @@ import app.helper.Strategy;
 import app.model.CardModel;
 import app.model.CountryModel;
 import app.model.GamePlayModel;
-import app.model.PlayerModel;
 import app.utilities.Validation;
-import app.view.AttackView;
-import app.view.FortificationView;
-import app.view.ReinforcementView;
+
 /**
- * In PlayerController, the data flow into model object and updates the view
- * whenever data changes.
+ * In AgressivePlayerController, the data flow into model object and updates the
+ * view whenever data changes.
  * 
  * @author Hamid
  * @version 1.0.0
@@ -37,10 +34,11 @@ public class AgressivePlayerController implements Strategy {
 	/**
 	 * Constructor initializes values and sets the screen too visible.
 	 *
-	 * @param gamePlayModel the game play model
+	 * @param gamePlayModel
+	 *            the game play model
 	 */
 	public AgressivePlayerController(GamePlayModel gamePlayModel) {
-		
+
 		this.gamePlayModel = gamePlayModel;
 	}
 

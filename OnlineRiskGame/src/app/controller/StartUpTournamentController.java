@@ -8,9 +8,10 @@ import java.util.List;
 import app.model.CountryModel;
 import app.model.GamePlayModel;
 
+// TODO: Auto-generated Javadoc
 /**
- * In StartUpController, the data flow into model object and updates the view
- * whenever data changes.
+ * In StartUpTournamentController, the data flow into model object and updates
+ * the view whenever data changes.
  *
  * @author Suruthi Raju
  * @version 1.0.0
@@ -70,7 +71,10 @@ public class StartUpTournamentController {
 	/**
 	 * Constructor initializes values and sets the screen too visible.
 	 *
-	 * @param gamePlayModel the game play model
+	 * @param gamePlayModel
+	 *            the game play model
+	 * @param noOfTurns
+	 *            the no of turns
 	 */
 	public StartUpTournamentController(GamePlayModel gamePlayModel, int noOfTurns) {
 
@@ -79,7 +83,7 @@ public class StartUpTournamentController {
 
 		allocateArmies();
 		checkForOverallArmies();
-		
+
 		new GamePlayController(gamePlayModel, noOfTurns);
 	}
 
@@ -184,8 +188,10 @@ public class StartUpTournamentController {
 	/**
 	 * This method gives the Random generation of numbers within two values.
 	 *
-	 * @param min the min
-	 * @param max the max
+	 * @param min
+	 *            the min
+	 * @param max
+	 *            the max
 	 * @return the random between range
 	 */
 	public int getRandomBetweenRange(double min, double max) {
@@ -210,22 +216,24 @@ public class StartUpTournamentController {
 		} else {
 			for (int i = 0; i < this.gamePlayModel.getPlayers().size(); i++) {
 				if (this.gamePlayModel.getPlayers().get(i).getremainTroop() != 0) {
-					System.out.println(this.gamePlayModel.getPlayers().get(i).getremainTroop() +  " "+this.gamePlayModel.getPlayers().get(i).getNamePlayer() );
+					System.out.println(this.gamePlayModel.getPlayers().get(i).getremainTroop() + " "
+							+ this.gamePlayModel.getPlayers().get(i).getNamePlayer());
 					for (int j = 0; j < this.gamePlayModel.getGameMap().getCountries().size(); j++) {
 						if (this.gamePlayModel.getPlayers().get(i).getremainTroop() != 0) {
-						if (this.gamePlayModel.getPlayers().get(i).getNamePlayer()
-								.equals(this.gamePlayModel.getGameMap().getCountries().get(j).getRulerName())) {
-							System.out.println(this.gamePlayModel.getGameMap().getCountries().get(j).getCountryName());
-							this.gamePlayModel.getGameMap().getCountries().get(j)
-									.setArmies(this.gamePlayModel.getGameMap().getCountries().get(j).getArmies() + 1);
-							this.gamePlayModel.getPlayers().get(i)
-									.setremainTroop(this.gamePlayModel.getPlayers().get(i).getremainTroop() - 1);
-						}
+							if (this.gamePlayModel.getPlayers().get(i).getNamePlayer()
+									.equals(this.gamePlayModel.getGameMap().getCountries().get(j).getRulerName())) {
+								System.out.println(
+										this.gamePlayModel.getGameMap().getCountries().get(j).getCountryName());
+								this.gamePlayModel.getGameMap().getCountries().get(j).setArmies(
+										this.gamePlayModel.getGameMap().getCountries().get(j).getArmies() + 1);
+								this.gamePlayModel.getPlayers().get(i)
+										.setremainTroop(this.gamePlayModel.getPlayers().get(i).getremainTroop() - 1);
+							}
 						}
 					}
 				}
 			}
 		}
-	} 
+	}
 
 }
