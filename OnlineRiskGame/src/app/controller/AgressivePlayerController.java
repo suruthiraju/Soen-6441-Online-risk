@@ -34,8 +34,7 @@ public class AgressivePlayerController implements Strategy {
 	/**
 	 * Constructor initializes values and sets the screen too visible.
 	 *
-	 * @param gamePlayModel
-	 *            the game play model
+	 * @param gamePlayModel the game play model
 	 */
 	public AgressivePlayerController(GamePlayModel gamePlayModel) {
 
@@ -47,60 +46,44 @@ public class AgressivePlayerController implements Strategy {
 	 * 
 	 */
 	public void reinforcement() {
-		System.out.println("Agressive - reinforcement");
+		this.gamePlayModel.getConsole().append("Agressive - reinforcement");
+		this.gamePlayModel.getConsole()
+				.append("Initiating Reinforcement for " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
 		ArrayList<CardModel> deck = new ArrayList<CardModel>();
-		int troops = 0;
 		ArrayList<CountryModel> controlledCountries = new ArrayList<CountryModel>();
 		ArrayList<CountryModel> linkedCountries = new ArrayList<CountryModel>();
-		this.gamePlayModel.getConsoleText().setLength(0);
-		this.gamePlayModel.getConsoleText()
+		this.gamePlayModel.getConsole()
 				.append("Initiating Reinforcement for " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
 		CountryModel strongestCountry = new CountryModel();
 		this.gamePlayModel.getGameMap().getPlayerTurn().setremainTroop(this.gamePlayModel.numberOfCountries()
 				+ this.gamePlayModel.continentCovered(gamePlayModel.getGameMap().getPlayerTurn()));
-		if (gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().size() > 0) {
-			this.gamePlayModel.getConsoleText().append("\n Reinforcement View - Please find the list of Cards: \n");
-			for (int i = 0; i < gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().size(); i++) {
-				this.gamePlayModel.getConsoleText()
-						.append(gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().get(i).getCardId() + "\n ");
-			}
-			this.gamePlayModel.getGameMap().getPlayerTurn().setShowReinforcementCard(true);
-		}
-		for (int i = 0; i < gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().size(); i++) {
-			troops = troops + gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().get(i).getCardValue();
-			gamePlayModel.getCards().add(gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().get(i));
-			gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().remove(i);
-
-		}
 
 		controlledCountries.addAll(gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries());
-		controlledCountries = gamePlayModel.sortCountry(controlledCountries);
-
-		for (int i = controlledCountries.size() - 1; i > 0; i--) {
+		controlledCountries = gamePlayModel.descCountry(controlledCountries);
+		boolean notSamePlayer = false;
+		CountryModel cm = new CountryModel();
+		for (int i = 0; i < controlledCountries.size(); i++) {
 			strongestCountry = controlledCountries.get(i);
-			linkedCountries = gamePlayModel
-					.sortCountry((ArrayList<CountryModel>) strongestCountry.getLinkedCountries());
-
-			for (int j = linkedCountries.size() - 1; j > 0; j--) {
-				for (int k = 0; k < gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().size(); k++) {
-					if (gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(k).getCountryName()
-							.equals(linkedCountries.get(j).getCountryName())) {
-						continue;
-					} else {
-						attackerCountry = strongestCountry;
-						defenderCountry = linkedCountries.get(j);
-						break;
-					}
+			ArrayList<CountryModel> linkedCountry = (ArrayList<CountryModel>) strongestCountry.getLinkedCountries();
+			for (int j = 0; j < linkedCountry.size(); j++) {
+				if (!gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer()
+						.equals(linkedCountry.get(j).getRulerName())) {
+					notSamePlayer = true;
+					defenderCountry = linkedCountry.get(j);
+					attackerCountry = strongestCountry;
 				}
-
 			}
-
+			if (notSamePlayer == true) {
+				break;
+			}
 		}
-		gamePlayModel.getGameMap().getPlayerTurn()
-				.setmyTroop(gamePlayModel.getGameMap().getPlayerTurn().getmyTroop() + troops);
+
 		attackerCountry
-				.setArmies(gamePlayModel.getGameMap().getPlayerTurn().getmyTroop() + attackerCountry.getArmies());
+				.setArmies(gamePlayModel.getGameMap().getPlayerTurn().getremainTroop() + attackerCountry.getArmies());
+		gamePlayModel.getGameMap().getPlayerTurn().setremainTroop(0);
 		System.out.println(
+				"Attacking from " + attackerCountry.getCountryName() + " to " + defenderCountry.getCountryName());
+		this.gamePlayModel.getConsole().append(
 				"Attacking from " + attackerCountry.getCountryName() + " to " + defenderCountry.getCountryName());
 
 	}
@@ -109,7 +92,7 @@ public class AgressivePlayerController implements Strategy {
 	 * This method is called in fortification phase.
 	 */
 	public void fortification() {
-		System.out.println("Agressive - fortification");
+		this.gamePlayModel.getConsole().append("Agressive - fortification");
 		int i = 0;
 		int j = 0;
 		boolean flag = false;
@@ -141,7 +124,6 @@ public class AgressivePlayerController implements Strategy {
 			if (flag == true)
 				break;
 		}
-		gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().add(gamePlayModel.getCard());
 
 		System.out.println("Fortifiction done");
 
@@ -151,7 +133,7 @@ public class AgressivePlayerController implements Strategy {
 	 * This method is called in attack phase.
 	 */
 	public void attack() {
-		System.out.println("Agressive - attack");
+		this.gamePlayModel.getConsole().append("Agressive - attack");
 		this.gamePlayModel.getConsoleText().setLength(0);
 		this.gamePlayModel.getConsoleText()
 				.append("Initiating " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer() + "'s attack");

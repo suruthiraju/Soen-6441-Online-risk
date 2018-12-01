@@ -118,8 +118,6 @@ public class GamePlayController implements ActionListener {
 	public void gamePlay() {
 		this.gamePlayModel.getGameMap()
 				.setPlayerTurn(this.gamePlayModel.getPlayers().get(this.gamePlayModel.getGameMap().getPlayerIndex()));
-		this.gamePlayModel.getConsole()
-				.append("This is " + this.gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer() + "'s turn");
 		new PlayerController(this.gamePlayModel);
 	}
 

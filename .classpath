@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="OnlineRiskGame/src"/>
+	<classpathentry kind="lib" path="JARS/json-simple-1.1.jar"/>
+	<classpathentry kind="lib" path="JARS/junit-4.10.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

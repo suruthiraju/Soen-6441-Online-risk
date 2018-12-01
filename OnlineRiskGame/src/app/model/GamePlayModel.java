@@ -849,6 +849,15 @@ public class GamePlayModel extends Observable {
        });
 		return ownedCountries;
 	}
+	
+	public ArrayList<CountryModel> descCountry(ArrayList<CountryModel> ownedCountries) {
+		Collections.sort(ownedCountries, new Comparator<CountryModel>(){
+            public int compare(CountryModel s1, CountryModel s2) {
+              return Integer.valueOf(s2.getArmies()).compareTo(s1.getArmies());
+           }
+       });
+		return ownedCountries;
+	}
 
 	public ArrayList<CountryModel> selectWeakestCountry(ArrayList<CountryModel> ownedCountries) {
 		Collections.sort(ownedCountries, new Comparator<CountryModel>(){
