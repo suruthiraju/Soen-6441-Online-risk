@@ -11,8 +11,10 @@ import app.model.GamePlayModel;
 import app.utilities.SaveGame;
 import app.view.GameModeView;
 
+// TODO: Auto-generated Javadoc
 /**
- * The Class GameModeController.
+ * In GameModeController, the data flow into model object and updates the view
+ * whenever data changes.
  */
 public class GameModeController implements ActionListener {
 

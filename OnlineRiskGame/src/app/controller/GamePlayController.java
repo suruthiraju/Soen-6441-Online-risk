@@ -7,7 +7,6 @@ import javax.swing.JOptionPane;
 
 import app.model.GamePlayModel;
 import app.utilities.Validation;
-import app.view.PlayConsoleView;
 
 /**
  * In GamePlayController, the data flow into model object and updates the view
