@@ -99,7 +99,7 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 			if (!(MapValidation.emptyLinkCountryValidation(this.gameMapModel))) {
 				if ((!MapValidation.checkInterlinkedContinent(this.gameMapModel))) {
 					if (!(MapValidation.emptyContinentValidation(this.gameMapModel))) {
-						if (!(MapValidation.nonContinentValidation(this.gameMapModel))) {
+						
 
 							System.out.println(" All the map validations are correct");
 							filename = JOptionPane.showInputDialog("File Name");
@@ -113,13 +113,7 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
-						} else {
-							System.out.println("All continents are not linked");
-							JOptionPane.showOptionDialog(null, "One of the continent is invalid", "Invalid",
-									JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {},
-									null);
-
-						}
+						} 
 
 					} else {
 						System.out.println("Empty link country validation failed");
@@ -133,17 +127,19 @@ public class ConnectCountryController implements ActionListener, ListSelectionLi
 							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
 
 				}
-			} else {
-				System.out.println("Empty continent validation failed");
-				JOptionPane.showOptionDialog(null, "Empty link country validation failed", "Invalid",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
-			}
-
-		} else if (actionEvent.getSource().equals(this.connectCountryView.removeButton)) {
+			} 
+		else if (actionEvent.getSource().equals(this.connectCountryView.removeButton)) {
 
 			this.gameMapModel.removeNeighbouringCountry(
 					(CountryModel) this.connectCountryView.countryParentListLeft.getSelectedValue(),
 					(CountryModel) this.connectCountryView.countryParentListRight.getSelectedValue());
+
+		}
+		else {
+			System.out.println("All continents are not linked");
+			JOptionPane.showOptionDialog(null, "One of the continent is invalid", "Invalid",
+					JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {},
+					null);
 
 		}
 
