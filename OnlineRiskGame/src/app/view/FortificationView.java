@@ -1,15 +1,15 @@
 package app.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -24,10 +24,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.text.DefaultCaret;
 
 import app.helper.View;
@@ -251,14 +250,12 @@ public class FortificationView extends JFrame implements View {
 
 			button[i].setBorder(border);
 			button[i].setOpaque(true);
-			if(this.gameMapModel.getContinents().get(0).getContinentName().equals("clifftop")||this.gameMapModel.getContinents().get(0).getContinentName().equals("North America"))
-			{
-				button[i].setBounds(this.gameMapModel.getCountries().get(i).getXPosition() ,
-					this.gameMapModel.getCountries().get(i).getYPosition(), 50, 50);
-			}
-			else
-			{
-				button[i].setBounds(this.gameMapModel.getCountries().get(i).getXPosition() * 2 ,
+			if (this.gameMapModel.getContinents().get(0).getContinentName().equals("clifftop")
+					|| this.gameMapModel.getContinents().get(0).getContinentName().equals("North America")) {
+				button[i].setBounds(this.gameMapModel.getCountries().get(i).getXPosition(),
+						this.gameMapModel.getCountries().get(i).getYPosition(), 50, 50);
+			} else {
+				button[i].setBounds(this.gameMapModel.getCountries().get(i).getXPosition() * 2,
 						this.gameMapModel.getCountries().get(i).getYPosition() * 2, 50, 50);
 			}
 

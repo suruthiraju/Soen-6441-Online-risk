@@ -24,7 +24,6 @@ import app.model.ContinentsModel;
 import app.model.CountryModel;
 import app.model.GameMapModel;
 
-
 /**
  * "CreateCountryView" class represents a view object for creating a country
  * view Properties are containing labels, text fields, buttons, combo-boxes, a
@@ -37,49 +36,49 @@ public class CreateCountryView extends JFrame implements View {
 
 	/** The welcome label. */
 	public JLabel welcomeLabel;
-	
+
 	/** The country value. */
 	public JTextField countryValue;
-	
+
 	/** The continent list combobox. */
 	public JComboBox continentListCombobox;
-	
+
 	/** The continent list array. */
 	public Object[] continentListArray;
-	
+
 	/** The continent view renderer. */
 	private CountryViewRenderer continentViewRenderer;
-	
+
 	/** The country list text. */
 	public JLabel countryListText;
-	
+
 	/** The continent name label. */
 	public JLabel continentNameLabel;
-	
+
 	/** The observer list. */
 	public JTextArea observerList;
-	
+
 	/** The next button. */
 	public JButton nextButton;
-	
+
 	/** The add button. */
 	public JButton addButton;
-	
+
 	/** The save button. */
 	public JButton saveButton;
-	
+
 	/** The console text area. */
 	public JTextArea consoleTextArea;
-	
+
 	/** The console main panel. */
 	public JTextArea consoleMainPanel;
-	
+
 	/** The console panel. */
 	public JScrollPane consolePanel;
-	
+
 	/** The main panel. */
 	public JPanel mainPanel;
-	
+
 	/** The text area. */
 	JTextArea textArea;
 
@@ -135,7 +134,7 @@ public class CreateCountryView extends JFrame implements View {
 	 * Updates the screen after creating a country.
 	 *
 	 * @param listOfContinentModel the list of continent model
-	 * @param listOfCountryModel the list of country model
+	 * @param listOfCountryModel   the list of country model
 	 */
 	public void updateScreen(List<ContinentsModel> listOfContinentModel, List<CountryModel> listOfCountryModel) {
 		mainPanel.removeAll();

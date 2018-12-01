@@ -144,8 +144,8 @@ public class RandomPlayerController implements Strategy {
 			}
 			if (this.gamePlayModel.getArmyToMoveText()) {
 				this.gamePlayModel.moveArmies(attackCountry, defendCountry, noOfArmiesToBeMoved);
-				this.gamePlayModel.getConsole().append(" Armies " + noOfArmiesToBeMoved + " has been moved from " + attackCountry.getCountryName()
-				+  "to " + defendCountry.getCountryName());
+				this.gamePlayModel.getConsole().append(" Armies " + noOfArmiesToBeMoved + " has been moved from "
+						+ attackCountry.getCountryName() + "to " + defendCountry.getCountryName());
 			}
 		} else {
 			this.gamePlayModel.getConsole().append(" there is no linked country");

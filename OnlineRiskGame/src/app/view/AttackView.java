@@ -1,7 +1,9 @@
 package app.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -9,8 +11,6 @@ import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -25,9 +25,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
-import javax.swing.border.BevelBorder;
 import javax.swing.text.DefaultCaret;
 
 import app.helper.View;
@@ -35,7 +35,6 @@ import app.model.CountryModel;
 import app.model.GameMapModel;
 import app.model.GamePlayModel;
 import app.model.PlayerModel;
-
 
 /**
  * This View provides the attackView of the Game Play. It also provides the
@@ -50,88 +49,88 @@ public class AttackView extends JFrame implements View, ItemListener {
 
 	/** The game map model. */
 	public GameMapModel gameMapModel;
-	
+
 	/** The player model. */
 	public PlayerModel playerModel;
-	
+
 	/** The game play model. */
 	public GamePlayModel gamePlayModel;
 
 	/** The welcome panel. */
 	public JPanel welcomePanel;
-	
+
 	/** The graphic panel. */
 	public JPanel graphicPanel;
-	
+
 	/** The console main panel. */
 	public JPanel consoleMainPanel;
-	
+
 	/** The console panel. */
 	public JScrollPane consolePanel;
-	
+
 	/** The console text area. */
 	public JTextArea consoleTextArea;
 
 	/** The welcome label. */
 	public JLabel welcomeLabel;
-	
+
 	/** The attack country list label. */
 	public JLabel attackCountryListLabel;
-	
+
 	/** The defend country list label. */
 	public JLabel defendCountryListLabel;
-	
+
 	/** The no of troops label. */
 	public JLabel noOfTroopsLabel;
-	
+
 	/** The no of dice attack label. */
 	public JLabel noOfDiceAttackLabel;
-	
+
 	/** The no of dice defend label. */
 	public JLabel noOfDiceDefendLabel;
-	
+
 	/** The defected country label. */
 	public JLabel defectedCountryLabel;
-	
+
 	/** The next button. */
 	public JButton nextButton;
-	
+
 	/** The save button. */
 	public JButton saveButton;
-	
+
 	/** The move button. */
 	public JButton moveButton;
-	
+
 	/** The Single button. */
 	public JButton SingleButton;
-	
+
 	/** The allout button. */
 	public JButton alloutButton;
-	
+
 	/** The attack country list combo box. */
 	public JComboBox<Object> attackCountryListComboBox;
-	
+
 	/** The defend country list combo box. */
 	public JComboBox<Object> defendCountryListComboBox;
-	
+
 	/** The attack country list array. */
 	public Object[] attackCountryListArray;
-	
+
 	/** The defend country list array. */
 	public Object[] defendCountryListArray;
-	
+
 	/** The countries view renderer. */
 	private CountryViewRenderer countriesViewRenderer;
-	
+
 	/** The button. */
 	public JButton[] button;
-	
+
 	/** The num of dice attack combo box. */
 	public JComboBox<Integer> numOfDiceAttackComboBox;
-	
+
 	/** The num of dice defend combo box. */
 	public JComboBox<Integer> numOfDiceDefendComboBox;
-	
+
 	/** The num of armies to be moved combo box. */
 	public JComboBox<Integer> numOfArmiesToBeMovedComboBox;
 
@@ -153,10 +152,10 @@ public class AttackView extends JFrame implements View, ItemListener {
 		this.add(graphicPanel);
 		graphicPanel.setSize(1200, 650);
 		graphicPanel.setBackground(Color.WHITE);
-		
+
 		this.consoleMainPanel = new JPanel();
 		this.consoleMainPanel.setBorder(new BevelBorder(1));
- 		this.consoleTextArea = new JTextArea("Attack Phase !!!\n", 10, 500);
+		this.consoleTextArea = new JTextArea("Attack Phase !!!\n", 10, 500);
 		this.consoleTextArea.setEditable(false);
 		this.consoleTextArea.setFocusable(false);
 		this.consoleTextArea.setVisible(true);
@@ -164,11 +163,10 @@ public class AttackView extends JFrame implements View, ItemListener {
 		this.consoleTextArea.setBackground(Color.BLACK);
 		DefaultCaret caret = (DefaultCaret) this.consoleTextArea.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.OUT_BOTTOM);
- 		this.consolePanel = new JScrollPane(this.consoleTextArea);
+		this.consolePanel = new JScrollPane(this.consoleTextArea);
 		this.consolePanel.setPreferredSize(new Dimension(1580, 130));
- 		this.consoleMainPanel.add(this.consolePanel,BorderLayout.WEST);
- 		this.getContentPane().add(this.consoleMainPanel,BorderLayout.SOUTH);
- 		
+		this.consoleMainPanel.add(this.consolePanel, BorderLayout.WEST);
+		this.getContentPane().add(this.consoleMainPanel, BorderLayout.SOUTH);
 
 		this.nextButton = new JButton("Next");
 		this.saveButton = new JButton("Save Game");
@@ -191,7 +189,7 @@ public class AttackView extends JFrame implements View, ItemListener {
 	 * the Screen for attack Phase
 	 *
 	 * @param gamePlayModel the game play model
-	 * @param playerModel the player model
+	 * @param playerModel   the player model
 	 */
 	public void updateWindow(GamePlayModel gamePlayModel, PlayerModel playerModel) {
 
@@ -206,9 +204,9 @@ public class AttackView extends JFrame implements View, ItemListener {
 		welcomeLabel.setBounds(1300, 80, 300, 25);
 		welcomeLabel.setFont(largeFont);
 		welcomePanel.add(welcomeLabel);
-		
-		if(this.gamePlayModel.getConsoleText()!=null) {
-			this.consoleTextArea.setText(this.gamePlayModel.getConsoleText().toString());			
+
+		if (this.gamePlayModel.getConsoleText() != null) {
+			this.consoleTextArea.setText(this.gamePlayModel.getConsoleText().toString());
 		}
 
 		this.attackCountryListLabel = new JLabel("Select attacker country:");
@@ -230,11 +228,11 @@ public class AttackView extends JFrame implements View, ItemListener {
 
 		if (attackListOfCountries != null && !(attackListOfCountries.isEmpty())) {
 			attackCountryListComboBox = new JComboBox(attackCountryListArray);
-			if (attackListOfCountries.size() > gamePlayModel.getSelectedAttackComboBoxIndex() ) {
+			if (attackListOfCountries.size() > gamePlayModel.getSelectedAttackComboBoxIndex()) {
 				attackCountryListComboBox.setSelectedIndex(gamePlayModel.getSelectedAttackComboBoxIndex());
-			}else {
+			} else {
 				attackCountryListComboBox.setSelectedIndex(0);
-			}			
+			}
 		}
 
 		welcomePanel.add(this.attackCountryListComboBox);
@@ -283,9 +281,9 @@ public class AttackView extends JFrame implements View, ItemListener {
 		defendCountryListComboBox = new JComboBox(defendCountryListArray);
 		System.out.println("defendListOfCountries " + defendListOfCountries.size());
 		if (defendListOfCountries != null && !(defendListOfCountries.isEmpty())) {
-			if (defendListOfCountries.size() > gamePlayModel.getSelectedDefendComboBoxIndex() ) {
+			if (defendListOfCountries.size() > gamePlayModel.getSelectedDefendComboBoxIndex()) {
 				defendCountryListComboBox.setSelectedIndex(gamePlayModel.getSelectedDefendComboBoxIndex());
-			}else {
+			} else {
 				defendCountryListComboBox.setSelectedIndex(0);
 			}
 		}
@@ -355,10 +353,10 @@ public class AttackView extends JFrame implements View, ItemListener {
 			this.moveButton.setBounds(1300, 540, 150, 25);
 			welcomePanel.add(this.moveButton);
 		}
-		
+
 		this.saveButton.setBounds(1300, 575, 150, 25);
 		welcomePanel.add(this.saveButton);
-		
+
 		this.nextButton.setBounds(1300, 610, 150, 25);
 		welcomePanel.add(this.nextButton);
 
@@ -380,14 +378,12 @@ public class AttackView extends JFrame implements View, ItemListener {
 
 			button[i].setBorder(border);
 			button[i].setOpaque(true);
-			if(this.gameMapModel.getContinents().get(0).getContinentName().equals("clifftop")||this.gameMapModel.getContinents().get(0).getContinentName().equals("North America"))
-			{
-				button[i].setBounds(this.gameMapModel.getCountries().get(i).getXPosition() ,
-					this.gameMapModel.getCountries().get(i).getYPosition(), 50, 50);
-			}
-			else
-			{
-				button[i].setBounds(this.gameMapModel.getCountries().get(i).getXPosition() * 2 ,
+			if (this.gameMapModel.getContinents().get(0).getContinentName().equals("clifftop")
+					|| this.gameMapModel.getContinents().get(0).getContinentName().equals("North America")) {
+				button[i].setBounds(this.gameMapModel.getCountries().get(i).getXPosition(),
+						this.gameMapModel.getCountries().get(i).getYPosition(), 50, 50);
+			} else {
+				button[i].setBounds(this.gameMapModel.getCountries().get(i).getXPosition() * 2,
 						this.gameMapModel.getCountries().get(i).getYPosition() * 2, 50, 50);
 			}
 
@@ -439,8 +435,12 @@ public class AttackView extends JFrame implements View, ItemListener {
 
 	public class CountryViewRenderer extends BasicComboBoxRenderer {
 
-		/* (non-Javadoc)
-		 * @see javax.swing.plaf.basic.BasicComboBoxRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * javax.swing.plaf.basic.BasicComboBoxRenderer#getListCellRendererComponent(
+		 * javax.swing.JList, java.lang.Object, int, boolean, boolean)
 		 */
 		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
 				boolean cellHasFocus) {

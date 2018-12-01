@@ -91,11 +91,10 @@ public class CheaterPlayerController implements Strategy {
 			this.gamePlayModel.getGameMap().setMovingArmies(armies,
 					this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index1),
 					this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index2));
-			this.gamePlayModel.getConsole()
-					.append("From Country "
-							+ this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index1).getCountryName()
-							+ "armies " + armies + " has been moved to "
-							+ this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index2).getCountryName());
+			this.gamePlayModel.getConsole().append("From Country "
+					+ this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index1).getCountryName()
+					+ "armies " + armies + " has been moved to "
+					+ this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index2).getCountryName());
 		}
 	}
 
@@ -133,10 +132,10 @@ public class CheaterPlayerController implements Strategy {
 								this.gamePlayModel.getPlayers().get(k)
 										.attacked(this.gamePlayModel.getGameMap().getCountries().get(j));
 								this.gamePlayModel.getConsole()
-								.append(" Country "
-										+ this.gamePlayModel.getGameMap().getCountries().get(j).getCountryName()
-										+ "is added to player "
-										+ this.gamePlayModel.getPlayers().get(k).getNamePlayer());
+										.append(" Country "
+												+ this.gamePlayModel.getGameMap().getCountries().get(j).getCountryName()
+												+ "is added to player "
+												+ this.gamePlayModel.getPlayers().get(k).getNamePlayer());
 							}
 						}
 						this.gamePlayModel.getGameMap().getPlayerTurn()

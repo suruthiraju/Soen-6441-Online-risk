@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 
 import app.helper.View;
 
-
 /**
  * This is the Welcome Screen of the game. It displays Welcome Message and the
  * options for user to start the game with default map or to create/edit any map
@@ -23,28 +22,28 @@ public class WelcomeScreenView extends JFrame implements View {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -5402570613272324763L;
-	
+
 	/** The welcome text. */
 	private String welcomeText = "<html>WELCOME TO ONLINE \"RISK\" GAME</html>";
-	
+
 	/** The welcome label. */
 	private JLabel welcomeLabel = new JLabel(welcomeText);
-	
+
 	/** The question text. */
 	private String questionText = "<html>PLEASE SELECT AN OPTION</html>";
-	
+
 	/** The question label. */
 	private JLabel questionLabel = new JLabel(questionText);
 
 	/** The create map button. */
 	public JButton createMapButton = new JButton("Create Map");
-	
+
 	/** The edit map button. */
 	public JButton editMapButton = new JButton("Edit Map");
-	
+
 	/** The play map button. */
 	public JButton playMapButton = new JButton("Play");
-	
+
 	/** The exit button. */
 	public JButton exitButton = new JButton("Exit");
 

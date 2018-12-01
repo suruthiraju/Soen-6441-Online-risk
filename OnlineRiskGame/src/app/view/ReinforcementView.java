@@ -24,12 +24,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.text.DefaultCaret;
 
@@ -75,7 +72,7 @@ public class ReinforcementView extends JFrame implements Observer {
 	public JLabel countryListLabel;
 	public JComboBox<Object> countryListComboBox;
 	public Object[] countryListArray;
-	
+
 	/** The countries view renderer. */
 	private CountryViewRenderer countriesViewRenderer;
 
@@ -214,7 +211,7 @@ public class ReinforcementView extends JFrame implements Observer {
 
 			this.addButton.setBounds(1300, 260, 150, 25);
 			welcomePanel.add(this.addButton);
-			
+
 			this.saveButton.setBounds(1300, 500, 150, 25);
 			welcomePanel.add(this.saveButton);
 		}
@@ -238,14 +235,12 @@ public class ReinforcementView extends JFrame implements Observer {
 
 			button[i].setBorder(border);
 			button[i].setOpaque(true);
-			if(this.gameMapModel.getContinents().get(0).getContinentName().equals("clifftop")||this.gameMapModel.getContinents().get(0).getContinentName().equals("North America"))
-			{
-				button[i].setBounds(this.gameMapModel.getCountries().get(i).getXPosition() ,
-					this.gameMapModel.getCountries().get(i).getYPosition(), 50, 50);
-			}
-			else
-			{
-				button[i].setBounds(this.gameMapModel.getCountries().get(i).getXPosition() * 2 ,
+			if (this.gameMapModel.getContinents().get(0).getContinentName().equals("clifftop")
+					|| this.gameMapModel.getContinents().get(0).getContinentName().equals("North America")) {
+				button[i].setBounds(this.gameMapModel.getCountries().get(i).getXPosition(),
+						this.gameMapModel.getCountries().get(i).getYPosition(), 50, 50);
+			} else {
+				button[i].setBounds(this.gameMapModel.getCountries().get(i).getXPosition() * 2,
 						this.gameMapModel.getCountries().get(i).getYPosition() * 2, 50, 50);
 			}
 

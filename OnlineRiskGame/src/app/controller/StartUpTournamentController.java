@@ -71,10 +71,8 @@ public class StartUpTournamentController {
 	/**
 	 * Constructor initializes values and sets the screen too visible.
 	 *
-	 * @param gamePlayModel
-	 *            the game play model
-	 * @param noOfTurns
-	 *            the no of turns
+	 * @param gamePlayModel the game play model
+	 * @param noOfTurns     the no of turns
 	 */
 	public StartUpTournamentController(GamePlayModel gamePlayModel, int noOfTurns) {
 
@@ -188,10 +186,8 @@ public class StartUpTournamentController {
 	/**
 	 * This method gives the Random generation of numbers within two values.
 	 *
-	 * @param min
-	 *            the min
-	 * @param max
-	 *            the max
+	 * @param min the min
+	 * @param max the max
 	 * @return the random between range
 	 */
 	public int getRandomBetweenRange(double min, double max) {

@@ -1,15 +1,15 @@
 package app.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.ActionListener;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -24,9 +24,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
-import javax.swing.border.BevelBorder;
 import javax.swing.text.DefaultCaret;
 
 import app.helper.View;
@@ -52,7 +52,7 @@ public class StartUpView extends JFrame implements View {
 
 	public JPanel welcomePanel;
 	public JPanel graphicPanel;
-	
+
 	public JPanel consoleMainPanel;
 	public JScrollPane consolePanel;
 	public JTextArea consoleTextArea;
@@ -68,7 +68,7 @@ public class StartUpView extends JFrame implements View {
 	public JLabel countryListLabel;
 	public JComboBox<Object> countryListComboBox;
 	public Object[] countryListArray;
-	
+
 	/** The countries view renderer. */
 	private CountryViewRenderer countriesViewRenderer;
 
@@ -99,10 +99,10 @@ public class StartUpView extends JFrame implements View {
 		graphicPanel.setSize(1200, 650);
 		graphicPanel.setBackground(Color.WHITE);
 		graphicPanel.setLayout(null);
-		
+
 		this.consoleMainPanel = new JPanel();
 		this.consoleMainPanel.setBorder(new BevelBorder(1));
- 		this.consoleTextArea = new JTextArea("Start up Phase !!!\n", 10, 500);
+		this.consoleTextArea = new JTextArea("Start up Phase !!!\n", 10, 500);
 		this.consoleTextArea.setEditable(false);
 		this.consoleTextArea.setFocusable(false);
 		this.consoleTextArea.setVisible(true);
@@ -110,10 +110,10 @@ public class StartUpView extends JFrame implements View {
 		this.consoleTextArea.setBackground(Color.BLACK);
 		DefaultCaret caret = (DefaultCaret) this.consoleTextArea.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.OUT_BOTTOM);
- 		this.consolePanel = new JScrollPane(this.consoleTextArea);
+		this.consolePanel = new JScrollPane(this.consoleTextArea);
 		this.consolePanel.setPreferredSize(new Dimension(1580, 130));
- 		this.consoleMainPanel.add(this.consolePanel,BorderLayout.WEST);
- 		this.getContentPane().add(this.consoleMainPanel,BorderLayout.SOUTH);	
+		this.consoleMainPanel.add(this.consolePanel, BorderLayout.WEST);
+		this.getContentPane().add(this.consoleMainPanel, BorderLayout.SOUTH);
 		this.addButton = new JButton("Add");
 		this.add(welcomePanel);
 		this.playerModel = playerModel;
@@ -147,9 +147,9 @@ public class StartUpView extends JFrame implements View {
 		welcomeLabel.setBounds(1300, 80, 300, 25);
 		welcomeLabel.setFont(largeFont);
 		welcomePanel.add(welcomeLabel);
-		
-		if(this.gamePlayModel.getConsoleText()!=null) {
-			this.consoleTextArea.setText(this.gamePlayModel.getConsoleText().toString());			
+
+		if (this.gamePlayModel.getConsoleText() != null) {
+			this.consoleTextArea.setText(this.gamePlayModel.getConsoleText().toString());
 		}
 
 		this.noOfTroopsLabel = new JLabel("Number of Troops :");
@@ -177,8 +177,7 @@ public class StartUpView extends JFrame implements View {
 
 		ArrayList<CountryModel> listOfCountries = new ArrayList<CountryModel>();
 		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
-			if (playerModel.getNamePlayer()
-					.equals(this.gameMapModel.getCountries().get(i).getRulerName())) {
+			if (playerModel.getNamePlayer().equals(this.gameMapModel.getCountries().get(i).getRulerName())) {
 				listOfCountries.add(this.gameMapModel.getCountries().get(i));
 			}
 		}
@@ -210,21 +209,18 @@ public class StartUpView extends JFrame implements View {
 			country.setToolTipText("Troops: " + this.gameMapModel.getCountries().get(i).getArmies());
 			country.setFont(smallFont);
 			PlayerModel pm = this.gamePlayModel.getPlayer(country);
-			Border border = BorderFactory
-					.createLineBorder(pm.getColor(), 3);
+			Border border = BorderFactory.createLineBorder(pm.getColor(), 3);
 
 			country.setBorder(border);
-			
+
 			country.setOpaque(true);
-			
-			if(this.gameMapModel.getContinents().get(0).getContinentName().equals("clifftop")||this.gameMapModel.getContinents().get(0).getContinentName().equals("North America"))
-			{
-			country.setBounds(this.gameMapModel.getCountries().get(i).getXPosition() ,
-					this.gameMapModel.getCountries().get(i).getYPosition(), 50, 50);
-			}
-			else
-			{
-				country.setBounds(this.gameMapModel.getCountries().get(i).getXPosition() * 2 ,
+
+			if (this.gameMapModel.getContinents().get(0).getContinentName().equals("clifftop")
+					|| this.gameMapModel.getContinents().get(0).getContinentName().equals("North America")) {
+				country.setBounds(this.gameMapModel.getCountries().get(i).getXPosition(),
+						this.gameMapModel.getCountries().get(i).getYPosition(), 50, 50);
+			} else {
+				country.setBounds(this.gameMapModel.getCountries().get(i).getXPosition() * 2,
 						this.gameMapModel.getCountries().get(i).getYPosition() * 2, 50, 50);
 			}
 

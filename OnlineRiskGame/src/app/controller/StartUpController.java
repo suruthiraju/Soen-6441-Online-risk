@@ -76,8 +76,7 @@ public class StartUpController implements ActionListener {
 	/**
 	 * Constructor initializes values and sets the screen too visible.
 	 *
-	 * @param gamePlayModel
-	 *            the game play model
+	 * @param gamePlayModel the game play model
 	 */
 	public StartUpController(GamePlayModel gamePlayModel) {
 
@@ -209,10 +208,8 @@ public class StartUpController implements ActionListener {
 	/**
 	 * This method gives the Random generation of numbers within two values.
 	 *
-	 * @param min
-	 *            the min
-	 * @param max
-	 *            the max
+	 * @param min the min
+	 * @param max the max
 	 * @return the random between range
 	 */
 	public int getRandomBetweenRange(double min, double max) {
@@ -223,8 +220,7 @@ public class StartUpController implements ActionListener {
 	/**
 	 * This method performs action, by Listening the action event set in view.
 	 *
-	 * @param actionEvent
-	 *            the action event
+	 * @param actionEvent the action event
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override

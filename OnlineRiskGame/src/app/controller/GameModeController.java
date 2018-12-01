@@ -52,9 +52,8 @@ public class GameModeController implements ActionListener {
 					File GameFile = theGameModeView.chooseGame.getSelectedFile();
 					SaveGame readGame = new SaveGame();
 					GamePlayModel gamePlayModel = readGame.readFROMJSONFile(GameFile);
-						JOptionPane.showMessageDialog(theGameModeView,
-								"Gane Loaded Successfully!", "Game Loaded",
-								JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(theGameModeView, "Gane Loaded Successfully!", "Game Loaded",
+							JOptionPane.INFORMATION_MESSAGE);
 					new GamePlayController(gamePlayModel);
 					this.theGameModeView.dispose();
 				} catch (Exception e) {

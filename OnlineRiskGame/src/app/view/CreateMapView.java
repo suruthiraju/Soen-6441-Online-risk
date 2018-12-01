@@ -14,7 +14,6 @@ import javax.swing.ListSelectionModel;
 
 import app.helper.View;
 
-
 /**
  * "CreateMapView" class represents an object of map view Properties are
  * containing labels, text fields, buttons, a pane, and a panel.
@@ -25,37 +24,37 @@ public class CreateMapView extends JFrame implements View {
 
 	/** The enter continent. */
 	private JTextField enterContinent = new JTextField(20);
-	
+
 	/** The add continent. */
 	private JButton addContinent = new JButton("Push to the list");
-	
+
 	/** The model continent. */
 	private DefaultListModel modelContinent = new DefaultListModel<>();
-	
+
 	/** The current continent list. */
 	private JList currentContinentList = new JList(modelContinent);
-	
+
 	/** The remove continent. */
 	private JButton removeContinent = new JButton("Pull from the list");
-	
+
 	/** The finalize continents. */
 	private JButton finalizeContinents = new JButton("Finalize the list");
 
 	/** The enter country. */
 	private JTextField enterCountry = new JTextField(20);
-	
+
 	/** The add country. */
 	private JButton addCountry = new JButton("Push to the list");
-	
+
 	/** The model country. */
 	private DefaultListModel modelCountry = new DefaultListModel<>();
-	
+
 	/** The current country list. */
 	private JList currentCountryList = new JList(modelCountry);
-	
+
 	/** The remove country. */
 	private JButton removeCountry = new JButton("Pull from the list");
-	
+
 	/** The finalize countries. */
 	private JButton finalizeCountries = new JButton("Finalize the list");
 
@@ -239,7 +238,7 @@ public class CreateMapView extends JFrame implements View {
 	/**
 	 * Update.
 	 *
-	 * @param o the o
+	 * @param o   the o
 	 * @param arg the arg
 	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
 	 */

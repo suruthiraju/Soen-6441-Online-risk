@@ -24,16 +24,16 @@ public class GameModeView extends JFrame implements View {
 
 	/** The single mode. */
 	public JButton singleMode;
-	
+
 	/** The single mode. */
 	public JLabel gameModeLabel;
-	
+
 	/** The tournament mode. */
 	public JButton tournamentMode;
-	
+
 	/** The Load game . */
 	public JButton loadGame;
-	
+
 	public JFileChooser chooseGame;
 
 	/**
@@ -59,11 +59,11 @@ public class GameModeView extends JFrame implements View {
 		tournamentMode = new JButton("Tournament Mode");
 		tournamentMode.setBounds(350, 300, 150, 40);
 		getContentPane().add(tournamentMode);
-		
+
 		loadGame = new JButton("Load Previous Game");
 		loadGame.setBounds(225, 375, 175, 40);
 		getContentPane().add(loadGame);
-		
+
 		chooseGame = new JFileChooser();
 
 		initialize();

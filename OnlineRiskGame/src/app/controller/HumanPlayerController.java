@@ -1,6 +1,7 @@
 package app.controller;
 
 import java.util.ArrayList;
+
 import app.helper.Strategy;
 import app.model.GamePlayModel;
 import app.model.PlayerModel;
@@ -44,8 +45,7 @@ public class HumanPlayerController implements Strategy {
 	/**
 	 * Constructor initializes values and sets the screen too visible.
 	 *
-	 * @param gamePlayModel
-	 *            the game play model
+	 * @param gamePlayModel the game play model
 	 */
 	public HumanPlayerController(GamePlayModel gamePlayModel) {
 
