@@ -50,7 +50,7 @@ public class FortificationView extends JFrame implements View {
 
 	public JPanel welcomePanel;
 	public JPanel graphicPanel;
-	
+
 	public JPanel consoleMainPanel;
 	public JScrollPane consolePanel;
 	public JTextArea consoleTextArea;
@@ -61,7 +61,8 @@ public class FortificationView extends JFrame implements View {
 	public JComboBox<Integer> numOfTroopsComboBox;
 	public JButton moveButton;
 	public JButton saveButton;
-	
+	public JButton nextButton;
+
 	public JLabel listOfCountriesLabel;
 
 	public JLabel fromCountryListLabel;
@@ -71,12 +72,12 @@ public class FortificationView extends JFrame implements View {
 	public Object[] fromCountryListArray;
 	private CountryViewRenderer fromCountriesViewRenderer;
 	public Object[] toCountryListArray;
-	
+
 	/** The to countries view renderer. */
 	private CountryViewRenderer toCountriesViewRenderer;
 
 	public JButton[] button;
-	
+
 	/** The action listener. */
 	private ActionListener actionListener;
 
@@ -100,10 +101,10 @@ public class FortificationView extends JFrame implements View {
 		graphicPanel.setSize(1200, 650);
 		graphicPanel.setBackground(Color.WHITE);
 		graphicPanel.setLayout(null);
-		
+
 		this.consoleMainPanel = new JPanel();
 		this.consoleMainPanel.setBorder(new BevelBorder(1));
- 		this.consoleTextArea = new JTextArea("Fortification Phase!!!\n", 10, 500);
+		this.consoleTextArea = new JTextArea("Fortification Phase!!!\n", 10, 500);
 		this.consoleTextArea.setEditable(false);
 		this.consoleTextArea.setFocusable(false);
 		this.consoleTextArea.setVisible(true);
@@ -111,15 +112,16 @@ public class FortificationView extends JFrame implements View {
 		this.consoleTextArea.setBackground(Color.BLACK);
 		DefaultCaret caret = (DefaultCaret) this.consoleTextArea.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.OUT_BOTTOM);
- 		this.consolePanel = new JScrollPane(this.consoleTextArea);
+		this.consolePanel = new JScrollPane(this.consoleTextArea);
 		this.consolePanel.setPreferredSize(new Dimension(1580, 130));
- 		this.consoleMainPanel.add(this.consolePanel,BorderLayout.WEST);
- 		this.getContentPane().add(this.consoleMainPanel,BorderLayout.SOUTH);	
+		this.consoleMainPanel.add(this.consolePanel, BorderLayout.WEST);
+		this.getContentPane().add(this.consoleMainPanel, BorderLayout.SOUTH);
 
 		this.add(welcomePanel);
 		this.playerModel = this.gameMapModel.getPlayerTurn();
 		this.moveButton = new JButton("Move");
 		this.saveButton = new JButton("Save Game");
+		this.nextButton = new JButton("Next");
 		updateWindow(gamePlayModel, this.playerModel);
 		welcomePanel.setLayout(null);
 		graphicPanel.setLayout(null);
@@ -138,23 +140,10 @@ public class FortificationView extends JFrame implements View {
 		Font largeFont = new Font("Serif", Font.BOLD, 18);
 		Font mediumFont = new Font("Serif", Font.BOLD, 14);
 		Font smallFont = new Font("Serif", Font.BOLD, 12);
-		
+
 		this.gamePlayModel = gamePlayModel;
 		this.gameMapModel = gamePlayModel.getGameMap();
 		this.playerModel = playerModel;
-
-		this.welcomeLabel = new JLabel("It's " + playerModel.getNamePlayer() + "'s turn");
-		welcomeLabel.setBounds(1300, 80, 300, 25);
-		welcomeLabel.setFont(largeFont);
-		welcomePanel.add(welcomeLabel);
-		
-		if(this.gamePlayModel.getConsoleText()!=null) {
-			this.consoleTextArea.setText(this.gamePlayModel.getConsoleText().toString());			
-		}
-
-		this.fromCountryListLabel = new JLabel("From Country :");
-		fromCountryListLabel.setBounds(1300, 120, 150, 25);
-		welcomePanel.add(this.fromCountryListLabel);
 
 		// from country comboBox
 		ArrayList<CountryModel> fromListOfCountries = new ArrayList<CountryModel>();
@@ -166,67 +155,90 @@ public class FortificationView extends JFrame implements View {
 		}
 		fromCountriesViewRenderer = new CountryViewRenderer();
 		fromCountryListArray = fromListOfCountries.toArray();
-
 		fromCountryListComboBox = new JComboBox(fromCountryListArray);
-		fromCountryListComboBox.setSelectedIndex(gamePlayModel.getSelectedComboBoxIndex());
-		welcomePanel.add(this.fromCountryListComboBox);
+		if (fromListOfCountries.size() > 0) {
 
-		this.toCountryListLabel = new JLabel("To Country :");
-		toCountryListLabel.setBounds(1300, 240, 150, 25);
-		welcomePanel.add(this.toCountryListLabel);
+			this.welcomeLabel = new JLabel("It's " + playerModel.getNamePlayer() + "'s turn");
+			welcomeLabel.setBounds(1300, 80, 300, 25);
+			welcomeLabel.setFont(largeFont);
+			welcomePanel.add(welcomeLabel);
 
-		// to country comboBox
-		ArrayList<CountryModel> toListOfCountries = new ArrayList<CountryModel>();
-		for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
-			if (playerModel.getNamePlayer()
-					.equals(this.gameMapModel.getCountries().get(i).getRulerName())) {
-				toListOfCountries.add(this.gameMapModel.getCountries().get(i));
+			if (this.gamePlayModel.getConsoleText() != null) {
+				this.consoleTextArea.setText(this.gamePlayModel.getConsoleText().toString());
 			}
+
+			this.fromCountryListLabel = new JLabel("From Country :");
+			fromCountryListLabel.setBounds(1300, 120, 150, 25);
+			welcomePanel.add(this.fromCountryListLabel);
+
+			fromCountryListComboBox.setSelectedIndex(gamePlayModel.getSelectedComboBoxIndex());
+			welcomePanel.add(this.fromCountryListComboBox);
+
+			this.toCountryListLabel = new JLabel("To Country :");
+			toCountryListLabel.setBounds(1300, 240, 150, 25);
+			welcomePanel.add(this.toCountryListLabel);
+
+			// to country comboBox
+			ArrayList<CountryModel> toListOfCountries = new ArrayList<CountryModel>();
+			for (int i = 0; i < this.gameMapModel.getCountries().size(); i++) {
+				if (playerModel.getNamePlayer().equals(this.gameMapModel.getCountries().get(i).getRulerName())) {
+					toListOfCountries.add(this.gameMapModel.getCountries().get(i));
+				}
+			}
+			toCountriesViewRenderer = new CountryViewRenderer();
+			toCountryListArray = toListOfCountries.toArray();
+			toCountryListComboBox = new JComboBox(toCountryListArray);
+			welcomePanel.add(this.toCountryListComboBox);
+
+			if (toCountryListArray.length > 0) {
+				toCountryListComboBox.setRenderer(toCountriesViewRenderer);
+			}
+			toCountryListComboBox.setBounds(1300, 270, 150, 25);
+			welcomePanel.add(toCountryListComboBox);
+
+			this.noOfTroopsLabel = new JLabel("Number of Troops :");
+			noOfTroopsLabel.setBounds(1300, 180, 150, 25);
+			welcomePanel.add(noOfTroopsLabel);
+
+			CountryModel countryName = (CountryModel) this.fromCountryListComboBox.getSelectedItem();
+			System.out.println("country name " + countryName.getArmies());
+			Integer[] troops = new Integer[countryName.getArmies() - 1];
+			for (int i = 0; i < (countryName.getArmies() - 1); i++) {
+				troops[i] = i + 1;
+			}
+
+			numOfTroopsComboBox = new JComboBox(troops);
+			numOfTroopsComboBox.setBounds(1300, 210, 150, 25);
+			welcomePanel.add(numOfTroopsComboBox);
+
+			if (fromCountryListArray.length > 0) {
+				fromCountryListComboBox.setRenderer(fromCountriesViewRenderer);
+			}
+			fromCountryListComboBox.setBounds(1300, 150, 150, 25);
+			welcomePanel.add(fromCountryListComboBox);
+
+			this.moveButton.setBounds(1300, 330, 150, 25);
+			welcomePanel.add(this.moveButton);
+		} else {
+
+			this.welcomeLabel = new JLabel("There is no valid armies to move");
+			welcomeLabel.setBounds(1300, 80, 300, 25);
+			welcomeLabel.setFont(mediumFont);
+			welcomePanel.add(welcomeLabel);
+
+			this.nextButton.setBounds(1300, 400, 150, 25);
+			welcomePanel.add(this.nextButton);
 		}
-		toCountriesViewRenderer = new CountryViewRenderer();
-		toCountryListArray = toListOfCountries.toArray();
-		toCountryListComboBox = new JComboBox(toCountryListArray);
-		welcomePanel.add(this.toCountryListComboBox);
 
-		if (toCountryListArray.length > 0) {
-			toCountryListComboBox.setRenderer(toCountriesViewRenderer);
-		}
-		toCountryListComboBox.setBounds(1300, 270, 150, 25);
-		welcomePanel.add(toCountryListComboBox);
-
-		this.noOfTroopsLabel = new JLabel("Number of Troops :");
-		noOfTroopsLabel.setBounds(1300, 180, 150, 25);
-		welcomePanel.add(noOfTroopsLabel);
-
-		CountryModel countryName = (CountryModel) this.fromCountryListComboBox.getSelectedItem();
-		System.out.println("country name "  + countryName.getArmies());
-		Integer[] troops = new Integer[countryName.getArmies() - 1];
-		for (int i = 0; i < (countryName.getArmies() - 1); i++) {
-			troops[i] = i + 1;
-		}
-
-		numOfTroopsComboBox = new JComboBox(troops);
-		numOfTroopsComboBox.setBounds(1300, 210, 150, 25);
-		welcomePanel.add(numOfTroopsComboBox);
-
-		if (fromCountryListArray.length > 0) {
-			fromCountryListComboBox.setRenderer(fromCountriesViewRenderer);
-		}
-		fromCountryListComboBox.setBounds(1300, 150, 150, 25);
-		welcomePanel.add(fromCountryListComboBox);
-
-		this.moveButton.setBounds(1300, 330, 150, 25);
-		welcomePanel.add(this.moveButton);
-		
 		this.saveButton.setBounds(1300, 500, 150, 25);
 		welcomePanel.add(this.saveButton);
 
 		int n = this.gameMapModel.getCountries().size();
 		button = new JButton[n];
-		
+
 		PlayerModel pm = new PlayerModel();
 		CountryModel cm = new CountryModel();
-		
+
 		for (int i = 0; i < gameMapModel.getCountries().size(); i++) {
 
 			button[i] = new JButton();
@@ -314,7 +326,7 @@ public class FortificationView extends JFrame implements View {
 			this.gameMapModel = (GameMapModel) obs;
 		} else if (obs instanceof GamePlayModel) {
 			this.playerModel = (PlayerModel) obs;
-		} 
+		}
 		this.updateWindow(this.gamePlayModel, this.playerModel);
 		this.revalidate();
 		this.repaint();
@@ -329,6 +341,7 @@ public class FortificationView extends JFrame implements View {
 		this.actionListener = actionListener;
 		this.moveButton.addActionListener(actionListener);
 		this.saveButton.addActionListener(actionListener);
+		this.nextButton.addActionListener(actionListener);
 		this.fromCountryListComboBox.addActionListener(actionListener);
 	}
 
