@@ -11,6 +11,9 @@ import app.model.GamePlayModel;
 import app.utilities.SaveGame;
 import app.view.GameModeView;
 
+/**
+ * The Class GameModeController.
+ */
 public class GameModeController implements ActionListener {
 
 	/** The view. */
