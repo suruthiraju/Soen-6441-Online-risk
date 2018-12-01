@@ -25,7 +25,7 @@ import app.view.TournamentDetailView;
  * The Class TournamentDetailController.
  * 
  * @author Team35
- * @version 1.0.0
+ * @version 1.0.0   
  */
 
 public class TournamentDetailController implements ActionListener {
