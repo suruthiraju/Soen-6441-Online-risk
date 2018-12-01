@@ -5,9 +5,10 @@ import app.model.CountryModel;
 import app.model.GamePlayModel;
 import app.utilities.Validation;
 
+// TODO: Auto-generated Javadoc
 /**
- * In PlayerController, the data flow into model object and updates the view
- * whenever data changes.
+ * In CheaterPlayerController, the data flow into model object and updates the
+ * view whenever data changes.
  * 
  * @author Hamid
  * @version 1.0.0
@@ -21,12 +22,14 @@ public class CheaterPlayerController implements Strategy {
 	/** The val. */
 	private Validation val = new Validation();
 
+	/** The index 2. */
 	private int index1, index2;
 
 	/**
 	 * Constructor initializes values and sets the screen too visible.
 	 *
-	 * @param gamePlayModel the game play model
+	 * @param gamePlayModel
+	 *            the game play model
 	 */
 	public CheaterPlayerController(GamePlayModel gamePlayModel) {
 
@@ -66,7 +69,7 @@ public class CheaterPlayerController implements Strategy {
 	 * This method is called in fortification phase.
 	 */
 	public void fortification() {
-		
+
 		System.out.println("Cheater - fortification");
 		index1 = getRandomBetweenRange(1, this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().size());
 		index1 = index1 - 1;
@@ -74,7 +77,8 @@ public class CheaterPlayerController implements Strategy {
 		index2 = indexRandomvalues();
 		index2 = index2 - 1;
 
-		int armies = (this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index1).getArmies() - 1)*2;
+		int armies = (this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index1).getArmies() - 1)
+				* 2;
 		if (val.checkIfValidMove(this.gamePlayModel.getGameMap(),
 				this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index1),
 				this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index2))) {
@@ -123,7 +127,12 @@ public class CheaterPlayerController implements Strategy {
 		}
 
 	}
-	
+
+	/**
+	 * Index randomvalues.
+	 *
+	 * @return an index the int
+	 */
 	public int indexRandomvalues() {
 		boolean flag = false;
 		index2 = getRandomBetweenRange(1, this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().size());
@@ -140,6 +149,7 @@ public class CheaterPlayerController implements Strategy {
 		}
 		return index2;
 	}
+
 	/**
 	 * This method gives the Random generation of numbers within two values.
 	 *
