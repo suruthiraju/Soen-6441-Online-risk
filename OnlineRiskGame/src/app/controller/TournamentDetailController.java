@@ -20,19 +20,47 @@ import app.model.TournamentModel;
 import app.utilities.Validation;
 import app.view.TournamentDetailView;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TournamentDetailController.
+ * 
+ * @author Team35
+ * @version 1.0.0   
+ */
+
 public class TournamentDetailController implements ActionListener {
 
 	/** The view. */
 	private TournamentDetailView theTournamentDetailView;
+	
+	/** The tournament model. */
 	private TournamentModel theTournamentModel = new TournamentModel();
+	
+	/** The map file. */
 	private File mapFile[] = new File[5];
+	
+	/** The no of maps. */
 	private int noOfMaps ;
+	
+	/** The game play model. */
 	private GamePlayModel gamePlayModel ;
+	
+	/** The map loaded. */
 	private boolean mapLoaded = false;
+	
+	/** The valid game. */
 	private boolean validGame = true;
+	
+	/** The no of games. */
 	private int noOfGames ;
+	
+	/** The no of players. */
 	private int noOfPlayers ;
+	
+	/** The Player name. */
 	private String turns, PlayerType , PlayerName;
+	
+	/** The no of turns. */
 	private int noOfTurns ;
 	/** The list of players. */
 	private ArrayList<PlayerModel> listOfPlayers = new ArrayList<PlayerModel>();
@@ -126,6 +154,14 @@ public class TournamentDetailController implements ActionListener {
 			}
 		}
 	}
+	
+	/**
+	 * Map verification.
+	 *
+	 * @param mapFile the map file
+	 * @param index the index
+	 * @return true, if successful
+	 */
 	public boolean mapVerification(File mapFile, int index) {
 		gamePlayModel = new GamePlayModel();
 		boolean validMap = true;
