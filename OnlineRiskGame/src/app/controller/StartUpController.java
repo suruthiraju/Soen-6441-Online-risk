@@ -272,11 +272,12 @@ public class StartUpController implements ActionListener {
 	 * Check if the remaining armies allocated to each player has been reached to
 	 * zero.
 	 */
-	private void checkForOverallArmies() {
+	public boolean checkForOverallArmies() {
 		int numb = 0;
 		for (int i = 0; i < this.gamePlayModel.getPlayers().size(); i++) {
 			if (this.gamePlayModel.getPlayers().get(i).getremainTroop() != 0) {
 				numb++;
+				return false;
 			}
 		}
 		if (numb == 0) {
@@ -285,8 +286,10 @@ public class StartUpController implements ActionListener {
 			new GamePlayController(gamePlayModel);
 			if (initial == 1) {
 				this.theStartUpView.dispose();
+				return true;
 			}
 		}
+		return false;
 	}
 
 }

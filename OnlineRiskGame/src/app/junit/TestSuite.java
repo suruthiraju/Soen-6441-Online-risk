@@ -28,7 +28,9 @@ import app.junit.utilities.GetContinentWriteTest;
 import app.junit.utilities.GetCountryWriteTest;
 import app.junit.utilities.ReadFileContinent;
 import app.junit.utilities.ReadFileCountry;
+import app.junit.utilities.StartupTest;
 import app.junit.utilities.UnlinkedContinentValidationTest;
+import app.junit.utilities.WinnerCheckTest;
 import app.utilities.*;
 
 @RunWith(Suite.class)
@@ -57,7 +59,9 @@ import app.utilities.*;
 				GetCountryWriteTest.class,
 				GetCardForPlayerTest.class,
 				GetCards.class,
-				GetPlayerForCountryTest.class
+				GetPlayerForCountryTest.class,
+				StartupTest.class,
+				WinnerCheckTest.class
 				})
 
 /**
