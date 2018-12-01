@@ -406,9 +406,10 @@ public class GamePlayModel extends Observable {
 		Arrays.sort(attackDiceRoll, Collections.reverseOrder());
 		Arrays.sort(defendDiceRoll, Collections.reverseOrder());
 		System.out.println(Arrays.toString(attackDiceRoll));
-		System.out.println(Arrays.toString(defendDiceRoll));
 		this.consoleText.append("\n Attack country dice " + Arrays.toString(attackDiceRoll) + " \n");
 		this.consoleText.append("Defender country dice " + Arrays.toString(defendDiceRoll) + " \n");
+		this.console.append("\n Attack country dice " + Arrays.toString(attackDiceRoll) + " \n");
+		this.console.append("Defender country dice " + Arrays.toString(defendDiceRoll) + " \n");
 		for (int i = 0; i < defendDice; i++) {
 			if (attackDiceRoll[i] > defendDiceRoll[i]) {
 				armiesDeduction(defendCountry, 1);
@@ -482,7 +483,8 @@ public class GamePlayModel extends Observable {
 		int attackTotalArmies = attackCountry.getArmies() - 1;
 		int defendTotalArmies = defendCountry.getArmies();
 		int attackDice, defendDice;
-
+		this.console.append("Attack's total army: " + attackCountry.getArmies() + " \n");
+		this.console.append("Defender's total army: " + defendCountry.getArmies() + " \n");
 		while (attackTotalArmies > 0 && defendTotalArmies > 0) {
 			if (attackTotalArmies > 3) {
 				attackDice = 3;
@@ -506,8 +508,8 @@ public class GamePlayModel extends Observable {
 			Arrays.sort(defendDiceRoll, Collections.reverseOrder());
 			System.out.println(Arrays.toString(attackDiceRoll));
 			System.out.println(Arrays.toString(defendDiceRoll));
-			this.consoleText.append("Attack country dice " + Arrays.toString(attackDiceRoll) + " \n");
-			this.consoleText.append("Defender country dice " + Arrays.toString(defendDiceRoll) + " \n");
+			this.console.append("Attack country dice " + Arrays.toString(attackDiceRoll) + " \n");
+			this.console.append("Defender country dice " + Arrays.toString(defendDiceRoll) + " \n");
 			for (int i = 0; (i < defendDice && i < attackDice); i++) {
 				if (attackDiceRoll[i] > defendDiceRoll[i]) {
 					armiesDeduction(defendCountry, 1);

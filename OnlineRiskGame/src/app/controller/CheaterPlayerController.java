@@ -5,7 +5,6 @@ import app.model.CountryModel;
 import app.model.GamePlayModel;
 import app.utilities.Validation;
 
-// TODO: Auto-generated Javadoc
 /**
  * In CheaterPlayerController, the data flow into model object and updates the
  * view whenever data changes.
@@ -28,8 +27,7 @@ public class CheaterPlayerController implements Strategy {
 	/**
 	 * Constructor initializes values and sets the screen too visible.
 	 *
-	 * @param gamePlayModel
-	 *            the game play model
+	 * @param gamePlayModel the game play model
 	 */
 	public CheaterPlayerController(GamePlayModel gamePlayModel) {
 
@@ -41,7 +39,7 @@ public class CheaterPlayerController implements Strategy {
 	 * 
 	 */
 	public void reinforcement() {
-		System.out.println("Cheater - reinforcement");
+		this.gamePlayModel.getConsole().append("Cheater - reinforcement");
 
 		for (int j = 0; j < this.gamePlayModel.getPlayers().size(); j++) {
 			if (this.gamePlayModel.getPlayers().get(j).getNamePlayer()
@@ -49,6 +47,10 @@ public class CheaterPlayerController implements Strategy {
 				for (int i = 0; i < this.gamePlayModel.getPlayers().get(j).getOwnedCountries().size(); i++) {
 					this.gamePlayModel.getPlayers().get(j).getOwnedCountries().get(i).setArmies(
 							this.gamePlayModel.getPlayers().get(j).getOwnedCountries().get(i).getArmies() * 2);
+					this.gamePlayModel.getConsole().append("Country "
+							+ this.gamePlayModel.getPlayers().get(j).getOwnedCountries().get(i).getCountryName()
+							+ " got " + this.gamePlayModel.getPlayers().get(j).getOwnedCountries().get(i).getArmies()
+							+ " armies.");
 				}
 			}
 		}
@@ -60,6 +62,10 @@ public class CheaterPlayerController implements Strategy {
 						.equals(this.gamePlayModel.getGameMap().getCountries().get(j).getCountryName())) {
 					this.gamePlayModel.getGameMap().getCountries().get(j)
 							.setArmies(this.gamePlayModel.getGameMap().getCountries().get(j).getArmies() * 2);
+					this.gamePlayModel.getConsole()
+							.append("Country " + this.gamePlayModel.getGameMap().getCountries().get(j).getCountryName()
+									+ " got " + this.gamePlayModel.getGameMap().getCountries().get(j).getArmies()
+									+ " armies.");
 				}
 			}
 		}
@@ -70,7 +76,7 @@ public class CheaterPlayerController implements Strategy {
 	 */
 	public void fortification() {
 
-		System.out.println("Cheater - fortification");
+		this.gamePlayModel.getConsole().append("Cheater - fortification");
 		index1 = getRandomBetweenRange(1, this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().size());
 		index1 = index1 - 1;
 
@@ -85,6 +91,11 @@ public class CheaterPlayerController implements Strategy {
 			this.gamePlayModel.getGameMap().setMovingArmies(armies,
 					this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index1),
 					this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index2));
+			this.gamePlayModel.getConsole()
+					.append("From Country "
+							+ this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index1).getCountryName()
+							+ "armies " + armies + " has been moved to "
+							+ this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index2).getCountryName());
 		}
 	}
 
@@ -92,11 +103,12 @@ public class CheaterPlayerController implements Strategy {
 	 * This method is called in attack phase.
 	 */
 	public void attack() {
-		System.out.println("Cheater - attack");
+		this.gamePlayModel.getConsole().append("Cheater - attack");
 		index1 = getRandomBetweenRange(1, this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().size());
 		index1 = index1 - 1;
 
 		CountryModel attackCountry = this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index1);
+		this.gamePlayModel.getConsole().append("Attack Country - " + attackCountry.getCountryName());
 		for (int i = 0; i < attackCountry.getLinkedCountries().size(); i++) {
 			for (int j = 0; j < this.gamePlayModel.getGameMap().getCountries().size(); j++) {
 				if (attackCountry.getLinkedCountries().get(i).getCountryName()
@@ -110,11 +122,21 @@ public class CheaterPlayerController implements Strategy {
 									.equals(this.gamePlayModel.getPlayers().get(k).getNamePlayer())) {
 								this.gamePlayModel.getPlayers().get(k)
 										.defend(this.gamePlayModel.getGameMap().getCountries().get(j));
+								this.gamePlayModel.getConsole()
+										.append(" Country "
+												+ this.gamePlayModel.getGameMap().getCountries().get(j).getCountryName()
+												+ "is removed from player "
+												+ this.gamePlayModel.getPlayers().get(k).getNamePlayer());
 							}
 							if (this.gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer()
 									.equals(this.gamePlayModel.getPlayers().get(k).getNamePlayer())) {
 								this.gamePlayModel.getPlayers().get(k)
 										.attacked(this.gamePlayModel.getGameMap().getCountries().get(j));
+								this.gamePlayModel.getConsole()
+								.append(" Country "
+										+ this.gamePlayModel.getGameMap().getCountries().get(j).getCountryName()
+										+ "is added to player "
+										+ this.gamePlayModel.getPlayers().get(k).getNamePlayer());
 							}
 						}
 						this.gamePlayModel.getGameMap().getPlayerTurn()

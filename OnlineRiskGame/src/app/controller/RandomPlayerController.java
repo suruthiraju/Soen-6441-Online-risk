@@ -41,7 +41,7 @@ public class RandomPlayerController implements Strategy {
 	 * 
 	 */
 	public void reinforcement() {
-		System.out.println("Random - reinforcement");
+		this.gamePlayModel.getConsole().append("Random - reinforcement");
 
 		this.gamePlayModel.getGameMap().getPlayerTurn().setremainTroop(this.gamePlayModel.numberOfCountries()
 				+ this.gamePlayModel.continentCovered(gamePlayModel.getGameMap().getPlayerTurn()));
@@ -61,6 +61,7 @@ public class RandomPlayerController implements Strategy {
 					}
 				}
 				this.gamePlayModel.getCards().add(card);
+				this.gamePlayModel.getConsole().append("Card " + cardID + " is reimbursed");
 			}
 		}
 
@@ -70,6 +71,9 @@ public class RandomPlayerController implements Strategy {
 
 		this.gamePlayModel.setSelectedArmiesToCountries(selectedArmies,
 				this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index - 1));
+		this.gamePlayModel.getConsole().append("Country "
+				+ this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index - 1).getCountryName()
+				+ " got " + selectedArmies + " armies.");
 
 	}
 
@@ -77,7 +81,7 @@ public class RandomPlayerController implements Strategy {
 	 * This method is called in fortification phase.
 	 */
 	public void fortification() {
-		System.out.println("Random - fortification");
+		this.gamePlayModel.getConsole().append("Random - fortification");
 
 		index1 = getRandomBetweenRange(1, this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().size());
 		index1 = index1 - 1;
@@ -92,6 +96,10 @@ public class RandomPlayerController implements Strategy {
 			this.gamePlayModel.getGameMap().setMovingArmies(armies,
 					this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index1),
 					this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index2));
+			this.gamePlayModel.getConsole().append("From Country "
+					+ this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index1).getCountryName()
+					+ " armies " + armies + " has been moved to "
+					+ this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index2).getCountryName());
 		}
 
 		this.gamePlayModel.moveDeck();
@@ -102,11 +110,12 @@ public class RandomPlayerController implements Strategy {
 	 * This method is called in attack phase.
 	 */
 	public void attack() {
-		System.out.println("Random - attack");
+		this.gamePlayModel.getConsole().append("Random - attack");
 		index1 = getRandomBetweenRange(1, this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().size());
 		index1 = index1 - 1;
 
 		CountryModel attackCountry = this.gamePlayModel.getGameMap().getPlayerTurn().getOwnedCountries().get(index1);
+		this.gamePlayModel.getConsole().append("Attack country name - " + attackCountry.getCountryName());
 		CountryModel defendCountry = new CountryModel();
 		ArrayList<CountryModel> linkedCountry = new ArrayList<CountryModel>();
 		for (int i = 0; i < this.gamePlayModel.getGameMap().getCountries().size(); i++) {
@@ -123,19 +132,23 @@ public class RandomPlayerController implements Strategy {
 					defendCountry = linkedCountry.get(i);
 				}
 			}
-		}
-
-		this.gamePlayModel.setDefeatedCountry(defendCountry);
-		this.gamePlayModel.alloutStrike(attackCountry, defendCountry);
-		int noOfArmiesToBeMoved = 0;
-		for (int i = 0; i < this.gamePlayModel.getGameMap().getCountries().size(); i++) {
-			if (attackCountry.getCountryName()
-					.equals(this.gamePlayModel.getGameMap().getCountries().get(i).getCountryName())) {
-				noOfArmiesToBeMoved = this.gamePlayModel.getGameMap().getCountries().get(i).getArmies() - 1;
+			this.gamePlayModel.getConsole().append("Defend country name - " + defendCountry.getCountryName());
+			this.gamePlayModel.setDefeatedCountry(defendCountry);
+			this.gamePlayModel.alloutStrike(attackCountry, defendCountry);
+			int noOfArmiesToBeMoved = 0;
+			for (int i = 0; i < this.gamePlayModel.getGameMap().getCountries().size(); i++) {
+				if (attackCountry.getCountryName()
+						.equals(this.gamePlayModel.getGameMap().getCountries().get(i).getCountryName())) {
+					noOfArmiesToBeMoved = this.gamePlayModel.getGameMap().getCountries().get(i).getArmies() - 1;
+				}
 			}
-		}
-		if (this.gamePlayModel.getArmyToMoveText()) {
-			this.gamePlayModel.moveArmies(attackCountry, defendCountry, noOfArmiesToBeMoved);
+			if (this.gamePlayModel.getArmyToMoveText()) {
+				this.gamePlayModel.moveArmies(attackCountry, defendCountry, noOfArmiesToBeMoved);
+				this.gamePlayModel.getConsole().append(" Armies " + noOfArmiesToBeMoved + " has been moved from " + attackCountry.getCountryName()
+				+  "to " + defendCountry.getCountryName());
+			}
+		} else {
+			this.gamePlayModel.getConsole().append(" there is no linked country");
 		}
 	}
 

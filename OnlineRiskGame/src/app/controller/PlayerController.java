@@ -159,7 +159,7 @@ public class PlayerController implements ActionListener, ItemListener {
 				System.out.println("countryName" + selectedArmies + countryName);
 				this.gamePlayModel.setSelectedArmiesToCountries(selectedArmies, countryName);
 				this.gamePlayModel.getConsole().append(selectedArmies + " armies added to "
-						+ (String) theReinforcementView.countryListComboBox.getSelectedItem());
+						+ countryName.getCountryName());
 
 			} else {
 				this.theReinforcementView.dispose();
@@ -191,8 +191,6 @@ public class PlayerController implements ActionListener, ItemListener {
 							.append(gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer() + " is reimbursing card"
 									+ card.getCardId() + " and gets " + card.getCardValue() + " armies ");
 					this.gamePlayModel.getPlayers().get(i).removeCard(card);
-					this.gamePlayModel.getConsole()
-							.append((String) theReinforcementView.countryListComboBox.getSelectedItem());
 				}
 			}
 			this.gamePlayModel.getCards().add(card);
@@ -273,9 +271,9 @@ public class PlayerController implements ActionListener, ItemListener {
 			CountryModel defendCountry = (CountryModel) theAttackView.defendCountryListComboBox.getSelectedItem();
 			this.gamePlayModel.setDefeatedCountry(defendCountry);
 			this.gamePlayModel.getConsole()
-					.append("The attacker is " + (String) theAttackView.attackCountryListComboBox.getSelectedItem());
+					.append("The attacker is " + attackCountry.getCountryName());
 			this.gamePlayModel.getConsole()
-					.append("The attacker is " + (String) theAttackView.defendCountryListComboBox.getSelectedItem());
+					.append("The defender is " + defendCountry.getCountryName());
 
 			this.gamePlayModel.alloutStrike(attackCountry, defendCountry);
 			if (val.endOfGame(this.gamePlayModel) == true) {
