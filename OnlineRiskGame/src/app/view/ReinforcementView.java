@@ -238,8 +238,16 @@ public class ReinforcementView extends JFrame implements Observer {
 
 			button[i].setBorder(border);
 			button[i].setOpaque(true);
-			button[i].setBounds(gameMapModel.getCountries().get(i).getXPosition() * 2,
-					gameMapModel.getCountries().get(i).getYPosition() * 2, 50, 50);
+			if(this.gameMapModel.getContinents().get(0).getContinentName().equals("clifftop")||this.gameMapModel.getContinents().get(0).getContinentName().equals("North America"))
+			{
+				button[i].setBounds(this.gameMapModel.getCountries().get(i).getXPosition() ,
+					this.gameMapModel.getCountries().get(i).getYPosition(), 50, 50);
+			}
+			else
+			{
+				button[i].setBounds(this.gameMapModel.getCountries().get(i).getXPosition() * 2 ,
+						this.gameMapModel.getCountries().get(i).getYPosition() * 2, 50, 50);
+			}
 
 			graphicPanel.add(button[i]);
 		}

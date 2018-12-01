@@ -217,7 +217,7 @@ public class StartUpView extends JFrame implements View {
 			
 			country.setOpaque(true);
 			
-			if(this.gameMapModel.getContinents().get(0).getContinentName().equals("clifftop"))
+			if(this.gameMapModel.getContinents().get(0).getContinentName().equals("clifftop")||this.gameMapModel.getContinents().get(0).getContinentName().equals("North America"))
 			{
 			country.setBounds(this.gameMapModel.getCountries().get(i).getXPosition() ,
 					this.gameMapModel.getCountries().get(i).getYPosition(), 50, 50);
