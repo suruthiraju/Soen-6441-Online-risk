@@ -52,7 +52,7 @@ public class TournamentDetailView extends JFrame implements View {
 	
 	/** the no of Turns*/
 	public JLabel noOfTurnsLabel;
-	public JTextField noOfTurnsText;
+	public JComboBox<Integer> noOfTurnsText;
 	
 	/** The save and play button */
 	public JButton saveAndPlayButton;
@@ -205,11 +205,12 @@ public class TournamentDetailView extends JFrame implements View {
 		noOfTurnsLabel.setFont(smallFont);
 		getContentPane().add(noOfTurnsLabel);
 		
-		noOfTurnsText = new JTextField();
+		Integer[] turns = { 10,15,20,25,30,35,40,45,50 };
+		noOfTurnsText = new JComboBox<>(turns);
 		noOfTurnsText.setBounds(600, 300, 150, 22);
 		getContentPane().add(noOfTurnsText);
 
-		saveAndPlayButton = new JButton("Save&Play");
+		saveAndPlayButton = new JButton("Play Game");
 		saveAndPlayButton.setBounds(650, 550, 116, 25);
 		getContentPane().add(saveAndPlayButton);
 		
@@ -244,7 +245,12 @@ public class TournamentDetailView extends JFrame implements View {
 	public void setActionListener(ActionListener actionListener) {
 		saveAndPlayButton.addActionListener(actionListener);
 		exitButton.addActionListener(actionListener);
-
+		browseMap1Button.addActionListener(actionListener);
+		browseMap2Button.addActionListener(actionListener);
+		browseMap3Button.addActionListener(actionListener);
+		browseMap4Button.addActionListener(actionListener);
+		browseMap5Button.addActionListener(actionListener);
+		validateMapButton.addActionListener(actionListener);
 	}
 
 	/**

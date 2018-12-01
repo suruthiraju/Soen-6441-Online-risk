@@ -113,6 +113,8 @@ public class PlayerController implements ActionListener, ItemListener {
 		} else {
 			String PlayerType = this.gamePlayModel.getGameMap().getPlayerTurn().getTypePlayer();
 			if ("Human".equals(PlayerType)) {
+				this.gamePlayModel.getGameMap().getPlayerTurn()
+				.setStrategy(new HumanPlayerController(this.gamePlayModel));
 				String Phase = this.gamePlayModel.getGamePhase();
 				if ("Reinforcement".equals(Phase)) {
 					this.gamePlayModel.getGameMap().getPlayerTurn()
@@ -360,7 +362,21 @@ public class PlayerController implements ActionListener, ItemListener {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+		}else if (actionEvent.getSource().equals(this.theFortificationView.nextButton)) {
+			int index = this.gamePlayModel.getGameMap().getPlayerIndex();
+
+			index++;
+			if (this.gamePlayModel.getPlayers().size() > index) {
+				this.gamePlayModel.getGameMap().setPlayerIndex(index);
+				this.gamePlayModel.getPlayers().get(index).callObservers();
+			} else {
+				index = 0;
+				this.gamePlayModel.getGameMap().setPlayerIndex(index);
+				this.gamePlayModel.getPlayers().get(index).callObservers();
+			}
+			this.theFortificationView.dispose();
+			new GamePlayController(this.gamePlayModel);
+		} 
 
 	}
 
