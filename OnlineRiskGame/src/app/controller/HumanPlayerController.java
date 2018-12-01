@@ -58,7 +58,7 @@ public class HumanPlayerController implements Strategy {
 
 		this.gamePlayModel = gamePlayModel;
 		this.gamePlayModel.getConsoleText()
-				.append("Initiating reinforcement for " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
+				.append("Initiating for " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
 	}
 
 	/**
@@ -71,7 +71,8 @@ public class HumanPlayerController implements Strategy {
 		this.gamePlayModel.callObservers();
 		this.gamePlayModel.getConsoleText()
 				.append("Initiating Reinforcement for " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
-
+		this.gamePlayModel.getConsole()
+		.append("Initiating Reinforcement for " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
 		this.gamePlayModel.getGameMap().getPlayerTurn().setremainTroop(this.gamePlayModel.numberOfCountries()
 				+ this.gamePlayModel.continentCovered(gamePlayModel.getGameMap().getPlayerTurn()));
 		if (gamePlayModel.getGameMap().getPlayerTurn().getOwnedCards().size() > 0) {
@@ -89,6 +90,9 @@ public class HumanPlayerController implements Strategy {
 	 */
 	public void fortification() {
 		System.out.println("Human - fortification");
+		this.gamePlayModel.getConsole()
+		.append("Initiating fortification " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
+
 		this.gamePlayModel.getConsoleText().setLength(0);
 		this.gamePlayModel.getConsoleText()
 				.append("Initiating Fortification for " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
@@ -100,6 +104,9 @@ public class HumanPlayerController implements Strategy {
 	 */
 	public void attack() {
 		System.out.println("Human - attack");
+		this.gamePlayModel.getConsole()
+		.append("Initiating attack " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer());
+
 		this.gamePlayModel.getConsoleText().setLength(0);
 		this.gamePlayModel.getConsoleText()
 				.append("Initiating " + gamePlayModel.getGameMap().getPlayerTurn().getNamePlayer() + "'s attack");			
