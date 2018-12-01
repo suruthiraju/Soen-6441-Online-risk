@@ -138,7 +138,7 @@ public class StartUpView extends JFrame implements View {
 		graphicPanel.removeAll();
 		Font largeFont = new Font("Serif", Font.BOLD, 18);
 		Font mediumFont = new Font("Serif", Font.BOLD, 14);
-		Font smallFont = new Font("Serif", Font.BOLD, 12);
+		Font smallFont = new Font("Serif", Font.BOLD, 8);
 
 		this.gameMapModel = gamePlayModel.getGameMap();
 		this.gamePlayModel = gamePlayModel;

@@ -133,6 +133,8 @@ public class PlayerController implements ActionListener, ItemListener {
 					this.gamePlayModel.getGameMap().addObserver(theReinforcementView);
 					this.gamePlayModel.addObserver(theReinforcementView);
 				} else if ("Attack".equals(Phase)) {
+					theReinforcementView = new ReinforcementView(this.gamePlayModel);
+					theReinforcementView.dispose();
 					theAttackView = new AttackView(this.gamePlayModel);
 					theAttackView.setActionListener(this);
 					theAttackView.setVisible(true);
@@ -141,6 +143,10 @@ public class PlayerController implements ActionListener, ItemListener {
 					this.gamePlayModel.setArmyToMoveText(false);
 					this.gamePlayModel.setCardToBeAssigned(false);
 				} else if ("Fortification".equals(Phase)) {
+					theReinforcementView = new ReinforcementView(this.gamePlayModel);
+					theReinforcementView.dispose();
+					theAttackView = new AttackView(this.gamePlayModel);
+					theAttackView.dispose();
 					theFortificationView = new FortificationView(this.gamePlayModel);
 					theFortificationView.setActionListener(this);
 					theFortificationView.setItemListener(this);

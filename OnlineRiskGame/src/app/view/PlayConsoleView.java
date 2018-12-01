@@ -57,11 +57,11 @@ public class PlayConsoleView extends JFrame {
 		this.setTitle("Action Console");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(50, 50);
-		this.setSize(500, 500);
+		this.setSize(750, 750);
 		this.setResizable(true);
 		this.setVisible(false);
 		this.consoleMainPanel = new JPanel();
-		this.consoleTextArea = new JTextArea("Life is a risk, instead play risk !!!\n", 490, 490);
+		this.consoleTextArea = new JTextArea("Life is a risk, instead play risk !!!\n", 700, 700);
 		this.consoleTextArea.setEditable(false);
 		this.consoleTextArea.setFocusable(false);
 		this.consoleTextArea.setVisible(true);
@@ -70,7 +70,7 @@ public class PlayConsoleView extends JFrame {
 		DefaultCaret caret = (DefaultCaret) this.consoleTextArea.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.OUT_BOTTOM);
 		this.consolePanel = new JScrollPane(this.consoleTextArea);
-		this.consolePanel.setPreferredSize(new Dimension(490, 490));
+		this.consolePanel.setPreferredSize(new Dimension(700, 700));
 		this.consoleMainPanel.add(this.consolePanel, BorderLayout.WEST);
 		this.getContentPane().add(this.consoleMainPanel, BorderLayout.SOUTH);
 	}
