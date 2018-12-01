@@ -1,0 +1,16 @@
+[Map]
+author=
+image=new.bmp
+
+
+[Continents]
+Asia=5
+America=7
+
+
+[Territories]
+India,330,40,Asia,China,
+China,300,95,Asia,India,Sri Lanka,
+Sri Lanka,255,110,Asia,China,Canada,
+Canada,230,160,America,Sri Lanka,USA,
+USA,265,150,America,Canada,
