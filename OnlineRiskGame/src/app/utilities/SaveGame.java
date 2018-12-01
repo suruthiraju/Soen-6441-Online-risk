@@ -29,54 +29,9 @@ import app.model.PlayerModel;
 
 public class SaveGame {
 
-	public static void main(String[] args) throws IOException, ParseException {
-		GameMapModel gameMapModel;
-		GamePlayModel gamePlayModel;
-		Validation val;
-		ReadFile readFile;
-		File file;
-		ArrayList<CountryModel> countryList = new ArrayList<CountryModel>();
-		ArrayList<CountryModel> cardList = new ArrayList<CountryModel>();
 
-		PlayerModel pm = new PlayerModel("X", "Human", 0, Color.WHITE, 0, countryList, cardList);
-		CardModel card;
-		readFile = new ReadFile();
-		file = new File(Constant.FILE_LOCATION);
-		readFile.setFile(file);
-		gameMapModel = new GameMapModel(file);
-		gamePlayModel = new GamePlayModel();
-		gamePlayModel.setGameMap(gameMapModel);
-
-		countryList.add(gameMapModel.getCountries().get(0));
-		countryList.add(gameMapModel.getCountries().get(1));
-
-		countryList.get(0).setArmies(2);
-
-		ArrayList<PlayerModel> pmList = new ArrayList<PlayerModel>();
-
-		pmList.add(pm);
-		gamePlayModel.getCardFromJSON();
-		card = gamePlayModel.getCards().get(0);
-
-		gamePlayModel.setPlayers(pmList);
-		Color myColor = Color.GRAY;
-		String colorS = Integer.toString(myColor.getRGB());
-		Color c = new Color(Integer.parseInt(colorS));
-
-		// writeTOJSONFile(gamePlayModel, "file");
-
-		// File readFile1 = new File(System.getProperty("user.dir") +
-		// "\\mapfiles\\file.json");
-		// readFROMJSONFile(readFile1);
-	}
-
-	public void writeTOJSONFile(GamePlayModel gamePlayModel, String fileName) throws IOException {
+	public boolean writeTOJSONFile(GamePlayModel gamePlayModel, String fileName) throws IOException, ParseException {
 		File file = new File(System.getProperty("user.dir") + "//mapfiles//" + fileName + ".json");
-//		File rootFolder = new File(System.getProperty("user.dir") + "\\mapfiles\\");
-		System.out.println(file);
-//		fileName = fileName+".json";
-//		System.out.println(fileName);
-//		File jsonFile = new File(rootFolder, fileName);
 		try {
 
 			// If file doesn't exists, then create it
@@ -476,9 +431,11 @@ public class SaveGame {
 			bw.write(jsonText);
 
 			bw.close();
+			return true;
 		} catch (Exception e) {
-			System.out.println(e);
+			return false;
 		}
+		
 	}
 
 	public GamePlayModel readFROMJSONFile(File file) throws IOException, ParseException {

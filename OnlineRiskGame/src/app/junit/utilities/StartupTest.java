@@ -65,7 +65,7 @@ public class StartupTest {
 	public void teststartup()
 	{
 		StartUpController statup = new StartUpController(gamePlayModel);
-		assertTrue(statup.checkForOverallArmies());
+		assertFalse(statup.checkForOverallArmies());
 	}
 	
 	

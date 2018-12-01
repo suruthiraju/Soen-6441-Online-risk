@@ -26,8 +26,10 @@ import app.junit.utilities.EmptyLinkCountryValidationTest;
 import app.junit.utilities.EndOfGameTest;
 import app.junit.utilities.GetContinentWriteTest;
 import app.junit.utilities.GetCountryWriteTest;
+import app.junit.utilities.LoadGameTest;
 import app.junit.utilities.ReadFileContinent;
 import app.junit.utilities.ReadFileCountry;
+import app.junit.utilities.SaveGameTest;
 import app.junit.utilities.StartupTest;
 import app.junit.utilities.UnlinkedContinentValidationTest;
 import app.junit.utilities.WinnerCheckTest;
@@ -61,7 +63,9 @@ import app.utilities.*;
 				GetCards.class,
 				GetPlayerForCountryTest.class,
 				StartupTest.class,
-				WinnerCheckTest.class
+				WinnerCheckTest.class,
+				SaveGameTest.class,
+				LoadGameTest.class
 				})
 
 /**

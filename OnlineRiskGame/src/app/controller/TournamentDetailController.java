@@ -20,7 +20,6 @@ import app.model.TournamentModel;
 import app.utilities.Validation;
 import app.view.TournamentDetailView;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class TournamentDetailController.
  * 
@@ -144,7 +143,6 @@ public class TournamentDetailController implements ActionListener {
 							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {}, null);
 				} else {
 					if (mapVerification(mapFile[i], i)) {
-						// this.theTournamentModel.getGamePlay().add(gamePlayModel);
 						if (noOfMaps == (i + 1)) {
 							mapLoaded = true;
 						}
@@ -248,11 +246,6 @@ public class TournamentDetailController implements ActionListener {
 		}
 
 		for (int i = 0; i < noOfMaps; i++) {
-//				if (this.theTournamentModel.getGamePlay().get(i).getPlayers().size() > 0) {
-//					for(int j=0; j<this.theTournamentModel.getGamePlay().get(i).getPlayers().size();j++ ) {
-//						this.theTournamentModel.getGamePlay().get(i).getPlayers().remove(j);
-//					}
-//				}
 			this.theTournamentModel.getGamePlay().get(i).setPlayers(listOfPlayers);
 			this.theTournamentModel.getGamePlay().get(i).setCards(gamePlayModel.getCardFromJSON());
 		}
